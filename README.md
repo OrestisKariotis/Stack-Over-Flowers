@@ -1,4 +1,4 @@
-# Stack-Over-Flowers
+# Stack Over Flowers
 
 | Όνομα         | Α.Μ           | E-mail  |
 | ------------- |---------------| ----- |
