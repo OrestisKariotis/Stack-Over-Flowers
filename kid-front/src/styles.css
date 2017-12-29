@@ -1,1 +1,183 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+	font-family: 'Didact Gothic', sans-serif !important;
+	font-weight: 500;
+}
+
+.navbar {
+	margin-bottom: 0px !important;
+}
+
+.search {
+	margin-top: 20px;
+}
+
+.form-group-bottom {
+  	margin-bottom: 20px;
+}
+
+.carousel-caption {
+  	text-shadow: 0 0 4px #000, 0 0 8px #000, 0 0 10px #000, 0 0 15px #000 !important;
+	position: absolute;
+	right: 10% !important;
+	bottom: 5px !important;
+	left: 10% !important;
+	z-index: 5 !important;
+	padding-bottom: 5px !important;
+}
+
+.carousel-indicators {
+	display: none;
+}
+
+@media screen and (min-width: 600px) {
+	.carousel-caption {
+		font-size: 24px;
+		padding-bottom: 20px !important;
+		z-index: 10 !important;
+		bottom: 20px !important;
+	}
+	.carousel-indicators {
+		display: inline;
+	}
+}
+
+@media screen and (min-width: 768px) {
+	.carousel-caption {
+		font-size: 30px;
+		padding-bottom: 30px !important;
+		z-index: 10 !important;
+		bottom: 30px !important;
+		right: 20% !important;
+		left: 20% !important;
+	}
+}
+
+.card-img {
+    margin-bottom: 5px;
+}
+
+.img-hover:hover {
+    opacity: 0.8;
+}
+
+.card {
+	margin-bottom: 15px;
+}
+
+.card-info {
+	font-size: 13px;
+}
+
+@media(min-width:768px) {
+    .card {
+        margin-bottom: 30px;
+        font-size: 16px !important;
+    }
+}
+
+.sparse {
+	letter-spacing: 1px;
+}
+
+@media(min-width:768px) {
+    .platform {
+        font-size: 20px !important;
+    }
+}
+
+.button-a {
+	margin-bottom: 20px !important;
+}
+
+.img-center {
+	margin: 0 auto;
+}
+
+img.resize {
+    width: 35%;
+    height: auto;
+}
+
+/* Custom Carousel control */
+.carousel-control-custom {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 15%;
+  font-size: 20px;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+  background-color: rgba(0, 0, 0, 0);
+  filter: alpha(opacity=50);
+  opacity: .5;
+}
+
+.carousel-control-custom.right {
+  right: 0;
+  left: auto;
+}
+
+.carousel-control-custom:hover,
+.carousel-control-custom:focus {
+  color: #fff;
+  text-decoration: none;
+}
+
+.carousel-control-custom .icon-prev,
+.carousel-control-custom .icon-next,
+.carousel-control-custom .glyphicon-chevron-left,
+.carousel-control-custom .glyphicon-chevron-right {
+  position: absolute;
+  top: 50%;
+  z-index: 5;
+  display: inline-block;
+  margin-top: -10px;
+}
+.carousel-control-custom .icon-prev,
+.carousel-control-custom .glyphicon-chevron-left {
+  left: 50%;
+  margin-left: -10px;
+}
+.carousel-control-custom .icon-next,
+.carousel-control-custom .glyphicon-chevron-right {
+  right: 50%;
+  margin-right: -10px;
+}
+.carousel-control-custom .icon-prev,
+.carousel-control-custom .icon-next {
+  width: 20px;
+  height: 20px;
+  font-family: serif;
+  line-height: 1;
+}
+.carousel-control-custom .icon-prev:before {
+  content: '\2039';
+}
+.carousel-control-custom .icon-next:before {
+  content: '\203a';
+}
+
+@media screen and (min-width: 768px) {
+  .carousel-control-custom .glyphicon-chevron-left,
+  .carousel-control-custom .glyphicon-chevron-right,
+  .carousel-control-custom .icon-prev,
+  .carousel-control-custom .icon-next {
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+    font-size: 20px;
+  }
+  .carousel-control-custom .glyphicon-chevron-left,
+  .carousel-control-custom .icon-prev {
+    left: 10% !important;
+    margin-left: 0 !important;
+  }
+  .carousel-control-custom .glyphicon-chevron-right,
+  .carousel-control-custom .icon-next {
+  	right: 10% !important;
+    margin-right: 0 !important;
+  }
+}
+/* End Custom Control */
