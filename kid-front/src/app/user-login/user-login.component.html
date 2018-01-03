@@ -18,9 +18,14 @@
 				<div *ngIf="f.submitted && !password.valid" class="help-block">Password
 					is required</div>
 			</div>
-			<button class="btn btn-default">Login as User</button>
+			<div class="form-group">
+				<label class="radio-inline"><input type="radio" name="loginType" value="parent" checked [(ngModel)]="model.mode">Parent Login</label>
+				<label class="radio-inline"><input type="radio" name="loginType" value="provider" [(ngModel)]="model.mode">Provider Login</label>
+			</div>
+			<button class="btn btn-default">Login</button>
 		</form>
 	</div>
 </div>
 
 <div>Test: {{alert}}</div>
+<div>Test: {{context}}</div>

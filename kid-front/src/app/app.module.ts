@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { SearchComponent } from './search/search.component';
 import { UserLoginComponent } from './user-login/user-login.component';
+import { ParentRegisterComponent } from './parent-register/parent-register.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { UserLoginComponent } from './user-login/user-login.component';
     AppComponent,
     HomeComponent,
     SearchComponent,
-    UserLoginComponent
+    UserLoginComponent,
+    ParentRegisterComponent
   ],
   imports: [
     BrowserModule,

@@ -9,13 +9,16 @@ export class UserLoginComponent implements OnInit {
 
   alert = false;
   model: any = {};
+  context: any ;
   constructor() { }
 
   ngOnInit() {
+    this.model.mode = 'parent';
   }
 
   login() {
 // TO DO
+    this.context = this.model.mode;
     this.alert = !this.alert;
   }
 }
