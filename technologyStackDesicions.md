@@ -1,22 +1,22 @@
-##FRONTEND
+## FRONTEND
 
 Angular 5
 Bootstrap 3
 jQuery
 
-##ΕΝΔΙΑΜΕΣΑ
+## ΕΝΔΙΑΜΕΣΑ
 
 JSON 
 RESTful API
 
-##BACKEND
+## BACKEND
 
 Java Spring Boot (MVC Architecture) ???
 MySQL
 ElasticSearch
 
 
-##TOOLS
+## TOOLS
 
 NodeJS
 Gradle
