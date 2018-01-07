@@ -11,7 +11,7 @@ fork again
 :check if event expired;
 end fork
 if (all conditions met) then (yes)
-	:successful purchase;
+	:send ticket -pdf format- \nto parent's e-mail;
 	if (reached point usage quota) then (yes)
 		:reward parent with bonus points;
 		end

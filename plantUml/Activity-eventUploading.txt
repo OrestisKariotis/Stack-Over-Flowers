@@ -1,10 +1,9 @@
 @startuml
 
 start
-:fill out event deteails;
+:fill out event details;
 :submit event;
 :await administrative approval;
--> notify admin via e-mail;
 if (approved) then (yes)
 	:successful registration of event;
 	end

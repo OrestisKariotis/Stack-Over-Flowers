@@ -16,11 +16,11 @@ providersReport --> eventsInterface
 
 
 component Frontend {
-      [monthlyReportScript]
+      [monthlyReport]
 }
 interface monthlyReportInterface
-monthlyReportScript -- monthlyReportInterface
-monthlyReportScript --> providersReportInterface
+monthlyReport -- monthlyReportInterface
+monthlyReport --> providersReportInterface
 
 :Provider: as p
 p -u-> monthlyReportInterface

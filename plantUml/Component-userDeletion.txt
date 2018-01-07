@@ -1,32 +1,32 @@
 @startuml
 
-database "Elastic Search" {
-    [parents]
+database "mySQL" {
+    [users]
 }
-interface parentsInterface
-parents -- parentsInterface
+interface usersInterface
+users -- usersInterface
 
 
 component Backend {
-       [parentDeletion]
+       [userDeletionB]
 }
-interface parentDeletionInterfaceB
-parentDeletion -- parentDeletionInterfaceB
-parentDeletion --> parentsInterface
+interface userDeletionInterfaceB
+userDeletionB -- userDeletionInterfaceB
+userDeletionB --> usersInterface
 
 
 component Frontend {
-      [parentDeletionScript]
+      [userDeletionF]
 }
-interface parentDeletionInterfaceF
-parentDeletionScript -- parentDeletionInterfaceF
-parentDeletionScript --> parentDeletionInterfaceB
+interface userDeletionInterfaceF
+userDeletionF -- userDeletionInterfaceF
+userDeletionF --> userDeletionInterfaceB
 
 
 :Administrator: as a
-a -u-> parentDeletionInterfaceF
+a -u-> userDeletionInterfaceF
 
 
-note "The Component Diagramm for \ndeleting a provider is the exact same, \nonly set <provider> where <user>." as n
+note "The user entity can \nbe regarded as, either \na provider or a parent." as n
 
 @enduml
