@@ -1,0 +1,18 @@
+@startuml
+left to right direction
+actor parent
+actor provider
+rectangle frontend {
+	parent -right- (buyTicket)
+	parent -u- (searchEvents)
+	provider -- (uploadEvent) 
+	provider -- (monthlyReport)
+	(uploadEvent) ..> (contactServer)
+	(monthlyReport) ..> (contactServer)
+	(buyTicket) .> (contactServer)	
+	(searchEvents) .> (contactServer)
+}
+rectangle Server
+(contactServer) -- Server
+
+@enduml

@@ -3,13 +3,14 @@
 start
 :open desired event's details;
 :select number of tickets;
-:check conditions;
-fork
+
+split
 :check remaining points;
-fork again
+split again
 :check remaining tickets;
+split again
 :check if event expired;
-end fork
+end split
 if (all conditions met) then (yes)
 	:send ticket -pdf format- \nto parent's e-mail;
 	if (reached point usage quota) then (yes)
