@@ -3,7 +3,7 @@
 start
 if (choose type \nof user) then (parent)
 	:parent inserts username \nand password;
-	:data is passed \nthrough to backend;
+	:data is passed to \nbackend through https;
 	:cross-check credentials \nthrough the database;
 
 	if (credentials were correct) then (yes)
@@ -15,7 +15,7 @@ if (choose type \nof user) then (parent)
 	endif
 else (provider)
 	:provider inserts username \nand password;
-	:data is passed \nthrough to backend;
+	:data is passed to \nbackend through https;
 	:cross-check credentials \nthrough the database;
 	if (credentials were correct) then (yes)
 		:load provider interface;

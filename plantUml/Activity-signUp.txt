@@ -20,10 +20,11 @@ else (provider)
 	:await administrative approval;
 	if (approved) then (yes)
 		:successful sign up;
+		end
 	else (no)
 		:inform user of denied sign up;
+		end
 	endif
-	end
 endif
 
 @enduml
