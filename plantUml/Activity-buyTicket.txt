@@ -1,0 +1,27 @@
+@startuml
+
+start
+:open desired event's details;
+:select number of tickets;
+
+split
+:check remaining points;
+split again
+:check remaining tickets;
+split again
+:check if event expired;
+end split
+if (all conditions met) then (yes)
+	:send ticket -pdf format- \nto parent's e-mail;
+	if (reached point usage quota) then (yes)
+		:reward parent with bonus points;
+		end
+	else (no)
+		end
+	endif
+else (no)
+	:inform parent about reason of failure;
+	end
+endif
+
+@enduml

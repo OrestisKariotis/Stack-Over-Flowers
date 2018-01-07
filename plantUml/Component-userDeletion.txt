@@ -1,0 +1,32 @@
+@startuml
+
+database "mySQL" {
+    [users]
+}
+interface usersInterface
+users -- usersInterface
+
+
+component Backend {
+       [userDeletionB]
+}
+interface userDeletionInterfaceB
+userDeletionB -- userDeletionInterfaceB
+userDeletionB --> usersInterface
+
+
+component Frontend {
+      [userDeletionF]
+}
+interface userDeletionInterfaceF
+userDeletionF -- userDeletionInterfaceF
+userDeletionF --> userDeletionInterfaceB
+
+
+:Administrator: as a
+a -u-> userDeletionInterfaceF
+
+
+note "The user entity can \nbe regarded as, either \na provider or a parent." as n
+
+@enduml

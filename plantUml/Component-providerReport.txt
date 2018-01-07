@@ -1,0 +1,29 @@
+@startuml
+
+database "Elastic Search" {
+    [events]
+}
+interface eventsInterface
+events -- eventsInterface
+
+
+component Backend {
+       [providersReport]
+}
+interface providersReportInterface
+providersReport -- providersReportInterface
+providersReport --> eventsInterface
+
+
+component Frontend {
+      [monthlyReport]
+}
+interface monthlyReportInterface
+monthlyReport -- monthlyReportInterface
+monthlyReport --> providersReportInterface
+
+:Provider: as p
+p -u-> monthlyReportInterface
+
+      
+@enduml

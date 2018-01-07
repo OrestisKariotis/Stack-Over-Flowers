@@ -1,0 +1,44 @@
+@startuml
+
+interface inputOutputSearchInterface
+interface searchInterface
+interface eventsInterface
+interface mapsInterface
+interface output
+
+
+database "Elastic Search" {
+    [events]
+}
+events -- eventsInterface
+
+
+component Backend {
+       [eventsSearch]
+}
+eventsSearch --- searchInterface
+eventsSearch -up-> eventsInterface
+
+
+component Frontend {
+      [searchEventsScript]
+      [geoSearchScript]
+}
+searchEventsScript -- inputOutputSearchInterface
+geoSearchScript -- output
+searchEventsScript --> searchInterface
+geoSearchScript --> mapsInterface
+searchEventsScript -> geoSearchScript
+
+
+component google {
+    [mapService]
+}
+mapService --- mapsInterface
+
+
+:User: as P
+P -u-> inputOutputSearchInterface
+
+      
+@enduml

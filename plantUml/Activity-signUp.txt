@@ -1,0 +1,30 @@
+@startuml
+
+start
+:user sign up;
+if (sign up as) then (parent)
+	repeat
+		:fill the form;
+		backward: request different \nusername/e-mail;
+	repeat while (username/e-mail \nalready in use) is (yes)
+	-> no;
+	:successful sign up;
+	end
+else (provider)
+	repeat
+		:fill the form;
+		:upload credentials;
+		backward: request different \nusername/e-mail;
+	repeat while (username/e-mail \nalready in use) is (yes)
+	-> no;
+	:await administrative approval;
+	if (approved) then (yes)
+		:successful sign up;
+		end
+	else (no)
+		:inform user of denied sign up;
+		end
+	endif
+endif
+
+@enduml
