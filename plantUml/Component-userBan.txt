@@ -1,0 +1,32 @@
+@startuml
+
+database "Elastic Search" {
+    [parents]
+}
+interface parentsInterface
+parents -- parentsInterface
+
+
+component Backend {
+       [parentBan]
+}
+interface parentBanInterfaceB
+parentBan -- parentBanInterfaceB
+parentBan --> parentsInterface
+
+
+component Frontend {
+      [parentBanScript]
+}
+interface parentBanInterfaceF
+parentBanScript -- parentBanInterfaceF
+parentBanScript --> parentBanInterfaceB
+
+
+:Administrator: as a
+a -u-> parentBanInterfaceF
+
+
+note "The Component Diagramm for \nbanning a provider is the exact same, \nonly set <provider> where <user>." as n
+
+@enduml

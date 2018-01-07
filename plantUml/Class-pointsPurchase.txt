@@ -1,0 +1,51 @@
+@startuml
+ 
+class PurchasePoints  {
+    Parent p
+    int money
+    Plarform_State state
+    Transaction trans
+   {abstract} void doAllTheStaff()
+}
+
+class User {
+    int id
+    String username
+    String password
+    String firstname
+    String lastname
+    String phone
+    String e-mail
+    int bitOfBan
+    {abstract} void resetPassword()
+}
+
+class Parent {
+    int points
+    int money-paid
+    {abstract} void update_wallet()
+}
+
+class Platform_State {
+    int total_points
+    int parents
+    int providers
+    int debt
+    double profit
+    {abstract} void updateAllStats()
+}
+
+
+class Transaction {
+     String bank_account
+     String password
+     {abstract} void verify_password()
+     {abstract} void verify_account()
+}
+
+Parent --|> User 
+Parent o-- PurchasePoints
+Platform_State o-- PurchasePoints
+Transaction o-- PurchasePoints
+
+@enduml

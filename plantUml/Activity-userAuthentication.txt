@@ -1,0 +1,38 @@
+@startuml
+
+start
+:user inserts username \nand password;
+:data is passed through to backend;
+:cross-check credentials \nthrough the database;
+
+if (credentials were correct) then (yes)
+	:check user type;
+	split
+	->if parent;
+	:load parent interface;
+	split again
+	->if provider;
+	:load provider interface;
+	split again
+	->if administrator;
+	:load administrator interface;
+	end split
+	end
+else (no)
+	:inform user;
+	end
+endif
+	
+@enduml
+
+:check user type;
+	if (user is parent) then (yes)
+		
+	elseif (user is provider) then (yes)
+		:load parent provider;
+	elseif (user is administrator) then (yes)
+		:load parent administrator;
+	endif
+else (no) 
+	:notify user;
+endif

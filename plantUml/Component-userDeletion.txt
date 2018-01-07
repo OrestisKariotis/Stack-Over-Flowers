@@ -1,0 +1,32 @@
+@startuml
+
+database "Elastic Search" {
+    [parents]
+}
+interface parentsInterface
+parents -- parentsInterface
+
+
+component Backend {
+       [parentDeletion]
+}
+interface parentDeletionInterfaceB
+parentDeletion -- parentDeletionInterfaceB
+parentDeletion --> parentsInterface
+
+
+component Frontend {
+      [parentDeletionScript]
+}
+interface parentDeletionInterfaceF
+parentDeletionScript -- parentDeletionInterfaceF
+parentDeletionScript --> parentDeletionInterfaceB
+
+
+:Administrator: as a
+a -u-> parentDeletionInterfaceF
+
+
+note "The Component Diagramm for \ndeleting a provider is the exact same, \nonly set <provider> where <user>." as n
+
+@enduml

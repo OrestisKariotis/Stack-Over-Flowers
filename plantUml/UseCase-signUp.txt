@@ -1,0 +1,29 @@
+@startuml
+
+start
+:user sign up;
+if (sign up as) then (parent)
+	repeat
+		:fill the form;
+		backward: request different username;
+	repeat while (username already in use) is (yes)
+	-> no;
+	:successful sign up;
+	end
+else (provider)
+	repeat
+		:fill the form;
+		:upload credentials;
+		backward: request different username;
+	repeat while (username already in use) is (yes)
+	-> no;
+	:await administrative approval;
+	if (approved) then (yes)
+		:successful sign up;
+	else (no)
+		:inform user of denied sign up;
+	endif
+	end
+endif
+
+@enduml

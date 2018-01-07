@@ -1,0 +1,16 @@
+@startuml
+
+start
+:fill out event deteails;
+:submit event;
+:await administrative approval;
+-> notify admin via e-mail;
+if (approved) then (yes)
+	:successful registration of event;
+	end
+else (no)
+	:inform provider of failure;
+	end
+endif
+
+@enduml
