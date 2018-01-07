@@ -8,23 +8,23 @@ users -- usersInterface
 
 
 component Backend {
-       [userRightsB]
+       [userRights]
 }
-interface userRightsInterfaceB
-userRightsB -- userRightsInterfaceB
-userRightsB --> usersInterface
+interface userRightsInterface
+userRights -- userRightsInterface
+userRights --> usersInterface
 
 
 component Frontend {
-      [userRightsF]
+      [changeUserRights]
 }
-interface userRightsInterfaceF
-userRightsF -- userRightsInterfaceF
-userRightsF --> userRightsInterfaceB
+interface changeUserRightsInterface
+changeUserRights -- changeUserRightsInterface
+changeUserRights --> userRightsInterface
 
 
 :Administrator: as a
-a -u-> userRightsInterfaceF
+a -u-> changeUserRightsInterface
 
 
 note "The user entity can \nbe regarded as, either \na provider or a parent." as n
