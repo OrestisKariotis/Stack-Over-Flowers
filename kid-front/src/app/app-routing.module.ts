@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { ParentRegisterComponent } from './parent-register/parent-register.component';
 import { ProviderRegisterComponent } from './provider-register/provider-register.component';
+import { SearchComponent } from './search/search.component';
 
 const appRoutes: Routes = [
   { path: 'home',
@@ -18,6 +19,9 @@ const appRoutes: Routes = [
   },
   { path: 'provider-register',
     component: ProviderRegisterComponent
+  },
+  { path: 'search',
+    component: SearchComponent
   },
   { path: '',
     component: HomeComponent
