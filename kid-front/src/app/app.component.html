@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -6,18 +6,22 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span> 
       </button>
-      <a class="navbar-brand" routerLink="">Kidspiration</a>
+      <a class="navbar-brand" routerLink=""><img alt="Brand" src="/assets/images/logo.png"></a>
+	  <a class="platform-title" routerLink="">Kidspiration</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><a routerLink="search">Αναζήτηση</a></li>
+      </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-  				<a href="#" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Eggrafh
-  				<span class="caret"></span></a>
-  				<ul class="dropdown-menu">
+  		  <a href="#" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Εγγραφή
+  	      <span class="caret"></span></a>
+  		  <ul class="dropdown-menu">
     				<li><a routerLink="parent-register">Εγγραφή ως Γονέας</a></li>
     				<li><a routerLink="provider-register">Εγγραφή ως Πάροχος</a></li>
-  				</ul>
-				</li>
+  		  </ul>
+		</li>
         <li><a routerLink="user-login"><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Σύνδεση</a></li>
       </ul>
     </div>
@@ -31,28 +35,19 @@
 	<div class="container">
         <div class="row">
             <div class="col-sm-3">
-            	<h2>Logo</h2>
-            </div>
-        	<div class="col-sm-3">
-            	<h4>Kidspiration</h4>
             	<a href="#">Σχετικά με εμάς</a><br/>
+            </div>
+        	<div class="col-sm-3">
             	<a href="#">Όροι χρήσης</a><br/>
-            	<a href="#">Συχνές ερωτήσεις</a><br/>
             </div>
         	<div class="col-sm-3">
-            	<h4>Επικοινωνία</h4>
+				<a href="#">Συχνές ερωτήσεις</a><br/>
+            </div>
+        	<div class="col-sm-3">
             	<a href="#">Επικοινωνήστε μαζί μας</a><br/>
-            	<a href="#">Διαφημιστείτε σε εμάς</a><br/>
-            	<a href="#">Δίκτυο συνεργατών</a><br/>
-            </div>
-        	<div class="col-sm-3">
-            	<h4>Social Media</h4>
-            	<a href="#">Facebook</a><br/>
-            	<a href="#">Twitter</a><br/>
-            	<a href="#">Instagram</a><br/>
             </div>
         </div>
         <br/><br/>
-        <p class="text-center text-muted"><small>© 2017 StackOverFlowers. All rights reserved</small></p>
+        <p class="text-center text-muted"><small>© 2018 StackOverFlowers. All rights reserved</small></p>
     </div>
 </footer>
