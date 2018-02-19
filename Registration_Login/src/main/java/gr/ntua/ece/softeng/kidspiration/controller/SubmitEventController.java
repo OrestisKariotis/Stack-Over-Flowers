@@ -2,6 +2,9 @@ package gr.ntua.ece.softeng.kidspiration.controller;
 
 import gr.ntua.ece.softeng.kidspiration.model.PendingEvent;
 import gr.ntua.ece.softeng.kidspiration.model.Provider;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;s
 
 @RestController
 public class SubmitEventController {

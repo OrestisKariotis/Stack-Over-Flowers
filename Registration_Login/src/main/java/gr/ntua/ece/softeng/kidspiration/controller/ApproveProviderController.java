@@ -3,6 +3,9 @@ package gr.ntua.ece.softeng.kidspiration.controller;
 
 import gr.ntua.ece.softeng.kidspiration.model.Provider;
 import gr.ntua.ece.softeng.kidspiration.model.PendingProvider;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
 public class ApproveProviderController {

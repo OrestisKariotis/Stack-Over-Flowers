@@ -3,6 +3,9 @@ package gr.ntua.ece.softeng.kidspiration.controller;
 import gr.ntua.ece.softeng.kidspiration.model.Ticket;
 import gr.ntua.ece.softeng.kidspiration.model.CurrentEvent;
 import gr.ntua.ece.softeng.kidspiration.model.Parent;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
 public class PurchaseTicketController {
@@ -18,7 +21,7 @@ public class PurchaseTicketController {
             if (p.getRemain_points()>= (numOfTickets*event.getCost())) {
                 int temp= event.getTicketsRemainNumber();
                 event.setTicketsRemainNumber(temp-numOfTickets);
-                int temp= p.getRemain_points();
+                temp= p.getRemain_points();
                 p.setRemain_points(temp-(numOfTickets*event.getCost());
                 Ticket ticket=new Ticket(id_parent, id_event);
                 //enhmerwsh vashs event

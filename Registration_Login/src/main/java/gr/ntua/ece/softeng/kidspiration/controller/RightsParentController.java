@@ -1,6 +1,9 @@
 package gr.ntua.ece.softeng.kidspiration.controller;
 
 import gr.ntua.ece.softeng.kidspiration.model.Parent;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
 public class RightsParentController {
