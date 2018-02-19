@@ -13,7 +13,11 @@ import { ParentRegisterComponent } from './parent-register/parent-register.compo
 import { ProviderRegisterComponent } from './provider-register/provider-register.component';
 import { ConfirmPasswordDirective } from './directives/confirm-password.directive';
 
+import { fakeBackendProvider } from './helpers/fakebackend';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+
 import { UserLoginService } from './services/user-login.service';
+import { CurrentUserService } from './services/current-user.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +28,6 @@ import { UserLoginService } from './services/user-login.service';
     ParentRegisterComponent,
     ProviderRegisterComponent,
     ConfirmPasswordDirective,
-    UserLoginService
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,11 @@ import { UserLoginService } from './services/user-login.service';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    UserLoginService,
+    CurrentUserService,
+    fakeBackendProvider
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
