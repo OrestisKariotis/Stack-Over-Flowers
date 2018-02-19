@@ -20,11 +20,13 @@ public class LoginController {
     public Parent(@RequestParam String Username, @RequestParam String Password) {
         Login login= new Login(Username, Password);
         //search if there is a parent with this username and password
+        //ti epistrefw?
     }
 
     @RequestMapping("/loginProvider")
     public Provider (@RequestParam String Username, @RequestParam String Password) {
         Login login = new Login(Username, Password);
-        //search if there is a provider with this username and password
+        //search if there is a provider with this username and password AND check if he is ban!!!!!!!1
+        //ti epistrefw??
     }
 }

@@ -29,7 +29,7 @@ public class RegistrationController {
     public void registerProvider(@RequestParam String Username, @RequestParam String Password, @RequestParam String Firstname, @RequestParam String Lastname, @RequestParam String Businessname, @RequestParam String email, @RequestParam int phone, @RequestParam int Banknumber)
     {
         PendingProvider prov= new PendingProvider(Firstname, Lastname, Username, Password, Businessname, phone, email, Banknumber);
-        //newProvider.register(prov); enhmerwsh vashs
+        //newPendingProvider.register(prov); enhmerwsh vashs
     }
 
 

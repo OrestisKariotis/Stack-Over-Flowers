@@ -33,5 +33,107 @@ public class CurrentEvent {
         this.geoGeographicWidth=geoGeographicWidth;
     }
 
+    public int getId_event() {
+        return id_event;
+    }
 
+    public void setId_event(int id_event) {
+        this.id_event = id_event;
+    }
+
+    public int getId_provider() {
+        return id_provider;
+    }
+
+    public void setId_provider(int id_provider) {
+        this.id_provider = id_provider;
+    }
+
+    public String getEventName() {
+        return eventName;
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public int getLowestAge() {
+        return lowestAge;
+    }
+
+    public void setLowestAge(int lowestAge) {
+        this.lowestAge = lowestAge;
+    }
+
+    public int getHighestAge() {
+        return highestAge;
+    }
+
+    public void setHighestAge(int highestAge) {
+        this.highestAge = highestAge;
+    }
+
+    public String getKind() {
+        return kind;
+    }
+
+    public void setKind(String kind) {
+        this.kind = kind;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+
+    public int getTicketsRemainNumber() {
+        return ticketsRemainNumber;
+    }
+
+    public void setTicketsRemainNumber(int ticketsRemainNumber) {
+        this.ticketsRemainNumber = ticketsRemainNumber;
+    }
+
+    public int getTicketsStartingNumber() {
+        return ticketsStartingNumber;
+    }
+
+    public void setTicketsStartingNumber(int ticketsStartingNumber) {
+        this.ticketsStartingNumber = ticketsStartingNumber;
+    }
+
+    public double getGeographicLength() {
+        return geographicLength;
+    }
+
+    public void setGeographicLength(double geographicLength) {
+        this.geographicLength = geographicLength;
+    }
+
+    public double getGeoGeographicWidth() {
+        return geoGeographicWidth;
+    }
+
+    public void setGeoGeographicWidth(double geoGeographicWidth) {
+        this.geoGeographicWidth = geoGeographicWidth;
+    }
 }

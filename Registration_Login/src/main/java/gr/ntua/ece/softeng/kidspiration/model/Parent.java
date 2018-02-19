@@ -72,4 +72,8 @@ public class Parent {
     public void setSpent_points(int spent_points) {
         this.spent_points = spent_points;
     }
+
+    public void setBan(int ban) {
+        this.ban = ban;
+    }
 }

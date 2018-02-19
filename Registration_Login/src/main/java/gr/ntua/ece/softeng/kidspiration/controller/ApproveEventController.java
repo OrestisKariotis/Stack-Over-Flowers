@@ -2,12 +2,14 @@ package gr.ntua.ece.softeng.kidspiration.controller;
 
 import gr.ntua.ece.softeng.kidspiration.model.CurrentEvent;
 
+
 @RestController
 public class ApproveEventController {
 
     @RequestMapping("/approveEvent");
 
     public String ApproveEventController(@RequestParam int id) {
+
         //search sth vash twn pending events kai epistrofh tou pending event me auto to id
         //PendingEvent temp=find(id);
         //

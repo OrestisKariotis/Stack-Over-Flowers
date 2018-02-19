@@ -13,8 +13,8 @@ public class ApproveProviderController {
         //PendingProvider temp=find(id);
 
         Provider provider = new Provider(temp.getFirstname(), temp.getLastname(), temp.getUsername(), temp.getPassword(), temp.getBusinessName(), temp.getPhone(), temp.getEmail(), temp.getBankNumber())
-        //delete tou event apo th vash twn pending events
-        //insert tou event sth vash twn current events
+        //delete tou provider apo th vash twn pending providers
+        //insert tou provider sth vash twn providers
         //ti epistrefoume sto frontend?????
     }
 }

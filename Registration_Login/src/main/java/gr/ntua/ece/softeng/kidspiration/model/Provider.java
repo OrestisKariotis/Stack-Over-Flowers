@@ -26,4 +26,28 @@ public class Provider {
         this.inputMoney=0;
         this.rightsNumber=2;
     }
+
+    public int getBankNumber() {
+        return bankNumber;
+    }
+
+    public int getInputMoney() {
+        return inputMoney;
+    }
+
+    public int getRightsNumber() {
+        return rightsNumber;
+    }
+
+    public void setBankNumber(int bankNumber) {
+        this.bankNumber = bankNumber;
+    }
+
+    public void setInputMoney(int inputMoney) {
+        this.inputMoney = inputMoney;
+    }
+
+    public void setRightsNumber(int rightsNumber) {
+        this.rightsNumber = rightsNumber;
+    }
 }
