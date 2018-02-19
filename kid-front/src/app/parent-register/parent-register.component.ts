@@ -15,6 +15,7 @@ export class ParentRegisterComponent implements OnInit {
   }
 
   parentRegister() {
+    if (this.model.password !== this.model.passRetype ) { return; }
     this.alert = !this.alert;
   }
 }

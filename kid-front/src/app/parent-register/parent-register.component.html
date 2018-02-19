@@ -16,10 +16,20 @@
 				[ngClass]="{ 'has-error': f.submitted && !password.valid }">
 				<label for="password">Password</label> <input type="password"
 					class="form-control" name="password" [(ngModel)]="model.password"
-					#password="ngModel" required />
+					#password="ngModel" required minLength/>
 				<div *ngIf="f.submitted && !password.valid" class="help-block">Το πεδίο
 					είναι υποχρεωτικό!</div>
 			</div>
+			<div class="form-group"
+				[ngClass]="{ 'has-error': f.submitted && !password.valid }">
+				<label for="passRetype">Επανάληψη Password</label> <input type="password"
+					class="form-control" name="passRetype" [(ngModel)]="model.passRetype"
+					#passRetype="ngModel" required />
+				<div *ngIf="f.submitted && !password.valid" class="help-block">Το πεδίο
+					είναι υποχρεωτικό!</div>
+				<div *ngIf="f.submitted && (password.value != passRetype.value)" class="help-block">Οι κωδικοί δεν ταιριάζουν</div>
+			</div>
+			<hr />
 			<div class="form-group"
 				[ngClass]="{ 'has-error': f.submitted && !firstName.valid }">
 				<label for="firstName">Όνομα</label> <input type="text"
@@ -40,10 +50,19 @@
 				[ngClass]="{ 'has-error': f.submitted && !email.valid }">
 				<label for="email">Email</label> <input type="email"
 					class="form-control" name="email" [(ngModel)]="model.email"
-					#email="ngModel" required email/>
+					#email="ngModel" required email>
 				<div *ngIf="f.submitted && email.errors?.required" class="help-block">Το πεδίο
 					είναι υποχρεωτικό!</div>
 				<div *ngIf="f.submitted && email.errors?.email" class="help-block">Λαθος mail</div>
+			</div>
+			<div class="form-group"
+				[ngClass]="{ 'has-error': f.submitted && !phone.valid }">
+				<label for="phone">Τηλέφωνο</label> <input type="text"
+					class="form-control" name="phone" [(ngModel)]="model.phone"
+					#phone="ngModel" required pattern="\b[0-9]{10}\b" />
+				<div *ngIf="f.submitted && phone.errors?.required" class="help-block">Το πεδίο
+					είναι υποχρεωτικό!</div>
+				<div *ngIf="f.submitted && phone.errors?.pattern" class="help-block">Απαιτείται 10ψήφιος αριθμός</div>
 			</div>
 			<div class="text-info">Αν πατήσετε Εγγραφη ως Γονέας Συμφωνείτε με τους <a href="#">Όρους Χρήσης Γονέα</a></div>
 			<br>

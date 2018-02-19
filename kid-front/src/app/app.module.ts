@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,7 +11,13 @@ import { SearchComponent } from './search/search.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { ParentRegisterComponent } from './parent-register/parent-register.component';
 import { ProviderRegisterComponent } from './provider-register/provider-register.component';
+import { ConfirmPasswordDirective } from './directives/confirm-password.directive';
 
+import { fakeBackendProvider } from './helpers/fakebackend';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+
+import { UserLoginService } from './services/user-login.service';
+import { CurrentUserService } from './services/current-user.service';
 
 @NgModule({
   declarations: [
@@ -19,14 +26,20 @@ import { ProviderRegisterComponent } from './provider-register/provider-register
     SearchComponent,
     UserLoginComponent,
     ParentRegisterComponent,
-    ProviderRegisterComponent
+    ProviderRegisterComponent,
+    ConfirmPasswordDirective,
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    UserLoginService,
+    CurrentUserService,
+    fakeBackendProvider
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
