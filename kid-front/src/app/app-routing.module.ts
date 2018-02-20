@@ -1,11 +1,17 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, Router, NavigationEnd } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { ParentRegisterComponent } from './parent-register/parent-register.component';
 import { ProviderRegisterComponent } from './provider-register/provider-register.component';
 import { SearchComponent } from './search/search.component';
+import { FaqComponent } from './faq/faq.component';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { ContactComponent } from './contact/contact.component';
+import { TermsComponent } from './terms/terms.component';
+import { ErrorComponent } from './error/error.component';
+
 
 const appRoutes: Routes = [
   { path: 'home',
@@ -23,11 +29,23 @@ const appRoutes: Routes = [
   { path: 'search',
     component: SearchComponent
   },
+  { path: 'faq',
+    component: FaqComponent
+  },
+  { path: 'about-us',
+    component: AboutUsComponent
+  },
+  { path: 'contact',
+    component: ContactComponent
+  },
+  { path: 'terms',
+    component: TermsComponent
+  },
   { path: '',
     component: HomeComponent
   },
   { path: '**',
-    component: HomeComponent
+    component: ErrorComponent
   }
 ];
 
@@ -36,4 +54,12 @@ const appRoutes: Routes = [
   imports: [RouterModule.forRoot(appRoutes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+  constructor(private router: Router) {
+
+  this.router.events.subscribe(() => {
+      window.scroll(0, 0);
+    });
+
+  }
+}

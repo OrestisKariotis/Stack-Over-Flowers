@@ -19,6 +19,13 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UserLoginService } from './services/user-login.service';
 import { CurrentUserService } from './services/current-user.service';
 
+import { FaqComponent } from './faq/faq.component';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { ContactComponent } from './contact/contact.component';
+import { ErrorComponent } from './error/error.component';
+import { TermsComponent } from './terms/terms.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,6 +35,11 @@ import { CurrentUserService } from './services/current-user.service';
     ParentRegisterComponent,
     ProviderRegisterComponent,
     ConfirmPasswordDirective,
+    FaqComponent,
+    AboutUsComponent,
+    ContactComponent,
+    ErrorComponent,
+    TermsComponent
   ],
   imports: [
     BrowserModule,

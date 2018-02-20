@@ -85,10 +85,6 @@ body {
     }
 }
 
-.button-a {
-	margin-bottom: 20px !important;
-}
-
 .img-center {
 	margin: 0 auto;
 }
@@ -226,8 +222,36 @@ img.resize {
 }
 /* End Custom Control */
 
-body { padding-top: 73px; }
+body {
+	padding-top: 73px;
+	height: 100%;
+	margin-bottom: 150px !important;
+}
 
 @media screen and (min-width: 768px) {
     body { padding-top: 68px; }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.unlined:hover,
+.unlined:focus {
+	text-decoration: none !important;
+}
+
+.good-size {
+	font-size: 16px;
+}
+
+.underlined {
+	text-decoration: underline;
 }
