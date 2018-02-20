@@ -2,6 +2,7 @@ package gr.ntua.ece.softeng.kidspiration.Services;
 
 import gr.ntua.ece.softeng.kidspiration.Dao.PendingProviderDao;
 import gr.ntua.ece.softeng.kidspiration.Dao.UserDao;
+import gr.ntua.ece.softeng.kidspiration.Login;
 import gr.ntua.ece.softeng.kidspiration.PendingProvider;
 import gr.ntua.ece.softeng.kidspiration.PendingProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,11 @@ public class PendingProviderService implements UserService<PendingProvider> {
 
     public void addUser(PendingProvider user) {
         pendingProviderDao.addUser(user);
-    }
+    }  // checked
+
+    public PendingProvider validateUser(Login login) {
+        return null;
+    }  // WILL BE REMOVED
 
     public void editUser(PendingProvider user, int id) {
         pendingProviderDao.editUser(user, id);

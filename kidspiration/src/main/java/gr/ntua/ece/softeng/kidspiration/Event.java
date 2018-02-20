@@ -4,7 +4,7 @@ public class Event {
 
     private int event_id; // not-initialised
     private int provider_id;
-    private String name;
+    private String title;
     private String date; //could be date?
     private String starting_time;
     private String place;
@@ -12,9 +12,9 @@ public class Event {
     private int ticket_cost;
     private int initial_ticketsNumber;
 
-    public Event(int provider_id, String name, String date, String starting_time, String place, String type, int ticket_cost, int initial_ticketsNumber) {
+    public Event(int provider_id, String title, String date, String starting_time, String place, String type, int ticket_cost, int initial_ticketsNumber) {
         this.provider_id = provider_id;
-        this.name = name;
+        this.title = title;
         this.date = date;
         this.starting_time = starting_time;
         this.place = place;
@@ -39,12 +39,12 @@ public class Event {
         this.provider_id = provider_id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDate() {
