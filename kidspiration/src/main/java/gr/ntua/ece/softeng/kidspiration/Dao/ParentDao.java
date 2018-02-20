@@ -41,6 +41,13 @@ public class ParentDao implements UserDao<Parent>{
         System.out.println("User Updated!!");
     }
 
+    /*
+    public void editUser(Parent user) {
+        jdbcTemplate.update("UPDATE Parents SET id= ? , firstname= ? , lastname= ? , username= ? , password= ? , phone= ? , email= ? , remain_points= ? , spent_points= ? , ban= ? WHERE id= ? ",
+             user.getId(), user.getFirstname(), user.getLastname(), user.getUsername(), user.getPassword(), user.getPhone(), user.getEmail(), user.getRemain_points(), user.getSpent_points(), user.getBan(), user.getId())
+        System.out.println("User Updated!!");
+   */
+   
     public void deleteUser(int id) {
         jdbcTemplate.update("DELETE FROM Parents WHERE username = ? ", id);
         System.out.println("Person Deleted!!");
