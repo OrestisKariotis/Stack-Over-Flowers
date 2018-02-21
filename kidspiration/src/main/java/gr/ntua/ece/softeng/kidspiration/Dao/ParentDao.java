@@ -43,8 +43,8 @@ public class ParentDao implements UserDao<Parent>{
 
     /*
     public void editUser(Parent user) {
-        jdbcTemplate.update("UPDATE Parents SET id= ? , firstname= ? , lastname= ? , username= ? , password= ? , phone= ? , email= ? , remain_points= ? , spent_points= ? , ban= ? WHERE id= ? ",
-             user.getId(), user.getFirstname(), user.getLastname(), user.getUsername(), user.getPassword(), user.getPhone(), user.getEmail(), user.getRemain_points(), user.getSpent_points(), user.getBan(), user.getId())
+        jdbcTemplate.update("UPDATE Parents SET id= ? , firstname= ? , lastname= ? , username= ? , password= ? , phone= ? , email= ? , wallet= ? , spent_points= ? , ban= ? WHERE id= ? ",
+             user.getId(), user.getFirstname(), user.getLastname(), user.getUsername(), user.getPassword(), user.getPhone(), user.getEmail(), user.getWallet(), user.getSpent_points(), user.getBan(), user.getId())
         System.out.println("User Updated!!");
    */
    
