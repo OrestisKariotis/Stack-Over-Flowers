@@ -39,6 +39,13 @@ public class ProviderDao implements UserDao<Provider> {
                 user.getFirstname(), user.getLastname(), id);
         System.out.println("User Updated!!");
     }
+    
+    /*
+    public void editUser(Provider user) {
+        jdbcTemplate.update("UPDATE Providers SET id= ? , firstname= ? , lastname= ? , username= ? , password= ? , businessName? , phone= ? , email= ? , bankNumber= ? , profit= ? , rights_code= ? WHERE id= ? ",
+             user.getId(), user.getFirstname(), user.getLastname(), user.getUsername(), user.getPassword(), user.getBusinessName, user.getPhone(), user.getEmail(), user.getbankNumber(), user.getProfit(), user.getRights_code(), user.getId())
+        System.out.println("User Updated!!");
+   */
 
     public void deleteUser(int id) {
         jdbcTemplate.update("DELETE FROM Providers WHERE username = ? ", id);
