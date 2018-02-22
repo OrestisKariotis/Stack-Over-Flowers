@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.currentUserService.currentUser.subscribe(user => this.currentUser = user);
-    let prevUser = JSON.parse(sessionStorage.getItem('currentUser')) || {};
+    const prevUser = JSON.parse(sessionStorage.getItem('currentUser')) || {};
     if (prevUser) {
       this.currentUserService.changeUser(new CurrentUser(prevUser));
     }

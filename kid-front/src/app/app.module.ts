@@ -18,6 +18,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { UserLoginService } from './services/user-login.service';
 import { CurrentUserService } from './services/current-user.service';
+import { ParentRegisterService } from './services/parent-register.service';
+import { ProviderRegisterService } from './services/provider-register.service';
 
 import { FaqComponent } from './faq/faq.component';
 import { AboutUsComponent } from './about-us/about-us.component';
@@ -50,6 +52,8 @@ import { TermsComponent } from './terms/terms.component';
   providers: [
     UserLoginService,
     CurrentUserService,
+    ParentRegisterService,
+    ProviderRegisterService,
     fakeBackendProvider
   ],
   bootstrap: [AppComponent]
