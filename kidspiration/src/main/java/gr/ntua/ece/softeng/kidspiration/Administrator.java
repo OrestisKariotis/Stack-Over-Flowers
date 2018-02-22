@@ -7,10 +7,19 @@ public class Administrator {
     private String password;
     private String email;
 
-    public Administrator(String username, String password, String email) {
+    public Administrator(int id, String username, String password, String email) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUsername() {

@@ -1,37 +1,50 @@
-/*package gr.ntua.ece.softeng.kidspiration.Register_Login;
+package gr.ntua.ece.softeng.kidspiration.Controllers;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import gr.ntua.ece.softeng.kidspiration.Login;
+import gr.ntua.ece.softeng.kidspiration.Parent;
+import gr.ntua.ece.softeng.kidspiration.Provider;
+import gr.ntua.ece.softeng.kidspiration.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
-import gr.ntua.ece.softeng.kidspiration.User;
-import jbr.springmvc.service.UserService;
-@Controller
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+
+@RestController
+@RequestMapping(path = "/login", method = RequestMethod.GET)  //could be POST method
 public class LoginController {
+
     @Autowired
-    UserService userService;
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ModelAndView showLogin(HttpServletRequest request, HttpServletResponse response) {
-        ModelAndView mav = new ModelAndView("login");
-        mav.addObject("login", new Login());
-        return mav;
+    @Qualifier("ParentService")
+    private UserService parent_service;
+
+    @Autowired
+    @Qualifier("ProviderService")
+    private UserService provider_service;
+
+    @RequestMapping(value = "/parent", method = RequestMethod.GET)  // Could be POST method
+    public Parent Parent_login(@RequestParam String username, @RequestParam String password) {
+
+        Login login;
+        login = new Login(username, password);
+        Parent parent = (Parent) parent_service.validateUser(login);
+        /*if (null != parent)
+            return "Requested parent is in database with id = " + parent.getId();  //return value will be changed
+        else
+            return "There is no such parent in database"; //perhaps a null parent
+        */
+        return parent;
     }
-    @RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
-    public ModelAndView loginProcess(HttpServletRequest request, HttpServletResponse response,
-                                     @ModelAttribute("login") Login login) {
-        ModelAndView mav = null;
-        User user = userService.validateUser(login);
-        if (null != user) {
-            mav = new ModelAndView("welcome");
-            mav.addObject("firstname", user.getFirstname());
-        } else {
-            mav = new ModelAndView("login");
-            mav.addObject("message", "Username or Password is wrong!!");
-        }
-        return mav;
+
+    @RequestMapping(value = "/provider", method = RequestMethod.GET)  // Could be POST method
+    public Provider Provider_login(@RequestParam String username, @RequestParam String password) {
+
+        Login login;
+        login = new Login(username, password);
+        Provider provider = (Provider) provider_service.validateUser(login);
+        return provider;
     }
-}*/
+
+}

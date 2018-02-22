@@ -5,8 +5,8 @@ public class PendingProvider extends User{
     private String businessName;
     private String bankAccount;
 
-    public PendingProvider(String username, String password, String firstname, String lastname, String email, String phone, String businessName, String bankAccount) {
-        super(username, password, firstname, lastname, email, phone);
+    public PendingProvider(int id, String username, String password, String firstname, String lastname, String email, String phone, String businessName, String bankAccount) {
+        super(id, username, password, firstname, lastname, email, phone);
         this.businessName = businessName;
         this.bankAccount = bankAccount;
     }
