@@ -24,14 +24,13 @@
       <ng-template #disable>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-  		  <a href="#" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Εγγραφή
-  	      <span class="caret"></span></a>
-  	    
-  		  <ul class="dropdown-menu">
+  		  	<a href="#" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;Εγγραφή
+  	      	<span class="caret" data-toggle="dropdown"></span></a>
+  		  	<ul class="dropdown-menu" role="menu">
     				<li><a routerLink="parent-register">Εγγραφή ως Γονέας</a></li>
     				<li><a routerLink="provider-register">Εγγραφή ως Πάροχος</a></li>
-  		  </ul>
-		</li>
+  		  	</ul>
+				</li>
         <li><a routerLink="user-login"><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;Σύνδεση</a></li>
       </ul>
       </ng-template>

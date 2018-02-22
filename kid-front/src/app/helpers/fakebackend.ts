@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpRequest, HttpResponse, HttpErrorResponse,
+  HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/throw';
@@ -20,7 +21,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
             // get users
             if (request.url.endsWith('/api/users') && request.method === 'POST') {
-                if (true) {
+                if (request.body.username !== 'awf') {
                     let body = {
                     id: 1,
                     name: 'awf',
@@ -29,9 +30,26 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     points: 2,
                     enable: true
                   };
-                    return Observable.of(new HttpResponse({ status: 200, body: body }));
+                    return Observable.of(new HttpResponse({ status: 400 , body: body}));
                 } else {
                   return Observable.throw('Unauthorised');
+                }
+            }
+          if (request.url.endsWith('/api/register/parent') && request.method === 'POST') {
+                if (request.body.username !== 'gazzetta') {
+                  let body = {
+                    id: 1,
+                    name: 'lul',
+                    email: 'awf',
+                    tel: 'awf',
+                    points: 5,
+                    enable: true
+                  }
+                    return Observable.of(new HttpResponse({ status: 400 , body: body}));
+                } else if (request.body.firstName === 'lol') {
+                    return Observable.throw('Unauthorised');
+                } else {
+                  return Observable.throw('Error');
                 }
             }
             // pass through any requests not handled above

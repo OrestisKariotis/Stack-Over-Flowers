@@ -21,7 +21,7 @@
 					είναι υποχρεωτικό!</div>
 			</div>
 			<div class="form-group"
-				[ngClass]="{ 'has-error': f.submitted && !password.valid }">
+				[ngClass]="{ 'has-error': f.submitted && !passRetype.valid }">
 				<label for="passRetype">Επανάληψη Password</label> <input type="password"
 					class="form-control" name="passRetype" [(ngModel)]="model.passRetype"
 					#passRetype="ngModel" required />
@@ -64,10 +64,10 @@
 					είναι υποχρεωτικό!</div>
 				<div *ngIf="f.submitted && phone.errors?.pattern" class="help-block">Απαιτείται 10ψήφιος αριθμός</div>
 			</div>
-			<div class="text-info">Αν πατήσετε Εγγραφη ως Γονέας Συμφωνείτε με τους <a href="#">Όρους Χρήσης Γονέα</a></div>
+			<div class="text-info">Αν πατήσετε Εγγραφη ως Γονέας Συμφωνείτε με τους <a routerLink="/terms">Όρους Χρήσης</a></div>
 			<br>
 			<button class="btn btn-default">Εγγραφή ως Γονέας</button>
 		</form>
+		<div *ngIf="model.error" class = "alert alert-danger">{{model.error}}</div>
 	</div>
 </div>
-{{alert}}

@@ -1,3 +1,98 @@
-<p>
-  provider-register works!
-</p>
+<div class="container">
+	<div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+		<h2><b>Φόρμα εγγραφής Παρόχου</b></h2>
+		<br>
+		<form name="form" (ngSubmit)="f.form.valid && providerRegister()" #f="ngForm"
+			novalidate>
+			<div class="form-group"
+				[ngClass]="{ 'has-error': f.submitted && !username.valid }">
+				<label for="username">Username</label> <input type="text"
+					class="form-control" name="username" [(ngModel)]="model.username"
+					#username="ngModel" required />
+				<div *ngIf="f.submitted && !username.valid" class="help-block">Το πεδίο
+					είναι υποχρεωτικό!</div>
+			</div>
+			<div class="form-group"
+				[ngClass]="{ 'has-error': f.submitted && !password.valid }">
+				<label for="password">Password</label> <input type="password"
+					class="form-control" name="password" [(ngModel)]="model.password"
+					#password="ngModel" required minLength/>
+				<div *ngIf="f.submitted && !password.valid" class="help-block">Το πεδίο
+					είναι υποχρεωτικό!</div>
+			</div>
+			<div class="form-group"
+				[ngClass]="{ 'has-error': f.submitted && !passRetype.valid }">
+				<label for="passRetype">Επανάληψη Password</label> <input type="password"
+					class="form-control" name="passRetype" [(ngModel)]="model.passRetype"
+					#passRetype="ngModel" required />
+				<div *ngIf="f.submitted && !password.valid" class="help-block">Το πεδίο
+					είναι υποχρεωτικό!</div>
+				<div *ngIf="f.submitted && (password.value != passRetype.value)" class="help-block">Οι κωδικοί δεν ταιριάζουν</div>
+			</div>
+			<hr />
+			<div class="form-group"
+				[ngClass]="{ 'has-error': f.submitted && !firstName.valid }">
+				<label for="firstName">Όνομα</label> <input type="text"
+					class="form-control" name="firstName" [(ngModel)]="model.firstName"
+					#firstName="ngModel" required />
+				<div *ngIf="f.submitted && !firstName.valid" class="help-block">Το πεδίο
+					είναι υποχρεωτικό!</div>
+			</div>
+			<div class="form-group"
+				[ngClass]="{ 'has-error': f.submitted && !lastName.valid }">
+				<label for="lastName">Επώνυμο</label> <input type="text"
+					class="form-control" name="lastName" [(ngModel)]="model.lastName"
+					#lastName="ngModel" required />
+				<div *ngIf="f.submitted && !lastName.valid" class="help-block">Το πεδίο
+					είναι υποχρεωτικό!</div>
+			</div>
+			<div class="form-group"
+				[ngClass]="{ 'has-error': f.submitted && !orgName.valid }">
+				<label for="lastName">Όνομα Επιχείρησης</label> <input type="text"
+					class="form-control" name="orgName" [(ngModel)]="model.orgName"
+					#orgName="ngModel" required />
+				<div *ngIf="f.submitted && !orgName.valid" class="help-block">Το πεδίο
+					είναι υποχρεωτικό!</div>
+			</div>
+			<div class="form-group"
+				[ngClass]="{ 'has-error': f.submitted && !email.valid }">
+				<label for="email">Email</label> <input type="email"
+					class="form-control" name="email" [(ngModel)]="model.email"
+					#email="ngModel" required email>
+				<div *ngIf="f.submitted && email.errors?.required" class="help-block">Το πεδίο
+					είναι υποχρεωτικό!</div>
+				<div *ngIf="f.submitted && email.errors?.email" class="help-block">Λαθος mail</div>
+			</div>
+			<div class="form-group"
+				[ngClass]="{ 'has-error': f.submitted && !phone.valid }">
+				<label for="phone">Τηλέφωνο</label> <input type="text"
+					class="form-control" name="phone" [(ngModel)]="model.phone"
+					#phone="ngModel" required pattern="\b[0-9]{10}\b" />
+				<div *ngIf="f.submitted && phone.errors?.required" class="help-block">Το πεδίο
+					είναι υποχρεωτικό!</div>
+				<div *ngIf="f.submitted && phone.errors?.pattern" class="help-block">Απαιτείται 10ψήφιος αριθμός</div>
+			</div>
+			<div class="form-group">
+    		<label for="logo">Λογότυπο</label>
+    		<input type="file" class="form-control" name="logo"  #logo (change)="logoChange(logo.files)"/>
+  		</div>
+			<hr />
+			<div class="form-group"
+				[ngClass]="{ 'has-error': f.submitted && !bankNumber.valid }">
+				<label for="bankNumber">Τραπεζικός Λογαριασμός</label> <input type="text"
+					class="form-control" name="bankNumber" [(ngModel)]="model.bankNumber"
+					#bankNumber="ngModel" required />
+				<div *ngIf="f.submitted && !bankNumber.valid" class="help-block">Το πεδίο
+					είναι υποχρεωτικό!</div>
+			</div>
+			<div class="form-group">
+    		<label for="authDocs">Έγγραφα πιστοποίησης</label>
+    		<input type="file" class="form-control" name="authDocs" #authDocs (change)="authChange(authDocs.files)" multiple required>
+  		</div>
+			<div class="text-info">Αν πατήσετε Εγγραφη ως Πάροχος Συμφωνείτε με τους <a routerLink="/terms">Όρους Χρήσης</a></div>
+			<br>
+			<button class="btn btn-default">Εγγραφή ως Πάροχος</button>
+		</form>
+		<div *ngIf="model.error" class = "alert alert-danger">{{model.error}}</div>
+	</div>
+</div>
