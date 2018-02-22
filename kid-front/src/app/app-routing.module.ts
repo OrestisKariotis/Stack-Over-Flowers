@@ -11,6 +11,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { ContactComponent } from './contact/contact.component';
 import { TermsComponent } from './terms/terms.component';
 import { ErrorComponent } from './error/error.component';
+import { PointsComponent } from './points/points.component';
 
 
 const appRoutes: Routes = [
@@ -40,6 +41,9 @@ const appRoutes: Routes = [
   },
   { path: 'terms',
     component: TermsComponent
+  },
+  { path: 'points',
+    component: PointsComponent
   },
   { path: '',
     component: HomeComponent

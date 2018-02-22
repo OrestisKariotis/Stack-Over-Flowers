@@ -26,6 +26,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { ContactComponent } from './contact/contact.component';
 import { ErrorComponent } from './error/error.component';
 import { TermsComponent } from './terms/terms.component';
+import { PointsComponent } from './points/points.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { TermsComponent } from './terms/terms.component';
     AboutUsComponent,
     ContactComponent,
     ErrorComponent,
-    TermsComponent
+    TermsComponent,
+    PointsComponent
   ],
   imports: [
     BrowserModule,
