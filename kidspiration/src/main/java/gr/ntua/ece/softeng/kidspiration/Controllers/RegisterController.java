@@ -12,7 +12,7 @@ import gr.ntua.ece.softeng.kidspiration.User;
 import gr.ntua.ece.softeng.kidspiration.Services.UserService;
 
 @RestController
-@RequestMapping(path = "/register", method = RequestMethod.GET)
+@RequestMapping(path = "/register", method = RequestMethod.GET)  //Could be POST method
 public class RegisterController {
 
     @Autowired
@@ -28,7 +28,7 @@ public class RegisterController {
 
         System.out.println("Been parent");
         Parent parent;
-        parent = new Parent(username, password, firstname, lastname, email, phone);
+        parent = new Parent(0, username, password, firstname, lastname, email, phone, 0, 0, false);
         parent_service.addUser(parent);
         return parent;
         //Probably accepting data in JSON will be different, not @RequestParam
@@ -40,7 +40,7 @@ public class RegisterController {
 
         System.out.println("Been provider");
         PendingProvider provider;
-        provider = new PendingProvider(username, password, firstname, lastname, email, phone, businessName, bankAccount);
+        provider = new PendingProvider(0, username, password, firstname, lastname, email, phone, businessName, bankAccount);
         provider_service.addUser(provider);
         return provider;
         //Probably accepting data in JSON will be different, not @RequestParam

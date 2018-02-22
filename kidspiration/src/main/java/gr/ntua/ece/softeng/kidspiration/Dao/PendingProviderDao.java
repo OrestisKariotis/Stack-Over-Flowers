@@ -2,6 +2,7 @@ package gr.ntua.ece.softeng.kidspiration.Dao;
 
 import java.util.List;
 
+import gr.ntua.ece.softeng.kidspiration.Login;
 import gr.ntua.ece.softeng.kidspiration.PendingProvider;
 import gr.ntua.ece.softeng.kidspiration.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +18,15 @@ public class PendingProviderDao implements UserDao<PendingProvider>{
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    public void addUser(PendingProvider user) {
+    public void addUser(PendingProvider user) {  // checked
         jdbcTemplate.update("INSERT INTO PendingProviders (username, password, firstname, lastname, email, phone, businessName, bankAccount) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
                 user.getUsername(), user.getPassword(), user.getFirstname(), user.getLastname(), user.getEmail(), user.getPhone(), user.getBusinessName(), user.getBankAccount());
         System.out.println("User Added!!");
     }
+
+    public PendingProvider validateUser(Login login) {
+        return null;
+    }  // checked
 
     public void editUser(PendingProvider user, int id) {
         jdbcTemplate.update("UPDATE PendingProviders SET firstname = ? , lastname = ? WHERE id = ? ",

@@ -10,10 +10,4 @@ public class KidspirationApplication {
 
 		SpringApplication.run(KidspirationApplication.class, args);
 	}
-
-	/*@Bean
-	public UserDaoImpl userdaoimpl() {
-		return new UserDaoImpl();
-	}*/
-
 }
