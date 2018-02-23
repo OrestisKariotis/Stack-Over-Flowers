@@ -1,9 +1,9 @@
 DROP TABLE IF EXISTS kidspiration.Parents;
 DROP TABLE IF EXISTS kidspiration.PendingProviders;
 DROP TABLE IF EXISTS kidspiration.Providers;
-/*
-TABLE IF EXISTS kidspiration.MonthReferences;
- */
+
+DROP TABLE IF EXISTS kidspiration.MonthReferences;
+
 
 
 CREATE TABLE kidspiration.Parents (
@@ -48,13 +48,15 @@ CREATE TABLE kidspiration.Providers (
   PRIMARY KEY (`id`)
 ) AUTO_INCREMENT = 1;
 
-/*
+
 CREATE TABLE kidspiration.MonthReferences (
-  'month' INT,
-  'earnings' INT,
-  'expenses' DOUBLE
+  `month` INT,
+  `earnings` INT,
+  `expenses` DOUBLE
 );
-*/
+
 
 INSERT INTO kidspiration.Providers(username, password, firstname, lastname, email, phone, businessName, bankAccount, profit, rights_code) VALUES("manolman", "test", "Manolis", "Vardas", "mgvardas@hotmail.com", "6981913215", "ACME", "husad8773739", 0, 0),
   ("detectiveal", "test1", "Alexandra", "Vioni", "detectiveal@hotmail.com", "6940422100", "JUPI", "efg934huf3", 0, 0), ("gvoutsi", "test2", "Giannis", "Voutsinas", "gvoutsi@yahoo.gr", "6981930582", "3D", "dh4h8huih39h5", 0, 0);
+
+INSERT INTO kidspiration.MonthReferences(month, earnings, expenses) VALUES (0, 0, 0), (1, 0, 0), (2, 0, 0), (3, 0, 0), (4, 0, 0), (5, 0, 0), (6, 0, 0), (7, 0, 0), (8, 0, 0), (9, 0, 0), (10, 0, 0), (11, 0, 0)

@@ -29,7 +29,7 @@ public class PurchasePointsController {
         p.setWallet(temp + 500);
         parent_service.editUser(p);
         Calendar cal = Calendar.getInstance();
-        MonthReference monthReference=monthReference_service.find(cal.get(Calendar.MONTH));
+        MonthReference monthReference= (MonthReference) monthReference_service.find(cal.get(Calendar.MONTH));
         temp=monthReference.getEarnings();
         monthReference.setEarnings(temp+5);
         monthReference_service.editMonthReference(monthReference);

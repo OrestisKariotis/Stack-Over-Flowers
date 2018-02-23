@@ -28,10 +28,10 @@ public class MonthReferenceDao {
         // some arguments in query will be omitted
     }
 
-    public MonthReference find(int Month) {
+    public MonthReference find(int month) {
 
             MonthReference monthReference =  jdbcTemplate.queryForObject("SELECT * FROM MonthReferences where month= ? ",
-                    new Object[] { Month }, new MonthReferenceMapper());
+                    new Object[] { month }, new MonthReferenceMapper());
             return monthReference;
     }
 
