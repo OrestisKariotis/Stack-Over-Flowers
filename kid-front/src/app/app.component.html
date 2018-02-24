@@ -16,9 +16,9 @@
       <div *ngIf = "currentUser.enable;then enable else disable"></div>
       <ng-template #enable>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Αγορά Πόντων ( {{currentUser.points}} )</a></li>
+        <li><a routerLink="points">Αγορά Πόντων ( {{currentUser.points}} )</a></li>
         <li><a href="#">Προφίλ</a></li>
-        <li><a routerLink="" (click)="logout()">Αποσύνδεση</a></li>
+        <li><a routerLink="home" (click)="logout()">Αποσύνδεση</a></li>
       </ul>
       </ng-template>
       <ng-template #disable>
