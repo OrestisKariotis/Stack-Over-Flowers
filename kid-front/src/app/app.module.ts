@@ -27,6 +27,8 @@ import { ContactComponent } from './contact/contact.component';
 import { ErrorComponent } from './error/error.component';
 import { TermsComponent } from './terms/terms.component';
 import { PointsComponent } from './points/points.component';
+import { ParentProfileComponent } from './parent-profile/parent-profile.component';
+import { ProviderProfileComponent } from './provider-profile/provider-profile.component';
 
 
 @NgModule({
@@ -43,7 +45,9 @@ import { PointsComponent } from './points/points.component';
     ContactComponent,
     ErrorComponent,
     TermsComponent,
-    PointsComponent
+    PointsComponent,
+    ParentProfileComponent,
+    ProviderProfileComponent
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,5 @@
 <div class="container">
+	<br>
 	<div class="col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2">
 		<ul class="nav nav-tabs nav-justified">
 			<li class="active"><a id="tab1" data-toggle="tab" href="#selection">Επιλογή Πακέτου</a></li>
@@ -9,6 +10,9 @@
 		<div class="tab-content">
 		<div id="selection" class="tab-pane fade in active">
 				<h2>Αγορά Πόντων</h2>
+				<div class="row">
+    				<hr />
+    			</div>
 				<div class="row">
 					<div class ="col-xs-6 col-md-4">
 						<div class="panel panel-default">
@@ -50,7 +54,7 @@
 					</div>
 				</div>
 				<div class="well text-center">
-					<strong>DIAthesimoi pontoi: 5</strong>
+					<strong>Διαθέσιμοι πόντοι: 5</strong>
 				</div>
 		</div>
 		<div id="billing" class="tab-pane fade">
@@ -60,7 +64,7 @@
     				<hr />
     			</div>
 					<div class="row"> 
-    				<div class="form-group col-sm-2 col-md-2" [ngClass]="{ 'has-error': f.submitted && !cardType.valid }">
+    				<div class="form-group col-sm-3 col-md-3" [ngClass]="{ 'has-error': f.submitted && !cardType.valid }">
         			<label for="cardType" class="control-label">Τύπος Κάρτας</label>
         			<br />
         			<select style="width:100%" name="cardType" form="form" [(ngModel)]="model.cardType"
@@ -79,7 +83,7 @@
 								είναι υποχρεωτικό!</div>
 							<div *ngIf="f.submitted && cardNumber.errors?.pattern" class="help-block">Απαιτείται 16ψήφιος αριθμός</div>
     				</div>
-    				<div class="form-group col-sm-4 col-md-4" [ngClass]="{ 'has-error': f.submitted && !expdate.valid }">
+    				<div class="form-group col-sm-3 col-md-3" [ngClass]="{ 'has-error': f.submitted && !expdate.valid }">
         			<label for="expdate" class="control-label">Ημερομηνία λήξης</label>
         			<input type="month" class="form-control" name="expdate" [(ngModel)]="model.expdate"
 								#expdate="ngModel" required>
@@ -174,7 +178,7 @@
 			</div>
 			<div class="row">
     		<div class="form-group col-sm-4 col-md-4 col-sm-offset-4">
-    			<button class="btn btn-primary btn-block" (click)="buySubmit()">Αγορα</button>
+    			<button class="btn btn-primary btn-block" (click)="buySubmit()">Αγορά</button>
     		</div>
     	</div>
     	<div class="row">
