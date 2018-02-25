@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS kidspiration.OldTickets;
 DROP TABLE IF EXISTS kidspiration.Tickets;
 DROP TABLE IF EXISTS kidspiration.Parents;
 DROP TABLE IF EXISTS kidspiration.PendingProviders;

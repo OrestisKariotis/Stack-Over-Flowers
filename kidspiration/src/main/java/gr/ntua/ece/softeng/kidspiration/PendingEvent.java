@@ -6,8 +6,8 @@ public class PendingEvent extends Event{
     private byte highestAge;
     private String description;
 
-    public PendingEvent(int event_id, int provider_id, String name, String date, String starting_time, String place, String type, int ticket_cost, int initial_ticketsNumber, byte lowestAge, byte highestAge, String description) {
-        super(event_id, provider_id, name, date, starting_time, place, type, ticket_cost, initial_ticketsNumber);
+    public PendingEvent(int event_id, int provider_id, String title, String date, String starting_time, String place, String type, int ticket_cost, int initial_ticketsNumber, byte lowestAge, byte highestAge, String description) {
+        super(event_id, provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber);
         this.lowestAge = lowestAge;
         this.highestAge = highestAge;
         this.description = description;

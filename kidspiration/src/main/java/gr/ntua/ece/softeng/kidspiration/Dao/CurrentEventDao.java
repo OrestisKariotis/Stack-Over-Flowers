@@ -1,6 +1,7 @@
 package gr.ntua.ece.softeng.kidspiration.Dao;
 
 import gr.ntua.ece.softeng.kidspiration.CurrentEvent;
+import gr.ntua.ece.softeng.kidspiration.CurrentEventView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.spi.CurrencyNameProvider;
 
 @Repository
 @Qualifier("CurrentEventDao")
@@ -18,8 +20,11 @@ public class CurrentEventDao implements EventDao<CurrentEvent> {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    public void addEvent(CurrentEvent event) {    //not checked
-
+    public void addEvent(CurrentEvent event) {    //checked
+        System.out.println("Entering CurrentEvent Dao");
+        jdbcTemplate.update("INSERT INTO CurrentEvents (provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber, available_ticketsNumber, lowestAge, highestAge, longtitude, latitude, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                event.getProvider_id(), event.getTitle(), event.getDate(), event.getStarting_time(), event.getPlace(), event.getType(), event.getTicket_cost(), event.getInitial_ticketsNumber(), event.getAvailable_ticketsNumber(),event.getLowestAge(), event.getHighestAge(), event.getLongtitude(), event.getLatitude(),event.getDescription());
+        System.out.println("CurrentEvent Added!!");
     }
 
     public void editEvent(CurrentEvent event, int event_id) {  //checking
@@ -46,8 +51,15 @@ public class CurrentEventDao implements EventDao<CurrentEvent> {
         return event;
     }
 
-    public List<CurrentEvent> findAll() {    //not checked
-        return null;
+    public List<CurrentEvent> findAll_ByProviderId(int id) {  // checking
+        List<CurrentEvent> events = jdbcTemplate.query("SELECT * FROM CurrentEvents where provider_id = ? ",
+                new Object[] { id }, new CurrentEventMapper());
+        return events;
+    }
+
+    public List<CurrentEvent> findAll() {    //checked
+        List < CurrentEvent > events = jdbcTemplate.query("SELECT * FROM CurrentEvents", new CurrentEventMapper());
+        return events;
     }
 
     class CurrentEventMapper implements RowMapper<CurrentEvent> {

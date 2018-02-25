@@ -35,7 +35,7 @@ public class ParentDao implements UserDao<Parent>{
         return parents.size() > 0 ? parents.get(0) : null;
     }
 
-    public void editUser(Parent user, int id) {  // checking
+    public void editUser(Parent user, int id) {  // checked
         System.out.println("Entering Parent Base for Edit");
         jdbcTemplate.update("UPDATE Parents SET username = ? , password = ?, firstname = ?, lastname = ?, email = ?, phone = ?, wallet = ?, spent_points = ?, ban = ? WHERE id = ? ",
                 user.getUsername(), user.getPassword(), user.getFirstname(), user.getLastname(), user.getEmail(), user.getPhone(), user.getWallet(), user.getSpent_points(), user.isBan(), id);
@@ -45,19 +45,19 @@ public class ParentDao implements UserDao<Parent>{
         // some arguments in query will be omitted
     }
 
-    public void deleteUser(int id) {
-        jdbcTemplate.update("DELETE FROM Parents WHERE username = ? ", id);
+    public void deleteUser(int id) { //checked
+        jdbcTemplate.update("DELETE FROM Parents WHERE id = ? ", id);
         System.out.println("Person Deleted!!");
     }
 
-    public Parent find(int id) {
-        Parent user = (Parent) jdbcTemplate.queryForObject("SELECT * FROM Parents where username = ? ",
-                new Object[] { id }, new BeanPropertyRowMapper(Parent.class));
+    public Parent find(int id) {  // checked
+        Parent user = jdbcTemplate.queryForObject("SELECT * FROM Parents where id = ? ",
+                new Object[] { id }, new ParentMapper()); // could be query, not needed however
 
         return user;
     }
 
-    public List <Parent> findAll() {
+    public List <Parent> findAll() {  //checked
         List < Parent > users = jdbcTemplate.query("SELECT * FROM Parents", new ParentMapper());
         return users;
     }
