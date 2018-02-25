@@ -16,7 +16,6 @@ import java.util.List;
 public class PendingProviderService implements UserService<PendingProvider> {
 
     @Autowired
-    //@Qualifier("PendingProviderDao")
     PendingProviderDao pendingProviderDao;
 
     public void addUser(PendingProvider user) {
@@ -28,18 +27,18 @@ public class PendingProviderService implements UserService<PendingProvider> {
     }  // WILL BE REMOVED
 
     public void editUser(PendingProvider user, int id) {
-        pendingProviderDao.editUser(user, id);
+        //pendingProviderDao.editUser(user, id);
     }
 
-    public void deleteUser(int id) {
+    public void deleteUser(int id) { // checked
         pendingProviderDao.deleteUser(id);
     }
 
-    public PendingProvider find(int id) {
+    public PendingProvider find(int id) { //checked
         return pendingProviderDao.find(id);
     }
 
-    public List<PendingProvider> findAll() {
+    public List<PendingProvider> findAll() { //checked
         return pendingProviderDao.findAll();
     }
 }

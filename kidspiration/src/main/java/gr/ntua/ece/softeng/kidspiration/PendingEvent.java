@@ -2,38 +2,38 @@ package gr.ntua.ece.softeng.kidspiration;
 
 public class PendingEvent extends Event{
 
-    private int lowestAge;
-    private int highestAge;
-    private String freeText;
+    private byte lowestAge;
+    private byte highestAge;
+    private String description;
 
-    public PendingEvent(int provider_id, String name, String date, String starting_time, String place, String type, int ticket_cost, int initial_ticketsNumber, int lowestAge, int highestAge, String freeText) {
-        super(provider_id, name, date, starting_time, place, type, ticket_cost, initial_ticketsNumber);
+    public PendingEvent(int event_id, int provider_id, String title, String date, String starting_time, String place, String type, int ticket_cost, int initial_ticketsNumber, byte lowestAge, byte highestAge, String description) {
+        super(event_id, provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber);
         this.lowestAge = lowestAge;
         this.highestAge = highestAge;
-        this.freeText = freeText;
+        this.description = description;
     }
 
-    public int getLowestAge() {
+    public byte getLowestAge() {
         return lowestAge;
     }
 
-    public void setLowestAge(int lowestAge) {
+    public void setLowestAge(byte lowestAge) {
         this.lowestAge = lowestAge;
     }
 
-    public int getHighestAge() {
+    public byte getHighestAge() {
         return highestAge;
     }
 
-    public void setHighestAge(int highestAge) {
+    public void setHighestAge(byte highestAge) {
         this.highestAge = highestAge;
     }
 
-    public String getFreeText() {
-        return freeText;
+    public String getDescription() {
+        return description;
     }
 
-    public void setFreeText(String freeText) {
-        this.freeText = freeText;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

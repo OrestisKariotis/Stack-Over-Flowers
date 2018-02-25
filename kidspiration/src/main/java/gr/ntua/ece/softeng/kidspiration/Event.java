@@ -2,7 +2,7 @@ package gr.ntua.ece.softeng.kidspiration;
 
 public class Event {
 
-    private int event_id; // not-initialised
+    private int event_id;
     private int provider_id;
     private String title;
     private String date; //could be date?
@@ -12,7 +12,8 @@ public class Event {
     private int ticket_cost;
     private int initial_ticketsNumber;
 
-    public Event(int provider_id, String title, String date, String starting_time, String place, String type, int ticket_cost, int initial_ticketsNumber) {
+    public Event(int event_id, int provider_id, String title, String date, String starting_time, String place, String type, int ticket_cost, int initial_ticketsNumber) {
+        this.event_id = event_id;
         this.provider_id = provider_id;
         this.title = title;
         this.date = date;

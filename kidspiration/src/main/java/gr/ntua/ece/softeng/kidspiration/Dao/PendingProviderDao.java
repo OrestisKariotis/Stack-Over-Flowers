@@ -1,5 +1,7 @@
 package gr.ntua.ece.softeng.kidspiration.Dao;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import gr.ntua.ece.softeng.kidspiration.Login;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -34,21 +37,40 @@ public class PendingProviderDao implements UserDao<PendingProvider>{
         System.out.println("User Updated!!");
     }
 
-    public void deleteUser(int id) {
-        jdbcTemplate.update("DELETE FROM PendingProviders WHERE username = ? ", id);
-        System.out.println("Person Deleted!!");
+    public void deleteUser(int id) { //checked
+        jdbcTemplate.update("DELETE FROM PendingProviders WHERE id = ? ", id);
+        System.out.println("PendingProvider Deleted!!");
     }
 
-    public PendingProvider find(int id) {
-        PendingProvider user = (PendingProvider) jdbcTemplate.queryForObject("SELECT * FROM PendingProviders where username = ? ",
-                new Object[] { id }, new BeanPropertyRowMapper(User.class));
-
+    public PendingProvider find(int id) {  //checked
+        PendingProvider user = jdbcTemplate.queryForObject("SELECT * FROM PendingProviders where id = ? ",
+                new Object[] { id }, new PendingProviderMapper());
+        // could be a list
         return user;
     }
 
-    public List <PendingProvider> findAll() {
-        List < PendingProvider > users = jdbcTemplate.query("SELECT * FROM PendingProviders", new BeanPropertyRowMapper(User.class));
+    public List <PendingProvider> findAll() { //checked
+        List < PendingProvider > users = jdbcTemplate.query("SELECT * FROM PendingProviders", new PendingProviderMapper());
         return users;
+    }
+
+    class PendingProviderMapper implements RowMapper<PendingProvider> {
+
+        public PendingProvider mapRow(ResultSet rs, int rowNum) throws SQLException {
+
+            int id = rs.getInt("id");
+            String username = rs.getString("username");
+            String password = rs.getString("password");
+            String firstname = rs.getString("firstname");
+            String lastname = rs.getString("lastname");
+            String email = rs.getString("email");
+            String phone = rs.getString("phone");
+            String businessName = rs.getString("businessName");
+            String bankAccount = rs.getString("bankAccount");
+            PendingProvider provider = new PendingProvider(id, username, password, firstname, lastname, email, phone, businessName, bankAccount);
+
+            return provider;
+        }
     }
 }
 

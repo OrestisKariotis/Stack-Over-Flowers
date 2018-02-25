@@ -1,5 +1,6 @@
 package gr.ntua.ece.softeng.kidspiration.Dao;
 
+import gr.ntua.ece.softeng.kidspiration.CurrentEventView;
 import gr.ntua.ece.softeng.kidspiration.Login;
 import gr.ntua.ece.softeng.kidspiration.Provider;
 import gr.ntua.ece.softeng.kidspiration.User;
@@ -21,7 +22,7 @@ public class ProviderDao implements UserDao<Provider> {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    public void addUser(Provider user) {
+    public void addUser(Provider user) { //checked
         jdbcTemplate.update("INSERT INTO Providers (username, password, firstname, lastname, email, phone, businessName, bankAccount, profit, rights_code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 user.getUsername(), user.getPassword(), user.getFirstname(), user.getLastname(), user.getEmail(), user.getPhone(), user.getBusinessName(), user.getBankAccount(), user.getProfit(), user.getRights_code());
         System.out.println("Provider Added!!");
@@ -34,33 +35,26 @@ public class ProviderDao implements UserDao<Provider> {
         return providers.size() > 0 ? providers.get(0) : null;
     }
 
-    public void editUser(Provider user, int id) {
-        jdbcTemplate.update("UPDATE Providers SET firstname = ? , lastname = ? WHERE id = ? ",
-                user.getFirstname(), user.getLastname(), id);
+    public void editUser(Provider user, int id) { // checked
+        jdbcTemplate.update("UPDATE Providers SET username = ?, password = ?, firstname = ?, lastname = ?, email = ?, phone = ?, businessName = ?, bankAccount = ?, profit = ?, rights_code = ? WHERE id = ? ",
+                user.getUsername(), user.getPassword(), user.getFirstname(), user.getLastname(), user.getEmail(), user.getPhone(), user.getBusinessName(), user.getBankAccount(), user.getProfit(), user.getRights_code(), id);
         System.out.println("User Updated!!");
     }
-    
-    /*
-    public void editUser(Provider user) {
-        jdbcTemplate.update("UPDATE Providers SET id= ? , firstname= ? , lastname= ? , username= ? , password= ? , businessName? , phone= ? , email= ? , bankAccount= ? , profit= ? , rights_code= ? WHERE id= ? ",
-             user.getId(), user.getFirstname(), user.getLastname(), user.getUsername(), user.getPassword(), user.getBusinessName, user.getPhone(), user.getEmail(), user.getbankAccount(), user.getProfit(), user.getRights_code(), user.getId())
-        System.out.println("User Updated!!");
-   */
 
-    public void deleteUser(int id) {
-        jdbcTemplate.update("DELETE FROM Providers WHERE username = ? ", id);
+    public void deleteUser(int id) { //checked
+        jdbcTemplate.update("DELETE FROM Providers WHERE id = ? ", id);
         System.out.println("Person Deleted!!");
     }
 
-    public Provider find(int id) {
-        Provider user = (Provider) jdbcTemplate.queryForObject("SELECT * FROM PendingProviders where username = ? ",
-                new Object[] { id }, new BeanPropertyRowMapper(User.class));
+    public Provider find(int id) {  // checked
+        Provider user = jdbcTemplate.queryForObject("SELECT * FROM Providers where id = ? ",
+                new Object[] { id }, new ProviderMapper());
 
         return user;
     }
 
-    public List<Provider> findAll() {
-        List < Provider > users = jdbcTemplate.query("SELECT * FROM PendingProviders", new BeanPropertyRowMapper(User.class));
+    public List<Provider> findAll() { //checked
+        List < Provider > users = jdbcTemplate.query("SELECT * FROM Providers", new ProviderMapper());
         return users;
     }
 
@@ -84,4 +78,5 @@ public class ProviderDao implements UserDao<Provider> {
             return provider;
         }
     }
+
 }

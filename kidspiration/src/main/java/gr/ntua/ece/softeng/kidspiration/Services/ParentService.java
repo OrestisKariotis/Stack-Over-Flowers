@@ -25,19 +25,57 @@ public class ParentService implements UserService<Parent> {
         return parentDao.validateUser(login);
     } //checked
 
-    public void editUser(Parent user, int id) {
-        parentDao.editUser(user, id);
+    public void decreasePoints(Parent parent, int points) {
+        System.out.println("Entering parent's points decreasing service");
+        int wallet = parent.getWallet();
+        int spent_points = parent.getSpent_points();
+        parent.setWallet(wallet - points);
+        parent.setSpent_points(spent_points + points);  // Bonus will be checked later
+        parentDao.editUser(parent, parent.getId());
+
+        System.out.println("Leaving parent's points decreasing service");
+
+        // getId can be omitted as mentioned in Parent Dao
     }
 
-    public void deleteUser(int id) {
+    public Parent purchasePoints(Parent parent, byte points_package_code) { //checked
+
+        int wallet = parent.getWallet();
+
+        if (points_package_code == 1)
+            parent.setWallet(wallet + 500);
+        else if (points_package_code == 2)
+            parent.setWallet(wallet + 1025);
+        else if (points_package_code == 3)
+            parent.setWallet(wallet + 2100);
+        else if (points_package_code == 4)
+            parent.setWallet(wallet + 5300);
+        // else error
+        parentDao.editUser(parent, parent.getId());   // id could be omitted
+        return parent;
+    }
+
+    public Parent changeRights(int id, boolean ban) {   //checked
+        Parent parent = parentDao.find(id);   //could be done by better way, only one query
+        parent.setBan(ban);
+        parentDao.editUser(parent, id);
+        return parent;
+    }
+
+    public void editUser(Parent user, int id) { //checked
+        parentDao.editUser(user, id);  // Parent object already formed in controller
+        // for that reason, editUser WILL change
+    }
+
+    public void deleteUser(int id) {  //checked
         parentDao.deleteUser(id);
     }
 
-    public Parent find(int id) {
+    public Parent find(int id) {   //checked
         return parentDao.find(id);
     }
 
-    public List<Parent> findAll() {
+    public List<Parent> findAll() {  //checked
         return parentDao.findAll();
     }
 }
