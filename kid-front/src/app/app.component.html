@@ -17,7 +17,7 @@
       <ng-template #enable>
       <ul class="nav navbar-nav navbar-right">
         <li><a routerLink="points">Αγορά Πόντων ( {{currentUser.points}} )</a></li>
-        <li><a href="#">Προφίλ</a></li>
+        <li><a [routerLink]="['/parent-profile', currentUser.id]">Προφίλ</a></li>
         <li><a routerLink="home" (click)="logout()">Αποσύνδεση</a></li>
       </ul>
       </ng-template>
@@ -42,7 +42,7 @@
 <!-- <app-home></app-home> -->
 <footer class="footer">
 	<hr/>
-	<div class="container">
+	<div class="container footer-font-size">
         <div class="row">
             <div class="col-sm-3">
             	<a routerLink="about-us">Σχετικά με εμάς</a><br/>

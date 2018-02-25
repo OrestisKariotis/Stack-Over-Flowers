@@ -12,7 +12,8 @@ import { ContactComponent } from './contact/contact.component';
 import { TermsComponent } from './terms/terms.component';
 import { ErrorComponent } from './error/error.component';
 import { PointsComponent } from './points/points.component';
-
+import { ParentProfileComponent } from './parent-profile/parent-profile.component';
+import { ProviderProfileComponent } from './provider-profile/provider-profile.component';
 
 const appRoutes: Routes = [
   { path: 'home',
@@ -44,6 +45,12 @@ const appRoutes: Routes = [
   },
   { path: 'points',
     component: PointsComponent
+  },
+  { path: 'parent-profile/:id',
+    component: ParentProfileComponent
+  },
+  { path: 'provider-profile/:id',
+    component: ProviderProfileComponent
   },
   { path: '',
     component: HomeComponent
