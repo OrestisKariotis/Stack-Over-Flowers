@@ -1,6 +1,7 @@
 package gr.ntua.ece.softeng.kidspiration.Services;
 
 import gr.ntua.ece.softeng.kidspiration.CurrentEvent;
+import gr.ntua.ece.softeng.kidspiration.CurrentEventView;
 import gr.ntua.ece.softeng.kidspiration.Dao.CurrentEventDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,7 +16,7 @@ public class CurrentEventService implements EventService<CurrentEvent> {
     @Autowired
     CurrentEventDao currentEventDao;
 
-    public void buyTickets (CurrentEvent event, int count, int event_id) {  // checking
+    public void buyTickets (CurrentEvent event, int count, int event_id) {  // checked
 
         System.out.println("Entering CurrentEvent's Buying Tickets Service");  // application logic may be transfered in the controller, we 'll see
 
@@ -26,8 +27,8 @@ public class CurrentEventService implements EventService<CurrentEvent> {
         System.out.println("Leaving CurrentEvent's Buying Tickets Service");
     }
 
-    public void addEvent(CurrentEvent event) {
-
+    public void addEvent(CurrentEvent event) { //checked
+        currentEventDao.addEvent(event);
     }
 
     public void editEvent(CurrentEvent event, int id) {
@@ -40,9 +41,14 @@ public class CurrentEventService implements EventService<CurrentEvent> {
 
     public CurrentEvent find(int id) {
         return currentEventDao.find(id);
+    } //checking
+
+    public List<CurrentEventView> findAllViews_ByProviderId(int id) {
+       return null;
     }
 
-    public List<CurrentEvent> findAll() {
-        return null;
+    public List<CurrentEvent> findAll() { //checked
+
+        return currentEventDao.findAll();
     }
 }

@@ -2,7 +2,7 @@ package gr.ntua.ece.softeng.kidspiration;
 
 public class Event {
 
-    private int event_id; // not-initialised
+    private int event_id;
     private int provider_id;
     private String title;
     private String date; //could be date?

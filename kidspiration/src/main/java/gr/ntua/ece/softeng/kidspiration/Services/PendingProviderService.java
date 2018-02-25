@@ -30,17 +30,15 @@ public class PendingProviderService implements UserService<PendingProvider> {
         //pendingProviderDao.editUser(user, id);
     }
 
-    public void deleteUser(int id) {
-        //pendingProviderDao.deleteUser(id);
+    public void deleteUser(int id) { // checked
+        pendingProviderDao.deleteUser(id);
     }
 
-    public PendingProvider find(int id) {
-        return null;
-        //return pendingProviderDao.find(id);
+    public PendingProvider find(int id) { //checked
+        return pendingProviderDao.find(id);
     }
 
-    public List<PendingProvider> findAll() {
-        return null;
-        //return pendingProviderDao.findAll();
+    public List<PendingProvider> findAll() { //checked
+        return pendingProviderDao.findAll();
     }
 }

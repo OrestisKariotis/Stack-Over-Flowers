@@ -24,15 +24,15 @@ public class PendingEventService implements EventService<PendingEvent> {
 
     }
 
-    public void deleteEvent(int id) {
-
+    public void deleteEvent(int id) { //checked
+        pendingEventDao.deleteEvent(id);
     }
 
-    public PendingEvent find(int id) {
-        return null;
+    public PendingEvent find(int id) {  //checked
+        return pendingEventDao.find(id);
     }
 
-    public List<PendingEvent> findAll() {
-        return null;
+    public List<PendingEvent> findAll() {  //checked
+        return pendingEventDao.findAll();
     }
 }

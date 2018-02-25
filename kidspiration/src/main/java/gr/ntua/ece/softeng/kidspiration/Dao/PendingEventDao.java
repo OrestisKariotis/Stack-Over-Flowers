@@ -39,43 +39,43 @@ public class PendingEventDao implements EventDao<PendingEvent> {
     public void editEvent(PendingEvent user, int id) { // Not checked
         jdbcTemplate.update("UPDATE PendingEvents SET firstname = ? , lastname = ? WHERE event_id = ? ",
                 user.getDescription(), user.getDescription(), id);
-        System.out.println("User Updated!!");
+        System.out.println("Event Updated!!");
     }
 
-    public void deleteEvent(int id) { //not checked
-        jdbcTemplate.update("DELETE FROM Parents WHERE username = ? ", id);
-        System.out.println("Person Deleted!!");
+    public void deleteEvent(int id) { //checked
+        jdbcTemplate.update("DELETE FROM PendingEvents WHERE event_id = ? ", id);
+        System.out.println("Event Deleted!!");
     }
 
-    public PendingEvent find(int id) {  // not checked
-        PendingEvent user = (PendingEvent) jdbcTemplate.queryForObject("SELECT * FROM PendingEvents where username = ? ",
-                new Object[] { id }, new BeanPropertyRowMapper(PendingEvent.class));
-
+    public PendingEvent find(int id) {  // checked
+        PendingEvent user = jdbcTemplate.queryForObject("SELECT * FROM PendingEvents where event_id = ? ",
+                new Object[] { id }, new PendingEventMapper());
+        // could be a list
         return user;
     }
 
-    public List <PendingEvent> findAll() { //not ckecked
-        List < PendingEvent > users = jdbcTemplate.query("SELECT * FROM Parents", new BeanPropertyRowMapper(PendingEvent.class));
-        return users;
+    public List <PendingEvent> findAll() { //checked
+        List < PendingEvent > events = jdbcTemplate.query("SELECT * FROM PendingEvents", new PendingEventMapper());
+        return events;
     }
 
-    /* class ParentMapper implements RowMapper<PendingEvent> {
+    class PendingEventMapper implements RowMapper<PendingEvent> {
 
         public PendingEvent mapRow(ResultSet rs, int rowNum) throws SQLException {
-
-            int id = rs.getInt("id");
-            String username = rs.getString("username");
-            String password = rs.getString("password");
-            String firstname = rs.getString("firstname");
-            String lastname = rs.getString("lastname");
-            String email = rs.getString("email");
-            String phone = rs.getString("phone");
-            int wallet = rs.getInt("wallet");
-            int spent_points = rs.getInt("spent_points");
-            boolean ban= rs.getBoolean("ban");
-            PendingEvent parent = new PendingEvent(id, username, password, firstname, lastname, email, phone, wallet, spent_points, ban);
-
-            return parent;
+            int event_id = rs.getInt("event_id");
+            int provider_id = rs.getInt("provider_id");
+            String title = rs.getString("title");
+            String date = rs.getString("date");
+            String starting_time = rs.getString("starting_time");
+            String place = rs.getString("place");
+            String type = rs.getString("type");
+            int ticket_cost = rs.getInt("ticket_cost");
+            int initial_ticketsNumber = rs.getInt("initial_ticketsNumber");
+            byte lowestAge = rs.getByte("lowestAge");
+            byte highestAge = rs.getByte("highestAge");
+            String description = rs.getString("description");
+            PendingEvent pendingEvent = new PendingEvent(event_id, provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber, lowestAge, highestAge, description);
+            return pendingEvent;
         }
-    } */
+    }
 }

@@ -2,9 +2,12 @@ package gr.ntua.ece.softeng.kidspiration.Services;
 
 import gr.ntua.ece.softeng.kidspiration.Dao.TicketDao;
 import gr.ntua.ece.softeng.kidspiration.Ticket;
+import gr.ntua.ece.softeng.kidspiration.TicketView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @Qualifier("TicketService")
@@ -21,4 +24,8 @@ public class TicketService {
             ticketDao.AddTicket(ticket);
         System.out.println("Leaving Ticket Service");
     }
+
+    public List <TicketView> findAll_byParentId_TicketView (int id) {  //checked
+        return ticketDao.findAll_ByParentId_TicketView(id);
+    } //checking
 }

@@ -36,7 +36,7 @@ public class TicketPurchaseController {
 
         // above parameters should give the appropriate Parent and Event Objects and WILL BE CHANGED
 
-        // should be considered as one transaction, All or Nothing. SYNCRONISATION needed. SEE @Transactional in Spring
+        // should be considered as one transaction, All or Nothing. SYNChRONISATION needed. SEE @Transactional in Spring
         // LOCK
 
         CurrentEvent event = eventService.find(Integer.parseInt(event_id));
@@ -47,10 +47,12 @@ public class TicketPurchaseController {
             return "Number of tickets requested exceed available tickets number";
         else if (parent.getWallet() < tickets*event.getTicket_cost())  // could be checked in frontend, or NOT?
             return "Your wallet is not enough for purchasing requested tickets";
+        // + elegxos gia wraaaaaaa
         else {
             eventService.buyTickets(event, tickets, Integer.parseInt(event_id));
             ticketService.addTickets(Integer.parseInt(id), Integer.parseInt(event_id), tickets);
             parentService.decreasePoints(parent, tickets * event.getTicket_cost());
+            // UPDATE Provider's profit!!!!
         }
 
         // UNLOCK, SEE @Transacctional in Spring
