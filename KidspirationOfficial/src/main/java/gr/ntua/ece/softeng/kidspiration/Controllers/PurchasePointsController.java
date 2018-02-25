@@ -19,6 +19,10 @@ public class PurchasePointsController {
     @Qualifier("ParentService")
 
     private UserService parent_service;
+
+    @Autowired
+    @Qualifier("MonthReferenceService")
+
     private MonthReferenceService monthReference_service;
 
     @RequestMapping("/paketo1")
