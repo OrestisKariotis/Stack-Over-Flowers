@@ -18,7 +18,9 @@ export class PointsComponent implements OnInit {
 
   setInfo() {
     this.commitable = true;
+    window.document.getElementById('tab3').removeAttribute('style');
     window.document.getElementById('tab3').click();
+    window.document.getElementById('tab2').setAttribute('style', 'pointer-events:none');
   }
 
 
@@ -41,7 +43,9 @@ export class PointsComponent implements OnInit {
         this.model.points = 5300;
         break;
     }
+    window.document.getElementById('tab2').removeAttribute('style');
     window.document.getElementById('tab2').click();
+    window.document.getElementById('tab1').setAttribute('style', 'pointer-events:none');
   }
 
   buyReset() {
