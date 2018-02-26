@@ -14,6 +14,8 @@ import { ErrorComponent } from './error/error.component';
 import { PointsComponent } from './points/points.component';
 import { ParentProfileComponent } from './parent-profile/parent-profile.component';
 import { ProviderProfileComponent } from './provider-profile/provider-profile.component';
+import { AdminLoginComponent } from './admin-login/admin-login.component';
+import { ControlPanelComponent } from './control-panel/control-panel.component';
 
 const appRoutes: Routes = [
   { path: 'home',
@@ -51,6 +53,12 @@ const appRoutes: Routes = [
   },
   { path: 'provider-profile/:id',
     component: ProviderProfileComponent
+  },
+  { path: 'adminlogin',
+    component: AdminLoginComponent
+  },
+  { path: 'control-panel',
+    component: ControlPanelComponent
   },
   { path: '',
     component: HomeComponent

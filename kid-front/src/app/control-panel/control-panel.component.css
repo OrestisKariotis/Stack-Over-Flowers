@@ -1,0 +1,16 @@
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 15%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+    padding-top: 60px;
+}
+
+#main {
+    transition: margin-left .5s;
+    padding: 20px;
+    margin-left: 15%;
+}

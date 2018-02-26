@@ -29,6 +29,8 @@ import { TermsComponent } from './terms/terms.component';
 import { PointsComponent } from './points/points.component';
 import { ParentProfileComponent } from './parent-profile/parent-profile.component';
 import { ProviderProfileComponent } from './provider-profile/provider-profile.component';
+import { AdminLoginComponent } from './admin-login/admin-login.component';
+import { ControlPanelComponent } from './control-panel/control-panel.component';
 
 
 @NgModule({
@@ -47,7 +49,9 @@ import { ProviderProfileComponent } from './provider-profile/provider-profile.co
     TermsComponent,
     PointsComponent,
     ParentProfileComponent,
-    ProviderProfileComponent
+    ProviderProfileComponent,
+    AdminLoginComponent,
+    ControlPanelComponent
   ],
   imports: [
     BrowserModule,
