@@ -18,11 +18,11 @@ public class CurrentEventService implements EventService<CurrentEvent> {
 
     public void buyTickets (CurrentEvent event, int count, int event_id) {  // checked
 
-        System.out.println("Entering CurrentEvent's Buying Tickets Service");  // application logic may be transfered in the controller, we 'll see
+        System.out.println("Entering CurrentEvent's Buying Tickets Service");
 
         int available_tickets = event.getAvailable_ticketsNumber();
         event.setAvailable_ticketsNumber(available_tickets - count);
-        currentEventDao.editEvent(event, event_id);   //event_id can be omitted, we have it on event already
+        currentEventDao.updateNumberOfTickets(event_id, available_tickets - count);
 
         System.out.println("Leaving CurrentEvent's Buying Tickets Service");
     }

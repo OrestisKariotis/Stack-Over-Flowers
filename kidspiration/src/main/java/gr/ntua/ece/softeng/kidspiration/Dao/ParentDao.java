@@ -62,6 +62,12 @@ public class ParentDao implements UserDao<Parent>{
         return users;
     }
 
+    public void updatePoints(int id, int new_wallet, int new_spent_points) { //checked
+        System.out.println("Entering Update Points");
+        jdbcTemplate.update("UPDATE Parents SET wallet = ?, spent_points = ? WHERE id = ? ", new_wallet, new_spent_points, id);
+        System.out.println("Leaving Update Points");
+    }
+
     class ParentMapper implements RowMapper<Parent> {
 
         public Parent mapRow(ResultSet rs, int rowNum) throws SQLException {

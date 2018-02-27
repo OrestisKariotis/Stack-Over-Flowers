@@ -62,6 +62,12 @@ public class CurrentEventDao implements EventDao<CurrentEvent> {
         return events;
     }
 
+    public void updateNumberOfTickets(int id, int count) { //checked
+        System.out.println("Changing number of tickets");
+        jdbcTemplate.update("UPDATE CurrentEvents SET  available_ticketsNumber = ? WHERE event_id = ? ", count, id);
+        System.out.println("Changed number of tickets!!");
+    }
+
     class CurrentEventMapper implements RowMapper<CurrentEvent> {
 
         public CurrentEvent mapRow(ResultSet rs, int rowNum) throws SQLException {

@@ -25,14 +25,15 @@ public class ParentService implements UserService<Parent> {
         return parentDao.validateUser(login);
     } //checked
 
-    public void decreasePoints(Parent parent, int points) {
+    public void decreasePoints(Parent parent, int points) {    //checking //check if parent should be searched here
+
         System.out.println("Entering parent's points decreasing service");
         int wallet = parent.getWallet();
         int spent_points = parent.getSpent_points();
-        parent.setWallet(wallet - points);
-        parent.setSpent_points(spent_points + points);  // Bonus will be checked later
-        parentDao.editUser(parent, parent.getId());
-
+        parent.setWallet(wallet - points); //not needed
+        parent.setSpent_points(spent_points + points);  // Bonus will be checked later //not needed
+        parentDao.updatePoints(parent.getId(),wallet - points, spent_points + points);
+        //parentDao.editUser(parent, parent.getId());
         System.out.println("Leaving parent's points decreasing service");
 
         // getId can be omitted as mentioned in Parent Dao
@@ -51,7 +52,7 @@ public class ParentService implements UserService<Parent> {
         else if (points_package_code == 4)
             parent.setWallet(wallet + 5300);
         // else error
-        parentDao.editUser(parent, parent.getId());   // id could be omitted
+        parentDao.editUser(parent, parent.getId());   // id could be omitted //USE updatePoints Dao method!!!
         return parent;
     }
 
@@ -73,7 +74,7 @@ public class ParentService implements UserService<Parent> {
 
     public Parent find(int id) {   //checked
         return parentDao.find(id);
-    }
+    }  //checking
 
     public List<Parent> findAll() {  //checked
         return parentDao.findAll();
