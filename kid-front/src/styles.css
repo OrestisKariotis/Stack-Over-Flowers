@@ -276,3 +276,22 @@ html {
 .h2-font-size {
 	font-size: 30px;
 }
+
+.unbold {
+	font-weight: 500;
+}
+
+@media screen and (min-width: 768px) {
+	.search-row {
+		line-height: 40px;
+	}
+	input[type="checkbox"] {
+		margin-top: 14px !important;
+	}
+}
+
+.custom-search-button {
+	padding-left: 70px !important;
+	padding-right: 70px !important;
+	margin: 0 30px !important;
+}
