@@ -25,7 +25,7 @@
       	</ng-template>
       	<ng-template #provider>
       		<ul class="nav navbar-nav navbar-right">
-        		<li><a href="#">Νέα Δραστηριότητα</a></li>
+        		<li><a routerLink="/event-register" >Νέα Δραστηριότητα</a></li>
         		<li><a [routerLink]="['/provider-profile', currentUser.id]">Προφίλ</a></li>
         		<li><a routerLink="home" (click)="logout()">Αποσύνδεση</a></li>
       		</ul>

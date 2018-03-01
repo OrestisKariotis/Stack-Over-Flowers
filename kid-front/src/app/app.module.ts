@@ -19,6 +19,7 @@ import { UserLoginService } from './services/user-login.service';
 import { CurrentUserService } from './services/current-user.service';
 import { ParentRegisterService } from './services/parent-register.service';
 import { ProviderRegisterService } from './services/provider-register.service';
+import { EventRegisterService } from './services/event-register.service';
 
 import { FaqComponent } from './faq/faq.component';
 import { AboutUsComponent } from './about-us/about-us.component';
@@ -67,6 +68,7 @@ import { SearchComponent } from './search/search.component';
     CurrentUserService,
     ParentRegisterService,
     ProviderRegisterService,
+    EventRegisterService,
     fakeBackendProvider
   ],
   bootstrap: [AppComponent]

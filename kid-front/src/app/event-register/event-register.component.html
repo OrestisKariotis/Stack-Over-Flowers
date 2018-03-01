@@ -43,11 +43,11 @@
 					πεδίο είναι υποχρεωτικό!</div>
 			</div>
 			<div class="form-group col-sm-4 col-md-4"
-				[ngClass]="{ 'has-error': f.submitted && !starting_time.valid }">
-				<label for="starting_time" class="control-label">Ώρα Διεξαγωγής</label>
-				<input type="time" class="form-control" name="starting_time"
-					[(ngModel)]="model.starting_time" #starting_time="ngModel" required>
-				<div *ngIf="f.submitted && !starting_time.valid" class="help-block">Το
+				[ngClass]="{ 'has-error': f.submitted && !startingTime.valid }">
+				<label for="startingTime" class="control-label">Ώρα Διεξαγωγής</label>
+				<input type="time" class="form-control" name="startingTime"
+					[(ngModel)]="model.startingTime" #startingTime="ngModel" required>
+				<div *ngIf="f.submitted && !startingTime.valid" class="help-block">Το
 					πεδίο είναι υποχρεωτικό!</div>
 			</div>
 		</div>
@@ -101,8 +101,8 @@
 		</div>
 		<div class="row">
 			<div class="form-group">
-    		<label for="logo">Λογότυπο</label>
-    		<input type="file" accept="image/*" class="form-control" name="logo"  #logo (change)="true" required/>
+    		<label for="images">Εικόνες Δραστηριότητας</label>
+    		<input type="file" accept="image/*" class="form-control" name="images"  #images (change)="imagesChange(images.files)" required/>
   		</div>
   	</div>
 		<div class="row">
@@ -128,10 +128,14 @@
 		</div>
 		<div class="row">
 			<div class="form-group col-sm-4 col-md-4 col-sm-offset-2">
-				<button id="goconfirm" class="btn btn-default btn-block">Συνέχεια</button>
+				<button id="goconfirm" class="btn btn-default btn-block">Υποβολή</button>
 			</div>
-			<div class="text-info">Αν πατήσετε "Συνέχεια" Συμφωνείτε με τους <a routerLink="/terms">Όρους Χρήσης</a></div>
+			<div class="text-info">Αν πατήσετε "Υποβολή" Συμφωνείτε με τους <a routerLink="/terms">Όρους Χρήσης</a></div>
 		</div>
 	</form>
+	<div *ngIf="done" class = "alert alert-success">Η δραστηριότητα ανέβηκε επιτυχώς, και θα ενημερωθείτε με email για την έγκρισή της.
+		<a routerLink="/home">Επιστροφή</a>
+	</div>
+	<div *ngIf="model.error" class = "alert alert-danger">{{model.error}}</div>
 	</div>
 </div>

@@ -10,6 +10,7 @@ export class CurrentUser {
   profit?: number;
   businessName?: string;
   bankAccount?: string;
+  rights_code?: number;
   enable: boolean;
   mode: string;
 
@@ -35,6 +36,9 @@ export class CurrentUser {
     }
     if (obj && obj.bankAccount) {
       this.bankAccount = obj.bankAccount;
+    }
+    if (obj && obj.rights_code) {
+      this.rights_code = obj.rights_code;
     }
   }
 }

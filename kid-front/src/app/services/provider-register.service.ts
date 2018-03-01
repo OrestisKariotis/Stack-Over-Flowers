@@ -21,7 +21,7 @@ export class ProviderRegisterService {
         fd.append('file', auth, auth.name);
       }
     }
-    return this.http.post<CurrentUser>('/api/register/parent', fd).map(user => {
+    return this.http.post<CurrentUser>('/api/register/parents', fd).map(user => {
       if (user && user.enable) {
           sessionStorage.setItem('currentUser', JSON.stringify(user));
         }
