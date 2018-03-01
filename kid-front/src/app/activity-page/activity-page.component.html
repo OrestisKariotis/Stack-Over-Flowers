@@ -1,0 +1,52 @@
+<div class="container">
+	<h2><b>{{activity.title}}</b></h2>
+	<br>
+	<div class="col-md-6">
+	</div>
+	<div class="col-md-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Πληροφορίες</h3>
+			</div>
+			<div class="panel-body fixed-panel-1">
+				<strong>Πάροχος:</strong> <a [routerLink]="['/provider-profile', activity.prov_id]">{{activity.prov_name}}</a><br/>
+				<strong>Ημερομηνία:</strong> {{activity.date}}<br/>
+				<strong>Ώρα έναρξης:</strong> {{activity.starting_time}}<br/>
+				<strong>Ηλικίες:</strong> {{activity.lowestAge}} - {{activity.highestAge}} ετών<br/>
+		    	<strong>Κατηγορίες:</strong> {{activity.categories}}<br/>
+		    	<strong>Περιγραφή:</strong> {{activity.description}}<br/>
+		    	<strong>Διεύθυνση:</strong> {{activity.address}}<br/><br/>
+		    	<agm-map [zoom]="14" [latitude]="activity.latitude" [longitude]="activity.longitude">
+  					<agm-marker [latitude]="activity.latitude" [longitude]="activity.longitude">
+  						<agm-info-window>{{activity.title}}</agm-info-window>
+  					</agm-marker>
+				</agm-map>
+				<br/>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Αγορά εισιτηρίων</h3>
+			</div>
+			<div class="panel-body fixed-panel-2">
+				<strong>Τιμή εισιτηρίου:</strong> {{activity.ticketCost}} πόντοι<br/>
+				<strong>Διαθέσιμα εισιτήρια:</strong> {{activity.availTickets}}<br/>
+				<form name="form" class="form-inline" (ngSubmit)="f.form.valid && buyTicket()" #f="ngForm" novalidate>
+					Επιθυμώ να αγοράσω&nbsp;
+					<div class="form-group" [ngClass]="{ 'has-error': numTickets.errors?.pattern || numTickets.value == 0 || numTickets.value > activity.availTickets }">
+						<input class="form-control" type="text" name="numTickets" size="2"
+						[(ngModel)]="model.numTickets" #numTickets="ngModel" required pattern="\b[0-9]*\b" required />
+						<span *ngIf = "numTickets.value == 1;then enone else enmore"></span>
+						<ng-template #enone>&nbsp;εισιτήριο</ng-template>
+						<ng-template #enmore>&nbsp;εισιτήρια</ng-template>
+					</div>
+					<button class="btn btn-default custom-buy-button" type="submit" (click)="buyTicket()">Αγορά</button>
+					<div *ngIf="f.submitted && !numTickets.valid" class="help-block sos-error">Το πεδίο είναι υποχρεωτικό!</div>
+					<div *ngIf="f.submitted && numTickets.errors?.pattern" class="help-block sos-error">Απαιτείται ο αριθμός εισιτηρίων!</div>
+					<div *ngIf="f.submitted && numTickets.value == 0" class="help-block sos-error">Απαιτείται η αγορά ενός τουλάχιστον εισιτηρίου!</div>
+					<div *ngIf="f.submitted && numTickets.value > activity.availTickets" class="help-block sos-error">Δεν υπάρχουν τόσα διαθέσιμα εισιτήρια!</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
