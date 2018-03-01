@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { ParentRegisterComponent } from './parent-register/parent-register.component';
 import { ProviderRegisterComponent } from './provider-register/provider-register.component';
+import { EventRegisterComponent } from './event-register/event-register.component';
 import { SearchComponent } from './search/search.component';
 import { FaqComponent } from './faq/faq.component';
 import { AboutUsComponent } from './about-us/about-us.component';
@@ -30,6 +31,9 @@ const appRoutes: Routes = [
   },
   { path: 'provider-register',
     component: ProviderRegisterComponent
+  },
+  { path: 'event-register',
+    component: EventRegisterComponent
   },
   { path: 'search',
     component: SearchComponent

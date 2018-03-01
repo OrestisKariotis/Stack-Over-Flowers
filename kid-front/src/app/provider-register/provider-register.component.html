@@ -2,7 +2,7 @@
 	<div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
 		<h2><b>Φόρμα εγγραφής Παρόχου</b></h2>
 		<br>
-		<form name="form" (ngSubmit)="f.form.valid && providerRegister()" #f="ngForm"
+		<form name="form" (ngSubmit)="f.form.valid && (password.value == passRetype.value) && providerRegister()" #f="ngForm"
 			novalidate>
 			<div class="form-group"
 				[ngClass]="{ 'has-error': f.submitted && !username.valid }">
@@ -21,7 +21,7 @@
 					είναι υποχρεωτικό!</div>
 			</div>
 			<div class="form-group"
-				[ngClass]="{ 'has-error': f.submitted && !passRetype.valid }">
+				[ngClass]="{ 'has-error': f.submitted && (!passRetype.valid || password.value != passRetype.value) }">
 				<label for="passRetype">Επανάληψη Password</label> <input type="password"
 					class="form-control" name="passRetype" [(ngModel)]="model.passRetype"
 					#passRetype="ngModel" required />
@@ -74,7 +74,7 @@
 			</div>
 			<div class="form-group">
     		<label for="logo">Λογότυπο</label>
-    		<input type="file" class="form-control" name="logo"  #logo (change)="logoChange(logo.files)"/>
+    		<input type="file" accept="image/*" class="form-control" name="logo"  #logo (change)="logoChange(logo.files)" required/>
   		</div>
 			<hr />
 			<div class="form-group"

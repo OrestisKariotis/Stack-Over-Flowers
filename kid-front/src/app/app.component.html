@@ -15,11 +15,21 @@
       </ul>
       <div *ngIf = "currentUser.enable;then enable else disable"></div>
       <ng-template #enable>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a routerLink="points">Αγορά Πόντων ( {{currentUser.points}} )</a></li>
-        <li><a [routerLink]="['/parent-profile', currentUser.id]">Προφίλ</a></li>
-        <li><a routerLink="home" (click)="logout()">Αποσύνδεση</a></li>
-      </ul>
+      	<div *ngIf = "currentUser.mode==='parent';then parent else provider"></div>
+      	<ng-template #parent>
+      		<ul class="nav navbar-nav navbar-right">
+        		<li><a routerLink="points">Αγορά Πόντων ( {{currentUser.wallet}} )</a></li>
+        		<li><a [routerLink]="['/parent-profile', currentUser.id]">Προφίλ</a></li>
+        		<li><a routerLink="home" (click)="logout()">Αποσύνδεση</a></li>
+      		</ul>
+      	</ng-template>
+      	<ng-template #provider>
+      		<ul class="nav navbar-nav navbar-right">
+        		<li><a routerLink="/event-register" >Νέα Δραστηριότητα</a></li>
+        		<li><a [routerLink]="['/provider-profile', currentUser.id]">Προφίλ</a></li>
+        		<li><a routerLink="home" (click)="logout()">Αποσύνδεση</a></li>
+      		</ul>
+      	</ng-template>
       </ng-template>
       <ng-template #disable>
       <ul class="nav navbar-nav navbar-right">
