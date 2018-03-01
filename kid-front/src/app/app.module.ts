@@ -31,6 +31,7 @@ import { ParentProfileComponent } from './parent-profile/parent-profile.componen
 import { ProviderProfileComponent } from './provider-profile/provider-profile.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { ControlPanelComponent } from './control-panel/control-panel.component';
+import { EventRegisterComponent } from './event-register/event-register.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { ControlPanelComponent } from './control-panel/control-panel.component';
     ParentProfileComponent,
     ProviderProfileComponent,
     AdminLoginComponent,
-    ControlPanelComponent
+    ControlPanelComponent,
+    EventRegisterComponent
   ],
   imports: [
     BrowserModule,

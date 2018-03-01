@@ -14,15 +14,19 @@ export class UserLoginService {
     if (mode === 'parent') {
       return this.http.post<CurrentUser>('/api/users', { username: username, password: password } )
         .map(user => {
-          if (user && user.enable) {
+          if (user && user.id) {
+            user.mode = 'parent';
+            user.enable = true;
             sessionStorage.setItem('currentUser', JSON.stringify(user));
           }
           return user;
         });
     } else {
-      return this.http.post('url to provider login', { username: username, password: password } )
+      return this.http.post<CurrentUser>('/api/provs', { username: username, password: password } )
         .map(user => {
-          if (user) {
+          if (user && user.id) {
+            user.mode = 'provider';
+            user.enable = true;
             sessionStorage.setItem('currentUser', JSON.stringify(user));
           }
           return user;
