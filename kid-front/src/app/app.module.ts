@@ -57,7 +57,7 @@ import { ActivityPageComponent } from './activity-page/activity-page.component';
     AdminLoginComponent,
     ControlPanelComponent,
     SearchComponent,
-    ActivityPageComponent
+    ActivityPageComponent,
     EventRegisterComponent
   ],
   imports: [
