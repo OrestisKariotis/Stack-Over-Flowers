@@ -226,7 +226,7 @@ img.resize {
 body {
 	padding-top: 73px;
 	height: 100%;
-	margin-bottom: 150px !important;
+	margin-bottom: 200px !important;
 }
 
 @media screen and (min-width: 768px) {
@@ -295,3 +295,25 @@ html {
 	padding-right: 70px !important;
 	margin: 0 30px !important;
 }
+
+.custom-buy-button {
+	padding-left: 20px !important;
+	padding-right: 20px !important;
+	margin: 0 30px !important;
+}
+
+.fixed-panel-1 {
+  height: 220px !important;
+  overflow-y: auto;
+}
+
+.fixed-panel-2 {
+  height: 140px !important;
+  overflow-y: auto;
+}
+
+.sos-error {
+	  color: #a94442 !important;
+}
+
+/* Το AGM (Angular-Maps) CSS στα επιμέρους αρχεία CSS των components, για διαφορετικά ύψη */

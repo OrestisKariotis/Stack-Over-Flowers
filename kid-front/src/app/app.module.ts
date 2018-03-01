@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { AgmCoreModule } from '@agm/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -33,6 +34,7 @@ import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { ControlPanelComponent } from './control-panel/control-panel.component';
 import { EventRegisterComponent } from './event-register/event-register.component';
 import { SearchComponent } from './search/search.component';
+import { ActivityPageComponent } from './activity-page/activity-page.component';
 
 
 
@@ -54,14 +56,18 @@ import { SearchComponent } from './search/search.component';
     ProviderProfileComponent,
     AdminLoginComponent,
     ControlPanelComponent,
-    EventRegisterComponent,
-    SearchComponent
+    SearchComponent,
+    ActivityPageComponent
+    EventRegisterComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAmpQrI36e1gOYE-8bE6mBVzNkMKiEIwfw'
+    })
   ],
   providers: [
     UserLoginService,
