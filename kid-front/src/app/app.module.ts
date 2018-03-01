@@ -7,7 +7,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { SearchComponent } from './search/search.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { ParentRegisterComponent } from './parent-register/parent-register.component';
 import { ProviderRegisterComponent } from './provider-register/provider-register.component';
@@ -32,13 +31,14 @@ import { ProviderProfileComponent } from './provider-profile/provider-profile.co
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { ControlPanelComponent } from './control-panel/control-panel.component';
 import { EventRegisterComponent } from './event-register/event-register.component';
+import { SearchComponent } from './search/search.component';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    SearchComponent,
     UserLoginComponent,
     ParentRegisterComponent,
     ProviderRegisterComponent,
@@ -53,7 +53,8 @@ import { EventRegisterComponent } from './event-register/event-register.componen
     ProviderProfileComponent,
     AdminLoginComponent,
     ControlPanelComponent,
-    EventRegisterComponent
+    EventRegisterComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
