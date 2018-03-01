@@ -1,0 +1,141 @@
+<div class="container">
+<div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+	<form name="form" (ngSubmit)="f.form.valid && (highestAge.value >= lowestAge.value) && eventRegister()" #f="ngForm"
+		novalidate>
+		<div class="row">
+			<div class="col-sm-offset-3">
+				<h3>Υποβολή Νέας Εκδήλωσης</h3>
+			</div>
+		</div>
+		<div class="row">
+			<hr />
+		</div>
+		<div class="row">
+			<div class="form-group col-sm-6 col-md-6 col-sm-offset-3"
+				[ngClass]="{ 'has-error': f.submitted && !title.valid }">
+				<label for="title" class="control-label">Όνομα Εκδήλωσης</label> <input
+					type="text" class="form-control" name="title"
+					[(ngModel)]="model.title" #title="ngModel" required>
+				<div *ngIf="f.submitted && !title.valid" class="help-block">Το
+					πεδίο είναι υποχρεωτικό!</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-sm-6 col-md-6 col-sm-offset-3"
+				[ngClass]="{ 'has-error': f.submitted && !address.valid }">
+				<label for="address" class="control-label">Διεύθυνση</label> <input
+					type="text" class="form-control" name="address"
+					[(ngModel)]="model.address" #address="ngModel" required
+					pattern="^[α-ωΑ-Ω]{1,30}\s[0-9]{1,3}$">
+				<div *ngIf="f.submitted && address.errors?.required"
+					class="help-block">Το πεδίο είναι υποχρεωτικό!</div>
+				<div *ngIf="f.submitted && address.errors?.pattern"
+					class="help-block">Οδός (κενο) Αριθμός</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-sm-4 col-md-4 col-sm-offset-2"
+				[ngClass]="{ 'has-error': f.submitted && !date.valid }">
+				<label for="date" class="control-label">Ημερομηνία </label>
+				<input type="date" class="form-control" name="date"
+					[(ngModel)]="model.date" #date="ngModel" required>
+				<div *ngIf="f.submitted && !date.valid" class="help-block">Το
+					πεδίο είναι υποχρεωτικό!</div>
+			</div>
+			<div class="form-group col-sm-4 col-md-4"
+				[ngClass]="{ 'has-error': f.submitted && !startingTime.valid }">
+				<label for="startingTime" class="control-label">Ώρα Διεξαγωγής</label>
+				<input type="time" class="form-control" name="startingTime"
+					[(ngModel)]="model.startingTime" #startingTime="ngModel" required>
+				<div *ngIf="f.submitted && !startingTime.valid" class="help-block">Το
+					πεδίο είναι υποχρεωτικό!</div>
+			</div>
+		</div>
+		<div class="row">
+			<hr />
+		</div>
+		<div class="row">
+			<div class="form-group col-sm-4 col-md-4"
+				[ngClass]="{ 'has-error': f.submitted && !categories.valid }">
+				<label for="categories" class="control-label">Κατηγορίες</label>
+				<select multiple style="width: 100%" name="categories" form="form"
+					[(ngModel)]="model.categories" #categories="ngModel" required>
+					<option value="Παραστάσεις">Παραστάσεις</option>
+					<option value="Μουσεία">Μουσεία</option>
+					<option value="Αθλητισμός">Αθλητισμός</option>
+					<option value="Παιχνίδι">Παιχνίδι</option>
+					<option value="Επιστήμη&Περιβάλλον">Επιστήμη και Περιβάλλον</option>
+					<option value="Μαθήματα">Μαθήματα</option>
+				</select>
+				<div *ngIf="f.submitted && !categories.valid" class="help-block">Το
+					πεδίο είναι υποχρεωτικό!</div>
+			</div>
+			<div class="form-group col-sm-4 col-md-4"
+				[ngClass]="{ 'has-error': f.submitted && !lowestAge.valid }">
+					<label for="lowestAge" class="control-label">Ηλικιακό Εύρος: Από</label>
+					<input type="number" class="form-control" name="lowestAge"
+						[(ngModel)]="model.lowestAge" #lowestAge="ngModel" required min="1" max="18">
+					<div *ngIf="f.submitted && lowestAge.errors?.required"
+						class="help-block">Το πεδίο είναι υποχρεωτικό!</div>
+			</div>
+			<div class="form-group col-sm-4 col-md-4"
+				[ngClass]="{ 'has-error': f.submitted && (!highestAge.valid || highestAge.value < lowestAge.value) }">
+					<label for="lowestAge" class="control-label">Έως</label>
+					<input type="number" class="form-control" name="highestAge"
+						[(ngModel)]="model.highestAge" #highestAge="ngModel" required min="1" max="18">
+					<div *ngIf="f.submitted && highestAge.errors?.required"
+						class="help-block">Το πεδίο είναι υποχρεωτικό!</div>
+					<div *ngIf="f.submitted && (highestAge.value < lowestAge.value)"
+						class="help-block">Λάθος εύρος</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group"
+				[ngClass]="{ 'has-error': f.submitted && !description.valid }">
+				<label for="description" class="control-label">Περιγραφή Δραστηριότητας</label>
+				<textarea rows="4" cols="50" name="description" class="form-control" form="form"
+					[(ngModel)]="model.description" #description="ngModel" required></textarea>
+				<div *ngIf="f.submitted && !description.valid" class="help-block">Το
+					πεδίο είναι υποχρεωτικό!</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group">
+    		<label for="images">Εικόνες Δραστηριότητας</label>
+    		<input type="file" accept="image/*" class="form-control" name="images"  #images (change)="imagesChange(images.files)" required/>
+  		</div>
+  	</div>
+		<div class="row">
+			<hr />
+		</div>
+		<div class="row">
+			<div class="form-group col-sm-4 col-md-4 col-sm-offset-2"
+				[ngClass]="{ 'has-error': f.submitted && !initTickets.valid }">
+				<label for="initTickets" class="control-label">Σύνολο εισιτηρίων </label>
+				<input type="number" class="form-control" name="initTickets"
+					[(ngModel)]="model.initTickets" #initTickets="ngModel" required>
+				<div *ngIf="f.submitted && !initTickets.valid" class="help-block">Το
+					πεδίο είναι υποχρεωτικό!</div>
+			</div>
+			<div class="form-group col-sm-4 col-md-4"
+				[ngClass]="{ 'has-error': f.submitted && !ticketCost.valid }">
+				<label for="ticketCost" class="control-label">Κόστος εισιτηρίου</label>
+				<input type="text" class="form-control" name="ticketCost"
+					[(ngModel)]="model.ticketCost" #ticketCost="ngModel" required>
+				<div *ngIf="f.submitted && !ticketCost.valid" class="help-block">Το
+					πεδίο είναι υποχρεωτικό!</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-sm-4 col-md-4 col-sm-offset-2">
+				<button id="goconfirm" class="btn btn-default btn-block">Υποβολή</button>
+			</div>
+			<div class="text-info">Αν πατήσετε "Υποβολή" Συμφωνείτε με τους <a routerLink="/terms">Όρους Χρήσης</a></div>
+		</div>
+	</form>
+	<div *ngIf="done" class = "alert alert-success">Η δραστηριότητα ανέβηκε επιτυχώς, και θα ενημερωθείτε με email για την έγκρισή της.
+		<a routerLink="/home">Επιστροφή</a>
+	</div>
+	<div *ngIf="model.error" class = "alert alert-danger">{{model.error}}</div>
+	</div>
+</div>
