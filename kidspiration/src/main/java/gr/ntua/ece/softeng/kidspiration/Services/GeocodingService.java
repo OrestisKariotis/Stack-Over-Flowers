@@ -7,7 +7,7 @@ import gr.ntua.ece.softeng.kidspiration.*;
  * AIzaSyBRhF66pYVCc_C2km3tvIxt-pp7Ae6Gjw4
  */
 
-
+/* @Service *** */
 public class GeocodingService {
 
     /* Google almost always returns an answer with coordinates.
