@@ -12,7 +12,7 @@ import java.util.List;
 
 @Service
 @Qualifier("ProviderService")
-public class ProviderService implements UserService<Provider> {
+public class ProviderService { //implements UserService<Provider> {
 
     @Autowired
     ProviderDao providerDao;
@@ -47,7 +47,7 @@ public class ProviderService implements UserService<Provider> {
 
     public ProviderView findView(int id) { // OK
         Provider provider =  providerDao.find(id);
-        ProviderView providerView = new ProviderView(provider.getFirstname(), provider.getLastname(), provider.getEmail(), provider.getPhone(), provider.getBusinessName());
+        ProviderView providerView = new ProviderView(provider.getId(), provider.getUsername(), provider.getFirstname(), provider.getLastname(), provider.getEmail(), provider.getPhone(), provider.getBusinessName(), provider.getBankAccount(), provider.getRights_code(), provider.getRights_code());
         return providerView;
     }
 

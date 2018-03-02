@@ -2,52 +2,19 @@ package gr.ntua.ece.softeng.kidspiration;
 
 
 // May not be needed finally if JSON object can be made!!!
-public class ProviderView {
+public class ProviderView extends User{
 
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String phone;
     private String businessName;
+    private String bankAccount;
+    private double profit;
+    private byte rights_code;
 
-    public ProviderView(String firstName, String lastName, String email, String phone, String businessName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phone = phone;
+    public ProviderView(int id, String username, String firstname, String lastname, String email, String phone, String businessName, String bankAccount, double profit, byte rights_code) {
+        super(id, username, firstname, lastname, email, phone);
         this.businessName = businessName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
+        this.bankAccount = bankAccount;
+        this.profit = profit;
+        this.rights_code = rights_code;
     }
 
     public String getBusinessName() {
@@ -56,5 +23,29 @@ public class ProviderView {
 
     public void setBusinessName(String businessName) {
         this.businessName = businessName;
+    }
+
+    public String getBankAccount() {
+        return bankAccount;
+    }
+
+    public void setBankAccount(String bankAccount) {
+        this.bankAccount = bankAccount;
+    }
+
+    public double getProfit() {
+        return profit;
+    }
+
+    public void setProfit(double profit) {
+        this.profit = profit;
+    }
+
+    public byte getRights_code() {
+        return rights_code;
+    }
+
+    public void setRights_code(byte rights_code) {
+        this.rights_code = rights_code;
     }
 }

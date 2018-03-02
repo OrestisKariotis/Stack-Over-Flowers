@@ -11,15 +11,19 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Qualifier("ParentService")
-public class ParentService implements UserService<Parent> {
+public class ParentService { //implements UserService<Parent> {
 
     @Autowired
     //@Qualifier("ParentDao")
     ParentDao parentDao;
 
-    public void addUser(Parent user) {
+    public Parent addUser(Parent user) {  //CKECKING
+
+        if (parentDao.findByUsername(user.getUsername()) != null)
+            return null;
         parentDao.addUser(user);
-    } // OK
+        return parentDao.findByUsername(user.getUsername());
+    }
 
     public Parent validateUser(Login login) {
         return parentDao.validateUser(login);
