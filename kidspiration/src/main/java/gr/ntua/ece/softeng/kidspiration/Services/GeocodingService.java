@@ -7,8 +7,17 @@ import gr.ntua.ece.softeng.kidspiration.*;
  * AIzaSyBRhF66pYVCc_C2km3tvIxt-pp7Ae6Gjw4
  */
 
+
 public class GeocodingService {
 
+    /* Google almost always returns an answer with coordinates.
+       The idea is an administrator checks the pending event's address
+       before approving it and may thus request a request a resubmission.
+
+       Also, in the case of event searching, the problem -if existent-
+       is visible to the user via the front-end's map and as such
+       can be easily understood and resolved.
+     */
     public static Geocoding geocodingService(String address) {
         /* receive the whole json response */
         GeoCoordinates coordinates = Geocoding.findCoordinates(address);

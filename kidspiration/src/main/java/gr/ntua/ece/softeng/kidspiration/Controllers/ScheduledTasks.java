@@ -46,7 +46,7 @@ public class ScheduledTasks {
     private OldTicketService oldTicketService;
 
 
-   // @Scheduled(fixedRate = 30000)           //@Scheduled(cron = "0 30 2 * * ?") /* Test fixed time *** */ /* Is this fucker not a service */
+    @Scheduled(fixedRate = 30000)           //@Scheduled(cron = "0 30 2 * * ?") /* Test fixed time *** */ /* Is this fucker not a service */
     public void dailyUpdates() {
         System.out.println("Eisai malakas kai de tha treksei pote");
         Calendar cal = Calendar.getInstance(); /* get now in calendar format */
@@ -109,7 +109,7 @@ public class ScheduledTasks {
     }
 
 
-   // @Scheduled(fixedRate = 62000)       /* make it monthly */    /* for every start of the month */
+    @Scheduled(fixedRate = 62000)       /* make it monthly */    /* for every start of the month */
     public void monthlyResets(){
         Calendar cal = Calendar.getInstance();
         MonthReference monthReference= monthReferenceService.find(cal.get(Calendar.MONTH));
