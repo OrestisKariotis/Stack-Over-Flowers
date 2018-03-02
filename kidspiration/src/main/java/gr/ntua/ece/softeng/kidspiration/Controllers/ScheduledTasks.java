@@ -22,8 +22,8 @@ public class ScheduledTasks {
 
     @Autowired
     //@Qualifier("ProviderService");
-    private UserService providerService;
-
+    //private UserService providerService;
+    private ProviderService providerService;
 
     @Autowired
     // @Qualifier("CurrentEventService");
@@ -46,6 +46,10 @@ public class ScheduledTasks {
     private OldTicketService oldTicketService;
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3234baa74d2d8ed4137e582f5cf184f4e310b710
     @Scheduled(fixedRate = 30000)           //@Scheduled(cron = "0 30 2 * * ?") /* Test fixed time *** */ /* Is this fucker not a service */
     public void dailyUpdates() {
         System.out.println("Eisai malakas kai de tha treksei pote");
@@ -108,7 +112,10 @@ public class ScheduledTasks {
         oldEventService.deleteWithDate(sDate);
     }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 3234baa74d2d8ed4137e582f5cf184f4e310b710
     @Scheduled(fixedRate = 62000)       /* make it monthly */    /* for every start of the month */
     public void monthlyResets(){
         Calendar cal = Calendar.getInstance();

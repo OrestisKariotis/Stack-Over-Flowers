@@ -49,10 +49,20 @@ public class PendingProviderDao implements UserDao<PendingProvider>{
         return user;
     }
 
+    public PendingProvider findByUsername (String username) { // CHECKING
+
+        List <PendingProvider> users = jdbcTemplate.query("SELECT * FROM PendingProviders where username = ? ",
+                new Object[] { username }, new PendingProviderMapper()); // could be query, not needed however
+
+        return users.size() > 0 ? users.get(0) : null;
+    }
+
     public List <PendingProvider> findAll() { // OK
         List < PendingProvider > users = jdbcTemplate.query("SELECT * FROM PendingProviders", new PendingProviderMapper());
         return users;
     }
+
+
 
     class PendingProviderMapper implements RowMapper<PendingProvider> {
 
