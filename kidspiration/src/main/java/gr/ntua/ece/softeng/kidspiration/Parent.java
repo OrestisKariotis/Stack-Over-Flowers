@@ -13,6 +13,10 @@ public class Parent extends ParentView{
         this.ban = ban;
     }
 
+    public Parent() {
+
+    }
+
     public String getPassword() {
         return password;
     }

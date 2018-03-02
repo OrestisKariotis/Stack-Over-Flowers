@@ -1,11 +1,14 @@
 package gr.ntua.ece.softeng.kidspiration.Controllers;
 
 import gr.ntua.ece.softeng.kidspiration.Parent;
+import gr.ntua.ece.softeng.kidspiration.PurchaseView;
+import gr.ntua.ece.softeng.kidspiration.PurchasePointsInfo;
 import gr.ntua.ece.softeng.kidspiration.Services.MonthReferenceService;
 import gr.ntua.ece.softeng.kidspiration.Services.ParentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -19,29 +22,22 @@ public class PointsPurchaseController {
     private MonthReferenceService monthReferenceService;  /// ADDED
 
     @RequestMapping("/purchase_points")
-    public Parent Purchase_Points(@RequestParam String id, @RequestParam String points_package_code) {  //parameters may change. Whole Parent Object could be sent to Backend
+    public ResponseEntity<?> Purchase_Points(@RequestBody PurchasePointsInfo info) {  //parameters may change. Whole Parent Object could be sent to Backend
 
         // OK
+        // CHECK TRANSACTION
 
-        // Here Parent id and package type is sent, BankAcoount and safe code should be sent as well to simulate Bank Transaction
-        // Bank Communication in frontend or Backend ??? In backend i think.
+        Parent parent = parentService.find(info.getId());  // could be done with only one query if editUser returns parent
 
-        Parent parent = parentService.find(Integer.parseInt(id));  // could be done with only one query if editUser returns parent
+        if (parent == null)
+            return ResponseEntity.badRequest().body("Something went wrong");
         // two queries perhaps are redundant,for example parent could not be returned
-        parent = parentService.purchasePoints(parent, Byte.parseByte(points_package_code));
-
-        monthReferenceService.updateMonthReference(Byte.parseByte(points_package_code));  /// ADDED
-
-        /*
-        Calendar cal = Calendar.getInstance();
-        MonthReference monthReference= (MonthReference) monthReference_service.find(cal.get(Calendar.MONTH));
-        temp=monthReference.getEarnings();
-        monthReference.setEarnings(temp+5); + 10 for packet2 / 20 for packet3 / 50 for packet4
-        monthReference_service.editMonthReference(monthReference);
-        */
-        //enhmerwsh vashs monthreference kai parent
-        //ti stelnoume mprosta???
-
-        return parent;
+        parent = parentService.purchasePoints(parent, info);
+        if (parent == null)
+            return ResponseEntity.badRequest().body("Something went wrong");
+        monthReferenceService.updateMonthReference(info.getPointsCode());  /// ADDED
+        //EMAIL NOTIFICATION
+        PurchaseView purchase_return = new PurchaseView(info.getId(), parent.getWallet());
+        return ResponseEntity.accepted().body(purchase_return);
     }
 }

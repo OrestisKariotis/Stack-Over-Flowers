@@ -3,6 +3,7 @@ package gr.ntua.ece.softeng.kidspiration.Services;
 import gr.ntua.ece.softeng.kidspiration.CurrentEvent;
 import gr.ntua.ece.softeng.kidspiration.CurrentEventView;
 import gr.ntua.ece.softeng.kidspiration.Dao.CurrentEventDao;
+import gr.ntua.ece.softeng.kidspiration.EventPageView;
 import gr.ntua.ece.softeng.kidspiration.Geocoding;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -59,6 +60,14 @@ public class CurrentEventService implements EventService<CurrentEvent> {
     public List<CurrentEvent> findWithDate(Date date) {    ///CHECKING
         System.out.println("vres to me vash thn hmeromhnia gamw!!");
         return currentEventDao.findWithDate(date);
+    }
+
+    public List<CurrentEventView> findLatest() {
+        return currentEventDao.findLatest();
+    }
+
+    public EventPageView findEventPage(int id) {
+        return currentEventDao.findEventPage(id);
     }
 
     public List<CurrentEvent> findAll() { // OK

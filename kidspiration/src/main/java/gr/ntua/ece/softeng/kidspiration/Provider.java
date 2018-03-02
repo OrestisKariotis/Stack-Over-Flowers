@@ -11,6 +11,10 @@ public class Provider extends PendingProvider {
         this.rights_code = rights_code;
     }
 
+    public Provider() {
+
+    }
+
     public double getProfit() {
         return profit;
     }

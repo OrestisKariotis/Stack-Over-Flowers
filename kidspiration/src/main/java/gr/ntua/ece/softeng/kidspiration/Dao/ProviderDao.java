@@ -53,6 +53,22 @@ public class ProviderDao implements UserDao<Provider> {
         return user;
     }
 
+    public Provider findByUsername (String username) { // CHECKING
+
+        List <Provider> users = jdbcTemplate.query("SELECT * FROM Providers where username = ? ",
+                new Object[] { username }, new ProviderMapper());
+
+        return users.size() > 0 ? users.get(0) : null;
+    }
+
+    public Provider findByEmail (String email) { // CHECKING
+
+        List <Provider> users = jdbcTemplate.query("SELECT * FROM Providers where email = ? ",
+                new Object[] { email }, new ProviderMapper());
+
+        return users.size() > 0 ? users.get(0) : null;
+    }
+
     public List<Provider> findAll() { // OK
         List < Provider > users = jdbcTemplate.query("SELECT * FROM Providers", new ProviderMapper());
         return users;

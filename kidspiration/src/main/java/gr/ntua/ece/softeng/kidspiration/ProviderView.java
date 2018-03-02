@@ -1,7 +1,5 @@
 package gr.ntua.ece.softeng.kidspiration;
 
-
-// May not be needed finally if JSON object can be made!!!
 public class ProviderView extends User{
 
     private String businessName;

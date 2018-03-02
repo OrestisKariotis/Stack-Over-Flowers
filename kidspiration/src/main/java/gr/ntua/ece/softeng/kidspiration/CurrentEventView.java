@@ -4,23 +4,25 @@ import java.util.Date;
 
 public class CurrentEventView {  // could extend Event Class. Only initial_tickets is missing
     private int event_id;
-    private int provider_id; // probably not needed!
     private String title;
-    private Date date; //could be date?
+    private Date date;
     private String starting_time;
-    private String place; // place is not given in wireframe
-    private String type;
+    private String categories;
     private int ticket_cost;
+    private double latitude;
+    private double longtitude;
+    private String description;
 
-    public CurrentEventView(int event_id, int provider_id, String title, Date date, String starting_time, String place, String type, int ticket_cost) {
+    public CurrentEventView(int event_id, String title, Date date, String starting_time, String categories, int ticket_cost, double latitude, double longtitude, String description) {
         this.event_id = event_id;
-        this.provider_id = provider_id;
         this.title = title;
         this.date = date;
         this.starting_time = starting_time;
-        this.place = place;
-        this.type = type;
+        this.categories = categories;
         this.ticket_cost = ticket_cost;
+        this.latitude = latitude;
+        this.longtitude = longtitude;
+        this.description = description;
     }
 
     public int getEvent_id() {
@@ -29,14 +31,6 @@ public class CurrentEventView {  // could extend Event Class. Only initial_ticke
 
     public void setEvent_id(int event_id) {
         this.event_id = event_id;
-    }
-
-    public int getProvider_id() {
-        return provider_id;
-    }
-
-    public void setProvider_id(int provider_id) {
-        this.provider_id = provider_id;
     }
 
     public String getTitle() {
@@ -63,20 +57,12 @@ public class CurrentEventView {  // could extend Event Class. Only initial_ticke
         this.starting_time = starting_time;
     }
 
-    public String getPlace() {
-        return place;
+    public String getCategories() {
+        return categories;
     }
 
-    public void setPlace(String place) {
-        this.place = place;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
+    public void setCategories(String categories) {
+        this.categories = categories;
     }
 
     public int getTicket_cost() {
@@ -85,5 +71,29 @@ public class CurrentEventView {  // could extend Event Class. Only initial_ticke
 
     public void setTicket_cost(int ticket_cost) {
         this.ticket_cost = ticket_cost;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public double getLongtitude() {
+        return longtitude;
+    }
+
+    public void setLongtitude(double longtitude) {
+        this.longtitude = longtitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
     }
 }
