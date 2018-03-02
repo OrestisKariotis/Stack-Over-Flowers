@@ -1,16 +1,17 @@
 <div class="container">
-	<form name="form" class="form-inline" (ngSubmit)="f.form.valid && search()" #f="ngForm" novalidate>
+	<form name="form" class="form-inline" (ngSubmit)="f.form.valid && ((dist.value && position.value) || 
+		(!dist.value && !position.value)) && search()" #f="ngForm" novalidate>
 		<div class="row search-row">
 			<div class="form-group" [ngClass]="">
 				<input class="form-control" type="text" name="freetext" size="50" [(ngModel)]="model.freetext"
 				#freetext="ngModel" placeholder="Αναζήτηση δραστηριότητας..." />
 			</div>
-			<div class="form-group" [ngClass]="{ 'has-error': dist.errors?.pattern }">
+			<div class="form-group" [ngClass]="{ 'has-error': dist.errors?.pattern || (!dist.value && position.value)}">
 	            <label class="control-label unbold">&nbsp;με απόσταση έως&nbsp;</label>
 				<input class="form-control" type="text" name="dist" size="2" [(ngModel)]="model.dist"
-				#dist="ngModel" required pattern="\b[0-9]*\b" />
+				#dist="ngModel" pattern="\b[0-9]*\b" />
 			</div>
-			<div class="form-group" [ngClass]="">
+			<div class="form-group" [ngClass]="{ 'has-error': dist.value && !(position.value)}">
 	            <label class="control-label unbold">&nbsp;χλμ. από&nbsp;</label>
 				<input class="form-control" type="text" name="position" size="45" [(ngModel)]="model.position"
 				#position="ngModel" placeholder="το σημείο (διεύθυνση/περιοχή)..." />	
@@ -29,18 +30,18 @@
 			<div class="form-group" [ngClass]="{ 'has-error': lowpoints.errors?.pattern }">
 	            <label class="control-label unbold">&nbsp;Τιμή από&nbsp;</label>
 				<input class="form-control" type="text" name="lowpoints" size="8" [(ngModel)]="model.lowpoints"
-				#lowpoints="ngModel" required pattern="\b[0-9]*\b" />
+				#lowpoints="ngModel" pattern="\b[0-9]*\b" />
 			</div>
 			<div class="form-group" [ngClass]="{ 'has-error': highpoints.errors?.pattern }">
 	            <label class="control-label unbold">&nbsp;έως&nbsp;</label>
 				<input class="form-control is-invalid" type="text" name="highpoints" size="8" [(ngModel)]="model.highpoints"
-				#highpoints="ngModel" required pattern="\b[0-9]*\b" />
+				#highpoints="ngModel" pattern="\b[0-9]*\b" />
 				<label class="control-label unbold">&nbsp;πόντους&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 			</div>
 			<div class="form-group" [ngClass]="{ 'has-error': age.errors?.pattern }">
 	            <label class="control-label unbold">&nbsp;Ηλικία παιδιού&nbsp;</label>
 				<input class="form-control" type="text" name="age" size="8" [(ngModel)]="model.age"
-				#age="ngModel" required pattern="\b[0-9]*\b" />
+				#age="ngModel" pattern="\b[0-9]*\b" />
 				<label class="control-label unbold">&nbsp;έτη&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 			</div>
 			<div class="form-group" [ngClass]="">
@@ -70,7 +71,7 @@
 					#cat[6]="ngModel">Μαθήματα
 				</label>&nbsp;&nbsp;
 			</div>
-			<button class="btn btn-default custom-search-button" type="submit" (click)="search()">Αναζήτηση</button>
+			<button class="btn btn-default custom-search-button" type="submit" >Αναζήτηση</button>
 		</div>
 	</form>
 	<div *ngIf="model.error" class = "alert alert-danger">{{model.error}}</div>

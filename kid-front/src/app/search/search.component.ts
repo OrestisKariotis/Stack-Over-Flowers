@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { EventService } from '../services/event.service';
+import { HomeToSearchService, HomeSearch } from '../services/home-to-search.service';
 
 import { SearchModel } from '../models/SearchModel';
 import { SearchEventModel } from '../models/EventModel';
@@ -14,13 +15,31 @@ import { SearchEventModel } from '../models/EventModel';
 export class SearchComponent implements OnInit {
 
   model: any = {};
+  homesearch: HomeSearch;
   events: SearchEventModel[] = [];
-  constructor(private eventService: EventService) { }
+  constructor(private eventService: EventService, private hometosearchservice: HomeToSearchService) { }
 
   ngOnInit() {
+    this.hometosearchservice.homesearch.subscribe(search => this.homesearch = search);
+    if (this.homesearch.enable) {
+      this.eventService.getSearchEvents(new SearchModel(this.homesearch))
+      .subscribe(
+        data => {
+          this.events = data;
+        },
+        error => {
+          //this.alert = true;
+          this.model.error = error.statusText + error.error;
+        }
+      );
+      this.homesearch.enable = false;
+      this.homesearch.freetext = null;
+      this.hometosearchservice.setSearch(this.homesearch);
+    }
   }
 
   search() {
+    this.model.categories = [];
     if (this.model.cat1) {
       this.model.categories.push('Παραστάσεις');
     }

@@ -24,10 +24,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 if (request.body.username !== 'awf') {
                     let body = {
                     id: 1,
+                    username: 'lul',
                     firstname: 'awf',
                     lastname: 'agsag',
                     email: 'awf',
-                    phone: 'awf',
+                    phone: '1234657890',
                     wallet: 2
                   };
                     return Observable.of(new HttpResponse({ status: 400 , body: body}));

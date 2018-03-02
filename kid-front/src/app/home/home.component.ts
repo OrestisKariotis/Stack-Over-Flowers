@@ -20,21 +20,24 @@ export class HomeComponent implements OnInit {
   constructor(private eventService: EventService, private homesearchservice: HomeToSearchService, private router: Router) { }
 
   ngOnInit() {
-    /*this.eventService.getHomeEvents().subscribe(
-        data => {
-          this.events = data;
-        },
-        error => {
-          this.alert = true;
-          this.model.error = error;
-        }
-      );*/
     this.homesearchservice.homesearch.subscribe(search => this.homesearch = search);
+    this.eventService.getHomeEvents().subscribe(
+      data => {
+        this.events = data;
+      },
+      error => {
+        /*this.alert = true;
+        this.model.error = error;*/
+      }
+    );
   }
 
   goSearch(text: string) {
-    this.homesearch.freetext = text;
-    this.homesearch.enable = true;
+    if (text) {
+      this.homesearch.freetext = text;
+      this.homesearch.enable = true;
+      this.homesearchservice.setSearch(this.homesearch);
+    }
     this.router.navigate(['/search']);
   }
 }

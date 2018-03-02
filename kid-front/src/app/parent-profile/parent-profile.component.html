@@ -4,34 +4,30 @@
   		<div class="panel-heading">
     		<h3 class="panel-title sparse"><strong>Στοιχεία προφίλ</strong></h3>
   		</div>
-  		<div class="panel-body good-size">
-  			<form role="form" class="form-horizontal">
+  		<div class="panel-body good-size" >
+  			<form role="form" class="form-horizontal" (ngSubmit)="f.form.valid && updateParent()" #f="ngForm">
 	    		<div class="form-group">
             		<label class="col-md-1 control-label">Username:</label>
             		<div class="col-md-3">
-              			<input class="form-control" type="text" value="HelloNick" disabled>
+              			<input class="form-control" type="text" value="{{this.currentUser.username}}" disabled>
           			</div>
             		<label class="col-md-1 control-label">Όνομα:</label>
             		<div class="col-md-3">
-              			<input class="form-control" type="text" value="Nick" disabled>
+              			<input class="form-control" type="text" value="{{this.currentUser.firstname}}" disabled>
           			</div>
             		<label class="col-md-1 control-label">Επώνυμο:</label>
             		<div class="col-md-3">
-              			<input class="form-control" type="text" value="Paparis" disabled>
+              			<input class="form-control" type="text" value="{{this.currentUser.lastname}}" disabled>
           			</div>
 	    		</div>
 	    		<div class="form-group">
             		<label class="col-md-1 control-label">E-mail:</label>
             		<div class="col-md-3">
-              			<input class="form-control" type="text" value="nickthegreek34@gmail.com" disabled>
+              			<input class="form-control" type="text" value="{{this.currentUser.email}}" disabled>
           			</div> <!-- Na sizitisoume an tha allazei h oxi - asfaleia reset ktl -->
             		<label class="col-md-1 control-label">Τηλέφωνο:</label>
-            		<div class="col-md-3">
-              			<input class="form-control" type="text" value="6945238189">
-          			</div>
-            		<label class="col-md-1 control-label">Κωδικός:</label>
-            		<div class="col-md-3">
-              			<input class="form-control" type="text">
+            		<div class="col-md-3" [ngClass]="{'has-error': !phone.valid}">
+              			<input class="form-control" type="text" name="phone" [(ngModel)]="model.phone" #phone="ngModel" required pattern="\b[0-9]{10}\b">
           			</div>
 	    		</div>
 	    		<div class="pull-right">
