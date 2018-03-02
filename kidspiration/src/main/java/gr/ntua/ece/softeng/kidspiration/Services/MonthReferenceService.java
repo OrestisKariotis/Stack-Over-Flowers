@@ -60,5 +60,15 @@ public class MonthReferenceService {  /// CHECKING
         monthReference.setEarnings(temp2 + earnings);
 
         monthReferenceDao.editMonthReference(monthReference);
+
+        monthReference = monthReferenceDao.find(12);
+        temp = monthReference.getProfit();
+        monthReference.setProfit(temp + packageProfit);
+
+        temp2 = monthReference.getEarnings();
+        monthReference.setEarnings(temp2 + earnings);
+
+        monthReferenceDao.editMonthReference(monthReference);
+
     }
 }
