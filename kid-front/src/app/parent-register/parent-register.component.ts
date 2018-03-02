@@ -25,6 +25,7 @@ export class ParentRegisterComponent implements OnInit {
 
   parentRegister() {
     this.alert = false;
+    this.model.id = 0;
     this.parentRegisterService.register(new ParentRegisterModel(this.model))
       .subscribe(
         data => {
