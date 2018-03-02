@@ -13,14 +13,19 @@ import java.util.List;
 
 @Service
 @Qualifier("PendingProviderService")
-public class PendingProviderService implements UserService<PendingProvider> {
+public class PendingProviderService { //implements UserService<PendingProvider> {
 
     @Autowired
     PendingProviderDao pendingProviderDao;
 
-    public void addUser(PendingProvider user) {
+    public PendingProvider addUser(PendingProvider user) { // OK
+
+        if (pendingProviderDao.findByUsername(user.getUsername()) != null)
+            return null;
         pendingProviderDao.addUser(user);
-    }  // OK
+        return pendingProviderDao.findByUsername(user.getUsername());
+
+    }
 
     public PendingProvider validateUser(Login login) {
         return null;
@@ -41,4 +46,5 @@ public class PendingProviderService implements UserService<PendingProvider> {
     public List<PendingProvider> findAll() { //checked
         return pendingProviderDao.findAll();
     }  // OK
+
 }

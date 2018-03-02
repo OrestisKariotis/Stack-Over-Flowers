@@ -57,6 +57,14 @@ public class ParentDao implements UserDao<Parent>{
         return user;
     }
 
+    public Parent findByUsername (String username) { // CHECKING
+
+        List <Parent> users = jdbcTemplate.query("SELECT * FROM Parents where username = ? ",
+                new Object[] { username }, new ParentMapper()); // could be query, not needed however
+
+        return users.size() > 0 ? users.get(0) : null;
+    }
+
     public List <Parent> findAll() {  //checked
         List < Parent > users = jdbcTemplate.query("SELECT * FROM Parents", new ParentMapper());
         return users;
