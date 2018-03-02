@@ -215,14 +215,23 @@
 			<p class="platform">Η παιδική δημιουργικότητα και η όρεξη για παιχνίδι είναι δύο πράγματα που δεν πρέπει να στερηθεί κανένα παιδί. Με γνώμονα την αγάπη για τα παιδιά, όλοι εμείς στην Kidspiration εργαζόμαστε ώστε να μαθαίνετε πάντα πρώτοι και να έχετε στη διάθεσή σας τη μεγαλύτερη γκάμα εκδηλώσεων και δραστηριοτήτων για παιδιά και εφήβους σε όλη την Αττική. Αθλητικές δραστηριότητες, θεατρικές παραστάσεις, δημιουργική απασχόληση, παιδικές και εφηβικές εκδηλώσεις, ατέλειωτο παιχνίδι και πολλά άλλα βρίσκονται στη διάθεσή σας με ένα κλικ.</p>
 			<br/>
 			<div style="text-align: center">
-				<div class="btn-group">
-				<button type="button" class="btn btn-lg btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Εγγραφείτε τώρα
-    			<span class="caret"></span></button>
-  					<ul class="dropdown-menu">
-    					<li><a routerLink="parent-register">Εγγραφή ως Γονέας</a></li>
-    					<li><a routerLink="provider-register">Εγγραφή ως Πάροχος</a></li>
-					</ul>
-				</div>
+				<div *ngIf = "currentUser.enable;then notcl else clicb"></div>
+      			<ng-template #clicb>
+					<div class="btn-group">
+						<button type="button" class="btn btn-lg btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Εγγραφείτε τώρα
+		    			<span class="caret"></span></button>
+		  				<ul class="dropdown-menu">
+		    				<li><a routerLink="parent-register">Εγγραφή ως Γονέας</a></li>
+		    				<li><a routerLink="provider-register">Εγγραφή ως Πάροχος</a></li>
+						</ul>
+					</div>
+				</ng-template>
+				<ng-template #notcl>
+					<div class="btn-group">
+						<button type="button" class="btn btn-lg btn-default disabled">Εγγραφείτε τώρα
+						<span class="caret"></span></button>
+		    		</div>
+				</ng-template>
 			</div>
 		</div>
 		<div class="col-md-6">
