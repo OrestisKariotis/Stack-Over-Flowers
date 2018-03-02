@@ -35,11 +35,12 @@ export class ProviderRegisterComponent implements OnInit {
       this.model.error = 'upload auth files';
     } else {
       this.alert = false;
+      this.model.id = 0;
       this.providerRegisterService.register(new ProviderRegisterModel(this.model), this.logoFile, this.authFileList)
       .subscribe(
         data => {
           this.currentUserService.changeUser(new CurrentUser(data));
-          this.router.navigate(['/']);
+          this.router.navigate(['/']); // TODO
         },
         error => {
           this.alert = true;

@@ -22,14 +22,14 @@
 		</div>
 		<div class="row">
 			<div class="form-group col-sm-6 col-md-6 col-sm-offset-3"
-				[ngClass]="{ 'has-error': f.submitted && !address.valid }">
-				<label for="address" class="control-label">Διεύθυνση</label> <input
-					type="text" class="form-control" name="address"
-					[(ngModel)]="model.address" #address="ngModel" required
+				[ngClass]="{ 'has-error': f.submitted && !place.valid }">
+				<label for="place" class="control-label">Διεύθυνση</label> <input
+					type="text" class="form-control" name="place"
+					[(ngModel)]="model.place" #place="ngModel" required
 					pattern="^[α-ωΑ-Ω]{1,30}\s[0-9]{1,3}$">
-				<div *ngIf="f.submitted && address.errors?.required"
+				<div *ngIf="f.submitted && place.errors?.required"
 					class="help-block">Το πεδίο είναι υποχρεωτικό!</div>
-				<div *ngIf="f.submitted && address.errors?.pattern"
+				<div *ngIf="f.submitted && place.errors?.pattern"
 					class="help-block">Οδός (κενο) Αριθμός</div>
 			</div>
 		</div>
@@ -43,11 +43,11 @@
 					πεδίο είναι υποχρεωτικό!</div>
 			</div>
 			<div class="form-group col-sm-4 col-md-4"
-				[ngClass]="{ 'has-error': f.submitted && !startingTime.valid }">
-				<label for="startingTime" class="control-label">Ώρα Διεξαγωγής</label>
-				<input type="time" class="form-control" name="startingTime"
-					[(ngModel)]="model.startingTime" #startingTime="ngModel" required>
-				<div *ngIf="f.submitted && !startingTime.valid" class="help-block">Το
+				[ngClass]="{ 'has-error': f.submitted && !starting_time.valid }">
+				<label for="starting_time" class="control-label">Ώρα Διεξαγωγής</label>
+				<input type="time" class="form-control" name="starting_time"
+					[(ngModel)]="model.starting_time" #starting_time="ngModel" required>
+				<div *ngIf="f.submitted && !starting_time.valid" class="help-block">Το
 					πεδίο είναι υποχρεωτικό!</div>
 			</div>
 		</div>
@@ -110,19 +110,19 @@
 		</div>
 		<div class="row">
 			<div class="form-group col-sm-4 col-md-4 col-sm-offset-2"
-				[ngClass]="{ 'has-error': f.submitted && !initTickets.valid }">
-				<label for="initTickets" class="control-label">Σύνολο εισιτηρίων </label>
-				<input type="number" class="form-control" name="initTickets"
-					[(ngModel)]="model.initTickets" #initTickets="ngModel" required>
-				<div *ngIf="f.submitted && !initTickets.valid" class="help-block">Το
+				[ngClass]="{ 'has-error': f.submitted && !initial_ticketsNumber.valid }">
+				<label for="initial_ticketsNumber" class="control-label">Σύνολο εισιτηρίων </label>
+				<input type="number" class="form-control" name="initial_ticketsNumber"
+					[(ngModel)]="model.initial_ticketsNumber" #initial_ticketsNumber="ngModel" required>
+				<div *ngIf="f.submitted && !initial_ticketsNumber.valid" class="help-block">Το
 					πεδίο είναι υποχρεωτικό!</div>
 			</div>
 			<div class="form-group col-sm-4 col-md-4"
-				[ngClass]="{ 'has-error': f.submitted && !ticketCost.valid }">
-				<label for="ticketCost" class="control-label">Κόστος εισιτηρίου</label>
-				<input type="text" class="form-control" name="ticketCost"
-					[(ngModel)]="model.ticketCost" #ticketCost="ngModel" required>
-				<div *ngIf="f.submitted && !ticketCost.valid" class="help-block">Το
+				[ngClass]="{ 'has-error': f.submitted && !ticket_cost.valid }">
+				<label for="ticket_cost" class="control-label">Κόστος εισιτηρίου</label>
+				<input type="text" class="form-control" name="ticket_cost"
+					[(ngModel)]="model.ticket_cost" #ticket_cost="ngModel" required>
+				<div *ngIf="f.submitted && !ticket_cost.valid" class="help-block">Το
 					πεδίο είναι υποχρεωτικό!</div>
 			</div>
 		</div>
