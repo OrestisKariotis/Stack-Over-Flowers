@@ -2,6 +2,30 @@
 	<h2><b>{{activity.title}}</b></h2>
 	<br>
 	<div class="col-md-6">
+		<!-- Slideshow - Carousel -->
+		<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+			<!-- Indicators -->
+			<ol class="carousel-indicators">
+      				<li *ngFor="let ima of imagepaths; let first=first; let i = index" data-target="#carousel-example-generic"
+      				[attr.data-slide-to]="i" [ngClass]="{active: first}"></li>
+			</ol>
+			<!-- Wrapper for slides -->
+			<div class="carousel-inner" role="listbox">
+				<div *ngFor="let ima of imagepaths; let first=first" class="item" [ngClass]="{active: first}">
+					<img src="{{ima}}" alt="">
+				</div>
+			</div>
+			<!-- Controls -->
+			<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+				<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				<span class="sr-only">Previous</span>
+			</a>
+			<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+				<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				<span class="sr-only">Next</span>
+			</a>
+		</div>
+		<br/>
 	</div>
 	<div class="col-md-6">
 		<div class="panel panel-default">

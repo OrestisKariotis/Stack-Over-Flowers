@@ -34,7 +34,7 @@ import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { ControlPanelComponent } from './control-panel/control-panel.component';
 import { EventRegisterComponent } from './event-register/event-register.component';
 import { SearchComponent } from './search/search.component';
-import { ActivityPageComponent } from './activity-page/activity-page.component';
+import { EventPageComponent } from './event-page/event-page.component';
 
 
 
@@ -57,7 +57,7 @@ import { ActivityPageComponent } from './activity-page/activity-page.component';
     AdminLoginComponent,
     ControlPanelComponent,
     SearchComponent,
-    ActivityPageComponent,
+    EventPageComponent,
     EventRegisterComponent
   ],
   imports: [
