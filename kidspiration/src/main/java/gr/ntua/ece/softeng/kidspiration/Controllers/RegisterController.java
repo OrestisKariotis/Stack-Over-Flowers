@@ -16,7 +16,7 @@ import gr.ntua.ece.softeng.kidspiration.Services.UserService;
 import javax.xml.ws.Response;
 
 @RestController
-@RequestMapping(path = "/register", method = RequestMethod.POST)  //POST method
+@RequestMapping(path = "/api/register", method = RequestMethod.POST)  //POST method
 public class RegisterController {
 
     @Autowired

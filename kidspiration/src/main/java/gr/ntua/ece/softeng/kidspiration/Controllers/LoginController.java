@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 
 
 @RestController
-@RequestMapping(path = "/login", method = RequestMethod.POST)  //could be POST method
+@RequestMapping(path = "/api/login", method = RequestMethod.POST)  //could be POST method
 public class LoginController {
 
     @Autowired
