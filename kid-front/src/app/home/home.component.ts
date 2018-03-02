@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { SearchEventModel } from '../models/EventModel';
+import { EventService } from '../services/event.service';
+
 
 @Component({
   selector: 'app-home',
@@ -7,9 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  events: SearchEventModel[] = [];
+
+  constructor(private eventService: EventService) { }
 
   ngOnInit() {
+    /*this.eventService.getHomeEvents().subscribe(
+        data => {
+          this.events = data;
+        },
+        error => {
+          this.alert = true;
+          this.model.error = error;
+        }
+      );*/
   }
 
 }

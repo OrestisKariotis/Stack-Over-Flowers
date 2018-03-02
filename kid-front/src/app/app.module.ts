@@ -21,6 +21,7 @@ import { CurrentUserService } from './services/current-user.service';
 import { ParentRegisterService } from './services/parent-register.service';
 import { ProviderRegisterService } from './services/provider-register.service';
 import { EventRegisterService } from './services/event-register.service';
+import { EventService } from './services/event.service';
 
 import { FaqComponent } from './faq/faq.component';
 import { AboutUsComponent } from './about-us/about-us.component';
@@ -75,6 +76,7 @@ import { EventPageComponent } from './event-page/event-page.component';
     ParentRegisterService,
     ProviderRegisterService,
     EventRegisterService,
+    EventService,
     fakeBackendProvider
   ],
   bootstrap: [AppComponent]
