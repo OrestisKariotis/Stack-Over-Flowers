@@ -17,7 +17,7 @@ import { ParentProfileComponent } from './parent-profile/parent-profile.componen
 import { ProviderProfileComponent } from './provider-profile/provider-profile.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { ControlPanelComponent } from './control-panel/control-panel.component';
-import { ActivityPageComponent } from './activity-page/activity-page.component';
+import { EventPageComponent } from './event-page/event-page.component';
 
 const appRoutes: Routes = [
   { path: 'home',
@@ -59,8 +59,8 @@ const appRoutes: Routes = [
   { path: 'provider-profile/:id',
     component: ProviderProfileComponent
   },
-  { path: 'activity-page/:id',
-    component: ActivityPageComponent
+  { path: 'event-page/:id',
+    component: EventPageComponent
   },
   { path: 'adminlogin',
     component: AdminLoginComponent
