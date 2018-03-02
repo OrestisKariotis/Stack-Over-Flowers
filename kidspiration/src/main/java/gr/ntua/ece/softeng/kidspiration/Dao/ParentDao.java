@@ -8,7 +8,6 @@ import gr.ntua.ece.softeng.kidspiration.Login;
 import gr.ntua.ece.softeng.kidspiration.Parent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -45,22 +44,34 @@ public class ParentDao implements UserDao<Parent>{
         // some arguments in query will be omitted
     }
 
+    public void editInfo(int id, String phone) {
+        jdbcTemplate.update("UPDATE Parents SET phone = ? WHERE id = ? ", phone, id);
+    }
+
     public void deleteUser(int id) { // OK
         jdbcTemplate.update("DELETE FROM Parents WHERE id = ? ", id);
         System.out.println("Person Deleted!!");
     }
 
     public Parent find(int id) {  // checked
-        Parent user = jdbcTemplate.queryForObject("SELECT * FROM Parents where id = ? ",
+        List<Parent> users = jdbcTemplate.query("SELECT * FROM Parents where id = ? ",
                 new Object[] { id }, new ParentMapper()); // could be query, not needed however
 
-        return user;
+        return users.size() > 0 ? users.get(0) : null;
     }
 
     public Parent findByUsername (String username) { // CHECKING
 
         List <Parent> users = jdbcTemplate.query("SELECT * FROM Parents where username = ? ",
-                new Object[] { username }, new ParentMapper()); // could be query, not needed however
+                new Object[] { username }, new ParentMapper());
+
+        return users.size() > 0 ? users.get(0) : null;
+    }
+
+    public Parent findByEmail (String email) { // CHECKING
+
+        List <Parent> users = jdbcTemplate.query("SELECT * FROM Parents where email = ? ",
+                new Object[] { email }, new ParentMapper());
 
         return users.size() > 0 ? users.get(0) : null;
     }

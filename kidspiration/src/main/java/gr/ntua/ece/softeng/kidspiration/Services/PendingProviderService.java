@@ -1,6 +1,7 @@
 package gr.ntua.ece.softeng.kidspiration.Services;
 
 import gr.ntua.ece.softeng.kidspiration.Dao.PendingProviderDao;
+import gr.ntua.ece.softeng.kidspiration.Dao.ProviderDao;
 import gr.ntua.ece.softeng.kidspiration.Dao.UserDao;
 import gr.ntua.ece.softeng.kidspiration.Login;
 import gr.ntua.ece.softeng.kidspiration.PendingProvider;
@@ -18,12 +19,22 @@ public class PendingProviderService { //implements UserService<PendingProvider> 
     @Autowired
     PendingProviderDao pendingProviderDao;
 
+    @Autowired
+    ProviderDao providerDao;
+
     public PendingProvider addUser(PendingProvider user) { // OK
 
-        if (pendingProviderDao.findByUsername(user.getUsername()) != null)
-            return null;
-        pendingProviderDao.addUser(user);
-        return pendingProviderDao.findByUsername(user.getUsername());
+        PendingProvider provider = new PendingProvider();
+
+        if ((pendingProviderDao.findByUsername(user.getUsername()) != null) || (providerDao.findByUsername(user.getUsername()) != null))
+            provider.setId(1000);
+        else if ((pendingProviderDao.findByEmail(user.getEmail()) != null) || (providerDao.findByEmail(user.getEmail()) != null))
+            provider.setId(2000);
+        else {
+            pendingProviderDao.addUser(user);
+            provider = pendingProviderDao.findByUsername(user.getUsername());
+        }
+        return provider;
 
     }
 

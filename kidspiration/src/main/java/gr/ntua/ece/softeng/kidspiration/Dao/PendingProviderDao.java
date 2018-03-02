@@ -57,6 +57,14 @@ public class PendingProviderDao implements UserDao<PendingProvider>{
         return users.size() > 0 ? users.get(0) : null;
     }
 
+    public PendingProvider findByEmail (String email) { // CHECKING
+
+        List <PendingProvider> users = jdbcTemplate.query("SELECT * FROM PendingProviders where email = ? ",
+                new Object[] { email }, new PendingProviderMapper());
+
+        return users.size() > 0 ? users.get(0) : null;
+    }
+
     public List <PendingProvider> findAll() { // OK
         List < PendingProvider > users = jdbcTemplate.query("SELECT * FROM PendingProviders", new PendingProviderMapper());
         return users;

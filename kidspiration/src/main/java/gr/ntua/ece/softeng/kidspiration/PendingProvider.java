@@ -13,6 +13,10 @@ public class PendingProvider extends User{
         this.bankAccount = bankAccount;
     }
 
+    public PendingProvider() {
+
+    }
+
     public String getPassword() {
         return password;
     }
