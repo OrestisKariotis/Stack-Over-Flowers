@@ -64,15 +64,15 @@
     				<hr />
     			</div>
 					<div class="row"> 
-    				<div class="form-group col-sm-3 col-md-3" [ngClass]="{ 'has-error': f.submitted && !cardType.valid }">
-        			<label for="cardType" class="control-label">Τύπος Κάρτας</label>
+    				<div class="form-group col-sm-3 col-md-3" [ngClass]="{ 'has-error': f.submitted && !paymentType.valid }">
+        			<label for="paymentType" class="control-label">Τύπος Κάρτας</label>
         			<br />
-        			<select style="width:100%" name="cardType" form="form" [(ngModel)]="model.cardType"
-								#cardType="ngModel" required>
+        			<select style="width:100%" name="paymentType" form="form" [(ngModel)]="model.paymentType"
+								#paymentType="ngModel" required>
     						<option value="MasterCard">MasterCard</option>
     						<option value="Visa">Visa</option>
   						</select>
-  						<div *ngIf="f.submitted && !cardType.valid" class="help-block">Το πεδίο
+  						<div *ngIf="f.submitted && !paymentType.valid" class="help-block">Το πεδίο
 								είναι υποχρεωτικό!</div>
     					</div>
     				<div class="form-group col-sm-4 col-md-4" [ngClass]="{ 'has-error': f.submitted && !cardNumber.valid }">
@@ -83,20 +83,20 @@
 								είναι υποχρεωτικό!</div>
 							<div *ngIf="f.submitted && cardNumber.errors?.pattern" class="help-block">Απαιτείται 16ψήφιος αριθμός</div>
     				</div>
-    				<div class="form-group col-sm-3 col-md-3" [ngClass]="{ 'has-error': f.submitted && !expdate.valid }">
-        			<label for="expdate" class="control-label">Ημερομηνία λήξης</label>
-        			<input type="month" class="form-control" name="expdate" [(ngModel)]="model.expdate"
-								#expdate="ngModel" required>
-								<div *ngIf="f.submitted && !expdate.valid" class="help-block">Το πεδίο
+    				<div class="form-group col-sm-3 col-md-3" [ngClass]="{ 'has-error': f.submitted && !expireDate.valid }">
+        			<label for="expireDate" class="control-label">Ημερομηνία λήξης</label>
+        			<input type="month" class="form-control" name="expireDate" [(ngModel)]="model.expireDate"
+								#expireDate="ngModel" required>
+								<div *ngIf="f.submitted && !expireDate.valid" class="help-block">Το πεδίο
 									είναι υποχρεωτικό!</div>
     				</div>
-    				<div class="form-group col-sm-2 col-md-2" [ngClass]="{ 'has-error': f.submitted && !crc.valid }">
-        			<label for="crc" class="control-label">CRC</label>
-        			<input type="text" class="form-control" name="crc" [(ngModel)]="model.crc"
-								#crc="ngModel" required pattern="\b[0-9]{3}\b">
-							<div *ngIf="f.submitted && crc.errors?.required" class="help-block">Το πεδίο
+    				<div class="form-group col-sm-2 col-md-2" [ngClass]="{ 'has-error': f.submitted && !CRC.valid }">
+        			<label for="CRC" class="control-label">CRC</label>
+        			<input type="text" class="form-control" name="CRC" [(ngModel)]="model.CRC"
+								#CRC="ngModel" required pattern="\b[0-9]{3}\b">
+							<div *ngIf="f.submitted && CRC.errors?.required" class="help-block">Το πεδίο
 								είναι υποχρεωτικό!</div>
-							<div *ngIf="f.submitted && crc.errors?.pattern" class="help-block">3ψήφιος αριθμός</div>
+							<div *ngIf="f.submitted && CRC.errors?.pattern" class="help-block">3ψήφιος αριθμός</div>
     				</div>
     			</div>
     			<div class="row">
@@ -182,11 +182,32 @@
     		</div>
     	</div>
     	<div class="row">
-    		<div class="form-group col-sm-2 col-md-2 col-sm-offset-5">
+    		<div class="form-group col-sm-3 col-md-3 col-sm-offset-5">
     			<button class="btn btn-default btn-block" (click)="buyReset()">Ακύρωση</button>
     		</div>
     	</div>
 			</div>
 		</div>
 	</div>
+</div>
+
+<button id="openModalButton" class="hidden" data-toggle="modal" data-target="#myModal">Open Modal</button>
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+  
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">{{alert.head}}</h4>
+      </div>
+      <div class="modal-body">
+        <p>{{alert.body}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
 </div>

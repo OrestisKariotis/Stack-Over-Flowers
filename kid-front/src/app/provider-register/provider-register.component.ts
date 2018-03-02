@@ -40,7 +40,7 @@ export class ProviderRegisterComponent implements OnInit {
       .subscribe(
         data => {
           this.currentUserService.changeUser(new CurrentUser(data));
-          this.router.navigate(['/']);
+          this.router.navigate(['/']); // TODO
         },
         error => {
           this.alert = true;

@@ -49,6 +49,13 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   return Observable.throw('Unauthorised');
                 }
             }
+          if (request.url.endsWith('/api/purchase/tickets') && request.method === 'POST') {
+                    let body = {
+                    id: 1,
+                    wallet: 20
+                  };
+                    return Observable.of(new HttpResponse({ status: 200 , body: body}));
+            }
           if (request.url.endsWith('/api/register/event') && request.method === 'POST') {
             return Observable.of(new HttpResponse({ status: 200 }));
           }

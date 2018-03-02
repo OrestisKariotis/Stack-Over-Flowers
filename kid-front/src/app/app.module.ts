@@ -22,6 +22,8 @@ import { ParentRegisterService } from './services/parent-register.service';
 import { ProviderRegisterService } from './services/provider-register.service';
 import { EventRegisterService } from './services/event-register.service';
 import { EventService } from './services/event.service';
+import { PurchaseService } from './services/purchase.service';
+import { HomeToSearchService } from './services/home-to-search.service';
 
 import { FaqComponent } from './faq/faq.component';
 import { AboutUsComponent } from './about-us/about-us.component';
@@ -77,6 +79,8 @@ import { EventPageComponent } from './event-page/event-page.component';
     ProviderRegisterService,
     EventRegisterService,
     EventService,
+    PurchaseService,
+    HomeToSearchService,
     fakeBackendProvider
   ],
   bootstrap: [AppComponent]
