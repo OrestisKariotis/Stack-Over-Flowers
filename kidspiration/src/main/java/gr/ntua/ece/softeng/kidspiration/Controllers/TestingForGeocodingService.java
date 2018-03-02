@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
         public Geocoding testingGeocoding(@RequestParam String address){
             System.out.println("\ngeocodingService will get: \"" + address + "\" as argument.\n");
             Geocoding response = geocodingService.geocodingService(address);    /* make sure "address" is in correct format */
-            System.out.println("Response status: \"" + response.getStatus() + "\"\nLatitude: " + response.getLat() + "\nLongtitude: " + response.getLng());
+            System.out.println("Response status: \"" + response.getStatus() + "\"\nLatitude: " + response.getLat() + "\nlongitude: " + response.getLng());
             return response;
         }
     }

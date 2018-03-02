@@ -127,11 +127,15 @@ public class AdministratorPanelController {
 
         PendingEvent event =  pendingEventService.find(Integer.parseInt(id)); //we can have whole Object from frontend since AllPendingEvents has been executed
 
-        // !!! GOOGLE API FOR GETTING LONGTITUDE, LATITUDE FROM Place !!!
+        // !!! GOOGLE API FOR GETTING LONGITUDE, LATITUDE FROM Place !!! /* Doing it now.. Don't push me.. *** */
 
         CurrentEvent new_event = new CurrentEvent(0, event.getProvider_id(), event.getTitle(), event.getDate(), event.getStarting_time(), event.getPlace(), event.getType(), event.getTicket_cost(), event.getInitial_ticketsNumber(), event.getLowestAge(), event.getHighestAge(), event.getDescription(), event.getInitial_ticketsNumber(), 35.0000, 36.0000);
 
         // THIS SHOULD BE A TRANSACTION!!!
+        /*  ***
+            Make it a transaction or inverse order of called methods.
+            Better to have a duplicate, pending event than to have the original event lost.
+         */
         pendingEventService.deleteEvent(Integer.parseInt(id));
         currentEventService.addEvent(new_event);
         //END OF TRANSACTION
@@ -155,7 +159,7 @@ public class AdministratorPanelController {
     private void sendEmail() throws Exception{
         MimeMessage message = sender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
-        helper.setTo("mgvardas@hotmail.com");
+        helper.setTo("mgvardas@hotmail.com");   /* Under which address is the e-mail sent? *** */
         helper.setText("A test just to see that Email Notification is Working!");
         helper.setSubject("It works!");
 

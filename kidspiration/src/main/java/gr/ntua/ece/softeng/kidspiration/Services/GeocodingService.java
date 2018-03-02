@@ -21,7 +21,7 @@ public class GeocodingService {
     public static Geocoding geocodingService(String address) {
         /* receive the whole json response */
         GeoCoordinates coordinates = Geocoding.findCoordinates(address);
-        System.out.println("\n error message is:\n" + coordinates.error_message);
+        System.out.println("error message is: " + coordinates.error_message + "\n");
 
         /**         // Code displaying the full, geocoded address.
          if (coordinates != null && coordinates.isValid()) {

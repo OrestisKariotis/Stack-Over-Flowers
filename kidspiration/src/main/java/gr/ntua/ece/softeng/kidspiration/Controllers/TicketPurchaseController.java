@@ -40,11 +40,11 @@ public class TicketPurchaseController {
 
         // should get Event Object DEFENITELY, frontend maybe have an incosistent instance of it
 
-        if (tickets > event.getAvailable_ticketsNumber())  // could be checked in frontend, tickets > 0!!!
+        if (tickets > event.getAvailable_ticketsNumber())  // could be checked in frontend, tickets > 0!!! /* Or could be checked in the service. *** */
             return "Number of tickets requested exceed available tickets number";
         else if (parent.getWallet() < tickets*event.getTicket_cost())  // could be checked in frontend, or NOT?
             return "Your wallet is not enough for purchasing requested tickets";
-        // + elegxos gia wraaaaaaa
+        // + elegxos gia wraaaaaaa /* Implemented yet? *** */
         else {
             eventService.buyTickets(event, tickets, Integer.parseInt(event_id));
             ticketService.addTickets(Integer.parseInt(id), Integer.parseInt(event_id), tickets);
