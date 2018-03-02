@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-activity-page',
-  templateUrl: './activity-page.component.html',
-  styleUrls: ['./activity-page.component.css']
+  templateUrl: './event-page.component.html',
+  styleUrls: ['./event-page.component.css']
 })
-export class ActivityPageComponent implements OnInit {
+export class EventPageComponent implements OnInit {
 
   model: any = {};
   activity = {'event_id': '2',
@@ -25,6 +25,10 @@ export class ActivityPageComponent implements OnInit {
               'latitude' : 37.97781,
               'longitude' : 23.721594
               };
+  imagepaths = [
+    '/assets/eventslideshowtest/1.jpg',
+    '/assets/eventslideshowtest/2.jpg'
+  ];
 
   constructor() { }
 
