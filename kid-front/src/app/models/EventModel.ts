@@ -51,7 +51,7 @@ export class ProviderViewEventModel extends PendingEventModel { //selida provide
 export class SearchEventModel extends PendingEventModel { //selida search 
   description: string;
   event_id: number;
-  longtitude: number;
+  longitude: number;
   latitude: number;
 
   constructor (obj?: any) {
@@ -62,7 +62,7 @@ export class SearchEventModel extends PendingEventModel { //selida search
     }
     this.event_id = obj && obj.event_id || 0;
     this.description = obj && obj.description || '';
-    this.longtitude = obj && obj.longtitude || 0;
+    this.longitude = obj && obj.longitude || 0;
     this.latitude = obj && obj.latitude || 0;
   }
 }
@@ -96,7 +96,7 @@ export class EventModel extends EventRegisterModel {  //selida admin, current ta
 
   businessName: string;
   available_ticketsNumber: number;
-  longtitude: number;
+  longitude: number;
   latitude: number;
 
   constructor(obj?: any) {
@@ -107,7 +107,7 @@ export class EventModel extends EventRegisterModel {  //selida admin, current ta
     }
     this.businessName = obj && obj.businessName || '';
     this.available_ticketsNumber = obj && obj.available_ticketsNumber || 0;
-    this.longtitude = obj && obj.longtitude || 0;
+    this.longitude = obj && obj.longitude || 0;
     this.latitude = obj && obj.latitude || 0;
   }
 }

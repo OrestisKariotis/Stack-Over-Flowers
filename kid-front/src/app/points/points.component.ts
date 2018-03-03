@@ -77,7 +77,6 @@ export class PointsComponent implements OnInit {
           this.currentUserService.changeUser(this.user);
           this.alert.head = 'ΕΠΙΤΥΧΙΑ';
           this.alert.body = 'Τα εισιτήρια αγοράστικαν επιτυχώς! Θα σας αποσταλεί μαιλ με τα στοιχεία τους.';
-          //this.router.navigate(['/']);
         },
         error => {
           this.alert.head = 'Αποτυχία';

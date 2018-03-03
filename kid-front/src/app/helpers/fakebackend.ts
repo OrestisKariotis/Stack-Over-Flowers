@@ -50,7 +50,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   return Observable.throw('Unauthorised');
                 }
             }
-          if (request.url.endsWith('/api/purchase/tickets') && request.method === 'POST') {
+          if (request.url.endsWith('/api/purchase/points') && request.method === 'POST') {
                     let body = {
                     id: 1,
                     wallet: 20
@@ -60,7 +60,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           if (request.url.endsWith('/api/register/event') && request.method === 'POST') {
             return Observable.of(new HttpResponse({ status: 200 }));
           }
-          if (request.url.endsWith('/api/register/parent') && request.method === 'POST') {
+          if (request.url.endsWith('/api/register/provider') && request.method === 'POST') {
                 if (request.body.username !== 'gazzetta') {
                   let body = {
                     id: 1,

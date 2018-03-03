@@ -1,8 +1,8 @@
 export class ParentRegisterModel {
   username: string;
   password: string;
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  lastname: string;
   email: string;
   phone: string;
   enable: boolean;
@@ -10,8 +10,8 @@ export class ParentRegisterModel {
   constructor ( obj?: any) {
     this.username = obj && obj.username || '';
     this.password = obj && obj.password || '';
-    this.firstName = obj && obj.firstName || '';
-    this.lastName = obj && obj.lastName || '';
+    this.firstname = obj && obj.firstname || '';
+    this.lastname = obj && obj.lastname || '';
     this.email = obj && obj.email || '';
     this.phone = obj && obj.phone || '';
     this.enable = obj && obj.error || false;
