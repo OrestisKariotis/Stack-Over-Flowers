@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CurrentUserService } from '../services/current-user.service';
 import { ParentService } from '../services/parent.service';
 
-import { CurrentUser } from '../models/currentUser';
+import { CurrentUser } from '../models/CurrentUser';
+import { TicketsModel } from '../models/PurchaseModel';
 
 @Component({
   selector: 'app-parent-profile',
@@ -12,13 +13,20 @@ import { CurrentUser } from '../models/currentUser';
 export class ParentProfileComponent implements OnInit {
 
   currentUser: CurrentUser;
-  currentTickets: any; //lista tickets
+  currentTickets: TicketsModel[] = [];
+  oldTickets: TicketsModel[] = [];
   model: any = {};
   constructor(private currentUserService: CurrentUserService, private parentService: ParentService) { }
 
   ngOnInit() {
     this.currentUserService.currentUser.subscribe(user => this.currentUser = user);
     this.model.phone = this.currentUser.phone;
+    this.parentService.getChanges(this.currentUser.id, this.currentUser.wallet)
+      .subscribe(
+      data => {
+        this.currentUser.wallet = data.wallet;
+      }
+      );
   }
 
   updateParent() {
@@ -42,6 +50,18 @@ export class ParentProfileComponent implements OnInit {
       .subscribe(
       data => {
         this.currentTickets = data;
+      },
+      error => {
+        this.model.error = error;
+      }
+    );
+  }
+
+  getOldTickets() {
+    this.parentService.getOldTickets(this.currentUser.id)
+      .subscribe(
+      data => {
+        this.oldTickets = data;
       },
       error => {
         this.model.error = error;

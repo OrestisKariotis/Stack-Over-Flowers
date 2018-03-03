@@ -14,7 +14,7 @@ export class EventService {
 
   //selida event
   getFullEvent(event_id: number) {
-    return this.http.get<EventModel>('/api/events/${event_id}');
+    return this.http.get<EventModel>(`/api/events/${event_id}`);
   }
 
   //selida search
@@ -39,16 +39,16 @@ export class EventService {
 
   //selida provider profile, tab2, tab5
   getProvEvents(provider_id: number) {
-    return this.http.get<ProviderViewEventModel[]>('/api/provider/${provider_id}/events');
+    return this.http.get<ProviderViewEventModel[]>(`/api/provider/${provider_id}/events`);
   }
 
   //selida provider profile, tab4
   getProvPendingEvents(provider_id: number) {
-    return this.http.get<PendingEventModel[]>('/api/provider/${provider_id}/pendingEvents');
+    return this.http.get<PendingEventModel[]>(`/api/provider/${provider_id}/pendingEvents`);
   }
 
   //selida provider profile, tab4
   getProvHistoryEvents(provider_id: number) {
-    return this.http.get<HistoryEventModel[]>('/api/provider/${provider_id}/historyEvents');
+    return this.http.get<HistoryEventModel[]>(`/api/provider/${provider_id}/historyEvents`);
   }
 }

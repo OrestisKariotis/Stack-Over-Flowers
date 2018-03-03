@@ -14,7 +14,7 @@ export class UserLoginService {
     if (mode === 'parent') {
       return this.http.post<CurrentUser>('/api/users', { 'username': username, 'password': password } )
         .map(user => {
-          if (user && user.id) {
+          if (user && user.username) {
             user.mode = 'parent';
             user.enable = true;
             sessionStorage.setItem('currentUser', JSON.stringify(user));
@@ -24,7 +24,7 @@ export class UserLoginService {
     } else {
       return this.http.post<CurrentUser>('/api/provs', { 'username': username, 'password': password } )
         .map(user => {
-          if (user && user.id) {
+          if (user && user.username) {
             user.mode = 'provider';
             user.enable = true;
             sessionStorage.setItem('currentUser', JSON.stringify(user));

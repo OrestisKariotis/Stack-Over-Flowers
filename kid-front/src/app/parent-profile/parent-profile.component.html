@@ -24,16 +24,16 @@
             <label class="col-md-1 control-label">E-mail:</label>
             <div class="col-md-3">
               <input class="form-control" type="text" value="{{this.currentUser.email}}" disabled>
-          		</div> <!-- Na sizitisoume an tha allazei h oxi - asfaleia reset ktl -->
+          		</div>
             		<label class="col-md-1 control-label">Τηλέφωνο:</label>
             	<div class="col-md-3" [ngClass]="{'has-error': !phone.valid}">
               	<input class="form-control" type="text" name="phone" [(ngModel)]="model.phone" #phone="ngModel" required pattern="\b[0-9]{10}\b">
+              </div>
             	<div class="col-md-4">
 	    					<div class="pull-right">
 	    						<button class="btn btn-default">Ενημέρωση</button>
 	    					</div>
-          		</div>
-          	</div>		
+          		</div>	
 	    		</div>
     		</form>
   		</div>
@@ -49,13 +49,19 @@
       					<tr>
         					<th>Κωδικός εισιτηρίου</th>
         					<th>Όνομα εκδήλωσης</th>
-        					<th>Πάροχος</th>
         					<th>Ημερομηνία</th>
         					<th>Ώρα</th>
         					<th>Τιμή εισιτηρίου</th>
       					</tr>
     				</thead>
-    				<tbody>
+    				<tbody *ngIf="currentTickets?.length > 0">
+    					<tr *ngFor="let tick of currentTickets">
+    						<td>{{tick.ticketId}}</td>
+    						<td><a [routerLink]="['/event-page', tick.eventId]">{{tick.event_title}}</a></td>
+    						<td>{{tick.date}}</td>
+    						<td> time</td>
+    						<td>{{tick.ticket_cost}}</td>
+    					</tr>
     				</tbody>
     			</table>
     		</div>
@@ -72,13 +78,19 @@
       					<tr>
         					<th>Κωδικός εισιτηρίου</th>
         					<th>Όνομα εκδήλωσης</th>
-        					<th>Πάροχος</th>
-        					<th>Ημερομηνία</th>	<!-- Den ksero an to kratame sta palia tickets -->
-        					<th>Ώρα</th>	<!-- Den ksero an to kratame sta palia tickets -->
+        					<th>Ημερομηνία</th>
+        					<th>Ώρα</th>
         					<th>Τιμή εισιτηρίου</th>
       					</tr>
     				</thead>
-    				<tbody>
+    				<tbody *ngIf="oldTickets?.length > 0">
+    					<tr *ngFor="let otick of oldTickets">
+    						<td>{{otick.ticketId}}</td>
+    						<td>{{otick.event_title}}</td>
+    						<td>{{otick.date}}</td>
+    						<td> time</td>
+    						<td>{{otick.ticket_cost}}</td>
+    					</tr>
     				</tbody>
     			</table>
     		</div>

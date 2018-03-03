@@ -65,7 +65,7 @@
 						<ng-template #enone>&nbsp;εισιτήριο</ng-template>
 						<ng-template #enmore>&nbsp;εισιτήρια</ng-template>
 					</div>
-					<button class="btn btn-default custom-buy-button" type="submit">Αγορά</button>
+					<button class="btn btn-default custom-buy-button" [disabled]="user.mode!=='parent'" type="submit">Αγορά</button>
 					<div *ngIf="f.submitted && !ticketsNumber.valid" class="help-block sos-error">Το πεδίο είναι υποχρεωτικό!</div>
 					<div *ngIf="f.submitted && ticketsNumber.errors?.pattern" class="help-block sos-error">Απαιτείται ο αριθμός εισιτηρίων!</div>
 					<div *ngIf="f.submitted && ticketsNumber.value == 0" class="help-block sos-error">Απαιτείται η αγορά ενός τουλάχιστον εισιτηρίου!</div>
