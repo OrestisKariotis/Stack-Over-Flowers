@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { CurrentUserService } from '../services/current-user.service';
+import { CurrentUser } from '../models/CurrentUser';
 import { Router } from '@angular/router';
-
 import { SearchEventModel } from '../models/EventModel';
-
 import { EventService } from '../services/event.service';
 import { HomeToSearchService, HomeSearch } from '../services/home-to-search.service';
 
@@ -13,11 +13,13 @@ import { HomeToSearchService, HomeSearch } from '../services/home-to-search.serv
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  title = 'home';
+  currentUser: CurrentUser;
   events: SearchEventModel[] = [];
   homesearch: HomeSearch;
 
-  constructor(private eventService: EventService, private homesearchservice: HomeToSearchService, private router: Router) { }
+  constructor(private currentUserService: CurrentUserService, private eventService: EventService,
+    private homesearchservice: HomeToSearchService, private router: Router) { }
 
   ngOnInit() {
     /*this.eventService.getHomeEvents().subscribe(
@@ -29,6 +31,11 @@ export class HomeComponent implements OnInit {
           this.model.error = error;
         }
       );*/
+    this.currentUserService.currentUser.subscribe(user => this.currentUser = user);
+    /* const prevUser = JSON.parse(sessionStorage.getItem('currentUser')) || {};
+    if (prevUser) {
+      this.currentUserService.changeUser(new CurrentUser(prevUser));
+    } Auto prepei na mpei??? */
     this.homesearchservice.homesearch.subscribe(search => this.homesearch = search);
   }
 

@@ -1,0 +1,23 @@
+agm-map {
+	height: 100vh;
+}
+
+.cont-results-err {
+	margin: 0 10px !important;
+}
+
+.cont-results {
+	margin: 0 2px !important;
+}
+
+@media screen and (min-width: 768px) {
+	.cont-results-err {
+		margin: 0 100px !important;
+	}
+	.cont-results {
+		margin: 0 10px !important;
+	}
+	.h3-font-size {
+		font-size: 24px;
+	}
+}
