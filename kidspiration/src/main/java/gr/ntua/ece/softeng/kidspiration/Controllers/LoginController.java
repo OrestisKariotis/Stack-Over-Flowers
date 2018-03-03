@@ -31,10 +31,10 @@ public class LoginController {
     ProviderService providerService;
 
     @RequestMapping(value = "/parent", method = RequestMethod.POST)  // POST method
-    public ResponseEntity<?> Parent_login(@RequestParam String username, @RequestParam String password) {  // OK
+    public ResponseEntity<?> Parent_login(@RequestBody Login login) {  // OK
     // @RequestBody Login
-        Login login;
-        login = new Login(username, password);
+        //Login login;
+        //login = new Login(username, password);
         Parent parent = parentService.validateUser(login);
 
         if (parent == null)

@@ -26,14 +26,14 @@ public class CurrentEventDao implements EventDao<CurrentEvent> {
     public void addEvent(CurrentEvent event) {    // OK
         System.out.println("Entering CurrentEvent Dao");
         jdbcTemplate.update("INSERT INTO CurrentEvents (provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber, available_ticketsNumber, lowestAge, highestAge, latitude, longitude, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                event.getProvider_id(), event.getTitle(), event.getDate(), event.getStarting_time(), event.getPlace(), event.getType(), event.getTicket_cost(), event.getInitial_ticketsNumber(), event.getAvailable_ticketsNumber(), event.getLowestAge(), event.getHighestAge(), event.getLatitude(), event.getlongitude(), event.getDescription());
+                event.getProvider_id(), event.getTitle(), event.getDate(), event.getStarting_time(), event.getPlace(), event.getCategories(), event.getTicket_cost(), event.getInitial_ticketsNumber(), event.getAvailable_ticketsNumber(), event.getLowestAge(), event.getHighestAge(), event.getLatitude(), event.getlongitude(), event.getDescription());
         System.out.println("CurrentEvent Added!!");
     }
 
     public void editEvent(CurrentEvent event, int event_id) {  //checking
         System.out.println("Entering CurrentEvent base for edit");
         jdbcTemplate.update("UPDATE CurrentEvents SET  title = ?, date = ?, starting_time = ?, place = ?, type = ?, ticket_cost = ?, initial_ticketsNumber = ?, available_ticketsNumber = ?, lowestAge = ?, highestAge = ?, longitude = ?, latitude = ?, description = ? WHERE event_id = ? ",
-               event.getTitle() , event.getDate(), event.getStarting_time(), event.getPlace(), event.getType(), event.getTicket_cost(), event.getInitial_ticketsNumber(), event.getAvailable_ticketsNumber(), event.getLowestAge(), event.getHighestAge(), event.getlongitude(), event.getLatitude(), event.getDescription(), event_id);
+               event.getTitle() , event.getDate(), event.getStarting_time(), event.getPlace(), event.getCategories(), event.getTicket_cost(), event.getInitial_ticketsNumber(), event.getAvailable_ticketsNumber(), event.getLowestAge(), event.getHighestAge(), event.getlongitude(), event.getLatitude(), event.getDescription(), event_id);
         System.out.println("CurrentEvent Base edited!!");
 
         //event_id can be omitted, already included in event object
@@ -75,12 +75,12 @@ public class CurrentEventDao implements EventDao<CurrentEvent> {
     }
 
     public List<CurrentEventView> findLatest() {
-        List <CurrentEventView> events =  jdbcTemplate.query("SELECT event_id, title, date, starting_time, type, ticket_cost, latitude, longtitude, description FROM CurrentEvents ORDER BY event_id DESC LIMIT 6", new CurrentEventViewMapper());
+        List <CurrentEventView> events =  jdbcTemplate.query("SELECT event_id, title, date, starting_time, type, ticket_cost, latitude, longitude, description FROM CurrentEvents ORDER BY event_id DESC LIMIT 6", new CurrentEventViewMapper());
         return events;
     }
 
     public EventPageView findEventPage(int id) {
-        List <EventPageView> events = jdbcTemplate.query("select event_id, provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber, available_ticketsNumber, lowestAge, highestAge, latitude, longtitude, description, businessName from ((SELECT * FROM currentevents WHERE event_id = 2) sub INNER JOIN providers ON sub.provider_id = providers.id)",
+        List <EventPageView> events = jdbcTemplate.query("select event_id, provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber, available_ticketsNumber, lowestAge, highestAge, latitude, longitude, description, businessName from ((SELECT * FROM currentevents WHERE event_id = ?) sub INNER JOIN providers ON sub.provider_id = providers.id)",
                 new Object[] {id}, new EventPageViewMapper());  // Group By would be a nice choice
         return events.size() > 0 ? events.get(0) : null;
     }

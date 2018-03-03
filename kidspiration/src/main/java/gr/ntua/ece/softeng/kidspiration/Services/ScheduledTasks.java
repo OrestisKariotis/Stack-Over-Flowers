@@ -138,7 +138,7 @@ public class ScheduledTasks {
             /* age all events that transpired yesterday */
 
             int currentEvent_id = myList.get(i).getEvent_id();
-            OldEvent oldEvent = new OldEvent(0, myList.get(i).getProvider_id(), myList.get(i).getTitle(), myList.get(i).getDate(), myList.get(i).getStarting_time(), myList.get(i).getPlace(), myList.get(i).getType(), myList.get(i).getTicket_cost(), myList.get(i).getInitial_ticketsNumber(), myList.get(i).getInitial_ticketsNumber()-myList.get(i).getAvailable_ticketsNumber());
+            OldEvent oldEvent = new OldEvent(0, myList.get(i).getProvider_id(), myList.get(i).getTitle(), myList.get(i).getDate(), myList.get(i).getStarting_time(), myList.get(i).getPlace(), myList.get(i).getCategories(), myList.get(i).getTicket_cost(), myList.get(i).getInitial_ticketsNumber(), myList.get(i).getInitial_ticketsNumber()-myList.get(i).getAvailable_ticketsNumber());
             int oldEvent_id = oldEventService.addOldEvent(oldEvent); /* save event_id for later on (tickets' aging */
             System.out.println("Fuck my life (I age)");
 

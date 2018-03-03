@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "/event/{event_id}", method = RequestMethod.GET)
 public class EventPageController {
 
     @Autowired
     CurrentEventService currentEventService;
 
-    public ResponseEntity<?> Find_EventPage(@PathVariable String id) {
+    @RequestMapping(path = "/api/events/{event_id}", method = RequestMethod.GET)
+    public ResponseEntity<?> Find_EventPage(@PathVariable String event_id) {
 
-        EventPageView event = currentEventService.findEventPage(Integer.parseInt(id));
+        EventPageView event = currentEventService.findEventPage(Integer.parseInt(event_id));
         if (event != null)
             return ResponseEntity.accepted().body(event);
         else

@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/home", method = RequestMethod.GET)
 public class HomeController {
 
     @Autowired
     CurrentEventService currentEventService;
 
+    @RequestMapping(path = "/api/home", method = RequestMethod.GET)
     public List<CurrentEventView> ShowLatestEvents() {
         return currentEventService.findLatest();
     }

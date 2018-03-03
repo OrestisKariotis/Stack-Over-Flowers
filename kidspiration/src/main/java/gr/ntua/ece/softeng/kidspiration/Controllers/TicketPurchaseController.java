@@ -26,13 +26,13 @@ public class TicketPurchaseController {
     //@Qualifier("TicketService")
     TicketService ticketService;
 
-    @RequestMapping(path = "/purchase_tickets", method = RequestMethod.GET) // Will be post method
-    //URL probably will be parametric to event_id
+    @RequestMapping(path = "/api/purchase_tickets/{event_id}", method = RequestMethod.POST) // POST method
     @Transactional(isolation = Isolation.READ_COMMITTED)
-    public ResponseEntity<?> PurchaseTickets(@RequestBody PurchaseTicketInfo info) {
+    public ResponseEntity<?> PurchaseTickets(@PathVariable String event_id, @RequestBody PurchaseTicketInfo info) {
 
         System.out.println("ENTER");
 
+        info.setEvent_id(Integer.parseInt(event_id));
         int tickets = info.getTicketsNumber();
 
         Parent parent = parentService.find(info.getId());  //could be put inside Services

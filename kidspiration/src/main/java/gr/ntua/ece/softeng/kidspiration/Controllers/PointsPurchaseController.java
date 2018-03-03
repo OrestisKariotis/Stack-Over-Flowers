@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -21,8 +22,8 @@ public class PointsPurchaseController {
     @Autowired
     private MonthReferenceService monthReferenceService;  /// ADDED
 
-    @RequestMapping("/purchase_points")
-    public ResponseEntity<?> Purchase_Points(@RequestBody PurchasePointsInfo info) {  //parameters may change. Whole Parent Object could be sent to Backend
+    @RequestMapping(value = "/api/purchase_points", method = RequestMethod.POST)
+    public ResponseEntity<?> Purchase_Points(@RequestBody PurchasePointsInfo info) {
 
         // OK
         // CHECK TRANSACTION

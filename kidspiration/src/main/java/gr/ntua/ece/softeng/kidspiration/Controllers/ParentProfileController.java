@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/profile/parent/{id}") //path could be parametric to parent_id
+@RequestMapping(path = "/api/profile/parent/{id}") //path could be parametric to parent_id
 public class ParentProfileController {
 
     @Autowired
@@ -49,7 +49,10 @@ public class ParentProfileController {
     @RequestMapping(path = "/personal_info/edit", method = RequestMethod.POST) // POST  method!!!   CHECKING
     public String ParentProfile_PersonalInfoEdit(@PathVariable String id, @RequestBody String phone) {
 
-        parentService.editInfo(Integer.parseInt(id) , phone);
+        String delims = "[:}]"; // "[:\"}]";
+        String[] tokens = phone.split(delims);
+        System.out.println(tokens[1]);
+        parentService.editInfo(Integer.parseInt(id) , tokens[1]);
         return phone;
     }
 }

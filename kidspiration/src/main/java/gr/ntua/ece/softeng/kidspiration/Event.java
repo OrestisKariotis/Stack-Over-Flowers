@@ -26,6 +26,10 @@ public class Event {
         this.initial_ticketsNumber = initial_ticketsNumber;
     }
 
+    public Event() {
+
+    }
+
     public int getEvent_id() {
         return event_id;
     }
@@ -74,7 +78,7 @@ public class Event {
         this.place = place;
     }
 
-    public String getType() {
+    public String getCategories() {
         return categories;
     }
 

@@ -27,6 +27,10 @@ public class PurchasePointsInfo {
         this.phone = phone;
     }
 
+    public PurchasePointsInfo() {
+
+    }
+
     public int getId() {
         return id;
     }
