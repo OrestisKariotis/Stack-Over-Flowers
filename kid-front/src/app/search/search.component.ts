@@ -50,6 +50,26 @@ export class SearchComponent implements OnInit {
                 'ticket_cost' : 1000,
                 'latitude' : 38.02381,
                 'longitude' : 23.848450
+                },
+               {'event_id': '5',
+                'title': 'Μάπα',
+                'date': '2018-03-10',
+                'starting_time': '20:00',
+                'description': 'Lorem ipsum dolor sit amet, Maecenas ultricies mi si porta lorem mollis aliquam ut abcdefghijklmnopq',
+                'categories' : 'Παραστάσεις',
+                'ticket_cost' : 1000,
+                'latitude' : 38.02381,
+                'longitude' : 23.848450
+                },
+               {'event_id': '5',
+                'title': 'Μάπα',
+                'date': '2018-03-10',
+                'starting_time': '20:00',
+                'description': 'Lorem ipsum dolor sit amet, Maecenas ultricies mi si porta lorem mollis aliquam ut abcdefghijklmnopq',
+                'categories' : 'Παραστάσεις',
+                'ticket_cost' : 1000,
+                'latitude' : 38.02381,
+                'longitude' : 23.848450
                 }
   ];
   imagepaths = [

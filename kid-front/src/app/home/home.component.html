@@ -59,95 +59,30 @@
 			<h2>Νέες δραστηριότητες</h2>
 			<br/>
 		</div>
-	   	<div class="col-md-4 col-sm-6">
-			<div class="card">
-            	<a href="#"><img class="card-img img-responsive img-hover" src="http://placehold.it/700x450" alt=""></a>
-            	<div class="card-body">
-              		<h4 class="card-title">
-                		<a href="#">Δραστηριότητα Χ</a>
-              		</h4>
-              		<p class="card-info text-muted"><span class="glyphicon glyphicon-calendar"></span>&nbsp;14/01/2018&nbsp;&nbsp;
-              							  <span class="glyphicon glyphicon-time"></span>&nbsp;18:00&nbsp;&nbsp;
-              							  <span class="glyphicon glyphicon-record"></span>&nbsp;100&nbsp;&nbsp;
-              							  <span class="label label-danger sparse">Αθλητισμός</span></p>
-              		<p class="card-text">Τα καταστήματα παιδικών παιχνιδιών μουστάκας παρέχουν στους λάτρεις του skating μια μοναδική εμπειρία...</p>
-            	</div>
-          	</div>
+		<div *ngIf="lat_add_ev?.length == 0" class="container">
+			Δεν υπάρχουν ακόμα διαθέσιμες δραστηριότητες.
 		</div>
-		<div class="col-md-4 col-sm-6">
-			<div class="card">
-            	<a href="#"><img class="card-img img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt=""></a>
-            	<div class="card-body">
-              		<h4 class="card-title">
-                		<a href="#">Δραστηριότητα Χ</a>
-              		</h4>
-              		<p class="card-info text-muted"><span class="glyphicon glyphicon-calendar"></span>&nbsp;20/01/2018&nbsp;&nbsp;
-              							  <span class="glyphicon glyphicon-time"></span>&nbsp;10:00&nbsp;&nbsp;
-              							  <span class="glyphicon glyphicon-record"></span>&nbsp;200&nbsp;&nbsp;
-              							  <span class="label label-info sparse">Μουσική</span></p>              		
-              		<p class="card-text">Τα καταστήματα παιδικών παιχνιδιών μουστάκας παρέχουν στους λάτρεις του skating μια μοναδική εμπειρία...</p>
-            	</div>
-          	</div>
-		</div>
-		<div class="col-md-4 col-sm-6">
-			<div class="card">
-            	<a href="#"><img class="card-img img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt=""></a>
-            	<div class="card-body">
-              		<h4 class="card-title">
-                		<a href="#">Δραστηριότητα Χ</a>
-              		</h4>
-              		<p class="card-info text-muted"><span class="glyphicon glyphicon-calendar"></span>&nbsp;05/02/2018&nbsp;&nbsp;
-              							  <span class="glyphicon glyphicon-time"></span>&nbsp;12:00&nbsp;&nbsp;
-              							  <span class="glyphicon glyphicon-record"></span>&nbsp;70&nbsp;&nbsp;
-              							  <span class="label label-success sparse">Μουσεία</span></p>          
-              		<p class="card-text">Τα καταστήματα παιδικών παιχνιδιών μουστάκας παρέχουν στους λάτρεις του skating μια μοναδική εμπειρία...</p>
-            	</div>
-          	</div>
-		</div>
-	   	<div class="col-md-4 col-sm-6">
-			<div class="card">
-            	<a href="#"><img class="card-img img-responsive img-hover" src="http://placehold.it/700x450" alt=""></a>
-            	<div class="card-body">
-              		<h4 class="card-title">
-                		<a href="#">Δραστηριότητα Χ</a>
-              		</h4>
-              		<p class="card-info text-muted"><span class="glyphicon glyphicon-calendar"></span>&nbsp;14/01/2018&nbsp;&nbsp;
-              							  <span class="glyphicon glyphicon-time"></span>&nbsp;18:00&nbsp;&nbsp;
-              							  <span class="glyphicon glyphicon-record"></span>&nbsp;100&nbsp;&nbsp;
-              							  <span class="label label-primary sparse">Επιστήμη</span></p>
-              		<p class="card-text">Τα καταστήματα παιδικών παιχνιδιών μουστάκας παρέχουν στους λάτρεις του skating μια μοναδική εμπειρία...</p>
-            	</div>
-          	</div>
-		</div>
-		<div class="col-md-4 col-sm-6">
-			<div class="card">
-            	<a href="#"><img class="card-img img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt=""></a>
-            	<div class="card-body">
-              		<h4 class="card-title">
-                		<a href="#">Δραστηριότητα Χ</a>
-              		</h4>
-              		<p class="card-info text-muted"><span class="glyphicon glyphicon-calendar"></span>&nbsp;20/01/2018&nbsp;&nbsp;
-              							  <span class="glyphicon glyphicon-time"></span>&nbsp;10:00&nbsp;&nbsp;
-              							  <span class="glyphicon glyphicon-record"></span>&nbsp;200&nbsp;&nbsp;
-              							  <span class="label label-warning sparse">Παραστάσεις</span></p>              		
-              		<p class="card-text">Τα καταστήματα παιδικών παιχνιδιών μουστάκας παρέχουν στους λάτρεις του skating μια μοναδική εμπειρία...</p>
-            	</div>
-          	</div>
-		</div>
-		<div class="col-md-4 col-sm-6">
-			<div class="card">
-            	<a href="#"><img class="card-img img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt=""></a>
-            	<div class="card-body">
-              		<h4 class="card-title">
-                		<a href="#">Δραστηριότητα Χ</a>
-              		</h4>
-              		<p class="card-info text-muted"><span class="glyphicon glyphicon-calendar"></span>&nbsp;05/02/2018&nbsp;&nbsp;
-              							  <span class="glyphicon glyphicon-time"></span>&nbsp;12:00&nbsp;&nbsp;
-              							  <span class="glyphicon glyphicon-record"></span>&nbsp;70&nbsp;&nbsp;
-              							  <span class="label label-default sparse">Μαθήματα</span></p>          
-              		<p class="card-text">Τα καταστήματα παιδικών παιχνιδιών μουστάκας παρέχουν στους λάτρεις του skating μια μοναδική εμπειρία...</p>
-            	</div>
-          	</div>
+		<div *ngIf="lat_add_ev?.length > 0">
+		   	<div class="col-md-4 col-sm-6" *ngFor="let activ of lat_add_ev">
+				<div class="card">
+	            	<a><img class="card-img img-responsive img-hover" src="/assets/images/test.png" alt=""></a>
+	            	<div class="card-body">
+	              		<h4 class="card-title">
+	                		<a [routerLink]="['/event-page', activ.event_id]">{{activ.title}}</a>
+	              		</h4>
+	              		<p class="card-info text-muted"><span class="glyphicon glyphicon-calendar"></span>&nbsp;{{activ.date}}&nbsp;&nbsp;
+	              							  <span class="glyphicon glyphicon-time"></span>&nbsp;{{activ.starting_time}}&nbsp;&nbsp;
+	              							  <span class="glyphicon glyphicon-record"></span>&nbsp;{{activ.ticket_cost}}&nbsp;&nbsp;
+	              							  <span class="label sparse" [ngClass]="{ 'label-danger': activ.categories == 'Παιχνίδι',
+	              							  										  'label-warning': activ.categories == 'Παραστάσεις',
+	              							  										  'label-success': activ.categories == 'Μουσεία',
+	              							  										  'label-primary': activ.categories == 'Επιστήμη&Περιβάλλον',
+	              							  										  'label-info': activ.categories == 'Αθλητισμός',
+	              							  										  'label-default': activ.categories == 'Μαθήματα' }">{{activ.categories}}</span></p>
+	              		<p class="card-text">{{activ.description.substring(0,90)}}...</p>
+	            	</div>
+	          	</div>
+			</div>
 		</div>
 	</div>
 </div>

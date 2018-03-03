@@ -82,9 +82,9 @@
 		Δεν βρέθηκαν αποτελέσματα για την αναζήτησή σας. Παρακαλώ δοκιμάστε ξανά.
 	</div>
 	<div *ngIf="activities?.length > 0" class="cont-results">
-	   	<div class="col-md-6" *ngFor="let activ of activities">
+	   	<div class="col-md-6" *ngFor="let activ of activities | paginate: { itemsPerPage: 4, currentPage: p }">
 			<div class="card">
-            	<a [routerLink]="['/event-page', activ.event_id]"><img class="card-img img-responsive img-hover" src="/assets/images/test.png" alt=""></a>
+            	<a><img class="card-img img-responsive img-hover" src="/assets/images/test.png" alt=""></a>
             	<div class="card-body">
               		<h4 class="card-title">
                 		<a [routerLink]="['/event-page', activ.event_id]">{{activ.title}}</a>
@@ -97,11 +97,21 @@
               							  										  'label-success': activ.categories == 'Μουσεία',
               							  										  'label-primary': activ.categories == 'Επιστήμη&Περιβάλλον',
               							  										  'label-info': activ.categories == 'Αθλητισμός',
-              							  										  'label-default': activ.categories == 'Μαθήματα' }">
-              							  {{activ.categories}}</span></p>
+              							  										  'label-default': activ.categories == 'Μαθήματα' }">{{activ.categories}}</span></p>
               		<p class="card-text">{{activ.description.substring(0,90)}}...</p>
             	</div>
           	</div>
+		</div>
+		<div class="col-md-12 text-center">
+			<pagination-controls  (pageChange)="p = $event"
+								  directionLinks="true"
+			                      autoHide="true"
+			                      previousLabel="Προηγούμενη"
+			                      nextLabel="Επόμενη"
+			                      screenReaderPaginationLabel="Σελίδες"
+			                      screenReaderPageLabel="σελίδα"
+			                      screenReaderCurrentLabel="Βρίσκεστε στη σελίδα">
+			</pagination-controls>
 		</div>
 	</div>
 </div>
