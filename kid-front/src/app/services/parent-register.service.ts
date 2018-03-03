@@ -13,7 +13,7 @@ export class ParentRegisterService {
 
   register(parent: ParentRegisterModel) {
       return this.http.post<CurrentUser>('/api/register/parent', parent).map(user => {
-        if (user && user.enable) {
+        if (user && user.username) {
             sessionStorage.setItem('currentUser', JSON.stringify(user));
           }
           return user;

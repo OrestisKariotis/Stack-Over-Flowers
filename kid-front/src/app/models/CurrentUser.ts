@@ -16,6 +16,7 @@ export class CurrentUser {
 
   constructor ( obj?: any) {
     this.id = obj && obj.id || 0;
+    this.username = obj && obj.username || '';
     this.firstname = obj && obj.firstname || '';
     this.lastname = obj && obj.lastname || '';
     this.email = obj && obj.email || '';

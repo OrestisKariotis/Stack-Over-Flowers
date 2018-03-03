@@ -18,7 +18,7 @@ export class EventRegisterService {
     for (let i = 0; i < images.length; i++ ) {
       let im = images[i];
       if (im) {
-        fd.append('file', im, im.name);
+        fd.append('img', im);
       }
     }
     return this.http.post<any>('/api/register/even', fd);

@@ -3,10 +3,10 @@
     <div class="col-md-12">
 		<ul class="nav nav-tabs nav-justified">
   			<li class="active"><a data-toggle="tab" href="#profile">Προφίλ</a></li>
-  			<li><a data-toggle="tab" href="#activities">Δραστηριότητες</a></li>
-  			<li><a data-toggle="tab" href="#personal">Προσωπικά στοιχεία</a></li>
-  			<li><a data-toggle="tab" href="#tickets">Εισιτήρια</a></li>
-  			<li><a data-toggle="tab" href="#monthly-reports">Μηνιαίες αναφορές</a></li>
+  			<li><a data-toggle="tab" href="#activities" (click)="getActivities()">Δραστηριότητες</a></li>
+  			<li id="priv1" ><a data-toggle="tab" href="#personal" (click)="getPersonal()">Προσωπικά στοιχεία</a></li>
+  			<li id="priv2" ><a data-toggle="tab" href="#tickets" (click)="getTickets()">Εισιτήρια</a></li>
+  			<li id="priv3" ><a data-toggle="tab" href="#monthly-reports" (click)="getMonths()">Μηνιαίες αναφορές</a></li>
 		</ul>
 		<div class="tab-content">
   			<div id="profile" class="tab-pane fade in active">
@@ -19,10 +19,10 @@
 					<div class ="col-sm-7">
 						<div class="panel panel-default">
   							<div class="panel-body">
-  								Επωνυμία: Μουστάκας Α.Ε.<br>
-  								Υπεύθυνος: Φώτης Νικολόπουλος<br>
-  								Τηλέφωνο: 4758378576<br>
-  								E-mail: Θα βάλουμε να εμφανίζεται εδώ;
+  								Επωνυμία: {{thisPublicProvider.businessName}}<br>
+  								Υπεύθυνος: {{thisPublicProvider.firstname}} {{thisPublicProvider.lastname}}<br>
+  								Τηλέφωνο: {{thisPublicProvider.phone}}<br>
+  								E-mail: {{thisPublicProvider.email}}
   							</div>
 						</div>
 					</div>
@@ -30,134 +30,73 @@
   			</div>
   			<div id="activities" class="tab-pane fade">
     			<br>
-			   	<div class="col-md-4 col-sm-6">
-					<div class="card">
-		            	<a href="#"><img class="card-img img-responsive img-hover" src="http://placehold.it/700x450" alt=""></a>
-		            	<div class="card-body">
-		              		<h4 class="card-title">
-		                		<a href="#">Δραστηριότητα Χ</a>
-		              		</h4>
-		              		<p class="card-info text-muted"><span class="glyphicon glyphicon-calendar"></span>&nbsp;14/01/2018&nbsp;&nbsp;
-		              							  <span class="glyphicon glyphicon-time"></span>&nbsp;18:00&nbsp;&nbsp;
-		              							  <span class="glyphicon glyphicon-record"></span>&nbsp;100&nbsp;&nbsp;
-		              							  <span class="label label-danger sparse">Αθλητισμός</span></p>
-		              		<p class="card-text">Τα καταστήματα παιδικών παιχνιδιών μουστάκας παρέχουν στους λάτρεις του skating μια μοναδική εμπειρία...</p>
-		            	</div>
-		          	</div>
-				</div>
-				<div class="col-md-4 col-sm-6">
-					<div class="card">
-		            	<a href="#"><img class="card-img img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt=""></a>
-		            	<div class="card-body">
-		              		<h4 class="card-title">
-		                		<a href="#">Δραστηριότητα Χ</a>
-		              		</h4>
-		              		<p class="card-info text-muted"><span class="glyphicon glyphicon-calendar"></span>&nbsp;20/01/2018&nbsp;&nbsp;
-		              							  <span class="glyphicon glyphicon-time"></span>&nbsp;10:00&nbsp;&nbsp;
-		              							  <span class="glyphicon glyphicon-record"></span>&nbsp;200&nbsp;&nbsp;
-		              							  <span class="label label-info sparse">Μουσική</span></p>              		
-		              		<p class="card-text">Τα καταστήματα παιδικών παιχνιδιών μουστάκας παρέχουν στους λάτρεις του skating μια μοναδική εμπειρία...</p>
-		            	</div>
-		          	</div>
-				</div>
-				<div class="col-md-4 col-sm-6">
-					<div class="card">
-		            	<a href="#"><img class="card-img img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt=""></a>
-		            	<div class="card-body">
-		              		<h4 class="card-title">
-		                		<a href="#">Δραστηριότητα Χ</a>
-		              		</h4>
-		              		<p class="card-info text-muted"><span class="glyphicon glyphicon-calendar"></span>&nbsp;05/02/2018&nbsp;&nbsp;
-		              							  <span class="glyphicon glyphicon-time"></span>&nbsp;12:00&nbsp;&nbsp;
-		              							  <span class="glyphicon glyphicon-record"></span>&nbsp;70&nbsp;&nbsp;
-		              							  <span class="label label-success sparse">Μουσεία</span></p>          
-		              		<p class="card-text">Τα καταστήματα παιδικών παιχνιδιών μουστάκας παρέχουν στους λάτρεις του skating μια μοναδική εμπειρία...</p>
-		            	</div>
-		          	</div>
-				</div>
-			   	<div class="col-md-4 col-sm-6">
-					<div class="card">
-		            	<a href="#"><img class="card-img img-responsive img-hover" src="http://placehold.it/700x450" alt=""></a>
-		            	<div class="card-body">
-		              		<h4 class="card-title">
-		                		<a href="#">Δραστηριότητα Χ</a>
-		              		</h4>
-		              		<p class="card-info text-muted"><span class="glyphicon glyphicon-calendar"></span>&nbsp;14/01/2018&nbsp;&nbsp;
-		              							  <span class="glyphicon glyphicon-time"></span>&nbsp;18:00&nbsp;&nbsp;
-		              							  <span class="glyphicon glyphicon-record"></span>&nbsp;100&nbsp;&nbsp;
-		              							  <span class="label label-primary sparse">Επιστήμη</span></p>
-		              		<p class="card-text">Τα καταστήματα παιδικών παιχνιδιών μουστάκας παρέχουν στους λάτρεις του skating μια μοναδική εμπειρία...</p>
-		            	</div>
-		          	</div>
-				</div>
-				<div class="col-md-4 col-sm-6">
-					<div class="card">
-		            	<a href="#"><img class="card-img img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt=""></a>
-		            	<div class="card-body">
-		              		<h4 class="card-title">
-		                		<a href="#">Δραστηριότητα Χ</a>
-		              		</h4>
-		              		<p class="card-info text-muted"><span class="glyphicon glyphicon-calendar"></span>&nbsp;20/01/2018&nbsp;&nbsp;
-		              							  <span class="glyphicon glyphicon-time"></span>&nbsp;10:00&nbsp;&nbsp;
-		              							  <span class="glyphicon glyphicon-record"></span>&nbsp;200&nbsp;&nbsp;
-		              							  <span class="label label-warning sparse">Παραστάσεις</span></p>              		
-		              		<p class="card-text">Τα καταστήματα παιδικών παιχνιδιών μουστάκας παρέχουν στους λάτρεις του skating μια μοναδική εμπειρία...</p>
-		            	</div>
-		          	</div>
-				</div>
-				<div class="col-md-4 col-sm-6">
-					<div class="card">
-		            	<a href="#"><img class="card-img img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt=""></a>
-		            	<div class="card-body">
-		              		<h4 class="card-title">
-		                		<a href="#">Δραστηριότητα Χ</a>
-		              		</h4>
-		              		<p class="card-info text-muted"><span class="glyphicon glyphicon-calendar"></span>&nbsp;05/02/2018&nbsp;&nbsp;
-		              							  <span class="glyphicon glyphicon-time"></span>&nbsp;12:00&nbsp;&nbsp;
-		              							  <span class="glyphicon glyphicon-record"></span>&nbsp;70&nbsp;&nbsp;
-		              							  <span class="label label-default sparse">Μαθήματα</span></p>          
-		              		<p class="card-text">Τα καταστήματα παιδικών παιχνιδιών μουστάκας παρέχουν στους λάτρεις του skating μια μοναδική εμπειρία...</p>
-		            	</div>
-		          	</div>
+			   	<div *ngIf="activities?.length == 0" class="cont-results-err h3-font-size">
+						Δεν υπάρχουν διαθέσιμες δραστηριότητες.
+					</div>
+					<div *ngIf="activities?.length > 0" class="cont-results">
+	   				<div class="col-md-6" *ngFor="let activ of activities">
+							<div class="card">
+            	<a [routerLink]="['/event-page', activ.event_id]"><img class="card-img img-responsive img-hover" src="/assets/images/test.png" alt=""></a>
+            	<div class="card-body">
+              		<h4 class="card-title">
+                		<a [routerLink]="['/event-page', activ.event_id]">{{activ.title}}</a>
+              		</h4>
+              		<p class="card-info text-muted"><span class="glyphicon glyphicon-calendar"></span>&nbsp;{{activ.date}}&nbsp;&nbsp;
+              							  <span class="glyphicon glyphicon-time"></span>&nbsp;{{activ.starting_time}}&nbsp;&nbsp;
+              							  <span class="glyphicon glyphicon-record"></span>&nbsp;{{activ.ticket_cost}}&nbsp;&nbsp;
+              							  <span class="label sparse" [ngClass]="{ 'label-danger': activ.categories == 'Παιχνίδι',
+              							  										  'label-warning': activ.categories == 'Παραστάσεις',
+              							  										  'label-success': activ.categories == 'Μουσεία',
+              							  										  'label-primary': activ.categories == 'Επιστήμη&Περιβάλλον',
+              							  										  'label-info': activ.categories == 'Αθλητισμός',
+              							  										  'label-default': activ.categories == 'Μαθήματα' }">
+              							  {{activ.categories}}</span></p>
+              		<p class="card-text">{{activ.description.substring(0,90)}}...</p>
+            	</div>
+          	</div>
+					</div>
 				</div>
   			</div>
    			<div id="personal" class="tab-pane fade">
     			<br><br>
-	  			<form role="form" class="form-horizontal">
+	  			<form role="form" class="form-horizontal" (ngSubmit)="f.form.valid && updateProvider()" #f="ngForm">
 		    		<div class="form-group">
 	            		<label class="col-md-3 control-label">Ονομασία επιχείρησης:</label>
 	            		<div class="col-md-3">
-	              			<input class="form-control" type="text" value="Μουστάκας Α.Ε." disabled>
+	              			<input class="form-control" type="text" value="{{thisPrivateProvider.businessName}}" disabled>
 	          			</div>
 	            		<label class="col-md-1 col-md-offset-1 control-label">Username:</label>
 	            		<div class="col-md-3">
-	              			<input class="form-control" type="text" value="MoustakasStores" disabled>
+	              			<input class="form-control" type="text" value="{{thisPrivateProvider.username}}" disabled>
 	          			</div>
 		    		</div>
 		    		<div class="form-group">
 	            		<label class="col-md-3 control-label">E-mail:</label>
 	            		<div class="col-md-3">
-	              			<input class="form-control" type="text" value="trololomoust@moustakas.gr" disabled>
+	              			<input class="form-control" type="text" value="{{thisPrivateProvider.email}}" disabled>
 	          			</div>
 	            		<label class="col-md-1 col-md-offset-1 control-label">Τηλέφωνο:</label>
-	            		<div class="col-md-3">
-	              			<input class="form-control" type="text" value="4758378576">
+	            		<div class="col-md-3" [ngClass]="{'has-error': !phone.valid}">
+	              			<input class="form-control" type="text" name="phone" [(ngModel)]="model.phone" #phone="ngModel" required pattern="\b[0-9]{10}\b">
 	          			</div>
 		    		</div>
 		    		<div class="form-group">
 	            		<label class="col-md-3 control-label">Επώνυμο:</label>
-	            		<div class="col-md-3">
-	              			<input class="form-control" type="text" value="Νικολόπουλος">
+	            		<div class="col-md-3" [ngClass]="{'has-error': !lastname.valid}">
+	              			<input class="form-control" type="text" name="lastname" [(ngModel)]="model.lastname" 
+	              				#lastname="ngModel" required>
 	          			</div>
 	            		<label class="col-md-1 col-md-offset-1 control-label">Όνομα:</label>
-	            		<div class="col-md-3">
-	              			<input class="form-control" type="text" value="Φώτης">
+	            		<div class="col-md-3" [ngClass]="{'has-error': !firstname.valid}">
+	              			<input class="form-control" type="text" name="firstname" [(ngModel)]="model.firstname" 
+	              				#firstname="ngModel" required>
 	          			</div>
 		    		</div>
 		    		<div class="form-group">
 	            		<label class="col-md-3 control-label">Αριθμός Τραπεζικού Λογαριασμού:</label>
-	            		<div class="col-md-3">
-	              			<input class="form-control" type="text" value="4509877709642381">
+	            		<div class="col-md-3" [ngClass]="{'has-error': !bankAccount.valid}">
+	              			<input class="form-control" type="text" name="bankAccount" [(ngModel)]="model.bankAccount" 
+	              				#bankAccount="ngModel" required>
 	          			</div>
 	            		<div class="col-md-5">
 				    		<div class="pull-right">
