@@ -10,10 +10,10 @@ public class CurrentEventView {  // could extend Event Class. Only initial_ticke
     private String categories;
     private int ticket_cost;
     private double latitude;
-    private double longtitude;
+    private double longitude;
     private String description;
 
-    public CurrentEventView(int event_id, String title, Date date, String starting_time, String categories, int ticket_cost, double latitude, double longtitude, String description) {
+    public CurrentEventView(int event_id, String title, Date date, String starting_time, String categories, int ticket_cost, double latitude, double Longitude, String description) {
         this.event_id = event_id;
         this.title = title;
         this.date = date;
@@ -21,7 +21,7 @@ public class CurrentEventView {  // could extend Event Class. Only initial_ticke
         this.categories = categories;
         this.ticket_cost = ticket_cost;
         this.latitude = latitude;
-        this.longtitude = longtitude;
+        this.longitude = longitude;
         this.description = description;
     }
 
@@ -81,12 +81,12 @@ public class CurrentEventView {  // could extend Event Class. Only initial_ticke
         this.description = description;
     }
 
-    public double getLongtitude() {
-        return longtitude;
+    public double getLongitude() {
+        return longitude;
     }
 
-    public void setLongtitude(double longtitude) {
-        this.longtitude = longtitude;
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 
     public double getLatitude() {

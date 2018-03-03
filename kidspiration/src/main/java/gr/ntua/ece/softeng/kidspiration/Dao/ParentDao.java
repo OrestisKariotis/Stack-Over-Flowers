@@ -21,7 +21,7 @@ public class ParentDao implements UserDao<Parent>{
 
     public void addUser(Parent user) { // OK
         jdbcTemplate.update("INSERT INTO Parents (username, password, firstname, lastname, email, phone, wallet, spent_points, ban) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                user.getUsername(), user.getPassword(), user.getFirstname(), user.getLastname(), user.getEmail(), user.getPhone(), user.getWallet(), user.getSpent_points(), user.isBan());
+                user.getUsername(), user.getPassword(), user.getFirstname(), user.getLastname(), user.getEmail(), user.getPhone(), 0, 0, false);//user.getWallet(), user.getSpent_points(), user.isBan());
         System.out.println("User Added!!");
     }
 

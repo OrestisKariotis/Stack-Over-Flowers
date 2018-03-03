@@ -11,6 +11,10 @@ public class PurchaseTicketInfo {
         this.ticketsNumber = ticketsNumber;
     }
 
+    public PurchaseTicketInfo() {
+
+    }
+
     public int getId() {
         return id;
     }

@@ -24,7 +24,7 @@ public class PendingEventDao implements EventDao<PendingEvent> {
     public void addEvent(PendingEvent event) {  //checked
         System.out.println("Entering Event Dao");
         jdbcTemplate.update("INSERT INTO PendingEvents (provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber, lowestAge, highestAge, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                event.getProvider_id(), event.getTitle(), event.getDate(), event.getStarting_time(), event.getPlace(), event.getType(), event.getTicket_cost(), event.getInitial_ticketsNumber(), event.getLowestAge(), event.getHighestAge(), event.getDescription());
+                event.getProvider_id(), event.getTitle(), event.getDate(), event.getStarting_time(), event.getPlace(), event.getCategories(), event.getTicket_cost(), event.getInitial_ticketsNumber(), event.getLowestAge(), event.getHighestAge(), event.getDescription());
         System.out.println("Event Added!!");
     }
 
