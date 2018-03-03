@@ -47,3 +47,24 @@ export class ResultModel {
     this.wallet = obj && obj.wallet || 0;
   }
 }
+
+export class TicketsModel {
+  ticketId: number;
+  parentId: number;
+  eventId: number;
+  event_title: string;
+  provider_businessName: string;
+  date: string;
+  //wra
+  ticket_cost: string;
+
+  constructor(obj?: any) {
+    this.ticketId = obj && obj.ticketId || 0;
+    this.parentId = obj && obj.parentId || 0;
+    this.eventId = obj && obj.eventId || 0;
+    this.event_title = obj && obj.event_title || '';
+    this.provider_businessName = obj && obj.provider_businessName || '';
+    this.date = obj && obj.date || '';
+    this.ticket_cost = obj && obj.ticket_cost || '';
+  }
+}

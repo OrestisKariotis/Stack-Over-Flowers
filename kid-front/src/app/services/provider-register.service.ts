@@ -14,11 +14,11 @@ export class ProviderRegisterService {
 
     let fd = new FormData();
     fd.append('data', JSON.stringify(provider));
-    fd.append('logo', logo, logo.name);
+    fd.append('logo', logo);
     for (let i = 0; i < authdocs.length; i++ ) {
       let auth = authdocs[i];
       if (auth) {
-        fd.append('file', auth, auth.name);
+        fd.append('file', auth);
       }
     }
     return this.http.post<CurrentUser>('/api/register/provider', fd);

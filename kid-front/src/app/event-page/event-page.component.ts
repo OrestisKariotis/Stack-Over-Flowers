@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { CurrentUserService } from '../services/current-user.service';
 import { PurchaseService } from '../services/purchase.service';
+import { EventService } from '../services/event.service';
 
 import { CurrentUser } from '../models/CurrentUser';
 import { TicketPurchaseModel } from '../models/PurchaseModel';
+import { EventModel } from '../models/EventModel';
 
 @Component({
   selector: 'app-activity-page',
@@ -15,34 +17,31 @@ import { TicketPurchaseModel } from '../models/PurchaseModel';
 export class EventPageComponent implements OnInit {
 
   model: any = {};
+  thisId: number;
   user: CurrentUser;
   alert: any = {};
-  activity = {'event_id': '2',
-              'provider_id': '5',
-              'businessName': 'Paradise-Kids',
-              'title': 'Παιχνιδότοπος - Πάρτυ',
-              'date': '2018-03-07',
-              'starting_time': '18:00',
-              'description': 'Lorem ipsum dolor sit amet,  Maecenas ultricies mi si porta lorem mollis aliquam ut.',
-              'categories' : 'Παιχνίδι',
-              'ticket_cost' : 500,
-              'initial_ticketsNumber' : 20,
-              'available_ticketsNumber' : 15,
-              'lowestAge' : 5,
-              'highestAge' : 10,
-              'place' : 'Λεπενιώτου 5, Αθήνα',
-              'latitude' : 37.97781,
-              'longitude' : 23.721594
-              };
+  activity: EventModel;
   imagepaths = [
     '/assets/eventslideshowtest/1.jpg',
     '/assets/eventslideshowtest/2.jpg'
   ];
+  //EIKONES
 
-  constructor(private purchaseService: PurchaseService, private currentUserService: CurrentUserService) { }
+  constructor(private purchaseService: PurchaseService, private currentUserService: CurrentUserService, private route: ActivatedRoute,
+    private eventService: EventService) { }
 
   ngOnInit() {
     this.currentUserService.currentUser.subscribe(user => this.user = user);
+    this.thisId = +this.route.snapshot.paramMap.get('id');
+    this.eventService.getFullEvent(this.thisId)
+    .subscribe(
+      data => {
+        this.activity = data;
+      },
+      error => {
+        this.model.error = error.error;
+      }
+    );
   }
 
   buyTicket() {

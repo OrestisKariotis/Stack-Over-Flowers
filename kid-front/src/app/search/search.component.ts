@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { EventService } from '../services/event.service';
 import { HomeToSearchService, HomeSearch } from '../services/home-to-search.service';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { SearchModel } from '../models/SearchModel';
 import { SearchEventModel } from '../models/EventModel';
