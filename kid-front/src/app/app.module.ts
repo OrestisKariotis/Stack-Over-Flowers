@@ -76,6 +76,9 @@ import { EventPageComponent } from './event-page/event-page.component';
       apiKey: 'AIzaSyAmpQrI36e1gOYE-8bE6mBVzNkMKiEIwfw'
     })
   ],
+  exports: [
+        NgxPaginationModule
+  ],
   providers: [
     UserLoginService,
     CurrentUserService,
