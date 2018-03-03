@@ -48,7 +48,7 @@ export class ProviderViewEventModel extends PendingEventModel { //selida provide
   }
 }
 
-export class SearchEventModel extends PendingEventModel { //selida search 
+export class SearchEventModel extends PendingEventModel { //selida search
   description: string;
   event_id: number;
   longitude: number;

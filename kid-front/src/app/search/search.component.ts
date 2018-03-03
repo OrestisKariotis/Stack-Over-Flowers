@@ -19,6 +19,45 @@ export class SearchComponent implements OnInit {
   events: SearchEventModel[] = [];
   constructor(private eventService: EventService, private hometosearchservice: HomeToSearchService) { }
 
+  /* Proswrino gia check */
+  activities = [
+               {'event_id': '2',
+                'title': 'Παιχνιδότοπος - Πάρτυ',
+                'date': '2018-03-07',
+                'starting_time': '18:00',
+                'description': 'Lorem ipsum dolor sit amet, Maecenas ultricies mi si porta lorem mollis aliquam ut.',
+                'categories' : 'Παιχνίδι',
+                'ticket_cost' : 500,
+                'latitude' : 37.97781,
+                'longitude' : 23.721594
+                },
+               {'event_id': '3',
+                'title': 'Μάπα',
+                'date': '2018-03-10',
+                'starting_time': '20:00',
+                'description': 'Lorem ipsum dolor sit amet, Maecenas ultricies mi si porta lorem mollis aliquam ut.',
+                'categories' : 'Επιστήμη&Περιβάλλον',
+                'ticket_cost' : 1000,
+                'latitude' : 38.013583,
+                'longitude' : 23.821808
+                },
+               {'event_id': '5',
+                'title': 'Μάπα',
+                'date': '2018-03-10',
+                'starting_time': '20:00',
+                'description': 'Lorem ipsum dolor sit amet, Maecenas ultricies mi si porta lorem mollis aliquam ut abcdefghijklmnopq',
+                'categories' : 'Παραστάσεις',
+                'ticket_cost' : 1000,
+                'latitude' : 38.02381,
+                'longitude' : 23.848450
+                }
+  ];
+  imagepaths = [
+    '/assets/eventslideshowtest/1.jpg',
+    '/assets/eventslideshowtest/2.jpg'
+  ];
+
+
   ngOnInit() {
     this.hometosearchservice.homesearch.subscribe(search => this.homesearch = search);
     if (this.homesearch.enable) {
