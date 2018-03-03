@@ -14,14 +14,14 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @Qualifier("ParentDao")
-public class ParentDao implements UserDao<Parent>{
+public class ParentDao {//implements UserDao<Parent>{
 
     @Autowired
     JdbcTemplate jdbcTemplate;
 
     public void addUser(Parent user) { // OK
-        jdbcTemplate.update("INSERT INTO Parents (username, password, firstname, lastname, email, phone, wallet, spent_points, ban) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                user.getUsername(), user.getPassword(), user.getFirstname(), user.getLastname(), user.getEmail(), user.getPhone(), 0, 0, false);//user.getWallet(), user.getSpent_points(), user.isBan());
+        jdbcTemplate.update("INSERT INTO Parents (username, password, firstname, lastname, email, phone, wallet, spent_points, ban, salt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                user.getUsername(), user.getPassword(), user.getFirstname(), user.getLastname(), user.getEmail(), user.getPhone(), 0, 0, false, user.getSalt());//user.getWallet(), user.getSpent_points(), user.isBan());
         System.out.println("User Added!!");
     }
 
@@ -100,8 +100,9 @@ public class ParentDao implements UserDao<Parent>{
             String phone = rs.getString("phone");
             int wallet = rs.getInt("wallet");
             int spent_points = rs.getInt("spent_points");
-            boolean ban= rs.getBoolean("ban");
-            Parent parent = new Parent(id, username, password, firstname, lastname, email, phone, wallet, spent_points, ban);
+            boolean ban = rs.getBoolean("ban");
+            String salt = rs.getString("salt");
+            Parent parent = new Parent(id, username, password, firstname, lastname, email, phone, wallet, spent_points, ban, salt);
 
             return parent;
         }

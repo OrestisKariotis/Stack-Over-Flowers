@@ -69,6 +69,13 @@ public class CurrentEventDao implements EventDao<CurrentEvent> {
         return currentEvents;
     }
 
+    public CurrentEvent findId(int provider_id, String title, Date date) {
+        List <CurrentEvent> events = jdbcTemplate.query("SELECT * FROM CurrentEvents WHERE (provider_id = ? AND title = ? AND  date = ?) ORDER BY event_id DESC LIMIT 1",
+                new Object[] { provider_id, title, date }, new CurrentEventMapper());
+
+        return events.size() > 0 ? events.get(0) : null;
+    }
+
     public List<CurrentEvent> findAll() {    // OK
         List < CurrentEvent > events = jdbcTemplate.query("SELECT * FROM CurrentEvents", new CurrentEventMapper());
         return events;

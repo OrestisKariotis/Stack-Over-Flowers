@@ -1,6 +1,5 @@
 package gr.ntua.ece.softeng.kidspiration.Controllers;
 
-import com.sun.org.apache.xerces.internal.util.ShadowedSymbolTable;
 import gr.ntua.ece.softeng.kidspiration.PendingEvent;
 import gr.ntua.ece.softeng.kidspiration.Services.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ public class UploadEventController {
     @Qualifier("PendingEventService")
     EventService eventService;
     // WILL PROVIDER_ID BE USED?
-    @RequestMapping(path = "/api/upload_event/{provider_id}", method = RequestMethod.POST) //POST method  //Pi8anws na exei kai /id tou Provider
+    @RequestMapping(path = "/api/upload_event/{provider_id}", method = RequestMethod.POST) //produces = "text/plain;charset=UTF-8") //POST method  //Pi8anws na exei kai /id tou Provider
     public ResponseEntity<?> Upload_event(@PathVariable String provider_id, @RequestBody PendingEvent pendingEvent) {//@RequestParam String provider_id, @RequestParam String title, @RequestParam String date, @RequestParam String starting_time, @RequestParam String place, @RequestParam String categories, @RequestParam String ticket_cost, @RequestParam String initial_ticketsNumber, @RequestParam String lowestAge, @RequestParam String highestAge, @RequestParam String description) {
         System.out.println("Uploading Event Start"); // So far we only get provider_id. Later probably we 'll get the whole Provider Object
 
