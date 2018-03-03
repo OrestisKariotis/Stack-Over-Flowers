@@ -5,16 +5,17 @@ import gr.ntua.ece.softeng.kidspiration.Services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.mail.internet.MimeMessage;
+import java.io.IOException;
+import java.util.LinkedHashMap;
 import java.util.List;
 
+import static java.lang.System.exit;
+
 @RestController
-@RequestMapping(path = "/path_known_to_admins")      //Change name path
+@RequestMapping(path = "/api/path_known_to_admins")      //Change name path
 public class AdministratorPanelController {
 
     @Autowired
@@ -45,6 +46,7 @@ public class AdministratorPanelController {
         catch (Exception ex){
             System.out.println("ERROR in sending Email: " + ex);
         }
+        System.out.println("HERE");
         return parentService.findAll();
     }
 
@@ -99,7 +101,7 @@ public class AdministratorPanelController {
 
         PendingProvider provider =  pendingProviderService.find(Integer.parseInt(id)); //we can have whole Object from frontend since AllPendingProviders has been executed
 
-        Provider new_provider = new Provider(0, provider.getUsername(), provider.getPassword(), provider.getFirstname(), provider.getLastname(), provider.getEmail(), provider.getPhone(), provider.getBusinessName(), provider.getBankAccount(), 0, (byte) 0 );
+        Provider new_provider = new Provider(0, provider.getUsername(), provider.getPassword(), provider.getFirstname(), provider.getLastname(), provider.getEmail(), provider.getPhone(), provider.getBusinessName(), provider.getBankAccount(), provider.getSalt(),0, (byte) 0 );
 
         // THIS SHOULD BE A TRANSACTION!!!
         pendingProviderService.deleteUser(Integer.parseInt(id));
@@ -122,22 +124,34 @@ public class AdministratorPanelController {
         return pendingEventService.findAll();
     }
 
-    @RequestMapping(path = "/pending_events/accept", method = RequestMethod.GET) //could be POST or PUT method // OK
-    public String PendingEventsAccept(@RequestParam String id) {
-
-        PendingEvent event =  pendingEventService.find(Integer.parseInt(id)); //we can have whole Object from frontend since AllPendingEvents has been executed
+    @RequestMapping(path = "/pending_events/accept", method = RequestMethod.POST) //could be POST or PUT method // OK
+    public String PendingEventsAccept(@RequestBody LinkedHashMap id) {
+        Object o = id.get("id");
+        System.out.println(String.valueOf(o));
+        int integer_id = Integer.valueOf(String.valueOf(o));
+        PendingEvent event =  pendingEventService.find(integer_id); //we can have whole Object from frontend since AllPendingEvents has been executed
 
         // !!! GOOGLE API FOR GETTING LONGITUDE, LATITUDE FROM Place !!! /* Doing it now.. Don't push me.. *** */
 
-        CurrentEvent new_event = new CurrentEvent(0, event.getProvider_id(), event.getTitle(), event.getDate(), event.getStarting_time(), event.getPlace(), event.getCategories(), event.getTicket_cost(), event.getInitial_ticketsNumber(), event.getLowestAge(), event.getHighestAge(), event.getDescription(), event.getInitial_ticketsNumber(), 35.0000, 36.0000);
+       CurrentEvent new_event = new CurrentEvent(0, event.getProvider_id(), event.getTitle(), event.getDate(), event.getStarting_time(), event.getPlace(), event.getCategories(), event.getTicket_cost(), event.getInitial_ticketsNumber(), event.getLowestAge(), event.getHighestAge(), event.getDescription(), event.getInitial_ticketsNumber(), 35.0000, 36.0000);
 
         // THIS SHOULD BE A TRANSACTION!!!
         /*  ***
             Make it a transaction or inverse order of called methods.
             Better to have a duplicate, pending event than to have the original event lost.
          */
-        pendingEventService.deleteEvent(Integer.parseInt(id));
-        currentEventService.addEvent(new_event);
+        pendingEventService.deleteEvent(integer_id);
+        System.out.println("DELETION DONE");
+        new_event = currentEventService.addEvent(new_event);
+        System.out.println("SQL INSERTION DONE");
+        try {
+            currentEventService.addEventElastic(new_event);
+        }
+        catch(IOException ex){
+            System.out.println(ex);
+            exit(2);
+        }
+
         //END OF TRANSACTION
 
         //if transaction done return OK

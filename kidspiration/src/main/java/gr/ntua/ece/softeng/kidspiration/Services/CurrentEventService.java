@@ -1,14 +1,12 @@
 package gr.ntua.ece.softeng.kidspiration.Services;
 
-import gr.ntua.ece.softeng.kidspiration.CurrentEvent;
-import gr.ntua.ece.softeng.kidspiration.CurrentEventView;
+import gr.ntua.ece.softeng.kidspiration.*;
 import gr.ntua.ece.softeng.kidspiration.Dao.CurrentEventDao;
-import gr.ntua.ece.softeng.kidspiration.EventPageView;
-import gr.ntua.ece.softeng.kidspiration.Geocoding;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -16,7 +14,7 @@ import static gr.ntua.ece.softeng.kidspiration.Services.GeocodingService.geocodi
 
 @Service
 @Qualifier("CurrentEventService")
-public class CurrentEventService implements EventService<CurrentEvent> {
+public class CurrentEventService {//implements EventService<CurrentEvent> {
 
     @Autowired
     CurrentEventDao currentEventDao;
@@ -32,14 +30,25 @@ public class CurrentEventService implements EventService<CurrentEvent> {
         System.out.println("Leaving CurrentEvent's Buying Tickets Service");
     }
 
-    public void addEvent(CurrentEvent event) { //checked /* adding geocoded coords and rechecking */
+    public CurrentEvent addEvent(CurrentEvent event) { //checked /* adding geocoded coords and rechecking */
         Geocoding geocodedCoordinates = geocodingService(event.getPlace());
         event.setLatitude(geocodedCoordinates.getLat());
         event.setlongitude(geocodedCoordinates.getLng());
         System.out.println("Coordinates of event \"" + event.getTitle()
                 + "\" were set to (" + geocodedCoordinates.getLat() + ", " + event.getlongitude() + ").\n");
         currentEventDao.addEvent(event);
+        return event;
     } // OK
+
+    public void addEventElastic(CurrentEvent event) throws IOException{
+        CurrentEvent currentEvent;
+        currentEvent =  currentEventDao.findId(event.getProvider_id(), event.getTitle(), event.getDate());
+        Location location = new Location(currentEvent.getLatitude(), currentEvent.getlongitude()); //CHECK THINGS
+        Elastic leplak = new Elastic();
+        leplak.setup("localhost", 9200, "kids3"); // kanei to set up to server
+        Event2 event2 = new Event2(currentEvent.getEvent_id(), currentEvent.getTitle(), currentEvent.getDate().toString(), currentEvent.getCategories(), currentEvent.getTicket_cost(), location, currentEvent.getDescription(), currentEvent.getLowestAge(), currentEvent.getHighestAge(), currentEvent.getStarting_time());
+        leplak.add(event2);
+    }
 
     public void editEvent(CurrentEvent event, int id) {
 

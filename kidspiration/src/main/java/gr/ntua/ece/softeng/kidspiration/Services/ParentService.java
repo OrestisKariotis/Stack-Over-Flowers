@@ -2,23 +2,21 @@ package gr.ntua.ece.softeng.kidspiration.Services;
 
 import java.util.List;
 
+import gr.ntua.ece.softeng.kidspiration.*;
 import gr.ntua.ece.softeng.kidspiration.Dao.ParentDao;
-import gr.ntua.ece.softeng.kidspiration.Login;
-import gr.ntua.ece.softeng.kidspiration.Parent;
-import gr.ntua.ece.softeng.kidspiration.PurchasePointsInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
 @Qualifier("ParentService")
-public class ParentService { //implements UserService<Parent> {
+public class ParentService implements UserService<Parent> {
 
     @Autowired
     //@Qualifier("ParentDao")
     ParentDao parentDao;
 
-    public Parent addUser(Parent user) {  //CKECKING
+    public Parent addUser(Parent user) {  //CHECKING
 
         Parent parent = new Parent();
         if (parentDao.findByUsername(user.getUsername()) != null)
@@ -26,6 +24,11 @@ public class ParentService { //implements UserService<Parent> {
         else if (parentDao.findByEmail(user.getEmail()) != null)
             parent.setSpent_points(2);
         else {
+            String salt = new StringGenerator().randomgeneratedstring();
+            Salt hash = new Salt();
+            String hasedPassword = hash.hashed(user.getPassword(), salt);
+            user.setPassword(hasedPassword);
+            user.setSalt(salt);
             parentDao.addUser(user);
             parent = parentDao.findByUsername(user.getUsername());
         }
@@ -33,7 +36,14 @@ public class ParentService { //implements UserService<Parent> {
     }
 
     public Parent validateUser(Login login) {
-        return parentDao.validateUser(login);
+        Parent parent = parentDao.findByUsername(login.getUsername());
+        if (parent != null) {
+            Salt hash = new Salt();
+            String hashedPassword = hash.hashed(login.getPassword(), parent.getSalt());
+            login.setPassword(hashedPassword);
+            return parentDao.validateUser(login);
+        }
+        return parent;
     } // OK
 
     public Parent decreasePoints(Parent parent, int points) {    //OK //check if parent should be searched here

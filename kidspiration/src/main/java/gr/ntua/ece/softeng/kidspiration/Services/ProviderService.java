@@ -4,6 +4,7 @@ import gr.ntua.ece.softeng.kidspiration.ProviderView;
 import gr.ntua.ece.softeng.kidspiration.Dao.ProviderDao;
 import gr.ntua.ece.softeng.kidspiration.Login;
 import gr.ntua.ece.softeng.kidspiration.Provider;
+import gr.ntua.ece.softeng.kidspiration.Salt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,14 @@ public class ProviderService { //implements UserService<Provider> {
     }  // OK
 
     public Provider validateUser(Login login) {
-        return providerDao.validateUser(login);
+        Provider provider = providerDao.findByUsername(login.getUsername());
+        if (provider != null) {
+            Salt hash = new Salt();
+            String hashedPassword = hash.hashed(login.getPassword(), provider.getSalt());
+            login.setPassword(hashedPassword);
+            return providerDao.validateUser(login);
+        }
+        return provider;
     }  // OK
 
     public void editUser(Provider user, int id) { // checking
