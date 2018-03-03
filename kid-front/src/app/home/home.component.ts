@@ -32,10 +32,10 @@ export class HomeComponent implements OnInit {
         }
       );*/
     this.currentUserService.currentUser.subscribe(user => this.currentUser = user);
-    const prevUser = JSON.parse(sessionStorage.getItem('currentUser')) || {};
+    /* const prevUser = JSON.parse(sessionStorage.getItem('currentUser')) || {};
     if (prevUser) {
       this.currentUserService.changeUser(new CurrentUser(prevUser));
-    }
+    } Auto prepei na mpei??? */
     this.homesearchservice.homesearch.subscribe(search => this.homesearch = search);
   }
 

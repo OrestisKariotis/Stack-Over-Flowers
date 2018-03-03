@@ -51,7 +51,7 @@ export class EventPageComponent implements OnInit {
           this.user.wallet = data.wallet;
           this.currentUserService.changeUser(this.user);
           this.alert.head = 'ΕΠΙΤΥΧΙΑ';
-          this.alert.body = 'Τα εισιτήρια αγοράστικαν επιτυχώς! Θα σας αποσταλεί μαιλ με τα στοιχεία τους.';
+          this.alert.body = 'Τα εισιτήρια αγοράστηκαν επιτυχώς! Θα σας αποσταλεί mail με τα στοιχεία τους.';
         },
         error => {
           this.alert.head = 'Αποτυχία';
