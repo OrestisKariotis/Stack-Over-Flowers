@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { CurrentUser } from '../models/CurrentUser';
 import { ProviderRegisterModel } from '../models/ProviderRegisterModel';
 
 import { ProviderRegisterService } from '../services/provider-register.service';
-import { CurrentUserService } from '../services/current-user.service';
 
 @Component({
   selector: 'app-provider-register',
@@ -15,36 +12,31 @@ export class ProviderRegisterComponent implements OnInit {
 
   model: any = {};
   alert: boolean;
+  popup: string;
   logoFile: File = null;
   authFileList: FileList = null;
-  user: CurrentUser;
 
-  constructor(private currentUserService: CurrentUserService, private router: Router,
-    private providerRegisterService: ProviderRegisterService) { }
+  constructor(private providerRegisterService: ProviderRegisterService) { }
 
   ngOnInit() {
-    this.currentUserService.currentUser.subscribe(user => this.user = user);
   }
 
   providerRegister() {
+    this.alert = false;
     if (!this.logoFile) {
-      this.alert = true;
       this.model.error = 'select logo pic';
     } else if (!this.authFileList) {
-      this.alert = true;
       this.model.error = 'upload auth files';
     } else {
-      this.alert = false;
       this.model.id = 0;
       this.providerRegisterService.register(new ProviderRegisterModel(this.model), this.logoFile, this.authFileList)
       .subscribe(
         data => {
-          this.currentUserService.changeUser(new CurrentUser(data));
-          this.router.navigate(['/']); // TODO
+          this.alert = true;
+          this.popup = 'H εγγραφή έχει υποβληθεί για αποδοχή. Θα σας αποσταλεί μαιλ σχετικά με την εξέλιξή της.';
         },
         error => {
-          this.alert = true;
-          this.model.error = error;
+          this.model.error = error.error;
         }
       );
     }

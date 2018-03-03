@@ -32,7 +32,19 @@ export class UserLoginComponent implements OnInit {
         },
         error => {
           this.alert = true;
-          this.model.error = error;
+          this.model.error = error.error;
+        }
+      );
+  }
+
+  reset() {
+    this.loginService.reset(this.model.username, this.model.mode)
+      .subscribe(
+        data => {
+          this.alert = true;
+        },
+        error => {
+          this.model.error = error.error;
         }
       );
   }

@@ -33,4 +33,11 @@ export class UserLoginService {
         });
     }
   }
+  reset(username: string, mode: string) {
+    if (mode === 'parent') {
+      return this.http.post<any>('/api/reset/parent', { 'username': username});
+    } else {
+      return this.http.post<any>('/api/reset/provider', { 'username': username});
+    }
+  }
 }

@@ -17,13 +17,13 @@ export class SearchModel {
     if (obj && obj.dist) {
       this.dist = obj.dist;
     }
-    if (obj && obj.wallet) {
+    if (obj && obj.position) {
       this.position = obj.position;
     }
-    if (obj && obj.wallet) {
+    if (obj && obj.startdate) {
       this.startdate = obj.startdate;
     }
-    if (obj && obj.wallet) {
+    if (obj && obj.enddate) {
       this.enddate = obj.enddate;
     }
     if (obj && obj.lowpoints) {

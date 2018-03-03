@@ -31,19 +31,19 @@
 			</div>
 			<hr />
 			<div class="form-group"
-				[ngClass]="{ 'has-error': f.submitted && !firstName.valid }">
-				<label for="firstName">Όνομα</label> <input type="text"
-					class="form-control" name="firstName" [(ngModel)]="model.firstName"
-					#firstName="ngModel" required />
-				<div *ngIf="f.submitted && !firstName.valid" class="help-block">Το πεδίο
+				[ngClass]="{ 'has-error': f.submitted && !firstname.valid }">
+				<label for="firstname">Όνομα</label> <input type="text"
+					class="form-control" name="firstname" [(ngModel)]="model.firstname"
+					#firstname="ngModel" required />
+				<div *ngIf="f.submitted && !firstname.valid" class="help-block">Το πεδίο
 					είναι υποχρεωτικό!</div>
 			</div>
 			<div class="form-group"
-				[ngClass]="{ 'has-error': f.submitted && !lastName.valid }">
-				<label for="lastName">Επώνυμο</label> <input type="text"
-					class="form-control" name="lastName" [(ngModel)]="model.lastName"
-					#lastName="ngModel" required />
-				<div *ngIf="f.submitted && !lastName.valid" class="help-block">Το πεδίο
+				[ngClass]="{ 'has-error': f.submitted && !lastname.valid }">
+				<label for="lastname">Επώνυμο</label> <input type="text"
+					class="form-control" name="lastname" [(ngModel)]="model.lastname"
+					#lastname="ngModel" required />
+				<div *ngIf="f.submitted && !lastname.valid" class="help-block">Το πεδίο
 					είναι υποχρεωτικό!</div>
 			</div>
 			<div class="form-group"
