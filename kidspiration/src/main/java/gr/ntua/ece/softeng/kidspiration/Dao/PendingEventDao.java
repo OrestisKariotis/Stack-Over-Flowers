@@ -2,6 +2,7 @@ package gr.ntua.ece.softeng.kidspiration.Dao;
 
 import com.sun.prism.shader.Solid_ImagePattern_Loader;
 import gr.ntua.ece.softeng.kidspiration.PendingEvent;
+import gr.ntua.ece.softeng.kidspiration.PendingEventView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -62,6 +63,12 @@ public class PendingEventDao implements EventDao<PendingEvent> {
         return user;
     }
 
+    public List<PendingEventView> findAllPendingEventViews() {
+        List <PendingEventView> events = jdbcTemplate.query("select event_id, provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber, lowestAge, highestAge, description, businessName from ((SELECT * FROM PendingEvents) sub INNER JOIN providers ON sub.provider_id = providers.id)",
+                new PendingEventViewMapper());  // Group By would be a nice choice
+        return events;
+    }
+
     public List <PendingEvent> findAll() { // OK
         List < PendingEvent > events = jdbcTemplate.query("SELECT * FROM PendingEvents", new PendingEventMapper());
         return events;
@@ -85,7 +92,28 @@ public class PendingEventDao implements EventDao<PendingEvent> {
             PendingEvent pendingEvent = new PendingEvent(event_id, provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber, lowestAge, highestAge, description);
             return pendingEvent;
         }
-
     }
 
+    class PendingEventViewMapper implements RowMapper<PendingEventView> {
+
+        public PendingEventView mapRow(ResultSet rs, int rowNum) throws SQLException {
+            int event_id = rs.getInt("event_id");
+            int provider_id = rs.getInt("provider_id");
+            String title = rs.getString("title");
+            Date date = rs.getDate("date");
+            String starting_time = rs.getString("starting_time");
+            String place = rs.getString("place");
+            String type = rs.getString("type");
+            int ticket_cost = rs.getInt("ticket_cost");
+            int initial_ticketsNumber = rs.getInt("initial_ticketsNumber");
+            byte lowestAge = rs.getByte("lowestAge");
+            byte highestAge = rs.getByte("highestAge");
+            String description = rs.getString("description");
+
+            String businessName = rs.getString("businessName");
+
+            PendingEventView pendingEventView = new PendingEventView(event_id, provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber, lowestAge, highestAge, description, businessName);
+            return pendingEventView;
+        }
+    }
 }

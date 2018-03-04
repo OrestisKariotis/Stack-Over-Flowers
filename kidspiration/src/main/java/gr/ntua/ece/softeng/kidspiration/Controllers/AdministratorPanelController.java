@@ -130,8 +130,8 @@ public class AdministratorPanelController {
     }
 
     @RequestMapping(path = "/pending_events", method = RequestMethod.GET) // OK
-    public List<PendingEvent> AllPendingEvents() {
-        return pendingEventService.findAll();
+    public List<PendingEventView> AllPendingEvents() {
+        return pendingEventService.findAllPendingEventViews();
     }
 
     @RequestMapping(path = "/pending_events/accept", method = RequestMethod.POST) //could be POST or PUT method // OK
@@ -185,9 +185,9 @@ public class AdministratorPanelController {
         return currentEventService.findAllEventPages();
     }
 
-    @RequestMapping(path = "/month_report/{month}", method = RequestMethod.GET)
-    public MonthReference sendMonthReference(@PathVariable String month) {
-        return monthReferenceService.find(Integer.parseInt(month));
+    @RequestMapping(path = "/month_report", method = RequestMethod.GET)
+    public List<MonthReference> sendMonthReference() {
+        return monthReferenceService.findAll();
     }
 
     @RequestMapping(path = "/stats", method = RequestMethod.GET)
