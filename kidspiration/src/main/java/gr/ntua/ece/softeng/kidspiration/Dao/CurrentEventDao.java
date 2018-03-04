@@ -25,15 +25,15 @@ public class CurrentEventDao implements EventDao<CurrentEvent> {
 
     public void addEvent(CurrentEvent event) {    // OK
         System.out.println("Entering CurrentEvent Dao");
-        jdbcTemplate.update("INSERT INTO CurrentEvents (provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber, available_ticketsNumber, lowestAge, highestAge, latitude, longitude, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                event.getProvider_id(), event.getTitle(), event.getDate(), event.getStarting_time(), event.getPlace(), event.getCategories(), event.getTicket_cost(), event.getInitial_ticketsNumber(), event.getAvailable_ticketsNumber(), event.getLowestAge(), event.getHighestAge(), event.getLatitude(), event.getlongitude(), event.getDescription());
+        jdbcTemplate.update("INSERT INTO CurrentEvents (provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber, available_ticketsNumber, lowestAge, highestAge, latitude, longitude, description, numOfPhotos) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                event.getProvider_id(), event.getTitle(), event.getDate(), event.getStarting_time(), event.getPlace(), event.getCategories(), event.getTicket_cost(), event.getInitial_ticketsNumber(), event.getAvailable_ticketsNumber(), event.getLowestAge(), event.getHighestAge(), event.getLatitude(), event.getlongitude(), event.getDescription(), event.getNumOfPhotos());
         System.out.println("CurrentEvent Added!!");
     }
 
     public void editEvent(CurrentEvent event, int event_id) {  //checking
         System.out.println("Entering CurrentEvent base for edit");
-        jdbcTemplate.update("UPDATE CurrentEvents SET  title = ?, date = ?, starting_time = ?, place = ?, type = ?, ticket_cost = ?, initial_ticketsNumber = ?, available_ticketsNumber = ?, lowestAge = ?, highestAge = ?, longitude = ?, latitude = ?, description = ? WHERE event_id = ? ",
-               event.getTitle() , event.getDate(), event.getStarting_time(), event.getPlace(), event.getCategories(), event.getTicket_cost(), event.getInitial_ticketsNumber(), event.getAvailable_ticketsNumber(), event.getLowestAge(), event.getHighestAge(), event.getlongitude(), event.getLatitude(), event.getDescription(), event_id);
+        jdbcTemplate.update("UPDATE CurrentEvents SET  title = ?, date = ?, starting_time = ?, place = ?, type = ?, ticket_cost = ?, initial_ticketsNumber = ?, available_ticketsNumber = ?, lowestAge = ?, highestAge = ?, longitude = ?, latitude = ?, description = ?, numOfPhotos= ?  WHERE event_id = ? ",
+               event.getTitle() , event.getDate(), event.getStarting_time(), event.getPlace(), event.getCategories(), event.getTicket_cost(), event.getInitial_ticketsNumber(), event.getAvailable_ticketsNumber(), event.getLowestAge(), event.getHighestAge(), event.getlongitude(), event.getLatitude(), event.getDescription(), event.getNumOfPhotos(), event_id);
         System.out.println("CurrentEvent Base edited!!");
 
         //event_id can be omitted, already included in event object
@@ -130,8 +130,8 @@ public class CurrentEventDao implements EventDao<CurrentEvent> {
             double latitude = rs.getDouble("latitude");
             double longitude = rs.getDouble("longitude");
             String description = rs.getString("description");
-
-            CurrentEvent event = new CurrentEvent(event_id, provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber, lowestAge, highestAge, description, available_ticketsNumber, latitude, longitude);
+            int numOfPhotos= rs.getInt("numOfPhotos");
+            CurrentEvent event = new CurrentEvent(event_id, provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber, lowestAge, highestAge, description, numOfPhotos, available_ticketsNumber, latitude, longitude);
 
             return event;
         }
@@ -175,10 +175,11 @@ public class CurrentEventDao implements EventDao<CurrentEvent> {
             double latitude = rs.getDouble("latitude");
             double longitude = rs.getDouble("longitude");
             String description = rs.getString("description");
+            int numOfPhotos=rs.getInt("numOfPhotos");
 
             String businessName = rs.getString("businessName");
 
-            EventPageView event = new EventPageView(event_id, provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber, lowestAge, highestAge, description, available_ticketsNumber, latitude, longitude, businessName);
+            EventPageView event = new EventPageView(event_id, provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber, lowestAge, highestAge, description, numOfPhotos, available_ticketsNumber, latitude, longitude, businessName);
             return event;
         }
     }

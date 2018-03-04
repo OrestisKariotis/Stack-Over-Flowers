@@ -25,8 +25,8 @@ public class PendingEventDao implements EventDao<PendingEvent> {
 
     public void addEvent(PendingEvent event) {  //checked
         System.out.println("Entering Event Dao");
-        jdbcTemplate.update("INSERT INTO PendingEvents (provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber, lowestAge, highestAge, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                event.getProvider_id(), event.getTitle(), event.getDate(), event.getStarting_time(), event.getPlace(), event.getCategories(), event.getTicket_cost(), event.getInitial_ticketsNumber(), event.getLowestAge(), event.getHighestAge(), event.getDescription());
+        jdbcTemplate.update("INSERT INTO PendingEvents (provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber, lowestAge, highestAge, description, numOfPhotos) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                event.getProvider_id(), event.getTitle(), event.getDate(), event.getStarting_time(), event.getPlace(), event.getCategories(), event.getTicket_cost(), event.getInitial_ticketsNumber(), event.getLowestAge(), event.getHighestAge(), event.getDescription(), event.getNumOfPhotos());
         System.out.println("Event Added!!");
     }
 
@@ -89,7 +89,8 @@ public class PendingEventDao implements EventDao<PendingEvent> {
             byte lowestAge = rs.getByte("lowestAge");
             byte highestAge = rs.getByte("highestAge");
             String description = rs.getString("description");
-            PendingEvent pendingEvent = new PendingEvent(event_id, provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber, lowestAge, highestAge, description);
+            int numOfPhotos=rs.getInt("numOfPhotos");
+            PendingEvent pendingEvent = new PendingEvent(event_id, provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber, lowestAge, highestAge, description, numOfPhotos);
             return pendingEvent;
         }
     }
@@ -109,10 +110,11 @@ public class PendingEventDao implements EventDao<PendingEvent> {
             byte lowestAge = rs.getByte("lowestAge");
             byte highestAge = rs.getByte("highestAge");
             String description = rs.getString("description");
+            int numOfPhotos=rs.getInt("numOfPhotos");
 
             String businessName = rs.getString("businessName");
 
-            PendingEventView pendingEventView = new PendingEventView(event_id, provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber, lowestAge, highestAge, description, businessName);
+            PendingEventView pendingEventView = new PendingEventView(event_id, provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber, lowestAge, highestAge, description, numOfPhotos, businessName);
             return pendingEventView;
         }
     }
