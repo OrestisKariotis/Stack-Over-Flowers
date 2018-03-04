@@ -34,6 +34,11 @@ public class MonthReferenceDao {  //CHECKING
         return monthReference;
     }
 
+    public List<MonthReference> findAll() {
+        List<MonthReference> monthReferences = jdbcTemplate.query("SELECT * FROM MonthReferences", new MonthReferenceMapper());
+        return monthReferences;
+    }
+
 
 
     class MonthReferenceMapper implements RowMapper<MonthReference> {

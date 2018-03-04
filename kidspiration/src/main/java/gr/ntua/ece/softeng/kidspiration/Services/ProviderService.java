@@ -46,6 +46,11 @@ public class ProviderService { //implements UserService<Provider> {
         // for that reason, editUser WILL change
     }
 
+
+    public void editInfo(int id, String firstname, String lastname, String phone, String bankAccount) {
+        providerDao.editInfo(id, firstname, lastname, phone, bankAccount);
+    }
+
     public Provider changeRights(int id, byte rights_code) {   // OK
         Provider provider = providerDao.find(id);   //could be done by better way, only one query
         provider.setRights_code(rights_code);

@@ -4,6 +4,7 @@ import gr.ntua.ece.softeng.kidspiration.CurrentEventView;
 import gr.ntua.ece.softeng.kidspiration.Login;
 import gr.ntua.ece.softeng.kidspiration.Provider;
 import gr.ntua.ece.softeng.kidspiration.User;
+import org.omg.PortableInterceptor.ServerRequestInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -39,6 +40,10 @@ public class ProviderDao implements UserDao<Provider> {
         jdbcTemplate.update("UPDATE Providers SET username = ?, password = ?, firstname = ?, lastname = ?, email = ?, phone = ?, businessName = ?, bankAccount = ?, profit = ?, rights_code = ? WHERE id = ? ",
                 user.getUsername(), user.getPassword(), user.getFirstname(), user.getLastname(), user.getEmail(), user.getPhone(), user.getBusinessName(), user.getBankAccount(), user.getProfit(), user.getRights_code(), id);
         System.out.println("User Updated!!");
+    }
+
+    public void editInfo(int id, String firstname, String lastname, String phone, String bankAccount) {
+        jdbcTemplate.update("UPDATE Providers SET firstname = ?, lastname = ?, phone = ?, bankAccount = ? WHERE id = ? ", firstname, lastname, phone, bankAccount, id);
     }
 
     public void deleteUser(int id) { // OK

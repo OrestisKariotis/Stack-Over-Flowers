@@ -26,6 +26,10 @@ public class MonthReferenceService {  /// CHECKING
         return monthReferenceDao.find(month);
     }
 
+    public List<MonthReference> findAll() {
+        return monthReferenceDao.findAll();
+    }
+
 
     public void updateMonthReference(byte pointsPackage){ // OK
         double packageProfit = 0;
