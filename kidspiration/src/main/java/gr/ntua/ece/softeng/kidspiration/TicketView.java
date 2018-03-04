@@ -1,5 +1,7 @@
 package gr.ntua.ece.softeng.kidspiration;
 
+import java.util.Date;
+
 public class TicketView extends Ticket {  // do we need OldTicketView as well ?
 
     // ticket code ?
@@ -7,10 +9,10 @@ public class TicketView extends Ticket {  // do we need OldTicketView as well ?
 
     String event_title;
     String provider_businessName;
-    String date;   // could be date
+    Date date;   // could be date
     int ticket_cost;
 
-    public TicketView(int ticketId, int parentId, int eventId, String event_title, String provider_businessName, String date, int ticket_cost) {
+    public TicketView(int ticketId, int parentId, int eventId, String event_title, String provider_businessName, Date date, int ticket_cost) {
         super(ticketId, parentId, eventId);
         this.event_title = event_title;
         this.provider_businessName = provider_businessName;
@@ -34,11 +36,11 @@ public class TicketView extends Ticket {  // do we need OldTicketView as well ?
         this.provider_businessName = provider_businessName;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

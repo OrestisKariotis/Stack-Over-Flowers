@@ -1,24 +1,31 @@
 package gr.ntua.ece.softeng.kidspiration;
 
-public class Parent extends User{
 
-    private int wallet;   //could be long
-    private int spent_points;       //same
+public class Parent extends ParentView{
+
+    private String password;
+    private int spent_points;
     private boolean ban;
+    private String salt;
 
-    public Parent(int id, String username, String password, String firstname, String lastname, String email, String phone, int wallet, int spent_points, boolean ban) {
-        super(id, username, password, firstname, lastname, email, phone);
-        this.wallet = wallet;
+    public Parent(int id, String username, String password, String firstname, String lastname, String email, String phone, int wallet, int spent_points, boolean ban, String salt) {
+        super(id, username, firstname, lastname, email, phone, wallet);
+        this.password = password;
         this.spent_points = spent_points;
         this.ban = ban;
+        this.salt = salt;
     }
 
-    public int getWallet() {
-        return wallet;
+    public Parent() {
+
     }
 
-    public void setWallet(int wallet) {
-        this.wallet = wallet;
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public int getSpent_points() {
@@ -35,5 +42,13 @@ public class Parent extends User{
 
     public void setBan(boolean ban) {
         this.ban = ban;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 }

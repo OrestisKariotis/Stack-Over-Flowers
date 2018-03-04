@@ -2,9 +2,11 @@ package gr.ntua.ece.softeng.kidspiration.Services;
 
 import gr.ntua.ece.softeng.kidspiration.Dao.PendingEventDao;
 import gr.ntua.ece.softeng.kidspiration.PendingEvent;
+import gr.ntua.ece.softeng.kidspiration.PendingEventView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import gr.ntua.ece.softeng.kidspiration.CurrentEventView;
 
 import java.util.List;
 
@@ -24,15 +26,22 @@ public class PendingEventService implements EventService<PendingEvent> {
 
     }
 
+    public List<PendingEvent> findWithProvider(int id) {
+        List<PendingEvent> pendingEvents= pendingEventDao.findWithProvider(id);
+        return pendingEvents;
+    }
+
     public void deleteEvent(int id) { //checked
         pendingEventDao.deleteEvent(id);
-    }
+    } // OK
 
     public PendingEvent find(int id) {  //checked
         return pendingEventDao.find(id);
-    }
+    } //OK
+
+    public List<PendingEventView> findAllPendingEventViews() { return  pendingEventDao.findAllPendingEventViews();}
 
     public List<PendingEvent> findAll() {  //checked
         return pendingEventDao.findAll();
-    }
+    } // OK
 }

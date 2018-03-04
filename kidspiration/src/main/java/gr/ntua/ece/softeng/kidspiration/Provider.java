@@ -2,20 +2,24 @@ package gr.ntua.ece.softeng.kidspiration;
 
 public class Provider extends PendingProvider {
 
-    private int profit; //could be long, mhpws einai esoda?
+    private double profit; //could be long, mhpws einai esoda?
     private byte rights_code;
 
-    public Provider(int id, String username, String password, String firstname, String lastname, String email, String phone, String businessName, String bankAccount, int profit, byte rights_code) {
-        super(id, username, password, firstname, lastname, email, phone, businessName, bankAccount);
+    public Provider(int id, String username, String password, String firstname, String lastname, String email, String phone, String businessName, String bankAccount, String salt,double profit, byte rights_code) {
+        super(id, username, password, firstname, lastname, email, phone, businessName, bankAccount, salt);
         this.profit = profit;
         this.rights_code = rights_code;
     }
 
-    public int getProfit() {
+    public Provider() {
+
+    }
+
+    public double getProfit() {
         return profit;
     }
 
-    public void setProfit(int profit) {
+    public void setProfit(double profit) {
         this.profit = profit;
     }
 

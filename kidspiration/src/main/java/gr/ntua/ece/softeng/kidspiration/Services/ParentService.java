@@ -2,9 +2,8 @@ package gr.ntua.ece.softeng.kidspiration.Services;
 
 import java.util.List;
 
+import gr.ntua.ece.softeng.kidspiration.*;
 import gr.ntua.ece.softeng.kidspiration.Dao.ParentDao;
-import gr.ntua.ece.softeng.kidspiration.Login;
-import gr.ntua.ece.softeng.kidspiration.Parent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -17,49 +16,83 @@ public class ParentService implements UserService<Parent> {
     //@Qualifier("ParentDao")
     ParentDao parentDao;
 
-    public void addUser(Parent user) {
-        parentDao.addUser(user);
-    } //checked
+    public Parent addUser(Parent user) {  //CHECKING
 
-    public Parent validateUser(Login login) {
-        return parentDao.validateUser(login);
-    } //checked
-
-    public void decreasePoints(Parent parent, int points) {
-        System.out.println("Entering parent's points decreasing service");
-        int wallet = parent.getWallet();
-        int spent_points = parent.getSpent_points();
-        parent.setWallet(wallet - points);
-        parent.setSpent_points(spent_points + points);  // Bonus will be checked later
-        parentDao.editUser(parent, parent.getId());
-
-        System.out.println("Leaving parent's points decreasing service");
-
-        // getId can be omitted as mentioned in Parent Dao
-    }
-
-    public Parent purchasePoints(Parent parent, byte points_package_code) { //checked
-
-        int wallet = parent.getWallet();
-
-        if (points_package_code == 1)
-            parent.setWallet(wallet + 500);
-        else if (points_package_code == 2)
-            parent.setWallet(wallet + 1025);
-        else if (points_package_code == 3)
-            parent.setWallet(wallet + 2100);
-        else if (points_package_code == 4)
-            parent.setWallet(wallet + 5300);
-        // else error
-        parentDao.editUser(parent, parent.getId());   // id could be omitted
+        Parent parent = new Parent();
+        if (parentDao.findByUsername(user.getUsername()) != null)
+            parent.setSpent_points(1);
+        else if (parentDao.findByEmail(user.getEmail()) != null)
+            parent.setSpent_points(2);
+        else {
+            String salt = new StringGenerator().randomgeneratedstring();
+            Salt hash = new Salt();
+            String hasedPassword = hash.hashed(user.getPassword(), salt);
+            user.setPassword(hasedPassword);
+            user.setSalt(salt);
+            parentDao.addUser(user);
+            parent = parentDao.findByUsername(user.getUsername());
+        }
         return parent;
     }
 
-    public Parent changeRights(int id, boolean ban) {   //checked
+    public Parent validateUser(Login login) {
+        Parent parent = parentDao.findByUsername(login.getUsername());
+        if (parent != null) {
+            Salt hash = new Salt();
+            String hashedPassword = hash.hashed(login.getPassword(), parent.getSalt());
+            login.setPassword(hashedPassword);
+            return parentDao.validateUser(login);
+        }
+        return parent;
+    } // OK
+
+    public Parent decreasePoints(Parent parent, int points) {    //OK //check if parent should be searched here
+
+        System.out.println("Entering parent's points decreasing service");
+        int wallet = parent.getWallet();
+        int spent_points = parent.getSpent_points();
+        parent.setWallet(wallet - points); //not needed
+        parent.setSpent_points(spent_points + points);  // Bonus will be checked later //not needed
+        if (parent.getSpent_points() < 30000)
+            parentDao.updatePoints(parent.getId(),wallet - points, spent_points + points);
+        else {  // BONUS
+            //EMAIL NOTIFICATION
+            parent.setWallet(wallet - points + 1000);
+            parent.setWallet(spent_points + points - 30000);
+            parentDao.updatePoints(parent.getId(), wallet - points + 1000, spent_points + points - 30000);
+        }
+        System.out.println("Leaving parent's points decreasing service");
+        return parent;
+    }
+
+    public Parent purchasePoints(Parent parent, PurchasePointsInfo info) { // OK
+
+        int wallet = parent.getWallet();
+
+        if (info.getPointsCode() == 1)
+            parent.setWallet(wallet + 500);
+        else if (info.getPointsCode() == 2)
+            parent.setWallet(wallet + 1025);
+        else if (info.getPointsCode() == 3)
+            parent.setWallet(wallet + 2100);
+        else if (info.getPointsCode() == 4)
+            parent.setWallet(wallet + 5300);
+        else
+            return null;
+        // else error
+        parentDao.updatePoints(parent.getId(), parent.getWallet(), parent.getSpent_points());
+        return parent;
+    }
+
+    public Parent changeRights(int id, boolean ban) {   // OK
         Parent parent = parentDao.find(id);   //could be done by better way, only one query
         parent.setBan(ban);
         parentDao.editUser(parent, id);
         return parent;
+    }
+
+    public void editInfo(int id, String phone) {
+        parentDao.editInfo(id, phone);
     }
 
     public void editUser(Parent user, int id) { //checked
@@ -69,13 +102,13 @@ public class ParentService implements UserService<Parent> {
 
     public void deleteUser(int id) {  //checked
         parentDao.deleteUser(id);
-    }
+    } // OK
 
     public Parent find(int id) {   //checked
         return parentDao.find(id);
-    }
+    }  // OK
 
     public List<Parent> findAll() {  //checked
         return parentDao.findAll();
-    }
+    } // OK
 }

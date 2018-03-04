@@ -21,9 +21,9 @@ public class PendingProviderDao implements UserDao<PendingProvider>{
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    public void addUser(PendingProvider user) {  // checked
-        jdbcTemplate.update("INSERT INTO PendingProviders (username, password, firstname, lastname, email, phone, businessName, bankAccount) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-                user.getUsername(), user.getPassword(), user.getFirstname(), user.getLastname(), user.getEmail(), user.getPhone(), user.getBusinessName(), user.getBankAccount());
+    public void addUser(PendingProvider user) {  // OK
+        jdbcTemplate.update("INSERT INTO PendingProviders (username, password, firstname, lastname, email, phone, businessName, bankAccount, salt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                user.getUsername(), user.getPassword(), user.getFirstname(), user.getLastname(), user.getEmail(), user.getPhone(), user.getBusinessName(), user.getBankAccount(), user.getSalt());
         System.out.println("User Added!!");
     }
 
@@ -37,22 +37,40 @@ public class PendingProviderDao implements UserDao<PendingProvider>{
         System.out.println("User Updated!!");
     }
 
-    public void deleteUser(int id) { //checked
+    public void deleteUser(int id) { // OK
         jdbcTemplate.update("DELETE FROM PendingProviders WHERE id = ? ", id);
         System.out.println("PendingProvider Deleted!!");
     }
 
-    public PendingProvider find(int id) {  //checked
+    public PendingProvider find(int id) {  // OK
         PendingProvider user = jdbcTemplate.queryForObject("SELECT * FROM PendingProviders where id = ? ",
                 new Object[] { id }, new PendingProviderMapper());
         // could be a list
         return user;
     }
 
-    public List <PendingProvider> findAll() { //checked
+    public PendingProvider findByUsername (String username) { // CHECKING
+
+        List <PendingProvider> users = jdbcTemplate.query("SELECT * FROM PendingProviders where username = ? ",
+                new Object[] { username }, new PendingProviderMapper()); // could be query, not needed however
+
+        return users.size() > 0 ? users.get(0) : null;
+    }
+
+    public PendingProvider findByEmail (String email) { // CHECKING
+
+        List <PendingProvider> users = jdbcTemplate.query("SELECT * FROM PendingProviders where email = ? ",
+                new Object[] { email }, new PendingProviderMapper());
+
+        return users.size() > 0 ? users.get(0) : null;
+    }
+
+    public List <PendingProvider> findAll() { // OK
         List < PendingProvider > users = jdbcTemplate.query("SELECT * FROM PendingProviders", new PendingProviderMapper());
         return users;
     }
+
+
 
     class PendingProviderMapper implements RowMapper<PendingProvider> {
 
@@ -67,7 +85,8 @@ public class PendingProviderDao implements UserDao<PendingProvider>{
             String phone = rs.getString("phone");
             String businessName = rs.getString("businessName");
             String bankAccount = rs.getString("bankAccount");
-            PendingProvider provider = new PendingProvider(id, username, password, firstname, lastname, email, phone, businessName, bankAccount);
+            String salt = rs.getString("salt");
+            PendingProvider provider = new PendingProvider(id, username, password, firstname, lastname, email, phone, businessName, bankAccount, salt);
 
             return provider;
         }

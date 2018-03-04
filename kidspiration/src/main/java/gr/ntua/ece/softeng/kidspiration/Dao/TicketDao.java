@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -31,7 +32,7 @@ public class TicketDao {
         return users;
     } */
 
-    public List<TicketView> findAll_ByParentId_TicketView (int id) { //checked
+    public List<TicketView> findAll_ByParentId_TicketView (int id) { // OK
         System.out.println("Entering Tickets Search by Parent id");
         List <TicketView> tickets = jdbcTemplate.query("SELECT sub.ticket_id, sub.parent_id, sub.event_id, CurrentEvents.title, Providers.businessName, CurrentEvents.date, CurrentEvents.ticket_cost FROM (((SELECT * FROM Tickets WHERE Tickets.parent_id = ?) sub INNER JOIN CurrentEvents ON sub.event_id = CurrentEvents.event_id) INNER JOIN Providers ON CurrentEvents.provider_id = Providers.id)",
                 new Object[] {id}, new TicketViewMapper());  // Group By would be a nice choice
@@ -40,6 +41,26 @@ public class TicketDao {
         return tickets;
         //TicketView may change, parent_id is not needed
     }
+
+    public List<Ticket> findByEvent(int id){  //checking
+        List <Ticket> tickets = jdbcTemplate.query("SELECT * FROM Tickets WHERE event_id = ?", new Object[] {id}, new TicketMapper());
+        return tickets;
+    }
+
+    static class TicketMapper implements RowMapper<Ticket> {  // Defined static for use in OldTicketDao  //checking
+
+        public Ticket mapRow(ResultSet rs, int rowNum) throws SQLException {
+
+            int ticket_id = rs.getInt("ticket_id");
+            int parent_id = rs.getInt("parent_id");
+            int event_id = rs.getInt("event_id");
+            Ticket ticket = new Ticket(ticket_id, parent_id, event_id);
+
+            return ticket;
+        }
+    }
+    // Probably more methods will be inserted later. Interface could be a choice.
+
 
     static class TicketViewMapper implements RowMapper<TicketView> {  // Defined static for use in OldTicketDao
 
@@ -50,7 +71,7 @@ public class TicketDao {
             int event_id = rs.getInt("event_id");
             String title = rs.getString("title");
             String businessName = rs.getString("businessName");
-            String date = rs.getString("date");
+            Date date = rs.getDate("date");
             int ticket_cost = rs.getInt("ticket_cost");
             TicketView ticket = new TicketView(ticket_id, parent_id, event_id, title, businessName, date, ticket_cost);
 

@@ -4,6 +4,7 @@ import gr.ntua.ece.softeng.kidspiration.CurrentEventView;
 import gr.ntua.ece.softeng.kidspiration.Login;
 import gr.ntua.ece.softeng.kidspiration.Provider;
 import gr.ntua.ece.softeng.kidspiration.User;
+import org.omg.PortableInterceptor.ServerRequestInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -22,38 +23,58 @@ public class ProviderDao implements UserDao<Provider> {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    public void addUser(Provider user) { //checked
-        jdbcTemplate.update("INSERT INTO Providers (username, password, firstname, lastname, email, phone, businessName, bankAccount, profit, rights_code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                user.getUsername(), user.getPassword(), user.getFirstname(), user.getLastname(), user.getEmail(), user.getPhone(), user.getBusinessName(), user.getBankAccount(), user.getProfit(), user.getRights_code());
+    public void addUser(Provider user) { // OK
+        jdbcTemplate.update("INSERT INTO Providers (username, password, firstname, lastname, email, phone, businessName, bankAccount, salt, profit, rights_code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                user.getUsername(), user.getPassword(), user.getFirstname(), user.getLastname(), user.getEmail(), user.getPhone(), user.getBusinessName(), user.getBankAccount(), user.getSalt(),user.getProfit(), user.getRights_code());
         System.out.println("Provider Added!!");
     }
 
-    public Provider validateUser(Login login) { //checked
+    public Provider validateUser(Login login) { // OK
         List <Provider> providers = jdbcTemplate.query("SELECT * FROM Providers WHERE username = ? AND password = ?",
                 new Object[] { login.getUsername(), login.getPassword() }, new ProviderMapper());
         System.out.println("Provider checked for login!");
         return providers.size() > 0 ? providers.get(0) : null;
     }
 
-    public void editUser(Provider user, int id) { // checked
+    public void editUser(Provider user, int id) { // OK
         jdbcTemplate.update("UPDATE Providers SET username = ?, password = ?, firstname = ?, lastname = ?, email = ?, phone = ?, businessName = ?, bankAccount = ?, profit = ?, rights_code = ? WHERE id = ? ",
                 user.getUsername(), user.getPassword(), user.getFirstname(), user.getLastname(), user.getEmail(), user.getPhone(), user.getBusinessName(), user.getBankAccount(), user.getProfit(), user.getRights_code(), id);
         System.out.println("User Updated!!");
     }
 
-    public void deleteUser(int id) { //checked
+    public void editInfo(int id, String firstname, String lastname, String phone, String bankAccount) {
+        jdbcTemplate.update("UPDATE Providers SET firstname = ?, lastname = ?, phone = ?, bankAccount = ? WHERE id = ? ", firstname, lastname, phone, bankAccount, id);
+    }
+
+    public void deleteUser(int id) { // OK
         jdbcTemplate.update("DELETE FROM Providers WHERE id = ? ", id);
         System.out.println("Person Deleted!!");
     }
 
-    public Provider find(int id) {  // checked
+    public Provider find(int id) {  // OK
         Provider user = jdbcTemplate.queryForObject("SELECT * FROM Providers where id = ? ",
                 new Object[] { id }, new ProviderMapper());
 
         return user;
     }
 
-    public List<Provider> findAll() { //checked
+    public Provider findByUsername (String username) { // CHECKING
+
+        List <Provider> users = jdbcTemplate.query("SELECT * FROM Providers where username = ? ",
+                new Object[] { username }, new ProviderMapper());
+
+        return users.size() > 0 ? users.get(0) : null;
+    }
+
+    public Provider findByEmail (String email) { // CHECKING
+
+        List <Provider> users = jdbcTemplate.query("SELECT * FROM Providers where email = ? ",
+                new Object[] { email }, new ProviderMapper());
+
+        return users.size() > 0 ? users.get(0) : null;
+    }
+
+    public List<Provider> findAll() { // OK
         List < Provider > users = jdbcTemplate.query("SELECT * FROM Providers", new ProviderMapper());
         return users;
     }
@@ -71,9 +92,10 @@ public class ProviderDao implements UserDao<Provider> {
             String phone = rs.getString("phone");
             String businessName = rs.getString("businessName");
             String bankAccount = rs.getString("bankAccount");
-            int profit = rs.getInt("profit");
+            String salt = rs.getString("salt");
+            double profit = rs.getDouble("profit");
             byte rights_code = rs.getByte("rights_code");
-            Provider provider = new Provider(id, username, password, firstname, lastname, email, phone, businessName, bankAccount, profit, rights_code);
+            Provider provider = new Provider(id, username, password, firstname, lastname, email, phone, businessName, bankAccount, salt, profit, rights_code);
 
             return provider;
         }
