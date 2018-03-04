@@ -5,6 +5,7 @@ import gr.ntua.ece.softeng.kidspiration.PendingEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import gr.ntua.ece.softeng.kidspiration.CurrentEventView;
 
 import java.util.List;
 
@@ -22,6 +23,11 @@ public class PendingEventService implements EventService<PendingEvent> {
 
     public void editEvent(PendingEvent event, int id) {
 
+    }
+
+    public List<PendingEvent> findWithProvider(int id) {
+        List<PendingEvent> pendingEvents= pendingEventDao.findWithProvider(id);
+        return pendingEvents;
     }
 
     public void deleteEvent(int id) { //checked

@@ -62,8 +62,13 @@ public class CurrentEventService {//implements EventService<CurrentEvent> {
         return currentEventDao.find(id);
     } // OK
 
-    public List<CurrentEventView> findAllViews_ByProviderId(int id) {
-       return null;
+    public List<CurrentEvent> findAllByProvider(int id) {
+         return currentEventDao.findAllByProvider(id);
+    }
+
+    public List<CurrentEventView> findWithProvider(int id) {
+        List<CurrentEventView> currentEvents= currentEventDao.findWithProvider(id);
+        return currentEvents;
     }
 
     public List<CurrentEvent> findWithDate(Date date) {    ///CHECKING
