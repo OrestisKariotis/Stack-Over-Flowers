@@ -79,6 +79,8 @@ public class CurrentEventService {//implements EventService<CurrentEvent> {
         return currentEventDao.findEventPage(id);
     }
 
+    public List<EventPageView> findAllEventPages() { return  currentEventDao.findAllEventPages();}
+
     public List<CurrentEvent> findAll() { // OK
 
         return currentEventDao.findAll();
