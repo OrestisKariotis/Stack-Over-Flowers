@@ -1,9 +1,6 @@
 package gr.ntua.ece.softeng.kidspiration.Controllers;
 
-import gr.ntua.ece.softeng.kidspiration.Elastic;
-import gr.ntua.ece.softeng.kidspiration.Event2;
-import gr.ntua.ece.softeng.kidspiration.EventSearchInfo;
-import gr.ntua.ece.softeng.kidspiration.Location;
+import gr.ntua.ece.softeng.kidspiration.*;
 import org.elasticsearch.search.SearchHit;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +13,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import static gr.ntua.ece.softeng.kidspiration.Services.GeocodingService.geocodingService;
 
 @RestController
 public class EventSearchController {
@@ -36,7 +35,7 @@ public class EventSearchController {
         }
     }
     */
-/*
+
     @RequestMapping(path = "/api/events_search_insert", method = RequestMethod.GET)
     public String insert() {
 
@@ -59,7 +58,7 @@ public class EventSearchController {
         leplak.add(event22);
 
         return "Default event added";
-    } */
+    }
 
     @RequestMapping(path = "/api/events_search", method = RequestMethod.POST)
     public List<Map<String, Object>> search(@RequestBody EventSearchInfo info) {
@@ -70,10 +69,14 @@ public class EventSearchController {
 
         List<Map<String, Object>> res;
 
+        Geocoding geocodedCoordinates = geocodingService(info.getFromLoc());  // CHECK IF OK
+        Location location = new Location(geocodedCoordinates.getLat(), geocodedCoordinates.getLng());
+        System.out.println("Coordinates of event \"" + "\" were set to (" + geocodedCoordinates.getLat() + ", " + geocodedCoordinates.getLng() + ").\n");
+
         //List<String> tags = new ArrayList<>();
         // PROSOXH STO STRING DATES, AYTO PERIMENOUME
-        res = leplak.search(info.getDescription(), info.getCategories(), info.getDistanceInKm(), info.getFromLoc(), 0, 50, info.getAge(), info.getUpperCost(), info.getLowerCost(), info.getDateUpper(), info.getDateLower());
-        //res = leplak.search("παιδια",null, null, null, 0, 50, null, null, null, null, null);
+        res = leplak.search(info.getDescription(), info.getCategories(), info.getDistanceInKm(), location, 0, 50, info.getAge(), info.getUpperCost(), info.getLowerCost(), info.getDateUpper(), info.getDateLower());
+        //res = leplak.search("παιδια και μπαλα και ντοματα",null, null, null, 0, 50, null, null, null, null, null);
         return res;
         //return ResponseEntity.accepted().body(res);
     }

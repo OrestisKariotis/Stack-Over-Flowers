@@ -30,6 +30,13 @@ public class AdminDao {
         return admins.size() > 0 ? admins.get(0) : null;
     }
 
+    public Administrator findByUsername (String username) { // CHECKING
+
+        List <Administrator> users = jdbcTemplate.query("SELECT * FROM Admins where username = ? ",
+                new Object[] { username }, new AdminMapper());
+
+        return users.size() > 0 ? users.get(0) : null;
+    }
 
     class AdminMapper implements RowMapper<Administrator> {
 
@@ -39,8 +46,9 @@ public class AdminDao {
             String username = rs.getString("username");
             String password = rs.getString("password");
             String email = rs.getString("email");
+            String salt = rs.getString("salt");
 
-            Administrator administrator = new Administrator(id, username, password, email);
+            Administrator administrator = new Administrator(id, username, password, email, salt);
 
             return administrator;
         }
