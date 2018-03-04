@@ -6,8 +6,8 @@ public class PendingEventView extends PendingEvent{
 
     String businessName;
 
-    public PendingEventView(int event_id, int provider_id, String title, Date date, String starting_time, String place, String type, int ticket_cost, int initial_ticketsNumber, byte lowestAge, byte highestAge, String description, String businessName) {
-        super(event_id, provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber, lowestAge, highestAge, description);
+    public PendingEventView(int event_id, int provider_id, String title, Date date, String starting_time, String place, String type, int ticket_cost, int initial_ticketsNumber, byte lowestAge, byte highestAge, String description, int numOfPhotos, String businessName) {
+        super(event_id, provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber, lowestAge, highestAge, description, numOfPhotos);
         this.businessName = businessName;
     }
 
