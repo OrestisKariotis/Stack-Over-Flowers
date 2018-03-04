@@ -23,8 +23,8 @@ public class ProviderDao implements UserDao<Provider> {
     JdbcTemplate jdbcTemplate;
 
     public void addUser(Provider user) { // OK
-        jdbcTemplate.update("INSERT INTO Providers (username, password, firstname, lastname, email, phone, businessName, bankAccount, profit, rights_code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                user.getUsername(), user.getPassword(), user.getFirstname(), user.getLastname(), user.getEmail(), user.getPhone(), user.getBusinessName(), user.getBankAccount(), user.getProfit(), user.getRights_code());
+        jdbcTemplate.update("INSERT INTO Providers (username, password, firstname, lastname, email, phone, businessName, bankAccount, salt, profit, rights_code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                user.getUsername(), user.getPassword(), user.getFirstname(), user.getLastname(), user.getEmail(), user.getPhone(), user.getBusinessName(), user.getBankAccount(), user.getSalt(),user.getProfit(), user.getRights_code());
         System.out.println("Provider Added!!");
     }
 
@@ -53,6 +53,22 @@ public class ProviderDao implements UserDao<Provider> {
         return user;
     }
 
+    public Provider findByUsername (String username) { // CHECKING
+
+        List <Provider> users = jdbcTemplate.query("SELECT * FROM Providers where username = ? ",
+                new Object[] { username }, new ProviderMapper());
+
+        return users.size() > 0 ? users.get(0) : null;
+    }
+
+    public Provider findByEmail (String email) { // CHECKING
+
+        List <Provider> users = jdbcTemplate.query("SELECT * FROM Providers where email = ? ",
+                new Object[] { email }, new ProviderMapper());
+
+        return users.size() > 0 ? users.get(0) : null;
+    }
+
     public List<Provider> findAll() { // OK
         List < Provider > users = jdbcTemplate.query("SELECT * FROM Providers", new ProviderMapper());
         return users;
@@ -71,9 +87,10 @@ public class ProviderDao implements UserDao<Provider> {
             String phone = rs.getString("phone");
             String businessName = rs.getString("businessName");
             String bankAccount = rs.getString("bankAccount");
+            String salt = rs.getString("salt");
             double profit = rs.getDouble("profit");
             byte rights_code = rs.getByte("rights_code");
-            Provider provider = new Provider(id, username, password, firstname, lastname, email, phone, businessName, bankAccount, profit, rights_code);
+            Provider provider = new Provider(id, username, password, firstname, lastname, email, phone, businessName, bankAccount, salt, profit, rights_code);
 
             return provider;
         }

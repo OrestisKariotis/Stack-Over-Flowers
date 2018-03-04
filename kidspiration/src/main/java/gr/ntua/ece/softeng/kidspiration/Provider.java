@@ -5,10 +5,14 @@ public class Provider extends PendingProvider {
     private double profit; //could be long, mhpws einai esoda?
     private byte rights_code;
 
-    public Provider(int id, String username, String password, String firstname, String lastname, String email, String phone, String businessName, String bankAccount, double profit, byte rights_code) {
-        super(id, username, password, firstname, lastname, email, phone, businessName, bankAccount);
+    public Provider(int id, String username, String password, String firstname, String lastname, String email, String phone, String businessName, String bankAccount, String salt,double profit, byte rights_code) {
+        super(id, username, password, firstname, lastname, email, phone, businessName, bankAccount, salt);
         this.profit = profit;
         this.rights_code = rights_code;
+    }
+
+    public Provider() {
+
     }
 
     public double getProfit() {

@@ -2,12 +2,17 @@ package gr.ntua.ece.softeng.kidspiration.Services;
 
 //import java.util.ArrayList;
 
+import com.sun.glass.ui.Pixels;
+import com.sun.org.apache.bcel.internal.generic.FieldOrMethod;
 import gr.ntua.ece.softeng.kidspiration.*;
 import gr.ntua.ece.softeng.kidspiration.Services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -53,7 +58,7 @@ public class ScheduledTasks {
 
     /*  3234baa74d2d8ed4137e582f5cf184f4e310b710 <-- What the bloody hell is this turd I found?
     Occured at pull, 02/03 at 0:15, refer to http://prntscr.com/ilqo5v.  *** */
-    @Scheduled(fixedRate = 30000)           //@Scheduled(cron = "0 30 2 * * ?") /* Test fixed time *** */ /* Is this fucker not a service */
+//    @Scheduled(fixedRate = 30000)           //@Scheduled(cron = "0 30 2 * * ?") /* Test fixed time *** */ /* Is this fucker not a service */
     public void dailyUpdates() {
         System.out.println("Eisai malakas kai de tha treksei pote");
         Calendar cal = Calendar.getInstance(); /* get now in calendar format */
@@ -138,7 +143,7 @@ public class ScheduledTasks {
             /* age all events that transpired yesterday */
 
             int currentEvent_id = myList.get(i).getEvent_id();
-            OldEvent oldEvent = new OldEvent(0, myList.get(i).getProvider_id(), myList.get(i).getTitle(), myList.get(i).getDate(), myList.get(i).getStarting_time(), myList.get(i).getPlace(), myList.get(i).getType(), myList.get(i).getTicket_cost(), myList.get(i).getInitial_ticketsNumber(), myList.get(i).getInitial_ticketsNumber()-myList.get(i).getAvailable_ticketsNumber());
+            OldEvent oldEvent = new OldEvent(0, myList.get(i).getProvider_id(), myList.get(i).getTitle(), myList.get(i).getDate(), myList.get(i).getStarting_time(), myList.get(i).getPlace(), myList.get(i).getCategories(), myList.get(i).getTicket_cost(), myList.get(i).getInitial_ticketsNumber(), myList.get(i).getInitial_ticketsNumber()-myList.get(i).getAvailable_ticketsNumber());
             int oldEvent_id = oldEventService.addOldEvent(oldEvent); /* save event_id for later on (tickets' aging */
             System.out.println("Fuck my life (I age)");
 
@@ -165,11 +170,27 @@ public class ScheduledTasks {
         System.out.println(date);
         sDate = new java.sql.Date(date.getTime());  /* make usable sql.Date */
         oldEventService.deleteWithDate(sDate);
+        /* ELASTIC, PLAKAS SAID TO TRUST HIM*/
+        utilDate = cal.getTime();
+        Format formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String s = formatter.format(utilDate);
+        System.out.println(s);
+
+        Elastic leplak = new Elastic();
+        leplak.setup("localhost", 9200, "kids3");
+        try {
+            List<String> list = leplak.searchIdsToDelee(s);
+            leplak.bulkedDelete(list);
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
+            System.out.println("Elastic Error");
+        }
     }
 
 /*  3234baa74d2d8ed4137e582f5cf184f4e310b710 <-- What the bloody hell is this turd I found?
     Occured at pull, 02/03 at 0:15, refer to http://prntscr.com/ilqo5v.  *** */
-    @Scheduled(fixedRate = 62000)       /* make it monthly */    /* for every start of the month */
+//    @Scheduled(fixedRate = 62000)       /* make it monthly */    /* for every start of the month */
     public void monthlyResets(){
         Calendar cal = Calendar.getInstance();
         MonthReference monthReference= monthReferenceService.find(cal.get(Calendar.MONTH));

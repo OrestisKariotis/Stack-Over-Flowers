@@ -9,6 +9,10 @@ public class ParentView extends User{
         this.wallet = wallet;
     }
 
+    public ParentView() {
+
+    }
+
     public int getWallet() {
         return wallet;
     }

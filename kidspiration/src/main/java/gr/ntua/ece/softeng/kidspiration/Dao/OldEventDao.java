@@ -25,7 +25,7 @@ public class OldEventDao implements EventDao<OldEvent> { // CHECKING
     public int addOldEvent(OldEvent event) {
         System.out.println("Now we add the event to the list of old events!");
         jdbcTemplate.update("INSERT INTO OldEvents (event_id, provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber, sold_ticketsNumber) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                event.getEvent_id(), event.getProvider_id(), event.getTitle(), event.getDate(), event.getStarting_time(), event.getPlace(), event.getType(), event.getTicket_cost(), event.getInitial_ticketsNumber(), event.getSold_ticketsNumber());
+                event.getEvent_id(), event.getProvider_id(), event.getTitle(), event.getDate(), event.getStarting_time(), event.getPlace(), event.getCategories(), event.getTicket_cost(), event.getInitial_ticketsNumber(), event.getSold_ticketsNumber());
         //OldEvent temp =  jdbcTemplate.queryForObject("SELECT * FROM OldEvents WHERE event_id = (SELECT MAX(event_id) FROM kidspiration..oldevents)", new OldEventMapper());
         OldEvent temp =  jdbcTemplate.queryForObject("SELECT * FROM OldEvents ORDER BY event_id DESC LIMIT 1", new OldEventMapper());
         return temp.getEvent_id();
@@ -34,7 +34,7 @@ public class OldEventDao implements EventDao<OldEvent> { // CHECKING
     public void editEvent(OldEvent event, int event_id) {  //checking
         System.out.println("Entering CurrentEvent base for edit");
         jdbcTemplate.update("UPDATE OldEvents SET  title = ?, date = ?, starting_time = ?, place = ?, type = ?, ticket_cost = ?, initial_ticketsNumber = ?, sold_ticketsNumber = ? WHERE event_id = ? ",
-                event.getTitle() , event.getDate(), event.getStarting_time(), event.getPlace(), event.getType(), event.getTicket_cost(), event.getInitial_ticketsNumber(), event.getSold_ticketsNumber(), event_id);
+                event.getTitle() , event.getDate(), event.getStarting_time(), event.getPlace(), event.getCategories(), event.getTicket_cost(), event.getInitial_ticketsNumber(), event.getSold_ticketsNumber(), event_id);
         System.out.println("CurrentEvent Base edited!!");
 
         //event_id can be omitted, already included in event object

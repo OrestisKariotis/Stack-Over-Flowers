@@ -15,6 +15,10 @@ public class PendingEvent extends Event{
         this.description = description;
     }
 
+    public PendingEvent() {
+
+    }
+
     public byte getLowestAge() {
         return lowestAge;
     }

@@ -22,8 +22,8 @@ public class PendingProviderDao implements UserDao<PendingProvider>{
     JdbcTemplate jdbcTemplate;
 
     public void addUser(PendingProvider user) {  // OK
-        jdbcTemplate.update("INSERT INTO PendingProviders (username, password, firstname, lastname, email, phone, businessName, bankAccount) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-                user.getUsername(), user.getPassword(), user.getFirstname(), user.getLastname(), user.getEmail(), user.getPhone(), user.getBusinessName(), user.getBankAccount());
+        jdbcTemplate.update("INSERT INTO PendingProviders (username, password, firstname, lastname, email, phone, businessName, bankAccount, salt) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                user.getUsername(), user.getPassword(), user.getFirstname(), user.getLastname(), user.getEmail(), user.getPhone(), user.getBusinessName(), user.getBankAccount(), user.getSalt());
         System.out.println("User Added!!");
     }
 
@@ -57,6 +57,14 @@ public class PendingProviderDao implements UserDao<PendingProvider>{
         return users.size() > 0 ? users.get(0) : null;
     }
 
+    public PendingProvider findByEmail (String email) { // CHECKING
+
+        List <PendingProvider> users = jdbcTemplate.query("SELECT * FROM PendingProviders where email = ? ",
+                new Object[] { email }, new PendingProviderMapper());
+
+        return users.size() > 0 ? users.get(0) : null;
+    }
+
     public List <PendingProvider> findAll() { // OK
         List < PendingProvider > users = jdbcTemplate.query("SELECT * FROM PendingProviders", new PendingProviderMapper());
         return users;
@@ -77,7 +85,8 @@ public class PendingProviderDao implements UserDao<PendingProvider>{
             String phone = rs.getString("phone");
             String businessName = rs.getString("businessName");
             String bankAccount = rs.getString("bankAccount");
-            PendingProvider provider = new PendingProvider(id, username, password, firstname, lastname, email, phone, businessName, bankAccount);
+            String salt = rs.getString("salt");
+            PendingProvider provider = new PendingProvider(id, username, password, firstname, lastname, email, phone, businessName, bankAccount, salt);
 
             return provider;
         }

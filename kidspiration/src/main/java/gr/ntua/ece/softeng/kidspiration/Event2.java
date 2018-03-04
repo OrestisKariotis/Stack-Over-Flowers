@@ -1,93 +1,45 @@
 package gr.ntua.ece.softeng.kidspiration;
 
-import java.util.List;
-
-import org.json.JSONArray;
-
 public class Event2 {
 
-//   private int event_id; // not-initialised
-//    private int provider_id;
     private String title;
+    private int event_id; //gia sql
     private String date; //could be date?
     private String starting_time;
-    private String desc;
-    private List<String> type;
+    private String description;
+    private String categories;  // ena string tlk prepei na allaksw ta panta
     private int ticket_cost;
-    private int age;
-//    private int initial_ticketsNumber;
     private Location location ;
-    
-    
-    public Event2(String title) {
-    	
-    	  this.title = title;
-    	
-    }
+    private int lowestAge ;	//
+    private int highestAge;		//ta low kai high pedia gia to serch
 
-    public Event2( String title, String date, List<String> type, int ticket_cost,Location loc, String desc,  int age) {
- //       this.event_id = event_id;
- //       this.provider_id = provider_id;
+    public Event2(int sqlid ,String title, String date, String type, int ticket_cost,Location loc, String desc , int lowage,int highage,String starting_time) {
         this.title = title;
         this.date = date;
-   //   this.starting_time = starting_time;
-        this.desc=desc;
-        this.type = type;
-        this.ticket_cost = ticket_cost;
-  //    this.initial_ticketsNumber = initial_ticketsNumber;
-        this.location =loc;
-        this.age=age;
-        
-    }
-
-//    public int getEvent_id() {
-//        return event_id;
-//    }
-
-//    public void setEvent_id(int event_id) {
-//        this.event_id = event_id;
-//    }
-
-//    public int getProvider_id() {
-//        return provider_id;
-//    }
-
-//    public void setProvider_id(int provider_id) {
-//        this.provider_id = provider_id;
-//    }
-
-    
-    
-    public String getStarting_time() {
-        return starting_time;
-    }
-
-    public void setStarting_time(String starting_time) {
         this.starting_time = starting_time;
-}
-    
-    
-    
-    
-    public Location getLoc() {
-        return location;
+        this.description=desc;
+        this.event_id=sqlid;
+        this.lowestAge=lowage ;
+        this.highestAge=highage;
+        this.categories = type;
+        this.ticket_cost = ticket_cost;
+        this.location =loc;
     }
-    
-    public void setLoc(Location loc) {
-        this.location = loc;
-    }
-    
-    
-    
-    
-    
-    
+
     public String getTitle() {
         return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public int getEvent_id() {
+        return event_id;
+    }
+
+    public void setEvent_id(int event_id) {
+        this.event_id = event_id;
     }
 
     public String getDate() {
@@ -98,48 +50,28 @@ public class Event2 {
         this.date = date;
     }
 
-    public String getDesc() {
-       return desc;
-   }
-
-    public void setDesc(String desc) {
-        this.desc= desc;
+    public String getStarting_time() {
+        return starting_time;
     }
 
-/**    public String getPlace() {
-        return place;
+    public void setStarting_time(String starting_time) {
+        this.starting_time = starting_time;
     }
 
-    public void setPlace(String place) {
-        this.place = place;
+    public String getDescription() {
+        return description;
     }
 
-**/
-    public List<String> getType() {  // to type einai lista apo strings
-        return type;
-    }
-    
-    
-    
-
-    public void addType(String tagg) { //gia eukolh pros8esh sth lista twn taggs
-        this.type.add(tagg);
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    
-    public JSONArray fromListTojson() {
-    
-
-    	JSONArray mJSONArray = new JSONArray((this.type));
-		return mJSONArray;
-    	
+    public String getCategories() {
+        return categories;
     }
 
-    
-    
-
-    public void setType(List<String> type) {
-        this.type = type;
+    public void setCategories(String categories) {
+        this.categories = categories;
     }
 
     public int getTicket_cost() {
@@ -149,25 +81,29 @@ public class Event2 {
     public void setTicket_cost(int ticket_cost) {
         this.ticket_cost = ticket_cost;
     }
-    
-    
-    public int getAge() {
-        return age;
+
+    public Location getLocation() {
+        return location;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setLocation(Location location) {
+        this.location = location;
     }
-    
-    
-    
-    
 
-  //  public int getInitial_ticketsNumber() {
-   //     return initial_ticketsNumber;
-   // }
+    public int getLowestAge() {
+        return lowestAge;
+    }
 
-  //  public void setInitial_ticketsNumber(int initial_ticketsNumber) {
-  //      this.initial_ticketsNumber = initial_ticketsNumber;
-  //  }
+    public void setLowestAge(int lowestAge) {
+        this.lowestAge = lowestAge;
+    }
+
+    public int getHighestAge() {
+        return highestAge;
+    }
+
+    public void setHighestAge(int highestAge) {
+        this.highestAge = highestAge;
+    }
 }
+

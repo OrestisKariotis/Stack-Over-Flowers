@@ -45,8 +45,8 @@ public class ProviderProfileController {
     public Provider ProviderProfile_PersonalInfoEdit_Private(@RequestParam String id, @RequestParam String username, @RequestParam String password, @RequestParam String firstname, @RequestParam String lastname, @RequestParam String email, @RequestParam String phone, @RequestParam String businessName, @RequestParam String bankAccount, @RequestParam String profit, @RequestParam String rights_code) {
         //if not all parameters can change, then Provider object sending is redundant. Later, we 'll use JSON commands
         //to get only the things that are about to change, find will be needed then to get Provider Object or a new more reduced editUser
-        Provider provider = new Provider(Integer.parseInt(id), username, password, firstname, lastname, email, phone, businessName, bankAccount, Integer.parseInt(profit), Byte.parseByte(rights_code));
-        // Need to know what can we change and what not. These will be passed to EditUser
+        Provider provider = new Provider(Integer.parseInt(id), username, password, firstname, lastname, email, phone, businessName, bankAccount, "hdbhe",Integer.parseInt(profit), Byte.parseByte(rights_code));
+        // Need to know what can we change and what not. These will be passed to EditUser  // TAKE CARE OF SALT!!!!
         providerService.editUser(provider, Integer.parseInt(id));
         return provider;
     }
