@@ -1,5 +1,6 @@
 package gr.ntua.ece.softeng.kidspiration;
 
+
 public class Parent extends ParentView{
 
     private String password;

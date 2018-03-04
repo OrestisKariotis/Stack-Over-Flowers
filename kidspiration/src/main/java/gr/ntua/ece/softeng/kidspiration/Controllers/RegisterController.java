@@ -32,6 +32,7 @@ public class RegisterController {
     @RequestMapping(path = "/parent", method = RequestMethod.POST) //POST method
     public ResponseEntity<?> Parent_registration(@RequestBody Parent parent) {//@RequestParam String username, @RequestParam String password, @RequestParam String firstname, @RequestParam String lastname, @RequestParam String email, @RequestParam String phone) { //Of course password will be encrypted
 
+        System.out.println(parent.getPassword());
         System.out.println("Enter: Parent Registration");
 
         //Parent parent;

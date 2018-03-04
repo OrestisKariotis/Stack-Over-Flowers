@@ -25,6 +25,7 @@ public class ProviderService { //implements UserService<Provider> {
 
     public void addUser(Provider user) {
         providerDao.addUser(user);
+        user = providerDao.findByUsername(user.getUsername());
         MonthProviderReference monthProviderReference=new MonthProviderReference(0, user.getId(), 0, 0, 0, 0, 0 , 0, 0, 0, 0, 0, 0, 0);
         monthProviderReferenceDao.addMonthProviderReference(monthProviderReference);
     }  // OK

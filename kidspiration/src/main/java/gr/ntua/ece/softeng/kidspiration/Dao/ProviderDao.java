@@ -23,7 +23,7 @@ public class ProviderDao implements UserDao<Provider> {
     JdbcTemplate jdbcTemplate;
 
     public void addUser(Provider user) { // OK
-        jdbcTemplate.update("INSERT INTO Providers (username, password, firstname, lastname, email, phone, businessName, bankAccount, salt, profit, rights_code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        jdbcTemplate.update("INSERT INTO Providers (username, password, firstname, lastname, email, phone, businessName, bankAccount, salt, profit, rights_code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 user.getUsername(), user.getPassword(), user.getFirstname(), user.getLastname(), user.getEmail(), user.getPhone(), user.getBusinessName(), user.getBankAccount(), user.getSalt(),user.getProfit(), user.getRights_code());
         System.out.println("Provider Added!!");
     }

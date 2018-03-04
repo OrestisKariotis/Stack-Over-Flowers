@@ -92,6 +92,12 @@ public class CurrentEventDao implements EventDao<CurrentEvent> {
         return events.size() > 0 ? events.get(0) : null;
     }
 
+    public List<EventPageView> findAllEventPages() {
+        List <EventPageView> events = jdbcTemplate.query("select event_id, provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber, available_ticketsNumber, lowestAge, highestAge, latitude, longitude, description, businessName from ((SELECT * FROM currentevents) sub INNER JOIN providers ON sub.provider_id = providers.id)",
+                new EventPageViewMapper());  // Group By would be a nice choice
+        return events;
+    }
+
     public void updateNumberOfTickets(int id, int count) { //checked
         System.out.println("Changing number of tickets");
         jdbcTemplate.update("UPDATE CurrentEvents SET  available_ticketsNumber = ? WHERE event_id = ? ", count, id);
