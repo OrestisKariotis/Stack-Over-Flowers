@@ -6,10 +6,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import java.util.Date;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
+
 import java.util.List;
 
 @Repository
@@ -47,8 +48,14 @@ public class OldEventDao implements EventDao<OldEvent> { // CHECKING
         jdbcTemplate.update("DELETE FROM OldEvents WHERE date = ?", date);
     }
 
-    public OldEvent find(int id) {   // checking
+    public OldEvent find(int id) {
         return null;
+    }
+
+    public List<OldEvent> findWithMonth(int month, int provider_id) {   // checking
+        List<OldEvent> oldEvents=jdbcTemplate.query("SELECT * FROM OldEvents WHERE MONTH(date)= ? AND provider_id= ? ",
+                new Object[] { month, provider_id }, new OldEventMapper());
+        return oldEvents;
     }
 
     public List<OldEvent> findWithDate(Date date) {

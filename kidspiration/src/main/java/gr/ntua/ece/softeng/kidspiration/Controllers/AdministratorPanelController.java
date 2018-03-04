@@ -32,6 +32,13 @@ public class AdministratorPanelController {
     @Autowired
     CurrentEventService currentEventService;
 
+
+    @Autowired
+    MonthReferenceService monthReferenceService;
+
+    @Autowired
+    StatsService statsService;
+
     @Autowired
     private JavaMailSender sender;
 
@@ -165,4 +172,22 @@ public class AdministratorPanelController {
 
         sender.send(message);
     }
+
+    @RequestMapping(path = "/month_report", method = RequestMethod.GET)
+
+    public MonthReference sendMonthReference(@RequestParam String month) {
+        return monthReferenceService.find(Integer.parseInt(month));
+    }
+
+    @RequestMapping(path = "/Stats", method = RequestMethod.GET)
+
+    public StatsView sendStats() {
+        int numOfParents=statsService.numOfParents();
+        int numOfProviders=statsService.numOfProviders();
+        MonthReference monthReference=monthReferenceService.find(12);
+        double profit=monthReference.getProfit();
+        StatsView statsView=new StatsView(numOfParents, numOfProviders, profit);
+        return statsView;
+    }
+
 }

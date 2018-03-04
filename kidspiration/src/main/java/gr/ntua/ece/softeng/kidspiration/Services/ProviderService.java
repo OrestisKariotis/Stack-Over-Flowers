@@ -7,6 +7,8 @@ import gr.ntua.ece.softeng.kidspiration.Provider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import gr.ntua.ece.softeng.kidspiration.Dao.MonthProviderReferenceDao;
+import gr.ntua.ece.softeng.kidspiration.MonthProviderReference;
 
 import java.util.List;
 
@@ -17,8 +19,13 @@ public class ProviderService { //implements UserService<Provider> {
     @Autowired
     ProviderDao providerDao;
 
+    @Autowired
+    MonthProviderReferenceDao monthProviderReferenceDao;
+
     public void addUser(Provider user) {
         providerDao.addUser(user);
+        MonthProviderReference monthProviderReference=new MonthProviderReference(0, user.getId(), 0, 0, 0, 0, 0 , 0, 0, 0, 0, 0, 0, 0);
+        monthProviderReferenceDao.addMonthProviderReference(monthProviderReference);
     }  // OK
 
     public Provider validateUser(Login login) {

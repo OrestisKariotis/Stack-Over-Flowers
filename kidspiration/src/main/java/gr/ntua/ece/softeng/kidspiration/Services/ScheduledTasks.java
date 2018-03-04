@@ -80,56 +80,56 @@ public class ScheduledTasks {
             p = (Provider) providerService.find(myList.get(i).getProvider_id());
             double temp = p.getProfit();
 
-            p.setProfit(temp+myList.get(i).getTicket_cost()*0.9*(myList.get(i).getInitial_ticketsNumber()-myList.get(i).getAvailable_ticketsNumber()));
+            p.setProfit(temp+(myList.get(i).getTicket_cost()*0.9*(myList.get(i).getInitial_ticketsNumber()-myList.get(i).getAvailable_ticketsNumber()))/100);
             providerService.editUser(p, p.getId());  //vres kai enhmerwse ta esoda tou en logw provider dld esoda=esoda+0.9*myList.get(i).cost
 
             /* update our monthly expenses */
             temp = monthReference.getExpenses();
-            monthReference.setExpenses(temp+myList.get(i).getTicket_cost()*0.9*(myList.get(i).getInitial_ticketsNumber()-myList.get(i).getAvailable_ticketsNumber()));
+            monthReference.setExpenses(temp+(myList.get(i).getTicket_cost()*0.9*(myList.get(i).getInitial_ticketsNumber()-myList.get(i).getAvailable_ticketsNumber()))/100);
             monthReferenceService.editMonthReference(monthReference); //vres kai enhmerwse th vash gia ta eksoda tou en logw mhna!
 
             temp = monthReferenceTotal.getExpenses();
-            monthReferenceTotal.setExpenses(temp + myList.get(i).getTicket_cost() * 0.9 * (myList.get(i).getInitial_ticketsNumber() - myList.get(i).getAvailable_ticketsNumber()));
+            monthReferenceTotal.setExpenses(temp + (myList.get(i).getTicket_cost() * 0.9 * (myList.get(i).getInitial_ticketsNumber() - myList.get(i).getAvailable_ticketsNumber()))/100);
             monthReferenceService.editMonthReference(monthReferenceTotal);
 
             /*update provider's monthly report */
             monthProviderReference = monthProviderReferenceService.find(p.getId()); //na paei sto monthproviderservice ***
             if ((cal.get(Calendar.MONTH)) == 0) {
                 temp = monthProviderReference.getJanuary();
-                monthProviderReference.setJanuary(temp + myList.get(i).getTicket_cost() * 0.9 * (myList.get(i).getInitial_ticketsNumber() - myList.get(i).getAvailable_ticketsNumber()));
+                monthProviderReference.setJanuary(temp + (myList.get(i).getTicket_cost() * 0.9 * (myList.get(i).getInitial_ticketsNumber() - myList.get(i).getAvailable_ticketsNumber()))/100);
             } else if ((cal.get(Calendar.MONTH)) == 1) {
                 temp = monthProviderReference.getFebruary();
-                monthProviderReference.setFebruary(temp + myList.get(i).getTicket_cost() * 0.9 * (myList.get(i).getInitial_ticketsNumber() - myList.get(i).getAvailable_ticketsNumber()));
+                monthProviderReference.setFebruary(temp + (myList.get(i).getTicket_cost() * 0.9 * (myList.get(i).getInitial_ticketsNumber() - myList.get(i).getAvailable_ticketsNumber()))/100);
             } else if ((cal.get(Calendar.MONTH)) == 2) {
                 temp = monthProviderReference.getMarch();
-                monthProviderReference.setMarch(temp + myList.get(i).getTicket_cost() * 0.9 * (myList.get(i).getInitial_ticketsNumber() - myList.get(i).getAvailable_ticketsNumber()));
+                monthProviderReference.setMarch(temp + (myList.get(i).getTicket_cost() * 0.9 * (myList.get(i).getInitial_ticketsNumber() - myList.get(i).getAvailable_ticketsNumber()))/100);
             } else if ((cal.get(Calendar.MONTH)) == 3) {
                 temp = monthProviderReference.getApril();
-                monthProviderReference.setApril(temp + myList.get(i).getTicket_cost() * 0.9 * (myList.get(i).getInitial_ticketsNumber() - myList.get(i).getAvailable_ticketsNumber()));
+                monthProviderReference.setApril(temp + (myList.get(i).getTicket_cost() * 0.9 * (myList.get(i).getInitial_ticketsNumber() - myList.get(i).getAvailable_ticketsNumber()))/100);
             } else if ((cal.get(Calendar.MONTH)) == 4) {
                 temp = monthProviderReference.getMay();
-                monthProviderReference.setMay(temp + myList.get(i).getTicket_cost() * 0.9 * (myList.get(i).getInitial_ticketsNumber() - myList.get(i).getAvailable_ticketsNumber()));
+                monthProviderReference.setMay(temp + (myList.get(i).getTicket_cost() * 0.9 * (myList.get(i).getInitial_ticketsNumber() - myList.get(i).getAvailable_ticketsNumber()))/100);
             } else if ((cal.get(Calendar.MONTH)) == 5) {
                 temp = monthProviderReference.getJune();
-                monthProviderReference.setJune(temp + myList.get(i).getTicket_cost() * 0.9 * (myList.get(i).getInitial_ticketsNumber() - myList.get(i).getAvailable_ticketsNumber()));
+                monthProviderReference.setJune(temp + (myList.get(i).getTicket_cost() * 0.9 * (myList.get(i).getInitial_ticketsNumber() - myList.get(i).getAvailable_ticketsNumber()))/100);
             } else if ((cal.get(Calendar.MONTH)) == 6) {
                 temp = monthProviderReference.getJuly();
-                monthProviderReference.setJuly(temp + myList.get(i).getTicket_cost() * 0.9 * (myList.get(i).getInitial_ticketsNumber() - myList.get(i).getAvailable_ticketsNumber()));
+                monthProviderReference.setJuly(temp + (myList.get(i).getTicket_cost() * 0.9 * (myList.get(i).getInitial_ticketsNumber() - myList.get(i).getAvailable_ticketsNumber()))/100);
             } else if ((cal.get(Calendar.MONTH)) == 7) {
                 temp = monthProviderReference.getAugust();
-                monthProviderReference.setAugust(temp + myList.get(i).getTicket_cost() * 0.9 * (myList.get(i).getInitial_ticketsNumber() - myList.get(i).getAvailable_ticketsNumber()));
+                monthProviderReference.setAugust(temp + (myList.get(i).getTicket_cost() * 0.9 * (myList.get(i).getInitial_ticketsNumber() - myList.get(i).getAvailable_ticketsNumber()))/100);
             } else if ((cal.get(Calendar.MONTH)) == 8) {
                 temp = monthProviderReference.getSeptember();
-                monthProviderReference.setSeptember(temp + myList.get(i).getTicket_cost() * 0.9 * (myList.get(i).getInitial_ticketsNumber() - myList.get(i).getAvailable_ticketsNumber()));
+                monthProviderReference.setSeptember(temp + (myList.get(i).getTicket_cost() * 0.9 * (myList.get(i).getInitial_ticketsNumber() - myList.get(i).getAvailable_ticketsNumber()))/100);
             } else if ((cal.get(Calendar.MONTH)) == 9) {
                 temp = monthProviderReference.getOctomber();
-                monthProviderReference.setOctomber(temp + myList.get(i).getTicket_cost() * 0.9 * (myList.get(i).getInitial_ticketsNumber() - myList.get(i).getAvailable_ticketsNumber()));
+                monthProviderReference.setOctomber(temp + (myList.get(i).getTicket_cost() * 0.9 * (myList.get(i).getInitial_ticketsNumber() - myList.get(i).getAvailable_ticketsNumber()))/100);
             } else if ((cal.get(Calendar.MONTH)) == 10) {
                 temp = monthProviderReference.getNovember();
-                monthProviderReference.setNovember(temp + myList.get(i).getTicket_cost() * 0.9 * (myList.get(i).getInitial_ticketsNumber() - myList.get(i).getAvailable_ticketsNumber()));
+                monthProviderReference.setNovember(temp + (myList.get(i).getTicket_cost() * 0.9 * (myList.get(i).getInitial_ticketsNumber() - myList.get(i).getAvailable_ticketsNumber()))/100);
             } else if ((cal.get(Calendar.MONTH)) == 11) {
                 temp = monthProviderReference.getDecember();
-                monthProviderReference.setDecember(temp + myList.get(i).getTicket_cost() * 0.9 * (myList.get(i).getInitial_ticketsNumber() - myList.get(i).getAvailable_ticketsNumber()));
+                monthProviderReference.setDecember(temp + (myList.get(i).getTicket_cost() * 0.9 * (myList.get(i).getInitial_ticketsNumber() - myList.get(i).getAvailable_ticketsNumber()))/100);
             }
 
 

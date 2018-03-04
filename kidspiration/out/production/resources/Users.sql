@@ -11,6 +11,8 @@ DROP TABLE IF EXISTS kidspiration.Providers;
 
 DROP TABLE IF EXISTS kidspiration.MonthReferences; /* ADDED */
 
+DROP TABLE IF EXISTS kidspiration.Admins;
+
 CREATE TABLE kidspiration.Parents (
   `id`        INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `username`  VARCHAR(45) NOT NULL,
@@ -80,6 +82,15 @@ CREATE TABLE kidspiration.MonthProviderReferences (
   FOREIGN KEY (`provider_id`) REFERENCES kidspiration.Providers(`id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) AUTO_INCREMENT = 1;
 
+CREATE TABLE kidspiration.Admins (
+  `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `username`  VARCHAR(45) NOT NULL,
+  `password`  VARCHAR(45) NOT NULL,
+  `email`     VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) AUTO_INCREMENT = 1;
+
+
 
 INSERT INTO kidspiration.Providers(username, password, firstname, lastname, email, phone, businessName, bankAccount, profit, rights_code) VALUES("manolman", "test", "Manolis", "Vardas", "mgvardas@hotmail.com", "6981913215", "ACME", "husad8773739", 0, 0),
   ("detectiveal", "test1", "Alexandra", "Vioni", "detectiveal@hotmail.com", "6940422100", "JUPI", "efg934huf3", 0, 2), ("gvoutsi", "test2", "Giannis", "Voutsinas", "gvoutsi@yahoo.gr", "6981930582", "3D", "dh4h8huih39h5", 0, 0);
@@ -92,4 +103,5 @@ INSERT INTO kidspiration.MonthReferences(month, earnings, expenses, profit) VALU
 
 INSERT INTO kidspiration.MonthProviderReferences(provider_id, january_profit, february_profit, march_profit, april_profit, may_profit, june_profit, july_profit, august_profit, september_profit, octomber_profit, november_profit, december_profit) VALUES (1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), (2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), (3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
+INSERT INTO kidspiration.Admins(username, password, email) VALUES  ("Alafouzos", "Tweety13", "PaoSkai");
 /* ADDED, WILL BE CHANGED BY GIANNIS - ORESTIS */
