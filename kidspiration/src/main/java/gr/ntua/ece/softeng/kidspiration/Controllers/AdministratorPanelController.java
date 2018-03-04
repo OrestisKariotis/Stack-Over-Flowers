@@ -44,7 +44,7 @@ public class AdministratorPanelController {
     private JavaMailSender sender;
 
     @RequestMapping(path = "/parents", method = RequestMethod.GET) //OK
-    public List<Parent> AllParents() {  // Check if ParentView should be used
+    public List<Parent> AllParents() {  // PARENT VIEW 2 SHOULD BE MADE
 
         try{
             sendEmail();
@@ -57,21 +57,22 @@ public class AdministratorPanelController {
         return parentService.findAll();
     }
 
-    @RequestMapping(path = "/parents/ban", method = RequestMethod.GET)  //could be POST method!!! //will be parametric to id // OK
-    public Parent BanParent(@RequestParam String id, @RequestParam String ban) {
-        return parentService.changeRights(Integer.parseInt(id), Boolean.parseBoolean(ban));
+    @RequestMapping(path = "/parents/ban", method = RequestMethod.POST)  //POST method // OK
+    public Parent BanParent(@RequestBody Parent parent) {
+        return parentService.changeRights(parent.getId(), parent.isBan());
     }
 
-    @RequestMapping(path = "/parents/reset_password", method = RequestMethod.GET) //could be PostMethod or PUT? // OK
-    public String ParentPasswordReset(@RequestParam String id) {
+    @RequestMapping(path = "/parents/reset_password", method = RequestMethod.POST) //could be PostMethod or PUT? // OK
+    public String ParentPasswordReset(@RequestBody Parent parent) {
         // unique string generation for unique URL in email
         //email sent
+        System.out.println(parent.getId());
         return "Password Reset. Please follow above URL";
     }
 
-    @RequestMapping(path = "/parents/delete", method = RequestMethod.GET) // OK
-    public String ParentDelete(@RequestParam String id) {
-        parentService.deleteUser(Integer.parseInt(id));
+    @RequestMapping(path = "/parents/delete", method = RequestMethod.POST) // OK
+    public String ParentDelete(@RequestBody Parent parent) {
+        parentService.deleteUser(parent.getId());
         return "Parent deleted successfully";
     }
 
@@ -80,21 +81,22 @@ public class AdministratorPanelController {
         return providerService.findAll();
     }
 
-    @RequestMapping(path = "/providers/rights", method = RequestMethod.GET)  //could be POST method!!! //will be parametric to id // OK
-    public Provider BanProvider(@RequestParam String id, @RequestParam String rights_code) {
-        return providerService.changeRights(Integer.parseInt(id), Byte.parseByte(rights_code));
+    @RequestMapping(path = "/providers/rights", method = RequestMethod.POST)  //POST method!!!
+    public Provider BanProvider(@RequestBody Provider provider) {
+        return providerService.changeRights(provider.getId(), provider.getRights_code());
     }
 
-    @RequestMapping(path = "/providers/reset_password", method = RequestMethod.GET) //could be PostMethod or PUT? // OK
-    public String ProviderPasswordReset(@RequestParam String id) {
+    @RequestMapping(path = "/providers/reset_password", method = RequestMethod.POST) //could be PostMethod or PUT? // OK
+    public String ProviderPasswordReset(@RequestBody Provider provider) {
         // unique string generation for unique URL in email
         //email sent
+        System.out.println(provider.getId());
         return "Password Reset. Please follow above URL";
     }
 
-    @RequestMapping(path = "/providers/delete", method = RequestMethod.GET) // OK
-    public String ProviderDelete(@RequestParam String id) {
-        providerService.deleteUser(Integer.parseInt(id));
+    @RequestMapping(path = "/providers/delete", method = RequestMethod.POST) // OK
+    public String ProviderDelete(@RequestBody Provider provider) {
+        providerService.deleteUser(provider.getId());
         return "Provider deleted successfully";
     }
 
@@ -103,27 +105,28 @@ public class AdministratorPanelController {
         return pendingProviderService.findAll();
     }
 
-    @RequestMapping(path = "/pending_providers/accept", method = RequestMethod.GET) //could be POST or PUT method // OK
-    public String PendingProvidersAccept(@RequestParam String id) {
+    @RequestMapping(path = "/pending_providers/accept", method = RequestMethod.POST) //could be POST or PUT method // OK
+    public String PendingProvidersAccept(@RequestBody PendingProvider pendingProvider) {
 
-        PendingProvider provider =  pendingProviderService.find(Integer.parseInt(id)); //we can have whole Object from frontend since AllPendingProviders has been executed
+        if ((pendingProvider.getPhone()).equals("0")) { //Decline
+            pendingProviderService.deleteUser(pendingProvider.getId());
+            return "Pending provider got declined";
+        }
+        else {// phone == 1 // Accept
 
-        Provider new_provider = new Provider(0, provider.getUsername(), provider.getPassword(), provider.getFirstname(), provider.getLastname(), provider.getEmail(), provider.getPhone(), provider.getBusinessName(), provider.getBankAccount(), provider.getSalt(),0, (byte) 0 );
+            PendingProvider provider = pendingProviderService.find(pendingProvider.getId());
 
-        // THIS SHOULD BE A TRANSACTION!!!
-        pendingProviderService.deleteUser(Integer.parseInt(id));
-        providerService.addUser(new_provider);
-        //END OF TRANSACTION
+            Provider new_provider = new Provider(0, provider.getUsername(), provider.getPassword(), provider.getFirstname(), provider.getLastname(), provider.getEmail(), provider.getPhone(), provider.getBusinessName(), provider.getBankAccount(), provider.getSalt(), 0, (byte) 0);
 
-        //if transaction done return OK
-        // Notify user via email
-        return "Provider got accepted!!!";
-    }
+            // THIS SHOULD BE A TRANSACTION!!!
+            pendingProviderService.deleteUser(pendingProvider.getId());
+            providerService.addUser(new_provider);
+            //END OF TRANSACTION
 
-    @RequestMapping(path = "/pending_providers/decline", method = RequestMethod.GET) //could be POST or PUT method
-    public String PendingProvidersDecline(@RequestParam String id) {
-        pendingProviderService.deleteUser(Integer.parseInt(id));
-        return "Pending Provider deleted successfully!";
+            //if transaction done return OK
+            // Notify user via email
+            return "Provider got accepted!!!";
+        }
     }
 
     @RequestMapping(path = "/pending_events", method = RequestMethod.GET) // OK
@@ -132,49 +135,69 @@ public class AdministratorPanelController {
     }
 
     @RequestMapping(path = "/pending_events/accept", method = RequestMethod.POST) //could be POST or PUT method // OK
-    public String PendingEventsAccept(@RequestBody LinkedHashMap id) {
-        Object o = id.get("id");
-        System.out.println(String.valueOf(o));
-        int integer_id = Integer.valueOf(String.valueOf(o));
-        PendingEvent event =  pendingEventService.find(integer_id); //we can have whole Object from frontend since AllPendingEvents has been executed
+    public String PendingEventsAccept(@RequestBody PendingEvent pendingEvent) {// @RequestBody LinkedHashMap id) {
+        //Object o = id.get("id");
+        //System.out.println(String.valueOf(o));
+        //int integer_id = Integer.valueOf(String.valueOf(o));
+        //PendingEvent event =  pendingEventService.find(integer_id); //we can have whole Object from frontend since AllPendingEvents has been executed
 
-        // !!! GOOGLE API FOR GETTING LONGITUDE, LATITUDE FROM Place !!! /* Doing it now.. Don't push me.. *** */
+        int id = pendingEvent.getEvent_id();
 
-       CurrentEvent new_event = new CurrentEvent(0, event.getProvider_id(), event.getTitle(), event.getDate(), event.getStarting_time(), event.getPlace(), event.getCategories(), event.getTicket_cost(), event.getInitial_ticketsNumber(), event.getLowestAge(), event.getHighestAge(), event.getDescription(), event.getInitial_ticketsNumber(), 35.0000, 36.0000);
+        if(pendingEvent.getHighestAge() == 0) { //Decline
+            pendingEventService.deleteEvent(id);
+            return "Pending Event got declined";
+        }
+        else { // Accept
 
-        // THIS SHOULD BE A TRANSACTION!!!
+            PendingEvent event = pendingEventService.find(id);
+
+            // !!! GOOGLE API FOR GETTING LONGITUDE, LATITUDE FROM Place !!! /* Doing it now.. Don't push me.. *** */
+
+            CurrentEvent new_event = new CurrentEvent(0, event.getProvider_id(), event.getTitle(), event.getDate(), event.getStarting_time(), event.getPlace(), event.getCategories(), event.getTicket_cost(), event.getInitial_ticketsNumber(), event.getLowestAge(), event.getHighestAge(), event.getDescription(), event.getInitial_ticketsNumber(), 35.0000, 36.0000);
+
+            // THIS SHOULD BE A TRANSACTION!!!
         /*  ***
             Make it a transaction or inverse order of called methods.
             Better to have a duplicate, pending event than to have the original event lost.
          */
-        pendingEventService.deleteEvent(integer_id);
-        System.out.println("DELETION DONE");
-        new_event = currentEventService.addEvent(new_event);
-        System.out.println("SQL INSERTION DONE");
-        try {
-            currentEventService.addEventElastic(new_event);
+            new_event = currentEventService.addEvent(new_event);
+            System.out.println("SQL INSERTION DONE");
+            pendingEventService.deleteEvent(id);
+            System.out.println("DELETION DONE");
+
+            try {
+                currentEventService.addEventElastic(new_event);
+            } catch (IOException ex) {
+                System.out.println(ex);
+                return "Insertion in Elastic failed";
+            }
+
+            //END OF TRANSACTION
+
+            //if transaction done return OK
+            // Notify user via email
+            return "Event got accepted";
         }
-        catch(IOException ex){
-            System.out.println(ex);
-            exit(2);
-        }
-
-        //END OF TRANSACTION
-
-        //if transaction done return OK
-        // Notify user via email
-        return "Event got accepted!!!";
-    }
-
-    @RequestMapping(path = "/pending_events/decline", method = RequestMethod.GET) //could be POST or PUT method
-    public String PendingEventsDecline(@RequestParam String id) {
-            pendingEventService.deleteEvent(Integer.parseInt(id));
-            return "Pending Event deleted successfully!";
     }
 
     @RequestMapping(path = "/current_events", method = RequestMethod.GET) // OK
-    public List<CurrentEvent> AllCurrentEvents() {
-        return currentEventService.findAll();
+    public List<EventPageView> AllCurrentEvents() {
+        return currentEventService.findAllEventPages();
+    }
+
+    @RequestMapping(path = "/month_report/{month}", method = RequestMethod.GET)
+    public MonthReference sendMonthReference(@PathVariable String month) {
+        return monthReferenceService.find(Integer.parseInt(month));
+    }
+
+    @RequestMapping(path = "/stats", method = RequestMethod.GET)
+    public StatsView sendStats() {
+        int numOfParents=statsService.numOfParents();
+        int numOfProviders=statsService.numOfProviders();
+        MonthReference monthReference=monthReferenceService.find(12);
+        double profit=monthReference.getProfit();
+        StatsView statsView=new StatsView(numOfParents, numOfProviders, profit);
+        return statsView;
     }
 
     private void sendEmail() throws Exception{
@@ -186,22 +209,4 @@ public class AdministratorPanelController {
 
         sender.send(message);
     }
-
-    @RequestMapping(path = "/month_report", method = RequestMethod.GET)
-
-    public MonthReference sendMonthReference(@RequestParam String month) {
-        return monthReferenceService.find(Integer.parseInt(month));
-    }
-
-    @RequestMapping(path = "/Stats", method = RequestMethod.GET)
-
-    public StatsView sendStats() {
-        int numOfParents=statsService.numOfParents();
-        int numOfProviders=statsService.numOfProviders();
-        MonthReference monthReference=monthReferenceService.find(12);
-        double profit=monthReference.getProfit();
-        StatsView statsView=new StatsView(numOfParents, numOfProviders, profit);
-        return statsView;
-    }
-
 }

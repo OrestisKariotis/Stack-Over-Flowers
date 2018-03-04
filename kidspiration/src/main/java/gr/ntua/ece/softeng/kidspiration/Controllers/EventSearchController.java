@@ -36,7 +36,7 @@ public class EventSearchController {
     }
     */
 
-    @RequestMapping(path = "/api/events_search_insert", method = RequestMethod.GET)
+/*    @RequestMapping(path = "/api/events_search_insert", method = RequestMethod.GET)
     public String insert() {
 
         Elastic leplak = new Elastic();
@@ -58,7 +58,7 @@ public class EventSearchController {
         leplak.add(event22);
 
         return "Default event added";
-    }
+    }*/
 
     @RequestMapping(path = "/api/events_search", method = RequestMethod.POST)
     public List<Map<String, Object>> search(@RequestBody EventSearchInfo info) {
