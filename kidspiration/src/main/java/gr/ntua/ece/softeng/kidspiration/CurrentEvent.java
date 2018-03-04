@@ -8,8 +8,8 @@ public class CurrentEvent extends PendingEvent {
     private double latitude;
     private double longitude;
 
-    public CurrentEvent(int event_id, int provider_id, String title, Date date, String starting_time, String place, String type, int ticket_cost, int initial_ticketsNumber, byte lowestAge, byte highestAge, String description, int available_ticketsNumber, double latitude, double longitude) {
-        super(event_id, provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber, lowestAge, highestAge, description);
+    public CurrentEvent(int event_id, int provider_id, String title, Date date, String starting_time, String place, String type, int ticket_cost, int initial_ticketsNumber, byte lowestAge, byte highestAge, String description, int numOfPhotos, int available_ticketsNumber, double latitude, double longitude) {
+        super(event_id, provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber, lowestAge, highestAge, description, numOfPhotos);
         this.available_ticketsNumber = available_ticketsNumber;
         this.longitude = longitude;
         this.latitude = latitude;
