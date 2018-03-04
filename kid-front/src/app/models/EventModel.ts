@@ -53,6 +53,10 @@ export class SearchEventModel extends PendingEventModel { //selida search
   event_id: number;
   longitude: number;
   latitude: number;
+  location: {
+    lon: number;
+    lat: number;
+  };
 
   constructor (obj?: any) {
     if (obj) {
@@ -64,6 +68,14 @@ export class SearchEventModel extends PendingEventModel { //selida search
     this.description = obj && obj.description || '';
     this.longitude = obj && obj.longitude || 0;
     this.latitude = obj && obj.latitude || 0;
+    this.location.lat = obj && obj.location.lat || 0;
+    this.location.lon = obj && obj.location.lon || 0;
+  }
+
+  flatLoc(sem: SearchEventModel) {
+    sem.longitude = sem.location.lon;
+    sem.latitude = sem.location.lat;
+    return sem;
   }
 }
 

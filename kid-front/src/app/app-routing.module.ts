@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, Router, NavigationEnd } from '@angular/router';
 
+import { ParentProfGuardService, PointsGuardService, EventRegGuardService } from './services/guard.service';
+
 import { HomeComponent } from './home/home.component';
 import { UserLoginComponent } from './user-login/user-login.component';
 import { ParentRegisterComponent } from './parent-register/parent-register.component';
@@ -33,7 +35,8 @@ const appRoutes: Routes = [
     component: ProviderRegisterComponent
   },
   { path: 'event-register',
-    component: EventRegisterComponent
+    component: EventRegisterComponent,
+    canActivate: [EventRegGuardService]
   },
   { path: 'search',
     component: SearchComponent
@@ -51,10 +54,12 @@ const appRoutes: Routes = [
     component: TermsComponent
   },
   { path: 'points',
-    component: PointsComponent
+    component: PointsComponent,
+    canActivate: [PointsGuardService]
   },
   { path: 'parent-profile/:id',
-    component: ParentProfileComponent
+    component: ParentProfileComponent,
+    canActivate: [ParentProfGuardService]
   },
   { path: 'provider-profile/:id',
     component: ProviderProfileComponent
@@ -67,6 +72,9 @@ const appRoutes: Routes = [
   },
   { path: 'control-panel',
     component: ControlPanelComponent
+  },
+  { path: 'error',
+    component: ErrorComponent
   },
   { path: '',
     component: HomeComponent

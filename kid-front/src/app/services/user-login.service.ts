@@ -22,7 +22,7 @@ export class UserLoginService {
           return user;
         });
     } else {
-      return this.http.post<CurrentUser>('/api/provs', { 'username': username, 'password': password } )
+      return this.http.post<CurrentUser>('/api/users', { 'username': username, 'password': password } )
         .map(user => {
           if (user && user.username) {
             user.mode = 'provider';
