@@ -6,12 +6,14 @@ public class Administrator {
     private String username;
     private String password;
     private String email;
+    private String salt;
 
-    public Administrator(int id, String username, String password, String email) {
+    public Administrator(int id, String username, String password, String email, String salt) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
+        this.salt = salt;
     }
 
     public int getId() {
@@ -44,5 +46,13 @@ public class Administrator {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 }

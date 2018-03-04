@@ -2,15 +2,18 @@ package gr.ntua.ece.softeng.kidspiration.Dao;
 
 import com.sun.prism.shader.Solid_ImagePattern_Loader;
 import gr.ntua.ece.softeng.kidspiration.PendingEvent;
+import gr.ntua.ece.softeng.kidspiration.PendingEventView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import gr.ntua.ece.softeng.kidspiration.CurrentEventView;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -23,7 +26,7 @@ public class PendingEventDao implements EventDao<PendingEvent> {
     public void addEvent(PendingEvent event) {  //checked
         System.out.println("Entering Event Dao");
         jdbcTemplate.update("INSERT INTO PendingEvents (provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber, lowestAge, highestAge, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                event.getProvider_id(), event.getTitle(), event.getDate(), event.getStarting_time(), event.getPlace(), event.getType(), event.getTicket_cost(), event.getInitial_ticketsNumber(), event.getLowestAge(), event.getHighestAge(), event.getDescription());
+                event.getProvider_id(), event.getTitle(), event.getDate(), event.getStarting_time(), event.getPlace(), event.getCategories(), event.getTicket_cost(), event.getInitial_ticketsNumber(), event.getLowestAge(), event.getHighestAge(), event.getDescription());
         System.out.println("Event Added!!");
     }
 
@@ -42,19 +45,31 @@ public class PendingEventDao implements EventDao<PendingEvent> {
         System.out.println("Event Updated!!");
     }
 
-    public void deleteEvent(int id) { //checked
+    public List<PendingEvent> findWithProvider(int id) {  // checking
+        List<PendingEvent> events = jdbcTemplate.query("SELECT * FROM PendingEvents where provider_id = ? ",
+                new Object[] { id }, new PendingEventMapper());
+        return events;
+    }
+
+    public void deleteEvent(int id) { // OK
         jdbcTemplate.update("DELETE FROM PendingEvents WHERE event_id = ? ", id);
         System.out.println("Event Deleted!!");
     }
 
-    public PendingEvent find(int id) {  // checked
+    public PendingEvent find(int id) {  // OK
         PendingEvent user = jdbcTemplate.queryForObject("SELECT * FROM PendingEvents where event_id = ? ",
                 new Object[] { id }, new PendingEventMapper());
         // could be a list
         return user;
     }
 
-    public List <PendingEvent> findAll() { //checked
+    public List<PendingEventView> findAllPendingEventViews() {
+        List <PendingEventView> events = jdbcTemplate.query("select event_id, provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber, lowestAge, highestAge, description, businessName from ((SELECT * FROM PendingEvents) sub INNER JOIN providers ON sub.provider_id = providers.id)",
+                new PendingEventViewMapper());  // Group By would be a nice choice
+        return events;
+    }
+
+    public List <PendingEvent> findAll() { // OK
         List < PendingEvent > events = jdbcTemplate.query("SELECT * FROM PendingEvents", new PendingEventMapper());
         return events;
     }
@@ -65,7 +80,7 @@ public class PendingEventDao implements EventDao<PendingEvent> {
             int event_id = rs.getInt("event_id");
             int provider_id = rs.getInt("provider_id");
             String title = rs.getString("title");
-            String date = rs.getString("date");
+            Date date = rs.getDate("date");
             String starting_time = rs.getString("starting_time");
             String place = rs.getString("place");
             String type = rs.getString("type");
@@ -76,6 +91,29 @@ public class PendingEventDao implements EventDao<PendingEvent> {
             String description = rs.getString("description");
             PendingEvent pendingEvent = new PendingEvent(event_id, provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber, lowestAge, highestAge, description);
             return pendingEvent;
+        }
+    }
+
+    class PendingEventViewMapper implements RowMapper<PendingEventView> {
+
+        public PendingEventView mapRow(ResultSet rs, int rowNum) throws SQLException {
+            int event_id = rs.getInt("event_id");
+            int provider_id = rs.getInt("provider_id");
+            String title = rs.getString("title");
+            Date date = rs.getDate("date");
+            String starting_time = rs.getString("starting_time");
+            String place = rs.getString("place");
+            String type = rs.getString("type");
+            int ticket_cost = rs.getInt("ticket_cost");
+            int initial_ticketsNumber = rs.getInt("initial_ticketsNumber");
+            byte lowestAge = rs.getByte("lowestAge");
+            byte highestAge = rs.getByte("highestAge");
+            String description = rs.getString("description");
+
+            String businessName = rs.getString("businessName");
+
+            PendingEventView pendingEventView = new PendingEventView(event_id, provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber, lowestAge, highestAge, description, businessName);
+            return pendingEventView;
         }
     }
 }

@@ -1,27 +1,33 @@
 package gr.ntua.ece.softeng.kidspiration;
 
+import java.util.Date;
+
 public class Event {
 
     private int event_id;
     private int provider_id;
     private String title;
-    private String date; //could be date?
+    private Date date;
     private String starting_time;
     private String place;
-    private String type;
+    private String categories;
     private int ticket_cost;
     private int initial_ticketsNumber;
 
-    public Event(int event_id, int provider_id, String title, String date, String starting_time, String place, String type, int ticket_cost, int initial_ticketsNumber) {
+    public Event(int event_id, int provider_id, String title, Date date, String starting_time, String place, String categories, int ticket_cost, int initial_ticketsNumber) {
         this.event_id = event_id;
         this.provider_id = provider_id;
         this.title = title;
         this.date = date;
         this.starting_time = starting_time;
         this.place = place;
-        this.type = type;
+        this.categories = categories;
         this.ticket_cost = ticket_cost;
         this.initial_ticketsNumber = initial_ticketsNumber;
+    }
+
+    public Event() {
+
     }
 
     public int getEvent_id() {
@@ -48,11 +54,11 @@ public class Event {
         this.title = title;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -72,12 +78,12 @@ public class Event {
         this.place = place;
     }
 
-    public String getType() {
-        return type;
+    public String getCategories() {
+        return categories;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setType(String categories) {
+        this.categories = categories;
     }
 
     public int getTicket_cost() {
