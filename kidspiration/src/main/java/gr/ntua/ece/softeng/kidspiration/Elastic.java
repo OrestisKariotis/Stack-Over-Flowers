@@ -2,6 +2,8 @@ package gr.ntua.ece.softeng.kidspiration;
 
 
 
+
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -112,15 +114,45 @@ public class Elastic {
 
         writer.name("title");	//titlos
         writer.beginObject();
-        writer.name("type").value("text"); //greek analyzer & text
-        writer.name("analyzer").value("greek");//gia stemming kai tokenization//oxi tlk gt den paei mefuzzy
-        writer.endObject();
-
-        writer.name("description");	//to escription
+        writer.name("type").value("text"); 
+        
+        //greek analyzer & text
+        writer.name("fields");
         writer.beginObject();
-        writer.name("type").value("text");//greek analyzer & text
-        writer.name("analyzer").value("greek");//gia stemming kai tokenization ///oxi oi analyzer gaman to fuzzy
-        writer.endObject();
+        	writer.name("greek");
+        	writer.beginObject();
+        	 writer.name("type").value("text"); 
+        	 writer.name("analyzer").value("greek");//gia stemming kai tokenization//oxi tlk gt den paei mefuzzy
+        	writer.endObject();
+        	writer.endObject();
+        	writer.endObject();
+
+        	
+        	
+            writer.name("description");	//titlos
+            writer.beginObject();
+            writer.name("type").value("text"); 
+            
+            //greek analyzer & text
+            writer.name("fields");
+            writer.beginObject();
+            	writer.name("greek");
+            	writer.beginObject();
+            	 writer.name("type").value("text"); 
+            	 writer.name("analyzer").value("greek");//gia stemming kai tokenization//oxi tlk gt den paei mefuzzy
+            	writer.endObject();
+            	writer.endObject();
+            	writer.endObject();
+
+            	
+        	
+        	
+        	
+ //       writer.name("description");	//to escription
+//        writer.beginObject();
+ //       writer.name("type").value("text");//greek analyzer & text
+//       writer.name("analyzer").value("greek");//gia stemming kai tokenization ///oxi oi analyzer gaman to fuzzy
+//        writer.endObject();
 
         writer.name("date");	//h hmer/mnia
         writer.beginObject();
@@ -341,19 +373,16 @@ public class Elastic {
 
             if (text != null) {//tittlos kai desc
 
-                //to edit distance--megalo gia mpala --mpoula
-                boolQuery.should(   QueryBuilders.fuzzyQuery("title", text).fuzziness(Fuzziness.TWO).maxExpansions(200).boost((float) 1.0));
-                boolQuery.should(   QueryBuilders.fuzzyQuery("description", text).fuzziness(Fuzziness.TWO).maxExpansions(200).boost((float) 1.0));
-                //	boolQuery.must(// must gia na einan and
-                //      QueryBuilders.queryStringQuery(text).fields(fields).analyzer("greek").autoGenerateSynonymsPhraseQuery(true)) ;
+                
+ //               boolQuery.should(   QueryBuilders.fuzzyQuery("title", text).fuzziness(Fuzziness.TWO).maxExpansions(200).boost((float) 1.0));
+ //              boolQuery.should(   QueryBuilders.fuzzyQuery("description", text).fuzziness(Fuzziness.TWO).maxExpansions(200).boost((float) 1.0));
+            
+               
 
-                boolQuery.minimumShouldMatch(1); //lunei nmz to 8ema ton should pou einai optiomnal
+ //               boolQuery.minimumShouldMatch(1); //lunei nmz to 8ema ton should pou einai optiomnal
 
-                //STOY PLAKA HTAN INT KAI EPAIZE
-
-                //search sto title kai desc
-                //pros8etoume kai
-            }															//greek gia serch-time
+              boolQuery.must(QueryBuilders.multiMatchQuery(text,"title","title.greek","description","description.greek").field("title", (float)1.8).field("title.greek", (float)1.8).field("description", (float)1.4).field("description.greek", (float) (1.4)));
+            }															//greek gia serch-time"
 
             if (taggs != null) {//ta taggs
                 boolQuery.must( //must me term squery prpei na ginei

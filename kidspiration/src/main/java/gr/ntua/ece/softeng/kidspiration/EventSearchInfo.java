@@ -7,14 +7,14 @@ public class EventSearchInfo {
     String description;
     List<String> categories;
     Long distanceInKm;
-    Location fromLoc;
+    String fromLoc;
     Long age;
     Long upperCost;
     Long lowerCost;
     String dateUpper;
     String dateLower;
 
-    public EventSearchInfo(String description, List<String> categories, Long distanceInKm, Location fromLoc, Long age, Long upperCost, Long lowerCost, String dateUpper, String dateLower) {
+    public EventSearchInfo(String description, List<String> categories, Long distanceInKm, String fromLoc, Long age, Long upperCost, Long lowerCost, String dateUpper, String dateLower) {
         this.description = description;
         this.categories = categories;
         this.distanceInKm = distanceInKm;
@@ -52,11 +52,11 @@ public class EventSearchInfo {
         this.distanceInKm = distanceInKm;
     }
 
-    public Location getFromLoc() {
+    public String getFromLoc() {
         return fromLoc;
     }
 
-    public void setFromLoc(Location fromLoc) {
+    public void setFromLoc(String fromLoc) {
         this.fromLoc = fromLoc;
     }
 

@@ -16,7 +16,7 @@ DROP TABLE IF EXISTS kidspiration.Admins;
 CREATE TABLE kidspiration.Parents (
   `id`        INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `username`  VARCHAR(45) NOT NULL,
-  `password`  VARCHAR(45) NOT NULL,
+  `password`  VARCHAR(100) NOT NULL,
   `firstname` VARCHAR(45) NOT NULL,
   `lastname`  VARCHAR(45) NOT NULL,
   `email`     VARCHAR(45) NOT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE kidspiration.ParentSalts (
 CREATE TABLE kidspiration.PendingProviders (
   `id`        INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `username`  VARCHAR(45) NOT NULL,
-  `password`  VARCHAR(45) NOT NULL,
+  `password`  VARCHAR(100) NOT NULL,
   `firstname` VARCHAR(45) NOT NULL,
   `lastname`  VARCHAR(45) NOT NULL,
   `email`     VARCHAR(45) NOT NULL,
@@ -54,7 +54,7 @@ CREATE TABLE kidspiration.PendingProviders (
 CREATE TABLE kidspiration.Providers (
   `id`        INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `username`  VARCHAR(45) NOT NULL,
-  `password`  VARCHAR(45) NOT NULL,
+  `password`  VARCHAR(100) NOT NULL,
   `firstname` VARCHAR(45) NOT NULL,
   `lastname`  VARCHAR(45) NOT NULL,
   `email`     VARCHAR(45) NOT NULL,
@@ -97,8 +97,9 @@ CREATE TABLE kidspiration.MonthProviderReferences (
 CREATE TABLE kidspiration.Admins (
   `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `username`  VARCHAR(45) NOT NULL,
-  `password`  VARCHAR(45) NOT NULL,
+  `password`  VARCHAR(100) NOT NULL,
   `email`     VARCHAR(45) NOT NULL,
+  `salt`      VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`)
 ) AUTO_INCREMENT = 1;
 
@@ -115,5 +116,5 @@ INSERT INTO kidspiration.MonthReferences(month, earnings, expenses, profit) VALU
 
 INSERT INTO kidspiration.MonthProviderReferences(provider_id, january_profit, february_profit, march_profit, april_profit, may_profit, june_profit, july_profit, august_profit, september_profit, octomber_profit, november_profit, december_profit) VALUES (1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), (2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), (3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
-INSERT INTO kidspiration.Admins(username, password, email) VALUES  ("Alafouzos", "Tweety13", "PaoSkai");
+INSERT INTO kidspiration.Admins(username, password, email, salt) VALUES  ("batman", "4c684abaad8f8b41773ca0ef5aaf01e592e69518", "batman@gmail.com", "sleblkyqmuxlqcailjbp");
 /* ADDED, WILL BE CHANGED BY GIANNIS - ORESTIS */

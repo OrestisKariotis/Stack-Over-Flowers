@@ -14,20 +14,19 @@ import javax.servlet.http.HttpServletRequest;
 
 @RestController
 public class AdministratorLoginController {
+
     @Autowired
     private AdminService adminService;
 
-
-    @RequestMapping(value = "/path_known_to_admins/login", method = RequestMethod.GET)
-
-    public ResponseEntity<?> Admin_login(@RequestParam String username, @RequestParam String password) {
-        Login login;
-        login = new Login(username, password);
+    @RequestMapping(value = "/api/path_known_to_admins/login", method = RequestMethod.POST)
+    public ResponseEntity<?> Admin_login(@RequestBody Login login) {
+        //Login login;
+        //login = new Login(username, password);
         Administrator admin = adminService.validateUser(login);
         if (admin == null) {
             return ResponseEntity.badRequest().body("Invalid username or password");
         } else {
-            return ResponseEntity.accepted().body(admin);
+            return ResponseEntity.accepted().body(admin.getId());
         }
     }
 }
