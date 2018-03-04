@@ -18,6 +18,11 @@ public class MonthProviderReferenceDao {  //CHECKING
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+    public void addMonthProviderReference(MonthProviderReference monthProviderReference) { // OK
+        jdbcTemplate.update("INSERT INTO MonthProviderReferences (provider_id, january, february, march, april, may, june, july, august, september, octomber, november, december) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                monthProviderReference.getProvider_id(), monthProviderReference.getJanuary(), monthProviderReference.getFebruary(), monthProviderReference.getMarch(), monthProviderReference.getApril(), monthProviderReference.getMay(), monthProviderReference.getJune(), monthProviderReference.getJuly(), monthProviderReference.getAugust(), monthProviderReference.getSeptember(), monthProviderReference.getOctomber(), monthProviderReference.getNovember(), monthProviderReference.getDecember());
+    }
+
     public void editMonthProviderReference(MonthProviderReference monthProviderReference) {  // OK
 
         jdbcTemplate.update("UPDATE MonthProviderReferences SET monthProviderReference_id= ? , provider_id = ? , january_profit= ? , february_profit= ? , march_profit= ? , april_profit= ? , may_profit= ?, june_profit= ?, july_profit= ? , august_profit= ? , september_profit= ? , octomber_profit= ? , november_profit= ?, december_profit= ?  WHERE provider_id=? ",

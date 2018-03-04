@@ -28,6 +28,10 @@ public class OldEventService implements EventService<OldEvent> {   /// CHECKING
 
     public void deleteEvent(int id) { oldEventDao.deleteEvent(id); }
 
+    public List<OldEvent> findWithMonth(int month, int provider_id) {
+        return oldEventDao.findWithMonth(month, provider_id);
+    }
+
     public OldEvent find(int id) {
         return oldEventDao.find(id);
     }

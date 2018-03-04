@@ -1,9 +1,7 @@
-/*
 package gr.ntua.ece.softeng.kidspiration.Controllers;
 
 import gr.ntua.ece.softeng.kidspiration.*;
 import gr.ntua.ece.softeng.kidspiration.Services.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpRequest;
@@ -17,8 +15,19 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 public class AdministratorLoginController {
     @Autowired
-    @RequestMapping(value = "/path_known_to_admins/login", method = RequestMethod.POST)
+    private AdminService adminService;
 
 
+    @RequestMapping(value = "/path_known_to_admins/login", method = RequestMethod.GET)
+
+    public ResponseEntity<?> Admin_login(@RequestParam String username, @RequestParam String password) {
+        Login login;
+        login = new Login(username, password);
+        Administrator admin = adminService.validateUser(login);
+        if (admin == null) {
+            return ResponseEntity.badRequest().body("Invalid username or password");
+        } else {
+            return ResponseEntity.accepted().body(admin);
+        }
+    }
 }
-*/
