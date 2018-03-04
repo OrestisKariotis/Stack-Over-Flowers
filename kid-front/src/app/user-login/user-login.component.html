@@ -27,8 +27,9 @@
 			<button class="btn btn-default">Login</button>
 		</form>
 		<div *ngIf="model.error" class = "alert alert-danger">{{model.error}}</div>
+		<br/>
 		<button class="btn btn-default" (click)="model.reset=true">Επαναφορά κωδικού</button>
-		<div *ngIf="model.reset" class = "alert">Εισάγετε παραπάνω το username και την ιδιότητά σας, και πατίστε τον σύνδεσμο 
+		<div *ngIf="model.reset" class = "alert">Εισάγετε παραπάνω το username και την ιδιότητά σας, και πατήστε τον σύνδεσμο 
 			<a (click)="reset()">Reset </a> </div>
 	</div>
 </div>
