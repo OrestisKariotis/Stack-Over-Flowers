@@ -20,7 +20,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         return Observable.of(null).mergeMap(() => {
 
             // get users
-            if (request.url.endsWith('/api/users') && request.method === 'POST') {
+            if (request.url.endsWith('/api/admin/login') && request.method === 'POST') {
                 if (request.body.username !== 'awf') {
                     let body = {
                     id: 1,

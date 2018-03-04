@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { CurrentUserService } from '../services/current-user.service';
+import { CurrentUser } from '../models/CurrentUser';
+import { AdminService } from '../services/admin.service';
+import { Router } from '@angular/router';
+import { EventModel } from '../models/EventModel';
 
 @Component({
   selector: 'app-control-panel',
@@ -26,78 +31,11 @@ export class ControlPanelComponent implements OnInit {
   ];
 
   /* For testing */
-  parents_list = [
-    { 'id': 1,
-      'username': 'makis45',
-      'firstname': 'makis',
-      'lastname': 'paparis',
-      'email': 'makisp@hotmail.tr',
-      'phone': '7485769385',
-      'wallet': 4000,
-      'spent_points': 2000,
-      'ban': false }
-  ];
-  providers_list = [
-    { 'id': 1,
-      'username': 'trololo',
-      'firstname': 'Tasos',
-      'lastname': 'Mitsakis',
-      'email': 'mitsakistrololo@gmail.com',
-      'phone': '7867690990',
-      'businessName': 'LaLa Luna Park',
-      'profit': 5000,
-      'rights_code': 0 }
-  ];
-  pending_providers_list = [
-    { 'id': 1,
-      'username': 'malakia',
-      'firstname': 'Nikolakis',
-      'lastname': 'Tsoukas',
-      'email': 'mamamama@gmail.com',
-      'phone': '7867698090',
-      'businessName': 'Paixnidia Ouranio Toxo' }
-  ];
-  pending_events_list = [
-    { 'event_id': 1,
-      'title': 'Paidiko party',
-      'businessName': 'Troloclown',
-      'date': '2018-03-20',
-      'starting_time': '18:00',
-      'description': 'Θα είναι τέλειο πάρτυ, καλή φάση και τα λοιπά μάγκες μου.',
-      'categories': 'Παιχνίδι',
-      'place': 'Μικράς Αγγλίας 2, Μαρούσι',
-      'ticket_cost': 700,
-      'lowestAge': 8,
-      'highestAge': 12,
-      'initial_ticketsNumber': 20 },
-    { 'event_id': 2,
-      'title': 'Paidiki giorti',
-      'businessName': 'Troloclown',
-      'date': '2018-03-25',
-      'starting_time': '12:00',
-      'description': 'Θα είναι τέλειο πάρτυ, καλή φάση και τα λοιπά μάγκες μου.',
-      'categories': 'Παιχνίδι',
-      'place': 'Μικράς Αγγλίας 2, Μαρούσι',
-      'ticket_cost': 700,
-      'lowestAge': 5,
-      'highestAge': 10,
-      'initial_ticketsNumber': 50 }
-  ];
-  events_list = [
-    { 'event_id': 1,
-      'title': 'Paidiko party',
-      'businessName': 'Troloclown',
-      'date': '2018-03-20',
-      'starting_time': '18:00',
-      'description': 'Θα είναι τέλειο πάρτυ, καλή φάση και τα λοιπά μάγκες μου.',
-      'categories': 'Παιχνίδι',
-      'place': 'Μικράς Αγγλίας 2, Μαρούσι',
-      'ticket_cost': 700,
-      'lowestAge': 8,
-      'highestAge': 12,
-      'initial_ticketsNumber': 20,
-      'available_ticketsNumber': 13 }
-  ];
+  parents_list: CurrentUser[];
+  providers_list: CurrentUser[];
+  pending_providers_list: CurrentUser[];
+  pending_events_list: EventModel[];
+  events_list: EventModel[];
   total_stats = [
     { 'numOfParents': 100,
       'numOfProviders': 20,
@@ -119,9 +57,10 @@ export class ControlPanelComponent implements OnInit {
     { 'month': 12, 'earnings': 2530, 'expenses': 1350, 'profit': 222 }
   ];
 
-  constructor() { }
+  constructor(private router: Router, private currentUserService: CurrentUserService, private adminService: AdminService) { }
 
   ngOnInit() {
+    this.getParents();
   }
 
   responsive() {
@@ -133,28 +72,143 @@ export class ControlPanelComponent implements OnInit {
     }
 }
 
-  adminlogout() { }
+  adminlogout() {
+    this.currentUserService.changeUser(new CurrentUser());
+    sessionStorage.clear();
+  }
 
-  banParent(id: number) { }
+  banParent(id: number) {
+    this.adminService.banParent(id, true).subscribe(
+      data => {
+        const ind = this.parents_list.findIndex(function(elem) { return elem.id === id; } );
+        this.parents_list[ind].ban = true;
+      }
+    );
+  }
 
-  unbanParent(id: number) { }
+  unbanParent(id: number) {
+    this.adminService.banParent(id, false).subscribe(
+      data => {
+        const ind = this.parents_list.findIndex(function(elem) { return elem.id === id; } );
+        this.parents_list[ind].ban = false;
+      }
+    );
+  }
 
-  resetPassParent(id: number) { }
+  resetPassParent(username: string) {
+    this.adminService.reset(username, 'parent').subscribe(
+      data => {
+      }
+    );
+  }
 
-  suspendProvider(id: number) { }
+  suspendProvider(id: number) {
+    this.adminService.banProvider(id, 1).subscribe(
+      data => {
+        const ind = this.providers_list.findIndex(function(elem) { return elem.id === id; } );
+        this.providers_list[ind].rights_code = 1;
+      }
+    );
+  }
 
-  banProvider(id: number) { }
+  banProvider(id: number) {
+    this.adminService.banProvider(id, 2).subscribe(
+      data => {
+        const ind = this.providers_list.findIndex(function(elem) { return elem.id === id; } );
+        this.providers_list[ind].rights_code = 2;
+      }
+    );
+  }
 
-  unbanProvider(id: number) { }
+  unbanProvider(id: number) {
+    this.adminService.banProvider(id, 0).subscribe(
+      data => {
+        const ind = this.providers_list.findIndex(function(elem) { return elem.id === id; } );
+        this.providers_list[ind].rights_code = 0;
+      }
+    );
+  }
 
-  resetPassProvider(id: number) { }
+  resetPassProvider(username: string) {
+    this.adminService.reset(username, 'provider').subscribe(
+      data => {
+      }
+    );
+  }
 
-  acceptPendingProvider(id: number) { }
+  acceptPendingProvider(id: number) {
+    this.adminService.acceptProvider(id, 1).subscribe(
+      data => {
+        const ind = this.pending_providers_list.findIndex(function(elem) { return elem.id === id; } );
+        this.pending_providers_list.splice(ind, 1);
+      }
+    );
+  }
 
-  deletePendingProvider(id: number) { }
+  deletePendingProvider(id: number) {
+    this.adminService.acceptProvider(id, 0).subscribe(
+      data => {
+        const ind = this.pending_providers_list.findIndex(function(elem) { return elem.id === id; } );
+        this.pending_providers_list.splice(ind, 1);
+      }
+    );
+  }
 
-  acceptPendingEvent(id: number) { }
+  acceptPendingEvent(id: number) {
+    this.adminService.acceptEvent(id, 1).subscribe(
+      data => {
+        const ind = this.pending_events_list.findIndex(function(elem) { return elem.event_id === id; } );
+        this.pending_providers_list.splice(ind, 1);
+      }
+    );
+  }
 
-  deletePendingEvent(id: number) { }
+  deletePendingEvent(id: number) {
+    this.adminService.acceptEvent(id, 0).subscribe(
+      data => {
+        const ind = this.pending_events_list.findIndex(function(elem) { return elem.event_id === id; } );
+        this.pending_providers_list.splice(ind, 1);
+      }
+    );
+  }
 
+  getParents() {
+    this.adminService.getParents().subscribe(
+      data => {
+        this.parents_list = data;
+      }
+    );
+  }
+
+  getProviders() {
+    this.adminService.getProviders().subscribe(
+      data => {
+        this.providers_list = data;
+      }
+    );
+  }
+
+  getPendingProviders() {
+    this.adminService.getPendingProviders().subscribe(
+      data => {
+        this.pending_providers_list = data;
+      }
+    );
+  }
+
+  getActivities() {
+    this.adminService.getActivities().subscribe(
+      data => {
+        this.events_list = data;
+      }
+    );
+  }
+
+  getPendingActivities() {
+    this.adminService.getPendingActivities().subscribe(
+      data => {
+        this.pending_events_list = data;
+      }
+    );
+  }
 }
