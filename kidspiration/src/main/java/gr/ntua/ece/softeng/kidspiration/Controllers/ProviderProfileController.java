@@ -1,23 +1,14 @@
 package gr.ntua.ece.softeng.kidspiration.Controllers;
 
-import gr.ntua.ece.softeng.kidspiration.OldEvent;
-import gr.ntua.ece.softeng.kidspiration.CurrentEventView;
-import gr.ntua.ece.softeng.kidspiration.MonthProviderReference;
-import gr.ntua.ece.softeng.kidspiration.Provider;
-import gr.ntua.ece.softeng.kidspiration.ProviderView;
-import gr.ntua.ece.softeng.kidspiration.Services.CurrentEventService;
-import gr.ntua.ece.softeng.kidspiration.Services.OldEventService;
-import gr.ntua.ece.softeng.kidspiration.Services.ProviderService;
-import gr.ntua.ece.softeng.kidspiration.Services.MonthProviderReferenceService;
+import gr.ntua.ece.softeng.kidspiration.*;
+import gr.ntua.ece.softeng.kidspiration.Services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import gr.ntua.ece.softeng.kidspiration.ProviderReportView;
 
 import java.util.List;
-import gr.ntua.ece.softeng.kidspiration.OldEventView;
 
 @RestController
 @RequestMapping(path = "/profile/provider") //path could be parametric to provider_id
@@ -34,6 +25,10 @@ public class ProviderProfileController {
 
     @Autowired
     OldEventService oldEventService;
+
+    @Autowired
+    PendingEventService pendingEventService;
+
 
     @RequestMapping(path = "/personal_info", method = RequestMethod.GET)   // private profile // OK
     public Provider ProviderProfile_PersonalInfo_Private(@RequestParam String id) {
@@ -59,22 +54,28 @@ public class ProviderProfileController {
 
     @RequestMapping(path = "/current_events", method = RequestMethod.GET)  // NOT FINISHED
     public List<CurrentEventView> ProviderProfile_CurrentEvents_Public(@RequestParam String id) {
-        return  currentEventService.findAllViews_ByProviderId(Integer.parseInt(id));
+        return  currentEventService.findWithProvider(Integer.parseInt(id));
     }
 
     @RequestMapping(path = "/events", method = RequestMethod.GET) //Checking  //the private version of /current_events
-    public List<CurrentEventView> ProviderProfile_Events_Private(@RequestParam String id) {
-        return null;
+    public List<CurrentEvent> ProviderProfile_Events_Private(@RequestParam String id) {
+        List<CurrentEvent> currentEvents= currentEventService.findAllByProvider(Integer.parseInt(id));
+        return currentEvents;
+
     }
 
     @RequestMapping(path = "/pending_events", method = RequestMethod.GET) //Checking
-    public List<CurrentEventView> ProviderProfile_PendingEvents_Private(@RequestParam String id) {
-        return null;
+    public List<PendingEvent> ProviderProfile_PendingEvents_Private(@RequestParam String id) {
+
+        List<PendingEvent> pendingEvents=pendingEventService.findWithProvider(Integer.parseInt(id));
+        return pendingEvents;
     }
 
     @RequestMapping(path = "/old_events", method = RequestMethod.GET) //Checking
-    public List<CurrentEventView> ProviderProfile_OldEvents_Private(@RequestParam String id) {
-        return null;
+    public List<OldEvent> ProviderProfile_OldEvents_Private(@RequestParam String id) {
+
+        List<OldEvent> oldEvents=oldEventService.findWithProvider(Integer.parseInt(id));
+        return oldEvents;
     }
 
     @RequestMapping(path = "/months_report", method = RequestMethod.GET) //Checking

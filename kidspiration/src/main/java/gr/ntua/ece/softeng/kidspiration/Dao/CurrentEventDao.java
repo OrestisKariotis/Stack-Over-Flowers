@@ -55,9 +55,15 @@ public class CurrentEventDao implements EventDao<CurrentEvent> {
         return event;
     }
 
-    public List<CurrentEvent> findAll_ByProviderId(int id) {  // checking
-        List<CurrentEvent> events = jdbcTemplate.query("SELECT * FROM CurrentEvents where provider_id = ? ",
+    public List<CurrentEvent> findAllByProvider(int id) {
+        List<CurrentEvent> events=jdbcTemplate.query("SELECT * FROM CurrentEvents where provider_id= ?",
                 new Object[] { id }, new CurrentEventMapper());
+        return events;
+    }
+
+    public List<CurrentEventView> findWithProvider(int id) {  // checking
+        List<CurrentEventView> events = jdbcTemplate.query("SELECT * FROM CurrentEvents where provider_id = ? ",
+                new Object[] { id }, new CurrentEventViewMapper());
         return events;
     }
 

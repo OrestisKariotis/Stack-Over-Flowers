@@ -1,5 +1,6 @@
 package gr.ntua.ece.softeng.kidspiration.Services;
 
+import gr.ntua.ece.softeng.kidspiration.CurrentEventView;
 import gr.ntua.ece.softeng.kidspiration.Dao.OldEventDao;
 import gr.ntua.ece.softeng.kidspiration.OldEvent;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,12 @@ public class OldEventService implements EventService<OldEvent> {   /// CHECKING
     public OldEvent find(int id) {
         return oldEventDao.find(id);
     }
+
+    public List<OldEvent> findWithProvider(int id) {
+        List<OldEvent> oldEvents= oldEventDao.findWithProvider(id);
+        return oldEvents;
+    }
+
 
     public List<OldEvent> findWithDate(Date date) {
         return oldEventDao.findWithDate(date);

@@ -1,5 +1,6 @@
 package gr.ntua.ece.softeng.kidspiration.Dao;
 
+import gr.ntua.ece.softeng.kidspiration.CurrentEventView;
 import gr.ntua.ece.softeng.kidspiration.OldEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -63,6 +64,12 @@ public class OldEventDao implements EventDao<OldEvent> { // CHECKING
         return null;
     }
 
+    public List<OldEvent> findWithProvider(int id) {  // checking
+        List<OldEvent> events = jdbcTemplate.query("SELECT * FROM OldEvents where provider_id = ? ",
+                new Object[] { id }, new OldEventMapper());
+        return events;
+    }
+
     public List<OldEvent> findAll() {    //not checked
         return null;
     }
@@ -88,4 +95,7 @@ public class OldEventDao implements EventDao<OldEvent> { // CHECKING
             return event;
         }
     }
+
+
+
 }

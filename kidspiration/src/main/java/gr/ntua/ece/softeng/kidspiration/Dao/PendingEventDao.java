@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+import gr.ntua.ece.softeng.kidspiration.CurrentEventView;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,6 +42,12 @@ public class PendingEventDao implements EventDao<PendingEvent> {
         jdbcTemplate.update("UPDATE PendingEvents SET firstname = ? , lastname = ? WHERE event_id = ? ",
                 user.getDescription(), user.getDescription(), id);
         System.out.println("Event Updated!!");
+    }
+
+    public List<PendingEvent> findWithProvider(int id) {  // checking
+        List<PendingEvent> events = jdbcTemplate.query("SELECT * FROM PendingEvents where provider_id = ? ",
+                new Object[] { id }, new PendingEventMapper());
+        return events;
     }
 
     public void deleteEvent(int id) { // OK
@@ -78,5 +85,7 @@ public class PendingEventDao implements EventDao<PendingEvent> {
             PendingEvent pendingEvent = new PendingEvent(event_id, provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber, lowestAge, highestAge, description);
             return pendingEvent;
         }
+
     }
+
 }
