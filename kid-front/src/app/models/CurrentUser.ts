@@ -11,6 +11,7 @@ export class CurrentUser {
   businessName?: string;
   bankAccount?: string;
   rights_code?: number;
+  ban?: boolean;
   enable: boolean;
   mode: string;
 
@@ -40,6 +41,9 @@ export class CurrentUser {
     }
     if (obj && obj.rights_code) {
       this.rights_code = obj.rights_code;
+    }
+    if (obj && obj.ban) {
+      this.ban = obj.ban;
     }
   }
 }

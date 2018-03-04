@@ -11,18 +11,18 @@
     </div>
     <div class="collapse navbar-collapse" id="controlNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a routerLink="">Μετάβαση στην ιστοσελίδα</a></li>
+        <li><a routerLink="" (click)="adminlogout()">Μετάβαση στην ιστοσελίδα</a></li>
         <li><a routerLink="/home" (click)="adminlogout()">Αποσύνδεση</a></li>
       </ul>
     </div>
   </div>
 </nav>
 <ul class="nav nav-pills nav-stacked sidenav">
-  <li class="active"><a data-toggle="pill" href="#parents">Γονείς</a></li>
-  <li><a data-toggle="pill" href="#providers">Πάροχοι</a></li>
-  <li><a data-toggle="pill" href="#waitProv">Πάροχοι <br />σε αναμονή</a></li>
-  <li><a data-toggle="pill" href="#waitAct">Δραστηριότητες <br />σε αναμονή</a></li>
-  <li><a data-toggle="pill" href="#activities">Ενεργές <br />δραστηριότητες</a></li>
+  <li class="active"><a data-toggle="pill" href="#parents" (click)="getParents()">Γονείς</a></li>
+  <li><a data-toggle="pill" href="#providers" (click)="getProviders()">Πάροχοι</a></li>
+  <li><a data-toggle="pill" href="#waitProv" (click)="getPendingProviders()">Πάροχοι <br />σε αναμονή</a></li>
+  <li><a data-toggle="pill" href="#waitAct" (click)="getActivities()">Δραστηριότητες <br />σε αναμονή</a></li>
+  <li><a data-toggle="pill" href="#activities" (click)="getPendingActivities()">Ενεργές <br />δραστηριότητες</a></li>
   <li><a data-toggle="pill" href="#statistics">Στατιστικά</a></li>
 </ul>
 <div id="main">
@@ -67,7 +67,7 @@
     						</td>
     						<td>
        							<button class="btn btn-default btn-xs" type="button"
-       							(click)="resetPassParent(parent.id)">Reset password</button>
+       							(click)="resetPassParent(parent.username)">Reset password</button>
     						</td>
     					</tr>
     				</tbody>
@@ -136,7 +136,7 @@
     						</td>
     						<td>
        							<button class="btn btn-default btn-xs" type="button"
-       							(click)="resetPassProvider(provider.id)">Reset password</button>
+       							(click)="resetPassProvider(provider.username)">Reset password</button>
     						</td>
     					</tr>
     				</tbody>

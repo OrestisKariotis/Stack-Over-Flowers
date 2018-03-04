@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, Router, NavigationEnd } from '@angular/router';
 
-import { ParentProfGuardService, PointsGuardService, EventRegGuardService } from './services/guard.service';
+import { ParentProfGuardService, PointsGuardService, EventRegGuardService, ControlGuardService } from './services/guard.service';
 
 import { HomeComponent } from './home/home.component';
 import { UserLoginComponent } from './user-login/user-login.component';
@@ -71,7 +71,8 @@ const appRoutes: Routes = [
     component: AdminLoginComponent
   },
   { path: 'control-panel',
-    component: ControlPanelComponent
+    component: ControlPanelComponent,
+    canActivate: [ControlGuardService]
   },
   { path: 'error',
     component: ErrorComponent

@@ -52,3 +52,19 @@ export class EventRegGuardService implements CanActivate {
     return false;
   }
 }
+
+@Injectable()
+export class ControlGuardService implements CanActivate {
+
+  user: CurrentUser;
+  constructor(private router: Router, private service: CurrentUserService) {}
+
+  canActivate() {
+    this.service.currentUser.subscribe(user => this.user = user);
+    if (this.user.mode === 'admin') {
+      return true;
+    }
+    this.router.navigate(['/']);
+    return false;
+  }
+}
