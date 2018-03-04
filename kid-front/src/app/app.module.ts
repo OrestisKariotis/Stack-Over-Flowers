@@ -27,6 +27,7 @@ import { PurchaseService } from './services/purchase.service';
 import { HomeToSearchService } from './services/home-to-search.service';
 import { ParentService } from './services/parent.service';
 import { ProviderService } from './services/provider.service';
+import { ParentProfGuardService, PointsGuardService, EventRegGuardService } from './services/guard.service';
 
 import { FaqComponent } from './faq/faq.component';
 import { AboutUsComponent } from './about-us/about-us.component';
@@ -87,6 +88,9 @@ import { EventPageComponent } from './event-page/event-page.component';
     HomeToSearchService,
     ParentService,
     ProviderService,
+    ParentProfGuardService,
+    PointsGuardService,
+    EventRegGuardService,
     fakeBackendProvider
   ],
   bootstrap: [AppComponent]

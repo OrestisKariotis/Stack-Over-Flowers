@@ -1,36 +1,36 @@
 export class SearchModel {
 
-  freetext?: string;
-  dist?: number;
-  position?: string;
-  startdate?: string;
-  enddate?: string;
-  lowpoints?: number;
-  highpoints?: number;
+  description?: string;
+  distanceInKm?: number;
+  fromLoc?: string;
+  dateLower?: string;
+  dateUpper?: string;
+  lowerCost?: number;
+  upperCost?: number;
   age?: number;
   categories?: string[];
 
   constructor(obj?: any) {
     if (obj && obj.freetext) {
-      this.freetext = obj.freetext;
+      this.description = obj.freetext;
     }
     if (obj && obj.dist) {
-      this.dist = obj.dist;
+      this.distanceInKm = obj.dist;
     }
     if (obj && obj.position) {
-      this.position = obj.position;
+      this.fromLoc = obj.position;
     }
     if (obj && obj.startdate) {
-      this.startdate = obj.startdate;
+      this.dateLower = obj.startdate;
     }
     if (obj && obj.enddate) {
-      this.enddate = obj.enddate;
+      this.dateUpper = obj.enddate;
     }
     if (obj && obj.lowpoints) {
-      this.lowpoints = obj.lowpoints;
+      this.lowerCost = obj.lowpoints;
     }
     if (obj && obj.highpoints) {
-      this.highpoints = obj.highpoints;
+      this.upperCost = obj.highpoints;
     }
     if (obj && obj.age) {
       this.age = obj.age;

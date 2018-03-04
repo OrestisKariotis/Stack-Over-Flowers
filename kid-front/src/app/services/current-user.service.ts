@@ -14,5 +14,4 @@ export class CurrentUserService {
   changeUser(user: CurrentUser) {
     this.source.next(user);
   }
-
 }

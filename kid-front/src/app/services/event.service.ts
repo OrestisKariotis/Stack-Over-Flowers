@@ -17,11 +17,6 @@ export class EventService {
     return this.http.get<EventModel>(`/api/events/${event_id}`);
   }
 
-  //selida search
-  getSearchEvents(filters: SearchModel) {
-    return this.http.post<SearchEventModel[]>('/api/search', filters);
-  }
-
   //selida home
   getHomeEvents() {
     return this.http.get<SearchEventModel[]>('/api/home/events');
@@ -51,4 +46,13 @@ export class EventService {
   getProvHistoryEvents(provider_id: number) {
     return this.http.get<HistoryEventModel[]>(`/api/provider/${provider_id}/historyEvents`);
   }
+  
+  //selida search
+  getSearchEvents(filters: SearchModel) {
+    return this.http.post<SearchEventModel[]>('/api/search', filters)
+    .map(user => {
+      return user.map(res => res.flatLoc(res));
+    });
+  }
 }
+
