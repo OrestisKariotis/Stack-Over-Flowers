@@ -29,6 +29,7 @@ import { ParentService } from './services/parent.service';
 import { ProviderService } from './services/provider.service';
 import { ParentProfGuardService, PointsGuardService, EventRegGuardService, ControlGuardService } from './services/guard.service';
 import { AdminService } from './services/admin.service';
+import { NewPassService } from './services/new-pass.service';
 
 import { FaqComponent } from './faq/faq.component';
 import { AboutUsComponent } from './about-us/about-us.component';
@@ -43,6 +44,7 @@ import { ControlPanelComponent } from './control-panel/control-panel.component';
 import { EventRegisterComponent } from './event-register/event-register.component';
 import { SearchComponent } from './search/search.component';
 import { EventPageComponent } from './event-page/event-page.component';
+import { ResetPassComponent } from './reset-pass/reset-pass.component';
 
 
 
@@ -66,7 +68,8 @@ import { EventPageComponent } from './event-page/event-page.component';
     ControlPanelComponent,
     SearchComponent,
     EventPageComponent,
-    EventRegisterComponent
+    EventRegisterComponent,
+    ResetPassComponent
   ],
   imports: [
     BrowserModule,
@@ -94,6 +97,7 @@ import { EventPageComponent } from './event-page/event-page.component';
     EventRegGuardService,
     AdminService,
     ControlGuardService,
+    NewPassService,
     fakeBackendProvider
   ],
   bootstrap: [AppComponent]

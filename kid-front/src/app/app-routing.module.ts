@@ -20,6 +20,7 @@ import { ProviderProfileComponent } from './provider-profile/provider-profile.co
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { ControlPanelComponent } from './control-panel/control-panel.component';
 import { EventPageComponent } from './event-page/event-page.component';
+import { ResetPassComponent } from './reset-pass/reset-pass.component';
 
 const appRoutes: Routes = [
   { path: 'home',
@@ -66,6 +67,9 @@ const appRoutes: Routes = [
   },
   { path: 'event-page/:id',
     component: EventPageComponent
+  },
+  { path: 'reset-pass',
+    component: ResetPassComponent
   },
   { path: 'adminlogin',
     component: AdminLoginComponent
