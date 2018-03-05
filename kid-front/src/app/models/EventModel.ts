@@ -123,3 +123,21 @@ export class EventModel extends EventRegisterModel {  //selida admin, current ta
     this.latitude = obj && obj.latitude || 0;
   }
 }
+
+export class TotalModel {
+  name: string;
+  date: string;
+  initial_ticketsNumber: number;
+  ticket_cost: number;
+  sold_ticketsNumber: number;
+  profit: number;
+
+  constructor(obj?: any) {
+    this.name = obj && obj.name || '';
+    this.date = obj && obj.date || '';
+    this.initial_ticketsNumber = obj && obj.initial_ticketsNumber || 0;
+    this.ticket_cost = obj && obj.ticket_cost || 0;
+    this.sold_ticketsNumber = obj && obj.sold_ticketsNumber || 0;
+    this.profit = obj && obj.profit || 0;
+  }
+}

@@ -1,4 +1,5 @@
 export class ParentRegisterModel {
+  id: number;
   username: string;
   password: string;
   firstname: string;
@@ -8,6 +9,7 @@ export class ParentRegisterModel {
   enable: boolean;
 
   constructor ( obj?: any) {
+    this.id = obj && obj.id || 0;
     this.username = obj && obj.username || '';
     this.password = obj && obj.password || '';
     this.firstname = obj && obj.firstname || '';

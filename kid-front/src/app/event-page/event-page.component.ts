@@ -45,7 +45,7 @@ export class EventPageComponent implements OnInit {
   }
 
   buyTicket() {
-    this.purchaseService.purchaseTicket(new TicketPurchaseModel(this.model)).subscribe(
+    this.purchaseService.purchaseTicket(new TicketPurchaseModel(this.model), this.thisId).subscribe(
         data => {
           this.user.wallet = data.wallet;
           this.currentUserService.changeUser(this.user);

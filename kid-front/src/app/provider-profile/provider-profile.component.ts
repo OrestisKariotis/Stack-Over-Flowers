@@ -3,10 +3,12 @@ import { CurrentUserService } from '../services/current-user.service';
 import { ProviderService } from '../services/provider.service';
 import { EventService } from '../services/event.service';
 import { ActivatedRoute } from '@angular/router';
-import { ProviderViewEventModel } from '../models/EventModel';
+import { ProviderViewEventModel, PendingEventModel, HistoryEventModel } from '../models/EventModel';
+
 
 import { CurrentUser } from '../models/CurrentUser';
 import { TicketsModel } from '../models/PurchaseModel';
+import { TotalModel } from '../models/EventModel';
 
 @Component({
   selector: 'app-provider-profile',
@@ -22,6 +24,14 @@ export class ProviderProfileComponent implements OnInit {
   thisPublicProvider: CurrentUser;
   thisPrivateProvider: CurrentUser;
   thisId: number;
+  monthstats: {
+    totalProfit: number;
+    monthProfit: number
+  };
+  totalstats: TotalModel[] = [];
+  currAct: ProviderViewEventModel[] = [];
+  pendAct: PendingEventModel[] = [];
+  histAct: HistoryEventModel[] = [];
   constructor(private currentUserService: CurrentUserService, private providerService: ProviderService, private route: ActivatedRoute,
     private eventService: EventService) { }
 
@@ -29,7 +39,7 @@ export class ProviderProfileComponent implements OnInit {
     this.currentUserService.currentUser.subscribe(user => this.currentUser = user);
     this.thisId = +this.route.snapshot.paramMap.get('id');
     if (this.currentUser.mode === 'parent' || this.thisId !== this.currentUser.id) {
-      //this.clear(['priv1', 'priv2', 'priv3', 'personal', 'tickets', 'monthly-reports']);
+      this.clear(['priv1', 'priv2', 'priv3', 'personal', 'tickets', 'monthly-reports']);
     }
     this.providerService.getPublicProvider(this.thisId)
     .subscribe(
@@ -64,7 +74,33 @@ export class ProviderProfileComponent implements OnInit {
   }
 
   getTickets() {
-
+    this.eventService.getProvHistoryEvents(this.thisId)
+    .subscribe(
+      data => {
+        this.histAct = data;
+      },
+      error => {
+        this.model.error = error.error;
+      }
+    );
+    this.eventService.getProvPrivEvents(this.thisId)
+    .subscribe(
+      data => {
+        this.currAct = data;
+      },
+      error => {
+        this.model.error = error.error;
+      }
+    );
+    this.eventService.getProvPendingEvents(this.thisId)
+    .subscribe(
+      data => {
+        this.pendAct = data;
+      },
+      error => {
+        this.model.error = error.error;
+      }
+    );
   }
 
   getPersonal() {
@@ -82,8 +118,23 @@ export class ProviderProfileComponent implements OnInit {
       }
     );
   }
-  getMonths() {
+  getMonth() {
+    this.providerService.getMonth(this.thisId, this.model.month)
+    .subscribe(
+      data => {
+        this.monthstats.monthProfit = data.monthProfit;
+        this.monthstats.totalProfit = data.totalProfit;
+      }
+    );
+  }
 
+  getTotal() {
+    this.providerService.getTotal(this.thisId, this.model.month)
+    .subscribe(
+      data => {
+        this.totalstats = data;
+      }
+    );
   }
 
   updateProvider() {

@@ -11,10 +11,10 @@ export class PurchaseService {
   constructor(private http: HttpClient) { }
 
   purchasePoints(pointform: PointsPurchaseModel) {
-    return this.http.post<ResultModel>('/api/purchase/points', pointform);
+    return this.http.post<ResultModel>('/api/purchase_points', pointform);
   }
 
-  purchaseTicket(ticketform: TicketPurchaseModel) {
-    return this.http.post<ResultModel>('/api/purchase/tickets', ticketform);
+  purchaseTicket(ticketform: TicketPurchaseModel, id: number) {
+    return this.http.post<ResultModel>(`/api/purchase_tickets/${id}`, ticketform);
   }
 }
