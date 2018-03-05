@@ -10,17 +10,25 @@ export class ProviderRegisterService {
 
   constructor(private http: HttpClient) { }
 
-  register(provider: ProviderRegisterModel, logo: File, authdocs: FileList) {
+  register(provider: ProviderRegisterModel, logo: File, authdocs: File) {
 
     let fd = new FormData();
     fd.append('data', JSON.stringify(provider));
     fd.append('logo', logo);
-    for (let i = 0; i < authdocs.length; i++ ) {
-      let auth = authdocs[i];
-      if (auth) {
-        fd.append('file', auth);
-      }
-    }
+    fd.append('file', authdocs);
     return this.http.post<CurrentUser>('/api/register/provider', fd);
+  }
+
+  registerFiles(provider: ProviderRegisterModel, logo: File, authdocs: File) {
+
+    let fd = new FormData();
+    fd.append('username', provider.username);
+    fd.append('logo', logo);
+    fd.append('file', authdocs);
+    return this.http.post<CurrentUser>('/api/register/provider/files', fd);
+  }
+
+  registerJson(provider: ProviderRegisterModel) {
+    return this.http.post<CurrentUser>('/api/register/provider/data', provider);
   }
 }

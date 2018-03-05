@@ -12,23 +12,23 @@ export class AdminService {
   constructor(private http: HttpClient) { }
 
   login(username: string, password: string) {
-    return this.http.post<any>('/api/admin/login', { 'username': username, 'password': password } );
+    return this.http.post<any>('/api/path_known_to_admins/login', { 'username': username, 'password': password } );
   }
 
   banParent(id: number, ban: boolean) {
-    return this.http.post<any>('/api/parents/ban', { 'id': id , 'ban' : ban } );
+    return this.http.post<any>('/api/path_known_to_admins/parents/ban', { 'id': id , 'ban' : ban } );
   }
 
   banProvider(id: number, code: number) {
-    return this.http.post<any>('/api/providers/ban', { 'id': id , 'rights_code' : code } );
+    return this.http.post<any>('/api/path_known_to_admins/providers/rights', { 'id': id , 'rights_code' : code } );
   }
 
   acceptProvider(id: number, des: number) {
-    return this.http.post<any>('/api/providers/pending', { 'id': id , 'phone' : des });
+    return this.http.post<any>('/api/path_known_to_admins/pending_providers/accept', { 'id': id , 'phone' : des });
   }
 
   acceptEvent(id: number, des: number) {
-    return this.http.post<any>('/api/event/pending', { 'event_id': id , 'highestAge' : des });
+    return this.http.post<any>('/api/path_known_to_admins/pending-events/accept', { 'event_id': id , 'highestAge' : des });
   }
 
   reset(username: string, mode: string) {
@@ -40,22 +40,22 @@ export class AdminService {
   }
 
   getParents() {
-    return this.http.get<CurrentUser[]>('/api/parents');
+    return this.http.get<CurrentUser[]>('/api/path_known_to_admins/parents');
   }
 
   getProviders() {
-    return this.http.get<CurrentUser[]>('/api/providers');
+    return this.http.get<CurrentUser[]>('/api/path_known_to_admins/providers');
   }
 
   getPendingProviders() {
-    return this.http.get<CurrentUser[]>('/api/pending/providers');
+    return this.http.get<CurrentUser[]>('/api/path_known_to_admins/pending_providers');
   }
 
   getActivities() {
-    return this.http.get<EventModel[]>('/api/events');
+    return this.http.get<EventModel[]>('/api/path_known_to_admins/current_events');
   }
 
   getPendingActivities() {
-    return this.http.get<EventModel[]>('/api/pending/events');
+    return this.http.get<EventModel[]>('/api/path_known_to_admins/pending_events');
   }
 }

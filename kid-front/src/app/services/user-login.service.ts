@@ -12,7 +12,7 @@ export class UserLoginService {
 
   login(username: string, password: string , mode: string) {
     if (mode === 'parent') {
-      return this.http.post<CurrentUser>('/api/users', { 'username': username, 'password': password } )
+      return this.http.post<CurrentUser>('/api/login/parent', { 'username': username, 'password': password } )
         .map(user => {
           if (user && user.username) {
             user.mode = 'parent';
@@ -22,7 +22,7 @@ export class UserLoginService {
           return user;
         });
     } else {
-      return this.http.post<CurrentUser>('/api/users', { 'username': username, 'password': password } )
+      return this.http.post<CurrentUser>('/api/login/provider', { 'username': username, 'password': password } )
         .map(user => {
           if (user && user.username) {
             user.mode = 'provider';

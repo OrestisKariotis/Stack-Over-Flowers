@@ -19,7 +19,7 @@ export class EventService {
 
   //selida home
   getHomeEvents() {
-    return this.http.get<SearchEventModel[]>('/api/home/events');
+    return this.http.get<SearchEventModel[]>('/api/home');
   }
 
   //selida admin, pending tab
@@ -34,22 +34,26 @@ export class EventService {
 
   //selida provider profile, tab2, tab5
   getProvEvents(provider_id: number) {
-    return this.http.get<ProviderViewEventModel[]>(`/api/provider/${provider_id}/events`);
+    return this.http.get<ProviderViewEventModel[]>(`/api/profile/provider/${provider_id}/current_events`);
+  }
+
+  getProvPrivEvents(provider_id: number) {
+    return this.http.get<ProviderViewEventModel[]>(`/api/profile/provider/${provider_id}/events`);
   }
 
   //selida provider profile, tab4
   getProvPendingEvents(provider_id: number) {
-    return this.http.get<PendingEventModel[]>(`/api/provider/${provider_id}/pendingEvents`);
+    return this.http.get<PendingEventModel[]>(`/api/profile/provider/${provider_id}/pending_events`);
   }
 
   //selida provider profile, tab4
   getProvHistoryEvents(provider_id: number) {
-    return this.http.get<HistoryEventModel[]>(`/api/provider/${provider_id}/historyEvents`);
+    return this.http.get<HistoryEventModel[]>(`/api/profile/provider/${provider_id}/old_events`);
   }
-  
+
   //selida search
   getSearchEvents(filters: SearchModel) {
-    return this.http.post<SearchEventModel[]>('/api/search', filters)
+    return this.http.post<SearchEventModel[]>('/api/events_search', filters)
     .map(user => {
       return user.map(res => res.flatLoc(res));
     });

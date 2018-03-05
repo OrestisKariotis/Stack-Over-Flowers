@@ -14,7 +14,7 @@ export class ProviderRegisterComponent implements OnInit {
   alert: boolean;
   popup: string;
   logoFile: File = null;
-  authFileList: FileList = null;
+  authFile: File = null;
 
   constructor(private providerRegisterService: ProviderRegisterService) { }
 
@@ -25,15 +25,43 @@ export class ProviderRegisterComponent implements OnInit {
     this.alert = false;
     if (!this.logoFile) {
       this.model.error = 'select logo pic';
-    } else if (!this.authFileList) {
-      this.model.error = 'upload auth files';
+    } else if (!this.authFile) {
+      this.model.error = 'upload auth file';
     } else {
       this.model.id = 0;
-      this.providerRegisterService.register(new ProviderRegisterModel(this.model), this.logoFile, this.authFileList)
+      this.providerRegisterService.register(new ProviderRegisterModel(this.model), this.logoFile, this.authFile)
       .subscribe(
         data => {
           this.alert = true;
           this.popup = 'H εγγραφή έχει υποβληθεί για αποδοχή. Θα σας αποσταλεί μαιλ σχετικά με την εξέλιξή της.';
+        },
+        error => {
+          this.model.error = error.error;
+        }
+      );
+    }
+  }
+
+  providerRegister2() {
+    this.alert = false;
+    if (!this.logoFile) {
+      this.model.error = 'select logo pic';
+    } else if (!this.authFile) {
+      this.model.error = 'upload auth file';
+    } else {
+      this.model.id = 0;
+      this.providerRegisterService.registerJson(new ProviderRegisterModel(this.model))
+      .subscribe(
+        data => {
+          this.providerRegisterService.registerFiles(this.model.username, this.logoFile, this.authFile).subscribe(
+            data2 => {
+              this.alert = true;
+              this.popup = 'H εγγραφή έχει υποβληθεί για αποδοχή. Θα σας αποσταλεί μαιλ σχετικά με την εξέλιξή της.';
+            },
+            error => {
+              this.model.error = error.error;
+            }
+          );
         },
         error => {
           this.model.error = error.error;
@@ -47,7 +75,7 @@ export class ProviderRegisterComponent implements OnInit {
   }
 
   authChange(auth: any) {
-    this.authFileList = auth;
+    this.authFile = auth[0];
   }
 
 }

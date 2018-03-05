@@ -6,7 +6,7 @@
   			<li><a data-toggle="tab" href="#activities" (click)="getActivities()">Δραστηριότητες</a></li>
   			<li id="priv1" ><a data-toggle="tab" href="#personal" (click)="getPersonal()">Προσωπικά στοιχεία</a></li>
   			<li id="priv2" ><a data-toggle="tab" href="#tickets" (click)="getTickets()">Εισιτήρια</a></li>
-  			<li id="priv3" ><a data-toggle="tab" href="#monthly-reports" (click)="getMonths()">Μηνιαίες αναφορές</a></li>
+  			<li id="priv3" ><a data-toggle="tab" href="#monthly-reports" (click)="getMonth(); getTotal()">Μηνιαίες αναφορές</a></li>
 		</ul>
 		<div class="tab-content">
   			<div id="profile" class="tab-pane fade in active">
@@ -122,8 +122,16 @@
 	        					<th>Εξέλιξη προπώλησης</th>
 	      					</tr>
 	    				</thead>
-	    				<tbody>
-	    				</tbody>
+	    				<tbody *ngIf="currAct?.length > 0">
+    					<tr *ngFor="let act of currAct">
+    						<td>{{act.title}}</td>
+    						<td>{{act.date}}</td>
+    						<td>{{act.starting_time}}</td>
+    						<td>{{act.ticket_cost}}</td>
+    						<td>{{act.categories}}</td>
+    						<td>{{act.available_ticketsNumber}}/{{act.initial_ticketsNumber}}</td>
+    					</tr>
+    				</tbody>
 	    			</table>
 	    		</div>
     			<br>
@@ -141,8 +149,16 @@
 	        					<th>Σε αναμονή έγκρισης</th>
 	      					</tr>
 	    				</thead>
-	    				<tbody>
-	    				</tbody>
+	    				<tbody *ngIf="pendAct?.length > 0">
+    					<tr *ngFor="let pend of pendAct">
+    						<td>{{pend.title}}</td>
+    						<td>{{pend.date}}</td>
+    						<td>{{pend.starting_time}}</td>
+    						<td>{{pend.ticket_cost}}</td>
+    						<td>{{pend.categories}}</td>
+    						<td>-</td>
+    					</tr>
+    				</tbody>
 	    			</table>
 	    		</div>
     			<br>
@@ -160,8 +176,16 @@
 	        					<th>Εισιτήρια που πωλήθηκαν</th>
 	      					</tr>
 	    				</thead>
-	    				<tbody>
-	    				</tbody>
+	    				<tbody *ngIf="histAct?.length > 0">
+    					<tr *ngFor="let hist of histAct">
+    						<td>{{hist.title}}</td>
+    						<td>{{hist.date}}</td>
+    						<td>{{hist.starting_time}}</td>
+    						<td>{{hist.ticket_cost}}</td>
+    						<td>{{hist.categories}}</td>
+    						<td>{{hist.sold_ticketsNumber}}</td>
+    					</tr>
+    				</tbody>
 	    			</table>
 	    		</div>
   			</div>
@@ -171,27 +195,27 @@
 					<div class="row form-group">
 						<label class="col-md-2 col-md-offset-3">Μήνας:</label>
 		            	<div class="col-md-4">
-							<select class="form-control">
-								<option>Ιανουάριος</option>
-								<option>Φεβρουάριος</option>
-								<option>Μάρτιος</option>
-								<option>Απρίλιος</option>
-								<option>Μάιος</option>
-								<option>Ιούνιος</option>
-								<option>Ιούλιος</option>
-								<option>Αύγουστος</option>
-								<option>Σεπτέμβριος</option>
-								<option>Οκτώβριος</option>
-								<option>Νοέμβριος</option>
-								<option>Δεκέμβριος</option>
+							<select class="form-control" name="month" [(ngModel)]="model.month" #month="ngModel">
+								<option value="0" (click)="getMonth(); getTotal()">Ιανουάριος</option>
+								<option value="1" (click)="getMonth(); getTotal()">Φεβρουάριος</option>
+								<option value="2" (click)="getMonth(); getTotal()">Μάρτιος</option>
+								<option value="3" (click)="getMonth(); getTotal()">Απρίλιος</option>
+								<option value="4" (click)="getMonth(); getTotal()">Μάιος</option>
+								<option value="5" (click)="getMonth(); getTotal()">Ιούνιος</option>
+								<option value="6" (click)="getMonth(); getTotal()">Ιούλιος</option>
+								<option value="7" (click)="getMonth(); getTotal()">Αύγουστος</option>
+								<option value="8" (click)="getMonth(); getTotal()">Σεπτέμβριος</option>
+								<option value="9" (click)="getMonth(); getTotal()">Οκτώβριος</option>
+								<option value="10" (click)="getMonth(); getTotal()">Νοέμβριος</option>
+								<option value="11" (click)="getMonth(); getTotal()">Δεκέμβριος</option>
 							</select>
 		          		</div>
 					</div>
 					<div class="panel panel-default"><br>
-  					<div class="text-center h2-font-size">Έσοδα μήνα: 230&euro;</div><br>
+  					<div class="text-center h2-font-size">Έσοδα μήνα: {{monthstats.monthProfit}}&euro;</div><br>
 					</div>
 					<div class="panel panel-default"><br>
-  					<div class="text-center h2-font-size">Συνολικά έσοδα: 7000&euro;</div><br>
+  					<div class="text-center h2-font-size">Συνολικά έσοδα: {{monthstats.totalProfit}}&euro;</div><br>
 					</div>
 	  			</div>
    				<div class="col-sm-7">
@@ -209,8 +233,15 @@
 				        				<th>Έσοδα</th>
 				      				</tr>
 				    			</thead>
-				    			<tbody>
-				    			</tbody>
+				    			<tbody *ngIf="totalstats?.length > 0">
+    					<tr *ngFor="let tot of totalstats">
+    						<td>{{tot.name}}</td>
+    						<td>{{tot.date}}</td>
+    						<td>{{tot.ticket_cost}}</td>
+    						<td>{{tot.sold_ticketsNumber}}</td>
+    						<td>{{tot.profit}}</td>
+    					</tr>
+    				</tbody>
 				    		</table>
 				    	</div>
    					</div>
