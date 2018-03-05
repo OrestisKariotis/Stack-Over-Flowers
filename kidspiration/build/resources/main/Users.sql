@@ -67,6 +67,28 @@ CREATE TABLE kidspiration.Providers (
   PRIMARY KEY (`id`)
 ) AUTO_INCREMENT = 1;
 
+CREATE TABLE kidspiration.HashedParents (
+  `key` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` INT(10) UNSIGNED NOT NULL,
+  `username` INT(10) UNSIGNED NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `hashedString` VARCHAR(100) NOT NULL,
+  `salt2` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`key`),
+  FOREIGN KEY (`id`)  REFERENCES kidspiration.Parents(`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) AUTO_INCREMENT = 1;
+
+CREATE TABLE kidspiration.HashedProviders (
+  `key` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` INT(10) UNSIGNED NOT NULL,
+  `username` INT(10) UNSIGNED NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `hashedString` VARCHAR(100) NOT NULL,
+  `salt2` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`key`),
+  FOREIGN KEY (`id`)  REFERENCES kidspiration.Providers(`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) AUTO_INCREMENT = 1;
+
 CREATE TABLE kidspiration.MonthReferences(     /* ADDED */
   `month` TINYINT UNSIGNED,
   `earnings` INT,

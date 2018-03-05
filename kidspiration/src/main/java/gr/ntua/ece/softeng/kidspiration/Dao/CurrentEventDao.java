@@ -93,13 +93,13 @@ public class CurrentEventDao implements EventDao<CurrentEvent> {
     }
 
     public EventPageView findEventPage(int id) {
-        List <EventPageView> events = jdbcTemplate.query("select event_id, provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber, available_ticketsNumber, lowestAge, highestAge, latitude, longitude, description, businessName from ((SELECT * FROM currentevents WHERE event_id = ?) sub INNER JOIN providers ON sub.provider_id = providers.id)",
+        List <EventPageView> events = jdbcTemplate.query("select event_id, provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber, available_ticketsNumber, lowestAge, highestAge, latitude, longitude, description, businessName, numOfPhotos from ((SELECT * FROM currentevents WHERE event_id = ?) sub INNER JOIN providers ON sub.provider_id = providers.id)",
                 new Object[] {id}, new EventPageViewMapper());  // Group By would be a nice choice
         return events.size() > 0 ? events.get(0) : null;
     }
 
     public List<EventPageView> findAllEventPages() {
-        List <EventPageView> events = jdbcTemplate.query("select event_id, provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber, available_ticketsNumber, lowestAge, highestAge, latitude, longitude, description, businessName from ((SELECT * FROM currentevents) sub INNER JOIN providers ON sub.provider_id = providers.id)",
+        List <EventPageView> events = jdbcTemplate.query("select event_id, provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber, available_ticketsNumber, lowestAge, highestAge, latitude, longitude, description, businessName, numOfPhotos from ((SELECT * FROM currentevents) sub INNER JOIN providers ON sub.provider_id = providers.id)",
                 new EventPageViewMapper());  // Group By would be a nice choice
         return events;
     }

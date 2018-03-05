@@ -1,16 +1,13 @@
 package gr.ntua.ece.softeng.kidspiration.Services;
 
-import gr.ntua.ece.softeng.kidspiration.ProviderView;
+import gr.ntua.ece.softeng.kidspiration.*;
 import gr.ntua.ece.softeng.kidspiration.Dao.ProviderDao;
-import gr.ntua.ece.softeng.kidspiration.Login;
-import gr.ntua.ece.softeng.kidspiration.Provider;
-import gr.ntua.ece.softeng.kidspiration.Salt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import gr.ntua.ece.softeng.kidspiration.Dao.MonthProviderReferenceDao;
-import gr.ntua.ece.softeng.kidspiration.MonthProviderReference;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -46,7 +43,6 @@ public class ProviderService { //implements UserService<Provider> {
         // for that reason, editUser WILL change
     }
 
-
     public void editInfo(int id, String firstname, String lastname, String phone, String bankAccount) {
         providerDao.editInfo(id, firstname, lastname, phone, bankAccount);
     }
@@ -75,4 +71,35 @@ public class ProviderService { //implements UserService<Provider> {
     public List<Provider> findAll() {  //checked
         return providerDao.findAll();
     } // OK
+
+    public void addHashedUser(String username) throws IOException {
+
+        SendResetEmail emailer = new SendResetEmail();
+
+        String pseudopass = new StringGenerator().randomgeneratedstring();
+        String salt = new StringGenerator().randomgeneratedstring();
+        Salt hash = new Salt();
+        String hashedString = hash.hashed(pseudopass, salt);
+
+        Provider provider = providerDao.findByUsername(username);
+
+        providerDao.addHashedUser(provider.getId(), provider.getUsername(), provider.getEmail(), hashedString, salt);
+
+        emailer.sendresetEmail(pseudopass,salt,provider.getEmail());  //APOSTOLH EMAIL
+    }
+
+    public boolean resetPassword(String pseudoPassword, String salt, String newPassword) {
+        Salt hash = new Salt();
+        String hashedString = hash.hashed(pseudoPassword, salt);
+        ResetUser user = providerDao.findByHashedString(hashedString);
+        if(user != null) {
+            Provider provider = providerDao.find(user.getId());
+            String salt1 = provider.getSalt();
+            String new_password = hash.hashed(newPassword, salt1);
+            providerDao.editPassword(user.getId(), new_password);
+            return true;
+        }
+        else
+            return false;
+    }
 }

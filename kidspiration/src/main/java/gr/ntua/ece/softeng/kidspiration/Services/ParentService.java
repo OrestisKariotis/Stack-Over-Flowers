@@ -1,5 +1,6 @@
 package gr.ntua.ece.softeng.kidspiration.Services;
 
+import java.io.IOException;
 import java.util.List;
 
 import gr.ntua.ece.softeng.kidspiration.*;
@@ -111,4 +112,35 @@ public class ParentService implements UserService<Parent> {
     public List<Parent> findAll() {  //checked
         return parentDao.findAll();
     } // OK
+
+    public void addHashedUser(String username) throws IOException {
+
+        SendResetEmail emailer = new SendResetEmail();
+
+        String pseudopass = new StringGenerator().randomgeneratedstring();
+        String salt = new StringGenerator().randomgeneratedstring();
+        Salt hash = new Salt();
+        String hashedString = hash.hashed(pseudopass, salt);
+
+        Parent parent = parentDao.findByUsername(username);
+
+        parentDao.addHashedUser(parent.getId(), parent.getUsername(), parent.getEmail(), hashedString, salt);
+
+        emailer.sendresetEmail(pseudopass,salt,parent.getEmail());  //APOSTOLH EMAIL
+    }
+
+    public boolean resetPassword(String pseudoPassword, String salt, String newPassword) {
+        Salt hash = new Salt();
+        String hashedString = hash.hashed(pseudoPassword, salt);
+        ResetUser user = parentDao.findByHashedString(hashedString);
+        if(user != null) {
+            Parent parent = parentDao.find(user.getId());
+            String salt1 = parent.getSalt();
+            String new_password = hash.hashed(newPassword, salt1);
+            parentDao.editPassword(user.getId(), new_password);
+            return true;
+        }
+        else
+            return false;
+    }
 }

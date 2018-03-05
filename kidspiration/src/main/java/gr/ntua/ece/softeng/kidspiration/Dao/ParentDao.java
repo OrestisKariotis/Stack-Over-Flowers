@@ -6,6 +6,7 @@ import java.util.List;
 
 import gr.ntua.ece.softeng.kidspiration.Login;
 import gr.ntua.ece.softeng.kidspiration.Parent;
+import gr.ntua.ece.softeng.kidspiration.ResetUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -87,6 +88,23 @@ public class ParentDao {//implements UserDao<Parent>{
         System.out.println("Leaving Update Points");
     }
 
+    public void addHashedUser(int id, String username, String email, String hashedString, String salt) {
+        jdbcTemplate.update("INSERT INTO HashedParents (id, username, email, hashedString, salt2) VALUES (?, ?, ?, ?, ?)",
+                id, username, email, hashedString, salt);
+        System.out.println("Hashed User Added!!");
+    }
+
+    public ResetUser findByHashedString(String hashedString) {
+        List <ResetUser> users = jdbcTemplate.query("SELECT * FROM HashedParents where hashedString = ? ",
+                new Object[] { hashedString }, new ResetUserMapper());
+
+        return users.size() > 0 ? users.get(0) : null;
+    }
+
+    public void editPassword(int id, String newPassword) {
+        jdbcTemplate.update("UPDATE Parents SET password = ? WHERE id = ? ", newPassword, id);
+    }
+
     class ParentMapper implements RowMapper<Parent> {
 
         public Parent mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -105,6 +123,22 @@ public class ParentDao {//implements UserDao<Parent>{
             Parent parent = new Parent(id, username, password, firstname, lastname, email, phone, wallet, spent_points, ban, salt);
 
             return parent;
+        }
+    }
+
+    public static class ResetUserMapper implements RowMapper<ResetUser> {
+
+        public ResetUser mapRow(ResultSet rs, int rowNum) throws SQLException {
+
+            int key = rs.getInt("key");
+            int id = rs.getInt("id");
+            String username = rs.getString("username");
+            String email = rs.getString("email");
+            String hashedString = rs.getString("hashedString");
+            String salt2 = rs.getString("salt2");
+
+            ResetUser user = new ResetUser(key, id, username, email, hashedString, salt2);
+            return user;
         }
     }
 }
