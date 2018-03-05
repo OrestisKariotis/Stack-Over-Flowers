@@ -47,6 +47,11 @@ public class TicketDao {
         return tickets;
     }
 
+    public List<Ticket> findTickets(int id, int event_id) {
+        List<Ticket> tickets = jdbcTemplate.query("SELECT * FROM Tickets WHERE (parent_id = ? AND event_id = ?)", new Object[] {id, event_id}, new TicketMapper());
+        return tickets;
+    }
+
     static class TicketMapper implements RowMapper<Ticket> {  // Defined static for use in OldTicketDao  //checking
 
         public Ticket mapRow(ResultSet rs, int rowNum) throws SQLException {

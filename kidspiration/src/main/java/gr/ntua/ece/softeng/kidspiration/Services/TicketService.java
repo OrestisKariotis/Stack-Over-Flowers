@@ -3,6 +3,7 @@ package gr.ntua.ece.softeng.kidspiration.Services;
 import gr.ntua.ece.softeng.kidspiration.Dao.TicketDao;
 import gr.ntua.ece.softeng.kidspiration.Ticket;
 import gr.ntua.ece.softeng.kidspiration.TicketView;
+import org.elasticsearch.search.aggregations.bucket.terms.InternalTerms;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -31,4 +32,14 @@ public class TicketService {
     } //checking
 
     public List<Ticket> findByEvent(int event_id) { return ticketDao.findByEvent(event_id); }
+
+    public ArrayList<Integer> findTickets(int id, int event_id) {
+
+        List<Ticket> tickets = ticketDao.findTickets(id, event_id);
+        ArrayList<Integer> ids = new ArrayList<>();
+        for(int i = 0; i < tickets.size(); i++) {
+            ids.add(tickets.get(i).getTicketId());
+        }
+        return ids;
+    }
 }

@@ -1,15 +1,18 @@
 package gr.ntua.ece.softeng.kidspiration.Controllers;
 
-import gr.ntua.ece.softeng.kidspiration.CurrentEvent;
-import gr.ntua.ece.softeng.kidspiration.Parent;
-import gr.ntua.ece.softeng.kidspiration.PurchaseView;
+import com.itextpdf.text.DocumentException;
+import gr.ntua.ece.softeng.kidspiration.*;
 import gr.ntua.ece.softeng.kidspiration.Services.*;
-import gr.ntua.ece.softeng.kidspiration.PurchaseTicketInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class TicketPurchaseController {
@@ -52,6 +55,19 @@ public class TicketPurchaseController {
         }
         // UNLOCK, SEE @Transactional in Spring
         // EMAIL NOTIFICATION
+        ArrayList<Integer> ids = ticketService.findTickets(info.getId(), info.getEvent_id());
+        PdfCreator pdfCreator = new PdfCreator();
+        try {
+            pdfCreator.createPdf(parent.getUsername(), parent.getUsername(), ids, event.getTicket_cost(), event.getTitle(), event.getDate().toString());
+            SendResetEmail sendResetEmail = new SendResetEmail();
+            sendResetEmail.sendCheckEmail(parent.getEmail(), parent.getUsername());
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         PurchaseView purchase_return = new PurchaseView(info.getId(), parent.getWallet());
         System.out.println("LEAVING");
         return ResponseEntity.accepted().body(purchase_return);

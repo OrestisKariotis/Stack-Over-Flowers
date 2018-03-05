@@ -110,6 +110,8 @@ public class AdministratorPanelController {
 
         if ((pendingProvider.getPhone()).equals("0")) { //Decline
             pendingProviderService.deleteUser(pendingProvider.getId());
+            SendResetEmail sendResetEmail = new SendResetEmail();
+            sendResetEmail.sendSimpleMail(pendingProvider.getEmail(), "Λυπούμαστε πολύ "+pendingProvider.getUsername()+" αλλά δεν γίνατε αποδεκτός από τους διαχειριστές.");
             return "Pending provider got declined";
         }
         else {// phone == 1 // Accept
@@ -122,7 +124,8 @@ public class AdministratorPanelController {
             pendingProviderService.deleteUser(pendingProvider.getId());
             providerService.addUser(new_provider);
             //END OF TRANSACTION
-
+            SendResetEmail sendResetEmail = new SendResetEmail();
+            sendResetEmail.sendSimpleMail(provider.getEmail(), "Γεια σας "  + new_provider.getUsername()+"!\nΣας καλωσορίζουμε στην πλατφόρμα μας! Η αίτησή σας εγκρίθηκε.");
             //if transaction done return OK
             // Notify user via email
             return "Provider got accepted!!!";
@@ -143,15 +146,23 @@ public class AdministratorPanelController {
 
         int id = pendingEvent.getEvent_id();
 
+        System.out.println(id);
         if(pendingEvent.getHighestAge() == 0) { //Decline
+            SendResetEmail sendResetEmail = new SendResetEmail();
+            PendingEvent event = pendingEventService.find(id);
+            Provider provider = providerService.find(event.getProvider_id());
             pendingEventService.deleteEvent(id);
+            sendResetEmail.sendSimpleMail(provider.getEmail(), "Λυπούμαστε " + provider.getUsername()+" αλλά το event σας με τίτλο " + event.getTitle() + " δεν εγκρίθηκε για upload.");
             return "Pending Event got declined";
         }
         else { // Accept
 
-            PendingEvent event = pendingEventService.find(id);
 
-            // !!! GOOGLE API FOR GETTING LONGITUDE, LATITUDE FROM Place !!! /* Doing it now.. Don't push me.. *** */
+            PendingEvent event = pendingEventService.find(id);
+            Provider provider = providerService.find(event.getProvider_id());
+            SendResetEmail sendResetEmail=new SendResetEmail();
+            sendResetEmail.sendSimpleMail(provider.getEmail(), "Γειά σας "+ provider.getUsername() + "\nH αίτησή σας για upload του event με τίτλο " + event.getTitle() + " εγκρίθηκε.");
+                    // !!! GOOGLE API FOR GETTING LONGITUDE, LATITUDE FROM Place !!! /* Doing it now.. Don't push me.. *** */
 
             CurrentEvent new_event = new CurrentEvent(0, event.getProvider_id(), event.getTitle(), event.getDate(), event.getStarting_time(), event.getPlace(), event.getCategories(), event.getTicket_cost(), event.getInitial_ticketsNumber(), event.getLowestAge(), event.getHighestAge(), event.getDescription(), event.getNumOfPhotos(), event.getInitial_ticketsNumber(), 35.0000, 36.0000);
 
@@ -164,14 +175,14 @@ public class AdministratorPanelController {
             System.out.println("SQL INSERTION DONE");
             pendingEventService.deleteEvent(id);
             System.out.println("DELETION DONE");
-
+        /*
             try {
                 currentEventService.addEventElastic(new_event);
             } catch (IOException ex) {
                 System.out.println(ex);
                 return "Insertion in Elastic failed";
             }
-
+        */
             //END OF TRANSACTION
 
             //if transaction done return OK

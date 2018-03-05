@@ -3,6 +3,7 @@ package gr.ntua.ece.softeng.kidspiration.Dao;
 import com.sun.prism.shader.Solid_ImagePattern_Loader;
 import gr.ntua.ece.softeng.kidspiration.PendingEvent;
 import gr.ntua.ece.softeng.kidspiration.PendingEventView;
+import gr.ntua.ece.softeng.kidspiration.Provider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;

@@ -58,6 +58,8 @@ public class ParentService implements UserService<Parent> {
             parentDao.updatePoints(parent.getId(),wallet - points, spent_points + points);
         else {  // BONUS
             //EMAIL NOTIFICATION
+            SendResetEmail sendResetEmail = new SendResetEmail();
+            sendResetEmail.sendSimpleMail(parent.getEmail(), "Συγχαρητήρια " + parent.getUsername()+"!\nΚερδίσατε 1000 πόντους για αγορές στην πλατφόρμα μας, αφού συμπληρώσατε αγορές 30000 πόντων!");
             parent.setWallet(wallet - points + 1000);
             parent.setWallet(spent_points + points - 30000);
             parentDao.updatePoints(parent.getId(), wallet - points + 1000, spent_points + points - 30000);

@@ -1,8 +1,6 @@
 package gr.ntua.ece.softeng.kidspiration.Controllers;
 
-import gr.ntua.ece.softeng.kidspiration.Parent;
-import gr.ntua.ece.softeng.kidspiration.ParentView;
-import gr.ntua.ece.softeng.kidspiration.PendingProvider;
+import gr.ntua.ece.softeng.kidspiration.*;
 import gr.ntua.ece.softeng.kidspiration.Services.ParentService;
 import gr.ntua.ece.softeng.kidspiration.Services.PendingProviderService;
 import gr.ntua.ece.softeng.kidspiration.Services.ProviderService;
@@ -10,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import gr.ntua.ece.softeng.kidspiration.User;
 import gr.ntua.ece.softeng.kidspiration.Services.UserService;
 
 import javax.xml.ws.Response;
@@ -44,6 +41,8 @@ public class RegisterController {
 
         //EMAIL NOTIFICATION
         if (parent.getSpent_points() == 0) { //or get him to login
+            SendResetEmail sendResetEmail = new SendResetEmail();
+            sendResetEmail.sendSimpleMail(parent.getEmail(), "Γεια σας " + parent.getUsername()+"!\nΣας καλωσορίζουμε στην πλατφόρμα μας!");
             ParentView parentView = new ParentView(parent.getId(), parent.getUsername(), parent.getFirstname(), parent.getLastname(), parent.getEmail(), parent.getPhone(), parent.getWallet());
             return ResponseEntity.accepted().body(parentView);
         } else if (parent.getSpent_points() == 1)
