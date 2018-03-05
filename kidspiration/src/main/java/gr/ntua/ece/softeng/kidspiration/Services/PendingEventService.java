@@ -3,6 +3,7 @@ package gr.ntua.ece.softeng.kidspiration.Services;
 import gr.ntua.ece.softeng.kidspiration.Dao.PendingEventDao;
 import gr.ntua.ece.softeng.kidspiration.PendingEvent;
 import gr.ntua.ece.softeng.kidspiration.PendingEventView;
+import gr.ntua.ece.softeng.kidspiration.Provider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -44,4 +45,5 @@ public class PendingEventService implements EventService<PendingEvent> {
     public List<PendingEvent> findAll() {  //checked
         return pendingEventDao.findAll();
     } // OK
+
 }

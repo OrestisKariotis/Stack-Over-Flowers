@@ -18,6 +18,8 @@ public class PendingEvent extends Event{
         this.numOfPhotos = numOfPhotos;
     }
 
+    public PendingEvent() {}
+
     public byte getLowestAge() {
         return lowestAge;
     }

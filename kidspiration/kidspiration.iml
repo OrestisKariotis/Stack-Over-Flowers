@@ -39,6 +39,7 @@
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.elasticsearch:elasticsearch:6.2.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: com.google.code.gson:gson:2.8.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.json:json:20170516" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: com.itextpdf:itextpdf:5.5.10" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.springframework.boot:spring-boot-starter:1.5.10.RELEASE" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.springframework.boot:spring-boot-starter-tomcat:1.5.10.RELEASE" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Gradle: org.hibernate:hibernate-validator:5.3.6.Final" level="project" />
@@ -124,6 +125,7 @@
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.elasticsearch:elasticsearch:6.2.1" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: com.google.code.gson:gson:2.8.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.json:json:20170516" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: com.itextpdf:itextpdf:5.5.10" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.springframework.boot:spring-boot-starter:1.5.10.RELEASE" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.springframework.boot:spring-boot-starter-tomcat:1.5.10.RELEASE" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.hibernate:hibernate-validator:5.3.6.Final" level="project" />
@@ -209,6 +211,7 @@
     <orderEntry type="library" scope="TEST" name="Gradle: org.elasticsearch:elasticsearch:6.2.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.code.gson:gson:2.8.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.json:json:20170516" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.itextpdf:itextpdf:5.5.10" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.springframework.boot:spring-boot-starter:1.5.10.RELEASE" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.springframework.boot:spring-boot-starter-tomcat:1.5.10.RELEASE" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.hibernate:hibernate-validator:5.3.6.Final" level="project" />

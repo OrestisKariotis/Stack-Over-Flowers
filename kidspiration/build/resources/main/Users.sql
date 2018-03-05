@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS kidspiration.HashedParents;
+DROP TABLE IF EXISTS kidspiration.HashedProviders;
 DROP TABLE IF EXISTS kidspiration.OldTickets;
 DROP TABLE IF EXISTS kidspiration.Tickets;
 DROP TABLE IF EXISTS kidspiration.Parents;
@@ -70,7 +72,7 @@ CREATE TABLE kidspiration.Providers (
 CREATE TABLE kidspiration.HashedParents (
   `key` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `id` INT(10) UNSIGNED NOT NULL,
-  `username` INT(10) UNSIGNED NOT NULL,
+  `username` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `hashedString` VARCHAR(100) NOT NULL,
   `salt2` VARCHAR(45) NOT NULL,
@@ -81,7 +83,7 @@ CREATE TABLE kidspiration.HashedParents (
 CREATE TABLE kidspiration.HashedProviders (
   `key` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `id` INT(10) UNSIGNED NOT NULL,
-  `username` INT(10) UNSIGNED NOT NULL,
+  `username` VARCHAR(45) NOT NULL,
   `email` VARCHAR(45) NOT NULL,
   `hashedString` VARCHAR(100) NOT NULL,
   `salt2` VARCHAR(45) NOT NULL,
