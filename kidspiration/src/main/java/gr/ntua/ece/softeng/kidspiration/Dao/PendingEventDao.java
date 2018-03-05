@@ -25,7 +25,7 @@ public class PendingEventDao implements EventDao<PendingEvent> {
 
     public void addEvent(PendingEvent event) {  //checked
         System.out.println("Entering Event Dao");
-        jdbcTemplate.update("INSERT INTO PendingEvents (provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber, lowestAge, highestAge, description, numOfPhotos) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        jdbcTemplate.update("INSERT INTO PendingEvents (provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber, lowestAge, highestAge, description, numOfPhotos) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 event.getProvider_id(), event.getTitle(), event.getDate(), event.getStarting_time(), event.getPlace(), event.getCategories(), event.getTicket_cost(), event.getInitial_ticketsNumber(), event.getLowestAge(), event.getHighestAge(), event.getDescription(), event.getNumOfPhotos());
         System.out.println("Event Added!!");
     }
@@ -64,7 +64,7 @@ public class PendingEventDao implements EventDao<PendingEvent> {
     }
 
     public List<PendingEventView> findAllPendingEventViews() {
-        List <PendingEventView> events = jdbcTemplate.query("select event_id, provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber, lowestAge, highestAge, description, businessName from ((SELECT * FROM PendingEvents) sub INNER JOIN providers ON sub.provider_id = providers.id)",
+        List <PendingEventView> events = jdbcTemplate.query("select event_id, provider_id, title, date, starting_time, place, type, ticket_cost, initial_ticketsNumber, lowestAge, highestAge, description,numOfPhotos, businessName from ((SELECT * FROM PendingEvents) sub INNER JOIN providers ON sub.provider_id = providers.id)",
                 new PendingEventViewMapper());  // Group By would be a nice choice
         return events;
     }

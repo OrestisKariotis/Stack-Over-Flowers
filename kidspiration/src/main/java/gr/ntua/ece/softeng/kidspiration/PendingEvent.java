@@ -7,7 +7,7 @@ public class PendingEvent extends Event{
     private byte lowestAge;
     private byte highestAge;
     private String description;
-    private int NumOfPhotos;
+    private int numOfPhotos;
 
 
     public PendingEvent(int event_id, int provider_id, String title, Date date, String starting_time, String place, String categories, int ticket_cost, int initial_ticketsNumber, byte lowestAge, byte highestAge, String description, int numOfPhotos) {
@@ -15,7 +15,7 @@ public class PendingEvent extends Event{
         this.lowestAge = lowestAge;
         this.highestAge = highestAge;
         this.description = description;
-        NumOfPhotos = numOfPhotos;
+        this.numOfPhotos = numOfPhotos;
     }
 
     public byte getLowestAge() {
@@ -43,10 +43,10 @@ public class PendingEvent extends Event{
     }
 
     public int getNumOfPhotos() {
-        return NumOfPhotos;
+        return numOfPhotos;
     }
 
     public void setNumOfPhotos(int numOfPhotos) {
-        NumOfPhotos = numOfPhotos;
+        numOfPhotos = numOfPhotos;
     }
 }

@@ -1,9 +1,6 @@
 package gr.ntua.ece.softeng.kidspiration.Dao;
 
-import gr.ntua.ece.softeng.kidspiration.CurrentEventView;
-import gr.ntua.ece.softeng.kidspiration.Login;
-import gr.ntua.ece.softeng.kidspiration.Provider;
-import gr.ntua.ece.softeng.kidspiration.User;
+import gr.ntua.ece.softeng.kidspiration.*;
 import org.omg.PortableInterceptor.ServerRequestInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -77,6 +74,23 @@ public class ProviderDao implements UserDao<Provider> {
     public List<Provider> findAll() { // OK
         List < Provider > users = jdbcTemplate.query("SELECT * FROM Providers", new ProviderMapper());
         return users;
+    }
+
+    public void addHashedUser(int id, String username, String email, String hashedString, String salt) {
+        jdbcTemplate.update("INSERT INTO HashedProviders (id, username, email, hashedString, salt2) VALUES (?, ?, ?, ?, ?)",
+                id, username, email, hashedString, salt);
+        System.out.println("Hashed Provider Added!!");
+    }
+
+    public ResetUser findByHashedString(String hashedString) {
+        List <ResetUser> users = jdbcTemplate.query("SELECT * FROM HashedProviders where hashedString = ? ",
+                new Object[] { hashedString }, new ParentDao.ResetUserMapper());
+
+        return users.size() > 0 ? users.get(0) : null;
+    }
+
+    public void editPassword(int id, String newPassword) {
+        jdbcTemplate.update("UPDATE Providers SET password = ? WHERE id = ? ", newPassword, id);
     }
 
     class ProviderMapper implements RowMapper<Provider> {

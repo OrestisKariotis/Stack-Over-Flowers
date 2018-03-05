@@ -40,12 +40,12 @@ public class AdministratorPanelController {
     @Autowired
     StatsService statsService;
 
-    @Autowired
-    private JavaMailSender sender;
+    //@Autowired
+    //private JavaMailSender sender;
 
     @RequestMapping(path = "/parents", method = RequestMethod.GET) //OK
     public List<Parent> AllParents() {  // PARENT VIEW 2 SHOULD BE MADE
-
+/*
         try{
             sendEmail();
             System.out.println("EMAIL SENT!");
@@ -53,7 +53,7 @@ public class AdministratorPanelController {
         catch (Exception ex){
             System.out.println("ERROR in sending Email: " + ex);
         }
-        System.out.println("HERE");
+        System.out.println("HERE"); */
         return parentService.findAll();
     }
 
@@ -200,14 +200,15 @@ public class AdministratorPanelController {
         StatsView statsView=new StatsView(numOfParents, numOfProviders, profit);
         return statsView;
     }
-
+/*
     private void sendEmail() throws Exception{
         MimeMessage message = sender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
         helper.setTo("mgvardas@hotmail.com");   /* Under which address is the e-mail sent? *** */
-        helper.setText("A test just to see that Email Notification is Working!");
+/*        helper.setText("A test just to see that Email Notification is Working!");
         helper.setSubject("It works!");
 
         sender.send(message);
     }
+*/
 }

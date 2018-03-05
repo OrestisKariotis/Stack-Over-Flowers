@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS kidspiration.HashedParents;
+DROP TABLE IF EXISTS kidspiration.HashedProviders;
 DROP TABLE IF EXISTS kidspiration.OldTickets;
 DROP TABLE IF EXISTS kidspiration.Tickets;
 DROP TABLE IF EXISTS kidspiration.Parents;
@@ -65,6 +67,28 @@ CREATE TABLE kidspiration.Providers (
   `rights_code` TINYINT NOT NULL,
   `salt` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`)
+) AUTO_INCREMENT = 1;
+
+CREATE TABLE kidspiration.HashedParents (
+  `key` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` INT(10) UNSIGNED NOT NULL,
+  `username` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `hashedString` VARCHAR(100) NOT NULL,
+  `salt2` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`key`),
+  FOREIGN KEY (`id`)  REFERENCES kidspiration.Parents(`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) AUTO_INCREMENT = 1;
+
+CREATE TABLE kidspiration.HashedProviders (
+  `key` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` INT(10) UNSIGNED NOT NULL,
+  `username` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `hashedString` VARCHAR(100) NOT NULL,
+  `salt2` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`key`),
+  FOREIGN KEY (`id`)  REFERENCES kidspiration.Providers(`id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) AUTO_INCREMENT = 1;
 
 CREATE TABLE kidspiration.MonthReferences(     /* ADDED */
