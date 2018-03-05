@@ -1,0 +1,378 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#controlNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span> 
+      </button>
+      <div class="navbar-brand"><img alt="Brand" src="/assets/images/logo.png"></div>
+	  <div class="platform-title" routerLink="/control-panel">Kidspiration Control Panel</div>
+    </div>
+    <div class="collapse navbar-collapse" id="controlNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a routerLink="" (click)="adminlogout()">Μετάβαση στην ιστοσελίδα</a></li>
+        <li><a routerLink="/home" (click)="adminlogout()">Αποσύνδεση</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<ul class="nav nav-pills nav-stacked sidenav">
+  <li class="active"><a data-toggle="pill" href="#parents" (click)="getParents()">Γονείς</a></li>
+  <li><a data-toggle="pill" href="#providers" (click)="getProviders()">Πάροχοι</a></li>
+  <li><a data-toggle="pill" href="#waitProv" (click)="getPendingProviders()">Πάροχοι <br />σε αναμονή</a></li>
+  <li><a data-toggle="pill" href="#waitAct" (click)="getPendingActivities()">Δραστηριότητες <br />σε αναμονή</a></li>
+  <li><a data-toggle="pill" href="#activities" (click)="getActivities()">Ενεργές <br />δραστηριότητες</a></li>
+  <li><a data-toggle="pill" href="#statistics">Στατιστικά</a></li>
+</ul>
+<div id="main">
+	<div class="tab-content">
+	  	<div id="parents" class="tab-pane active">
+	   		<h2>Γονείς</h2>
+	    	<br/>
+    		<div class="table-responsive">
+    			<table class="table table-bordered">
+    				<thead class="sparse">
+      					<tr>
+      						<th>ID</th>
+      						<th>Username</th>
+      						<th>Όνομα</th>
+      						<th>Επώνυμο</th>
+      						<th>Email</th>
+      						<th>Τηλέφωνο</th>
+      						<th>Διαθ. πόντοι</th>
+      						<th>Ξοδ. πόντοι</th>
+      						<th></th>
+      						<th></th>
+      						<th></th>
+      					</tr>
+    				</thead>
+    				<tbody *ngIf="parents_list?.length > 0">
+    					<tr *ngFor="let parent of parents_list | paginate : { id: 'tab1', itemsPerPage: 10, currentPage: p1 }">
+    						<td>{{parent.id}}</td>
+    						<td>{{parent.username}}</td>
+    						<td>{{parent.firstname}}</td>
+    						<td>{{parent.lastname}}</td>
+    						<td>{{parent.email}}</td>
+    						<td>{{parent.phone}}</td>
+    						<td>{{parent.wallet}}</td>
+    						<td>{{parent.spent_points}}</td>
+    						<td>
+       							<button class="btn btn-default btn-xs" type="button" [ngClass]="{ 'disabled': parent.ban }"
+       							(click)="banParent(parent.id)">Ban</button>
+    						</td>
+    						<td>
+       							<button class="btn btn-default btn-xs" type="button" [ngClass]="{ 'disabled': !parent.ban }"
+       							(click)="unbanParent(parent.id)">Unban</button>
+    						</td>
+    						<td>
+       							<button class="btn btn-default btn-xs" type="button"
+       							(click)="resetPassParent(parent.username)">Reset password</button>
+    						</td>
+    					</tr>
+    				</tbody>
+    			</table>
+    		</div>
+    		<br/>
+			<div class="text-center">
+				<pagination-controls  (pageChange)="p1 = $event"
+									  id="tab1"
+							  		  directionLinks="true"
+			                  		  autoHide="true"
+			                   		  previousLabel="Προηγούμενη"
+			                   		  nextLabel="Επόμενη"
+			                   		  screenReaderPaginationLabel="Σελίδες"
+			                   		  screenReaderPageLabel="σελίδα"
+			                   		  screenReaderCurrentLabel="Βρίσκεστε στη σελίδα">
+				</pagination-controls>
+			</div>
+	  	</div>
+	  	<div id="providers" class="tab-pane">
+	   		<h2>Πάροχοι</h2>
+	    	<br/>
+    		<div class="table-responsive">
+    			<table class="table table-bordered">
+    				<thead class="sparse">
+      					<tr>
+      						<th>ID</th>
+      						<th>Username</th>
+      						<th>Όνομα</th>
+      						<th>Επώνυμο</th>
+      						<th>Email</th>
+      						<th>Τηλέφωνο</th>
+      						<th>Όνομα επιχείρησης</th>
+      						<th>Έσοδα</th>
+      						<th>Εικόνα</th>
+      						<th>Έγγραφο Πιστοποίησης</th>
+      						<th></th>
+      						<th></th>
+      						<th></th>
+      						<th></th>
+      					</tr>
+    				</thead>
+    				<tbody *ngIf="providers_list?.length > 0">
+    					<tr *ngFor="let provider of providers_list | paginate : { id: 'tab2', itemsPerPage: 10, currentPage: p2 }">
+    						<td>{{provider.id}}</td>
+    						<td>{{provider.username}}</td>
+    						<td>{{provider.firstname}}</td>
+    						<td>{{provider.lastname}}</td>
+    						<td>{{provider.email}}</td>
+    						<td>{{provider.phone}}</td>
+    						<td>{{provider.businessName}}</td>
+    						<td>{{provider.profit}}</td>
+    						<td><!-- <a [routerLink]="['/path/to/prov/images', provider.id]">Εικόνα</a> -->Εικόνα</td>
+    						<td><!-- <a [routerLink]="['/path/to/prov/files', provider.id]">Εικόνα</a> -->Έγγραφο</td>
+    						<td>
+       							<button class="btn btn-default btn-xs" type="button" [ngClass]="{ 'disabled': provider.rights_code == 1 }"
+       							(click)="suspendProvider(provider.id)">Suspend</button>
+    						</td>
+    						<td>
+       							<button class="btn btn-default btn-xs" type="button" [ngClass]="{ 'disabled': provider.rights_code == 2 }"
+       							(click)="banProvider(provider.id)">Ban</button>
+    						</td>
+    						<td>
+       							<button class="btn btn-default btn-xs" type="button" [ngClass]="{ 'disabled': provider.rights_code == 0 }"
+       							(click)="unbanProvider(provider.id)">Unban</button>
+    						</td>
+    						<td>
+       							<button class="btn btn-default btn-xs" type="button"
+       							(click)="resetPassProvider(provider.username)">Reset password</button>
+    						</td>
+    					</tr>
+    				</tbody>
+    			</table>
+    		</div>
+    		<br/>
+			<div class="text-center">
+				<pagination-controls  (pageChange)="p2 = $event"
+									  id="tab2"
+							  		  directionLinks="true"
+			                   		  autoHide="true"
+			                   		  previousLabel="Προηγούμενη"
+		                    		  nextLabel="Επόμενη"
+		                      		  screenReaderPaginationLabel="Σελίδες"
+		                      		  screenReaderPageLabel="σελίδα"
+		                      		  screenReaderCurrentLabel="Βρίσκεστε στη σελίδα">
+				</pagination-controls>
+			</div>
+	  	</div>
+	  	<div id="waitProv" class="tab-pane">
+	   		<h2>Πάροχοι σε αναμονή</h2>
+	    	<br/>
+    		<div class="table-responsive">
+    			<table class="table table-bordered">
+    				<thead class="sparse">
+      					<tr>
+      						<th>ID</th>
+      						<th>Username</th>
+      						<th>Όνομα</th>
+      						<th>Επώνυμο</th>
+      						<th>Email</th>
+      						<th>Τηλέφωνο</th>
+      						<th>Όνομα επιχείρησης</th>
+      						<th>Εικόνα</th>
+      						<th>Έγγραφο Πιστοποίησης</th>
+      						<th></th>
+      						<th></th>
+      					</tr>
+    				</thead>
+    				<tbody *ngIf="pending_providers_list?.length > 0">
+    					<tr *ngFor="let pend_prov of pending_providers_list | paginate : { id: 'tab3', itemsPerPage: 10, currentPage: p3 }">
+    						<td>{{pend_prov.id}}</td>
+    						<td>{{pend_prov.username}}</td>
+    						<td>{{pend_prov.firstname}}</td>
+    						<td>{{pend_prov.lastname}}</td>
+    						<td>{{pend_prov.email}}</td>
+    						<td>{{pend_prov.phone}}</td>
+    						<td>{{pend_prov.businessName}}</td>
+    						<td><!-- <a [routerLink]="['/path/to/prov/images', provider.id]">Εικόνα</a> -->Εικόνα</td>
+    						<td><!-- <a [routerLink]="['/path/to/prov/files', provider.id]">Εικόνα</a> -->Έγγραφο</td>
+    						<td>
+       							<button class="btn btn-default btn-xs" type="button"
+       							(click)="acceptPendingProvider(pend_prov.id)">Έγκριση</button>
+    						</td>
+    						<td>
+       							<button class="btn btn-default btn-xs" type="button"
+       							(click)="deletePendingProvider(pend_prov.id)">Διαγραφή</button>
+    						</td>
+    					</tr>
+    				</tbody>
+    			</table>
+    		</div>
+    		<br/>
+			<div class="text-center">
+				<pagination-controls  (pageChange)="p3 = $event"
+									  id="tab3"
+							  		  directionLinks="true"
+			                   		  autoHide="true"
+			                   		  previousLabel="Προηγούμενη"
+			                   		  nextLabel="Επόμενη"
+			                   		  screenReaderPaginationLabel="Σελίδες"
+			                   		  screenReaderPageLabel="σελίδα"
+			                   		  screenReaderCurrentLabel="Βρίσκεστε στη σελίδα">
+				</pagination-controls>
+			</div>
+	  	</div>
+	  	<div id="waitAct" class="tab-pane">
+	   		<h2>Δραστηριότητες σε αναμονή</h2>
+	    	<br/>
+    		<div class="table-responsive">
+    			<table class="table table-bordered">
+    				<thead class="sparse">
+      					<tr>
+      						<th>ID</th>
+      						<th>Όνομα δραστηριότητας</th>
+      						<th>Όνομα επιχείρησης</th>
+      						<th>Ημερομηνία</th>
+      						<th>Ώρα διεξαγωγής</th>
+      						<th>Κατηγορίες</th>
+      						<th>Διεύθυνση</th>
+      						<th>Κόστος εισιτηρίου</th>
+      						<th>Ηλικίες</th>
+      						<th>Αριθμός εισιτηρίων</th>
+      						<th></th>
+      						<th></th>
+      					</tr>
+    				</thead>
+    				<tbody *ngIf="pending_events_list?.length > 0">
+    					<ng-container *ngFor="let pend_event of pending_events_list | paginate : { id: 'tab4', itemsPerPage: 10, currentPage: p4 } ; index as i">
+	    					<tr data-toggle="collapse" [attr.data-target]="'#collapse-4-' + i" class="clickable">
+	    						<td>{{pend_event.event_id}}</td>
+	    						<td>{{pend_event.title}}</td>
+	    						<td>{{pend_event.businessName}}</td>
+	    						<td>{{pend_event.date}}</td>
+	    						<td>{{pend_event.starting_time}}</td>
+	    						<td>{{pend_event.categories}}</td>
+	    						<td>{{pend_event.place}}</td>
+	    						<td>{{pend_event.ticket_cost}}</td>
+	    						<td>{{pend_event.lowestAge}} - {{pend_event.highestAge}}</td>
+	    						<td>{{pend_event.initial_ticketsNumber}}</td>
+	    						<td>
+	       							<button class="btn btn-default btn-xs" type="button"
+	       							(click)="acceptPendingEvent(pend_event.event_id)">Έγκριση</button>
+	    						</td>
+	    						<td>
+	       							<button class="btn btn-default btn-xs" type="button"
+	       							(click)="deletePendingEvent(pend_event.event_id)">Διαγραφή</button>
+	    						</td>
+	    					</tr>
+	    					<tr><td colspan="12" class="collapse-row">
+	    						<div [attr.id]="'collapse-4-' + i" class="collapse out">
+	    							<br/>
+	    							Περιγραφή: {{pend_event.description}}
+	    							<br/><br/>
+									<!-- <a [routerLink]="['/path/to/event/images', pend_event.event_id]">Εικόνες</a> -->Εικόνες
+									<br/><br/>
+	    						</div>
+	    					</td></tr>
+    					</ng-container>
+    				</tbody>
+    			</table>
+    		</div>
+    		<br/>
+			<div class="text-center">
+				<pagination-controls  (pageChange)="p4 = $event"
+									  id="tab4"
+								  	  directionLinks="true"
+			                   		  autoHide="true"
+			                   		  previousLabel="Προηγούμενη"
+			                   		  nextLabel="Επόμενη"
+			                   		  screenReaderPaginationLabel="Σελίδες"
+			                   		  screenReaderPageLabel="σελίδα"
+			                   		  screenReaderCurrentLabel="Βρίσκεστε στη σελίδα">
+				</pagination-controls>
+			</div>
+	  	</div>
+	  	<div id="activities" class="tab-pane">
+	   		<h2>Ενεργές δραστηριότητες</h2>
+	    	<br/>
+    		<div class="table-responsive">
+    			<table class="table table-bordered">
+    				<thead class="sparse">
+      					<tr>
+      						<th>ID</th>
+      						<th>Όνομα δραστηριότητας</th>
+      						<th>Όνομα επιχείρησης</th>
+      						<th>Ημερομηνία</th>
+      						<th>Ώρα διεξαγωγής</th>
+      						<th>Κατηγορίες</th>
+      						<th>Διεύθυνση</th>
+      						<th>Κόστος εισιτηρίου</th>
+      						<th>Ηλικίες</th>
+      						<th>Αρχικός αριθμός εισιτηρίων</th>
+      						<th>Αριθμός διαθέσιμων εισιτηρίων</th>
+      					</tr>
+    				</thead>
+    				<tbody *ngIf="events_list?.length > 0">
+    					<ng-container *ngFor="let event of events_list | paginate : { id: 'tab5', itemsPerPage: 10, currentPage: p5 } ; index as i">
+	    					<tr data-toggle="collapse" [attr.data-target]="'#collapse-5-' + i" class="clickable">
+	    						<td>{{event.event_id}}</td>
+	    						<td>{{event.title}}</td>
+	    						<td>{{event.businessName}}</td>
+	    						<td>{{event.date}}</td>
+	    						<td>{{event.starting_time}}</td>
+	    						<td>{{event.categories}}</td>
+	    						<td>{{event.place}}</td>
+	    						<td>{{event.ticket_cost}}</td>
+	    						<td>{{event.lowestAge}} - {{event.highestAge}}</td>
+	    						<td>{{event.initial_ticketsNumber}}</td>
+	    						<td>{{event.available_ticketsNumber}}</td>
+	    					</tr>
+	    					<tr><td colspan="12" class="collapse-row">
+	    						<div [attr.id]="'collapse-5-' + i" class="collapse out">
+	    							<br/>
+	    							Περιγραφή: {{event.description}}
+	    							<br/><br/>
+									<!-- <a [routerLink]="['/path/to/event/images', event.event_id]">Εικόνες</a> -->Εικόνες
+									<br/><br/>
+	    						</div>
+	    					</td></tr>
+    					</ng-container>
+    				</tbody>
+    			</table>
+    		</div>
+    		<br/>
+			<div class="text-center">
+				<pagination-controls  (pageChange)="p5 = $event"
+									  id="tab5"
+								  	  directionLinks="true"
+			                   		  autoHide="true"
+			                   		  previousLabel="Προηγούμενη"
+			                   		  nextLabel="Επόμενη"
+			                   		  screenReaderPaginationLabel="Σελίδες"
+			                   		  screenReaderPageLabel="σελίδα"
+			                   		  screenReaderCurrentLabel="Βρίσκεστε στη σελίδα">
+				</pagination-controls>
+			</div>
+	  	</div>
+	  	<div id="statistics" class="tab-pane">
+	   		<h2>Στατιστικά στοιχεία</h2>
+	    	<br/>
+	    	<div class="col-md-6">
+				<div class="panel panel-default">
+					<div class="panel-body">
+  						<p class="h3-font-size">Συνολικά στοιχεία</p>
+  						<p>Αριθμός εγγεγραμμένων γονέων: {{total_stats[0].numOfParents}}</p>
+  						<p>Αριθμός εγγεγραμμένων παρόχων: {{total_stats[0].numOfProviders}}</p>
+  						<p>Συνολικά κέρδη πλατφόρμας: {{total_stats[0].profit}}</p>
+  					</div>
+				</div>
+	    	</div>
+	    	<div class="col-md-6">
+				<div class="panel panel-default">
+					<div class="panel-body">
+  						<p class="h3-font-size">Μηνιαία στοιχεία: &nbsp;
+  							<select id="month" name="month" [(ngModel)]="selectmonth">
+  								<option *ngFor="let month of months" [ngValue]="month.num">{{month.name}}</option>
+       						</select>
+  						</p>
+  						<p>Έσοδα πλατφόρμας: {{monthly_stats[selectmonth].earnings}}</p>
+  						<p>Έξοδα πλατφόρμας: {{monthly_stats[selectmonth].expenses}}</p>
+  						<p>Μηνιαία κέρδη: {{monthly_stats[selectmonth].profit}}</p>
+  					</div>
+				</div>
+	    	</div>
+	  	</div>
+	</div>
+</div>
+<footer class="footer"><div class="container"></div></footer>

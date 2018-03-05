@@ -65,7 +65,7 @@ public class EventSearchController {
 
         Elastic leplak = new Elastic();
 
-        leplak.setup("localhost", 9200, "kids3"); // kanei to set up to server
+        leplak.setup("localhost", 9200, "kids10"); // kanei to set up to server
 
         List<Map<String, Object>> res;
 

@@ -23,10 +23,10 @@ public class ResetPasswordController {
 	@RequestMapping(path="/api/reset/parent", method = RequestMethod.POST)
 	public ResponseEntity<?> resetParent(@RequestBody String username) {
 
-		String delims = "[:}]"; // "[:\"}]";  // CHECK PARSING WITH STRING
+		String delims = "[\":}]"; // "[:\"}]";  // CHECK PARSING WITH STRING
 		String[] tokens = username.split(delims);
-		System.out.println(tokens[1]);
-		String user = tokens[1];
+		System.out.println(tokens[4]);
+		String user = tokens[4];
 
 		try {
 			parentService.addHashedUser(user);

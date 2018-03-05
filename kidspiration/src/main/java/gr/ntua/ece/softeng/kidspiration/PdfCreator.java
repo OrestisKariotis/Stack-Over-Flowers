@@ -24,10 +24,10 @@ public class PdfCreator {
     public void createPdf(String username, String id, ArrayList<Integer> ids, int ticket_cost, String eventName, String date) throws URISyntaxException, DocumentException, MalformedURLException, IOException {
 
         //to logo ekei pou einia apo8hkeu
-        Path path = Paths.get(PdfCreator.class.getResource("/img/logo/logo.png").toURI());
+        Path path = Paths.get(PdfCreator.class.getResource("C:/Users/Orestis/Desktop/master/kidspiration/src/main/resources/img/logo").toURI());
 
         Document document = new Document();					//ekeipou 8a paei na apo9hkeutei
-        FileOutputStream fileOutputStream=new FileOutputStream("src/main/resources/checks/"+id+".pdf",false);
+        FileOutputStream fileOutputStream=new FileOutputStream("C:/Users/Orestis/Desktop/master/kidspiration/src/main/resources/checks/"+id+".pdf",false);
        PdfWriter.getInstance(document, fileOutputStream);
 
         document.open();									//ARA GRAFW KAI OPOU 8ELW

@@ -57,21 +57,26 @@ public class TicketPurchaseController {
         // EMAIL NOTIFICATION
         ArrayList<Integer> ids = ticketService.findTickets(info.getId(), info.getEvent_id());
         PdfCreator pdfCreator = new PdfCreator();
-        try {
-            pdfCreator.createPdf(parent.getUsername(), parent.getUsername(), ids, event.getTicket_cost(), event.getTitle(), event.getDate().toString());
+        //try {
+            //pdfCreator.createPdf(parent.getUsername(), parent.getUsername(), ids, event.getTicket_cost(), event.getTitle(), event.getDate().toString());
             SendResetEmail sendResetEmail = new SendResetEmail();
-            sendResetEmail.sendCheckEmail(parent.getEmail(), parent.getUsername());
-        } catch (URISyntaxException e) {
+            String message = "";
+            for (int i =0; i<ids.size(); i++) message = message + " " + ids.get(i);
+            if (ids.size()==1) message = "ό" + message;
+            else message = "ούς" + message;
+            sendResetEmail.sendSimpleMail(parent.getEmail(), "Κύριε/Κυρία " + parent.getUsername() + ",\n\nΤο εισιτήριό σας για την εκδήλωση " + event.getTitle()
+                    + " της " + event.getDate().toString() + " και με κωδικ" + message + ", συνολικού κόστους " + ids.size()*event.getTicket_cost() + ", έχουν εκδωθεί.\n\nΗ ομάδα του kidspiration.");
+            //sendResetEmail.sendCheckEmail(parent.getEmail(), parent.getUsername());
+        /*} catch (URISyntaxException e) {
             e.printStackTrace();
         } catch (DocumentException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
         PurchaseView purchase_return = new PurchaseView(info.getId(), parent.getWallet());
         System.out.println("LEAVING");
         return ResponseEntity.accepted().body(purchase_return);
     }
-
 
 }

@@ -70,7 +70,7 @@ public class RegisterController {
         else if (provider.getId() == 2000)
             return ResponseEntity.badRequest().body("Email already exists");
         else
-            return ResponseEntity.accepted().body("OK");
+            return ResponseEntity.ok("OK");
 
     }
 }

@@ -1,0 +1,252 @@
+<div class="container">
+	<br>
+    <div class="col-md-12">
+		<ul class="nav nav-tabs nav-justified">
+  			<li class="active"><a data-toggle="tab" href="#profile">Προφίλ</a></li>
+  			<li><a data-toggle="tab" href="#activities" (click)="getActivities()">Δραστηριότητες</a></li>
+  			<li id="priv1" ><a data-toggle="tab" href="#personal" (click)="getPersonal()">Προσωπικά στοιχεία</a></li>
+  			<li id="priv2" ><a data-toggle="tab" href="#tickets" (click)="getTickets()">Εισιτήρια</a></li>
+  			<li id="priv3" ><a data-toggle="tab" href="#monthly-reports" (click)="getMonth(); getTotal()">Μηνιαίες αναφορές</a></li>
+		</ul>
+		<div class="tab-content">
+  			<div id="profile" class="tab-pane fade in active">
+    			<h2>{{thisPublicProvider.businessName}}</h2>
+    			<br>
+    			<div class="row">
+					<div class ="col-sm-5">
+						<img class="img-responsive" src="http://placehold.it/700x600" alt="">
+					</div>
+					<div class ="col-sm-7">
+						<div class="panel panel-default">
+  							<div class="panel-body">
+  								Επωνυμία: {{thisPublicProvider.businessName}}<br>
+  								Υπεύθυνος: {{thisPublicProvider.firstname}} {{thisPublicProvider.lastname}}<br>
+  								Τηλέφωνο: {{thisPublicProvider.phone}}<br>
+  								E-mail: {{thisPublicProvider.email}}
+  							</div>
+						</div>
+					</div>
+    			</div>
+  			</div>
+  			<div id="activities" class="tab-pane fade">
+    			<br>
+			   	<div *ngIf="activities?.length == 0" class="cont-results-err h3-font-size">
+						Δεν υπάρχουν διαθέσιμες δραστηριότητες.
+					</div>
+					<div *ngIf="activities?.length > 0" class="cont-results">
+	   				<div class="col-md-6" *ngFor="let activ of activities">
+							<div class="card">
+            	<a [routerLink]="['/event-page', activ.event_id]"><img class="card-img img-responsive img-hover" src="/assets/images/test.png" alt=""></a>
+            	<div class="card-body">
+              		<h4 class="card-title">
+                		<a [routerLink]="['/event-page', activ.event_id]">{{activ.title}}</a>
+              		</h4>
+              		<p class="card-info text-muted"><span class="glyphicon glyphicon-calendar"></span>&nbsp;{{activ.date}}&nbsp;&nbsp;
+              							  <span class="glyphicon glyphicon-time"></span>&nbsp;{{activ.starting_time}}&nbsp;&nbsp;
+              							  <span class="glyphicon glyphicon-record"></span>&nbsp;{{activ.ticket_cost}}&nbsp;&nbsp;
+              							  <span class="label sparse" [ngClass]="{ 'label-danger': activ.categories == 'Παιχνίδι',
+              							  										  'label-warning': activ.categories == 'Παραστάσεις',
+              							  										  'label-success': activ.categories == 'Μουσεία',
+              							  										  'label-primary': activ.categories == 'Επιστήμη&Περιβάλλον',
+              							  										  'label-info': activ.categories == 'Αθλητισμός',
+              							  										  'label-default': activ.categories == 'Μαθήματα' }">
+              							  {{activ.categories}}</span></p>
+              		<p class="card-text">{{activ.description.substring(0,90)}}...</p>
+            	</div>
+          	</div>
+					</div>
+				</div>
+  			</div>
+   			<div id="personal" class="tab-pane fade">
+    			<br><br>
+	  			<form role="form" class="form-horizontal" (ngSubmit)="f.form.valid && updateProvider()" #f="ngForm">
+		    		<div class="form-group">
+	            		<label class="col-md-3 control-label">Ονομασία επιχείρησης:</label>
+	            		<div class="col-md-3">
+	              			<input class="form-control" type="text" value="{{thisPrivateProvider.businessName}}" disabled>
+	          			</div>
+	            		<label class="col-md-1 col-md-offset-1 control-label">Username:</label>
+	            		<div class="col-md-3">
+	              			<input class="form-control" type="text" value="{{thisPrivateProvider.username}}" disabled>
+	          			</div>
+		    		</div>
+		    		<div class="form-group">
+	            		<label class="col-md-3 control-label">E-mail:</label>
+	            		<div class="col-md-3">
+	              			<input class="form-control" type="text" value="{{thisPrivateProvider.email}}" disabled>
+	          			</div>
+	            		<label class="col-md-1 col-md-offset-1 control-label">Τηλέφωνο:</label>
+	            		<div class="col-md-3" [ngClass]="{'has-error': !phone.valid}">
+	              			<input class="form-control" type="text" name="phone" [(ngModel)]="model.phone" #phone="ngModel" required pattern="\b[0-9]{10}\b">
+	          			</div>
+		    		</div>
+		    		<div class="form-group">
+	            		<label class="col-md-3 control-label">Επώνυμο:</label>
+	            		<div class="col-md-3" [ngClass]="{'has-error': !lastname.valid}">
+	              			<input class="form-control" type="text" name="lastname" [(ngModel)]="model.lastname" 
+	              				#lastname="ngModel" required>
+	          			</div>
+	            		<label class="col-md-1 col-md-offset-1 control-label">Όνομα:</label>
+	            		<div class="col-md-3" [ngClass]="{'has-error': !firstname.valid}">
+	              			<input class="form-control" type="text" name="firstname" [(ngModel)]="model.firstname" 
+	              				#firstname="ngModel" required>
+	          			</div>
+		    		</div>
+		    		<div class="form-group">
+	            		<label class="col-md-3 control-label">Αριθμός Τραπεζικού Λογαριασμού:</label>
+	            		<div class="col-md-3" [ngClass]="{'has-error': !bankAccount.valid}">
+	              			<input class="form-control" type="text" name="bankAccount" [(ngModel)]="model.bankAccount" 
+	              				#bankAccount="ngModel" required>
+	          			</div>
+	            		<div class="col-md-5">
+				    		<div class="pull-right">
+		    					<button class="btn btn-default">Ενημέρωση</button>
+		    				</div>
+	            		</div>
+		    		</div>
+	    		</form>
+  			</div>
+  			<div id="tickets" class="tab-pane fade">
+  				<br>
+    			<h2>Τρέχουσες εκδηλώσεις</h2>
+    			<br>
+	    		<div class="table-responsive">
+	    			<table class="table table-bordered">
+	    				<thead class="sparse">
+	      					<tr>
+	        					<th>Όνομα εκδήλωσης</th>
+	        					<th>Ημερομηνία</th>
+	        					<th>Ώρα</th>
+	        					<th>Τιμή εισιτηρίου (πόντοι)</th>
+	        					<th>Κατηγορία</th>
+	        					<th>Εξέλιξη προπώλησης</th>
+	      					</tr>
+	    				</thead>
+	    				<tbody *ngIf="currAct?.length > 0">
+    					<tr *ngFor="let act of currAct">
+    						<td>{{act.title}}</td>
+    						<td>{{act.date}}</td>
+    						<td>{{act.starting_time}}</td>
+    						<td>{{act.ticket_cost}}</td>
+    						<td>{{act.categories}}</td>
+    						<td>{{act.available_ticketsNumber}}/{{act.initial_ticketsNumber}}</td>
+    					</tr>
+    				</tbody>
+	    			</table>
+	    		</div>
+    			<br>
+    			<h2>Σε αναμονή έγκρισης</h2>
+    			<br>
+	    		<div class="table-responsive">
+	    			<table class="table table-bordered">
+	    				<thead class="sparse">
+	      					<tr>
+	        					<th>Όνομα εκδήλωσης</th>
+	        					<th>Ημερομηνία</th>
+	        					<th>Ώρα</th>
+	        					<th>Τιμή εισιτηρίου (πόντοι)</th>
+	        					<th>Κατηγορία</th>
+	        					<th>Σε αναμονή έγκρισης</th>
+	      					</tr>
+	    				</thead>
+	    				<tbody *ngIf="pendAct?.length > 0">
+    					<tr *ngFor="let pend of pendAct">
+    						<td>{{pend.title}}</td>
+    						<td>{{pend.date}}</td>
+    						<td>{{pend.starting_time}}</td>
+    						<td>{{pend.ticket_cost}}</td>
+    						<td>{{pend.categories}}</td>
+    						<td>-</td>
+    					</tr>
+    				</tbody>
+	    			</table>
+	    		</div>
+    			<br>
+    			<h2>Ιστορικό εκδηλώσεων</h2>
+    			<br>
+	    		<div class="table-responsive">
+	    			<table class="table table-bordered">
+	    				<thead class="sparse">
+	      					<tr>
+	        					<th>Όνομα εκδήλωσης</th>
+	        					<th>Ημερομηνία</th>
+	        					<th>Ώρα</th>
+	        					<th>Τιμή εισιτηρίου (πόντοι)</th>
+	        					<th>Κατηγορία</th>
+	        					<th>Εισιτήρια που πωλήθηκαν</th>
+	      					</tr>
+	    				</thead>
+	    				<tbody *ngIf="histAct?.length > 0">
+    					<tr *ngFor="let hist of histAct">
+    						<td>{{hist.title}}</td>
+    						<td>{{hist.date}}</td>
+    						<td>{{hist.starting_time}}</td>
+    						<td>{{hist.ticket_cost}}</td>
+    						<td>{{hist.categories}}</td>
+    						<td>{{hist.sold_ticketsNumber}}</td>
+    					</tr>
+    				</tbody>
+	    			</table>
+	    		</div>
+  			</div>
+   			<div id="monthly-reports" class="tab-pane fade">
+   				<br>
+   				<div class="col-sm-5">
+					<div class="row form-group">
+						<label class="col-md-2 col-md-offset-3">Μήνας:</label>
+		            	<div class="col-md-4">
+							<select class="form-control" name="month" [(ngModel)]="model.month" #month="ngModel">
+								<option value="0" (click)="getMonth(); getTotal()">Ιανουάριος</option>
+								<option value="1" (click)="getMonth(); getTotal()">Φεβρουάριος</option>
+								<option value="2" (click)="getMonth(); getTotal()">Μάρτιος</option>
+								<option value="3" (click)="getMonth(); getTotal()">Απρίλιος</option>
+								<option value="4" (click)="getMonth(); getTotal()">Μάιος</option>
+								<option value="5" (click)="getMonth(); getTotal()">Ιούνιος</option>
+								<option value="6" (click)="getMonth(); getTotal()">Ιούλιος</option>
+								<option value="7" (click)="getMonth(); getTotal()">Αύγουστος</option>
+								<option value="8" (click)="getMonth(); getTotal()">Σεπτέμβριος</option>
+								<option value="9" (click)="getMonth(); getTotal()">Οκτώβριος</option>
+								<option value="10" (click)="getMonth(); getTotal()">Νοέμβριος</option>
+								<option value="11" (click)="getMonth(); getTotal()">Δεκέμβριος</option>
+							</select>
+		          		</div>
+					</div>
+					<div class="panel panel-default"><br>
+  					<div class="text-center h2-font-size">Έσοδα μήνα: {{monthstats.monthProfit}}&euro;</div><br>
+					</div>
+					<div class="panel panel-default"><br>
+  					<div class="text-center h2-font-size">Συνολικά έσοδα: {{monthstats.totalProfit}}&euro;</div><br>
+					</div>
+	  			</div>
+   				<div class="col-sm-7">
+   					<div class="well">
+   						<div class="h2-font-size">Δραστηριότητες μήνα</div>
+   						<br>
+				    	<div class="table-responsive">
+				    		<table class="table table-bordered">
+				    			<thead class="sparse">
+				      				<tr>
+				        				<th>Όνομα</th>
+				        				<th>Ημερομηνία</th>
+				        				<th>Τιμή</th>
+				        				<th>Πωλήθηκαν</th>
+				        				<th>Έσοδα</th>
+				      				</tr>
+				    			</thead>
+				    			<tbody *ngIf="totalstats?.length > 0">
+    					<tr *ngFor="let tot of totalstats">
+    						<td>{{tot.name}}</td>
+    						<td>{{tot.date}}</td>
+    						<td>{{tot.ticket_cost}}</td>
+    						<td>{{tot.sold_ticketsNumber}}</td>
+    						<td>{{tot.profit}}</td>
+    					</tr>
+    				</tbody>
+				    		</table>
+				    	</div>
+   					</div>
+   				</div>
+	  		</div>
+		</div>
+	</div>
+</div>

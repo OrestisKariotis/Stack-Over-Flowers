@@ -2,6 +2,7 @@ package gr.ntua.ece.softeng.kidspiration.Services;
 
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.io.IOException;
 
 @Service
@@ -16,8 +17,13 @@ public class WatermarkModuleService {
             /*  hard-coded version for testing
                 Runtime.getRuntime().exec("java -jar C:/Users/Orestis/Desktop/kidspiration/kidspiration/src/WatermarkModule.jar C:/Users/Orestis/Desktop/Screenshot_11.jpg C:/Users/Orestis/Desktop/Result.png 200 180");
              */
-            Runtime.getRuntime().exec("java -jar C:/Users/Orestis/Desktop/kidspiration/kidspiration/src/WatermarkModule.jar"
-                    + " " + sourcePath + " " + destinationPath + " " + desiredWidth + " " + desiredHeight);
+            String filePath = new File("").getAbsolutePath();
+            //filePath.concat();
+            System.out.println(filePath);
+            String dat = "java -jar " + filePath + "/src/WatermarkModule.jar"
+                    + " " + sourcePath + " " + destinationPath + " " + desiredWidth + " " + desiredHeight;
+            System.out.println(dat);
+            Runtime.getRuntime().exec(dat);
             //System.out.println("WatermarkModule's runtime ended.\n");
             response = destinationPath;
         } catch (IOException e) {

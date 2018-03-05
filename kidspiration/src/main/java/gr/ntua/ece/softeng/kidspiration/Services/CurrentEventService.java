@@ -45,7 +45,7 @@ public class CurrentEventService {//implements EventService<CurrentEvent> {
         currentEvent =  currentEventDao.findId(event.getProvider_id(), event.getTitle(), event.getDate());
         Location location = new Location(currentEvent.getLatitude(), currentEvent.getlongitude()); //CHECK THINGS
         Elastic leplak = new Elastic();
-        leplak.setup("localhost", 9200, "kids3"); // kanei to set up to server
+        leplak.setup("localhost", 9200, "kids10"); // kanei to set up to server
         Event2 event2 = new Event2(currentEvent.getEvent_id(), currentEvent.getTitle(), currentEvent.getDate().toString(), currentEvent.getCategories(), currentEvent.getTicket_cost(), location, currentEvent.getDescription(), currentEvent.getLowestAge(), currentEvent.getHighestAge(), currentEvent.getStarting_time());
         leplak.add(event2);
     }

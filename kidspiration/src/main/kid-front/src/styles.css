@@ -1,0 +1,319 @@
+body {
+	font-family: 'Didact Gothic', sans-serif !important;
+	font-weight: 500;
+	font-size: 16px !important;
+}
+
+.navbar {
+	margin-bottom: 0px !important;
+}
+
+.search {
+	margin-top: 20px;
+}
+
+.form-group-bottom {
+  	margin-bottom: 20px;
+}
+
+.carousel-caption {
+  	text-shadow: 0 0 4px #000, 0 0 8px #000, 0 0 10px #000, 0 0 15px #000 !important;
+	position: absolute;
+	right: 10% !important;
+	bottom: 5px !important;
+	left: 10% !important;
+	z-index: 5 !important;
+	padding-bottom: 5px !important;
+}
+
+.carousel-indicators {
+	display: none;
+}
+
+@media screen and (min-width: 600px) {
+	.carousel-caption {
+		font-size: 24px;
+		padding-bottom: 20px !important;
+		z-index: 10 !important;
+		bottom: 20px !important;
+	}
+	.carousel-indicators {
+		display: inline;
+	}
+}
+
+@media screen and (min-width: 768px) {
+	.carousel-caption {
+		font-size: 30px;
+		padding-bottom: 30px !important;
+		z-index: 10 !important;
+		bottom: 30px !important;
+		right: 20% !important;
+		left: 20% !important;
+	}
+}
+
+.card-img {
+    margin-bottom: 5px;
+}
+
+.img-hover:hover {
+    opacity: 0.8;
+}
+
+.card {
+	margin-bottom: 15px;
+}
+
+.card-info {
+	font-size: 13px;
+}
+
+@media(min-width:768px) {
+    .card {
+        margin-bottom: 30px;
+        font-size: 16px !important;
+    }
+}
+
+.sparse {
+	letter-spacing: 1px;
+}
+
+@media(min-width:768px) {
+    .platform {
+        font-size: 20px !important;
+    }
+}
+
+.img-center {
+	margin: 0 auto;
+}
+
+img.resize {
+    width: 35%;
+    height: auto;
+}
+
+.navbar-brand {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+    padding-left: 0px !important;
+    padding-right: 30px !important;
+}
+
+.navbar {
+  padding: 5px 15px;
+}
+
+.navbar-brand img {
+    height: 100%;
+}
+
+.navbar-nav li a {
+ line-height: 20px !important;
+}
+
+.navbar-brand {
+	min-height: 55px !important;
+}
+
+.platform-title {
+  float: left;
+  height: 50px;
+  padding: 15px 5px;
+  font-size: 16px !important;
+  color: #3b8bea !important;
+}
+.platform-title:hover,
+.platform-title:focus {
+  text-decoration: none;
+  color: #2c66ac !important;
+}
+
+@media screen and (min-width: 600px) {
+	.platform-title {
+		padding: 8px 15px;
+		font-size: 22px !important;;
+		padding-right: 50px !important;
+	}
+}
+
+/* Custom Carousel control */
+.carousel-control-custom {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 15%;
+  font-size: 20px;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+  background-color: rgba(0, 0, 0, 0);
+  filter: alpha(opacity=50);
+  opacity: .5;
+}
+
+.carousel-control-custom.right {
+  right: 0;
+  left: auto;
+}
+
+.carousel-control-custom:hover,
+.carousel-control-custom:focus {
+  color: #fff;
+  text-decoration: none;
+}
+
+.carousel-control-custom .icon-prev,
+.carousel-control-custom .icon-next,
+.carousel-control-custom .glyphicon-chevron-left,
+.carousel-control-custom .glyphicon-chevron-right {
+  position: absolute;
+  top: 50%;
+  z-index: 5;
+  display: inline-block;
+  margin-top: -10px;
+}
+.carousel-control-custom .icon-prev,
+.carousel-control-custom .glyphicon-chevron-left {
+  left: 50%;
+  margin-left: -10px;
+}
+.carousel-control-custom .icon-next,
+.carousel-control-custom .glyphicon-chevron-right {
+  right: 50%;
+  margin-right: -10px;
+}
+.carousel-control-custom .icon-prev,
+.carousel-control-custom .icon-next {
+  width: 20px;
+  height: 20px;
+  font-family: serif;
+  line-height: 1;
+}
+.carousel-control-custom .icon-prev:before {
+  content: '\2039';
+}
+.carousel-control-custom .icon-next:before {
+  content: '\203a';
+}
+
+@media screen and (min-width: 768px) {
+  .carousel-control-custom .glyphicon-chevron-left,
+  .carousel-control-custom .glyphicon-chevron-right,
+  .carousel-control-custom .icon-prev,
+  .carousel-control-custom .icon-next {
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+    font-size: 20px;
+  }
+  .carousel-control-custom .glyphicon-chevron-left,
+  .carousel-control-custom .icon-prev {
+    left: 10% !important;
+    margin-left: 0 !important;
+  }
+  .carousel-control-custom .glyphicon-chevron-right,
+  .carousel-control-custom .icon-next {
+  	right: 10% !important;
+    margin-right: 0 !important;
+  }
+}
+/* End Custom Control */
+
+body {
+	padding-top: 73px;
+	height: 100%;
+	margin-bottom: 200px !important;
+}
+
+@media screen and (min-width: 768px) {
+    body { padding-top: 68px; }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.unlined:hover,
+.unlined:focus {
+	text-decoration: none !important;
+}
+
+.good-size {
+	font-size: 16px;
+}
+
+.footer-font-size {
+	font-size: 14px;
+}
+
+.btn {
+	font-size: 16px !important;
+}
+
+.form-control {
+	font-size: 16px !important;
+}
+
+.custom-form-height {
+	height: 37px !important;
+}
+
+.underlined {
+	text-decoration: underline;
+}
+
+.h2-font-size {
+	font-size: 30px;
+}
+
+.unbold {
+	font-weight: 500;
+}
+
+@media screen and (min-width: 768px) {
+	.search-row {
+		line-height: 40px;
+	}
+	input[type="checkbox"] {
+		margin-top: 14px !important;
+	}
+}
+
+.custom-search-button {
+	padding-left: 70px !important;
+	padding-right: 70px !important;
+	margin: 0 30px !important;
+}
+
+.custom-buy-button {
+	padding-left: 20px !important;
+	padding-right: 20px !important;
+	margin: 0 30px !important;
+}
+
+.fixed-panel-1 {
+  height: 220px !important;
+  overflow-y: auto;
+}
+
+.fixed-panel-2 {
+  height: 140px !important;
+  overflow-y: auto;
+}
+
+.sos-error {
+	  color: #a94442 !important;
+}
+
+/* Το AGM (Angular-Maps) CSS στα επιμέρους αρχεία CSS των components, για διαφορετικά ύψη */
