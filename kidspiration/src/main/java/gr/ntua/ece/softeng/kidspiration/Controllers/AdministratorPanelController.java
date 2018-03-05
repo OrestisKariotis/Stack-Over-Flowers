@@ -175,14 +175,14 @@ public class AdministratorPanelController {
             System.out.println("SQL INSERTION DONE");
             pendingEventService.deleteEvent(id);
             System.out.println("DELETION DONE");
-        /*
+
             try {
                 currentEventService.addEventElastic(new_event);
             } catch (IOException ex) {
                 System.out.println(ex);
                 return "Insertion in Elastic failed";
             }
-        */
+
             //END OF TRANSACTION
 
             //if transaction done return OK
